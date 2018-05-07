@@ -1,0 +1,15 @@
+{
+  "name": "@okmarvin/generate-xml",
+  "version": "0.0.1",
+  "description": "generate xml content",
+  "main": "src/index.js",
+  "keywords": [
+    "okmarvin"
+  ],
+  "author": "Sam Chen",
+  "license": "MIT",
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "ejs": "^2.6.1"
+  }
+}

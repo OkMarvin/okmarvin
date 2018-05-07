@@ -7,8 +7,22 @@
   "license": "MIT",
   "private": true,
   "bolt": {
-    "workspaces": [
-      "packages/*"
-    ]
+    "workspaces": ["packages/*"]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": ["jest"]
+  },
+  "scripts": {
+    "test": "standard && jest"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "jest": "^22.4.3",
+    "standard": "^11.0.1"
+  },
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "ejs": "^2.6.1"
   }
 }

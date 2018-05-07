@@ -1,0 +1,14 @@
+{
+  "name": "@okmarvin/generate-sitemap",
+  "version": "0.0.1",
+  "description": "generate content for sitemap.xml",
+  "main": "src/index.js",
+  "keywords": [
+    "okmarvin"
+  ],
+  "author": "Sam Chen",
+  "license": "MIT",
+  "dependencies": {
+    "@okmarvin/generate-xml": "^0.0.1"
+  }
+}

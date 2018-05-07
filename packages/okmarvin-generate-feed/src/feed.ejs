@@ -1,0 +1,41 @@
+<%
+  var site = data.site;
+%>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+  >
+  <channel>
+    <title><%= site.title %></title>
+    <atom:link href="<%= site.domain %>/feed.xml" rel="self" type="application/rss+xml" />
+    <description><%= site.description %></description>
+    <link><%= site.domain %></link>
+    <language><%= site.lang %></language>
+    <generator>OkMarvin</generator>
+    <lastBuildDate><%= format(new Date(), 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></lastBuildDate>
+    <%_
+      var items = (site.posts || []).map((file) => {
+        return Object.assign({}, file, {
+          permalink: site.domain + file.permalink
+        })
+      }).sort(function (a, b) {
+        return new Date(b.datePublished) - new Date(a.datePublished)
+      })
+    _%>
+    <%_ for (var i = 0, len = items.length; i < len; i++) { var item = items[i]; _%>
+    <item>
+      <title><%= item['title'] %></title>
+      <link><%= item['permalink'] + '/' %></link>
+      <description><%= item['description'] %></description>
+      <pubDate><%= format(item['datePublished'], 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></pubDate>
+      <dc:creator><![CDATA[<%= item['author'] %>]]></dc:creator>
+      <guid isPermaLink="false"><%= item['permalink'] + '/' %></guid>
+      <content:encoded><![CDATA[<%- item['html'] %>]]></content:encoded>
+    </item>
+    <%_ } _%>
+  </channel>
+</rss>
