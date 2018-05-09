@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "ejs": "^2.6.1"
+    "ejs": "^2.6.1",
+    "winston": "^3.0.0-rc5"
   }
 }
