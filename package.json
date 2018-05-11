@@ -1,10 +1,4 @@
 {
-  "name": "okmarvin",
-  "version": "0.0.1",
-  "description": "Static site generator with better theme support.",
-  "main": "index.js",
-  "author": "Sam Chen",
-  "license": "MIT",
   "private": true,
   "bolt": {
     "workspaces": [
