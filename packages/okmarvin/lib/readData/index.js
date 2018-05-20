@@ -4,8 +4,9 @@ const logger = require('@okmarvin/logger')
 const assert = require('assert')
 const fs = require('fs-extra')
 const async = require('neo-async')
-
-const loadSiteConfig = require('./loadSiteConfig')
+const readUserSiteConfig = require('./readUserSiteConfig')
+const computeSiteConfig = require('./computeSiteConfig')
+const readMarkdown = require('./readMarkdown')
 /**
  * Collect all markdown files under `post` & `page`
  * @param {String} cwd current working directory
@@ -16,13 +17,31 @@ module.exports = function (cwd, callback) {
   const content = path.join(cwd, 'content')
   assert.ok(fs.pathExistsSync(content), `${content} folder doesn't exist`)
   const searchPattern = '{post,page}/**/*.md'
-  async.waterfall(
-    [
-      callback => loadSiteConfig(cwd, callback),
-      (siteConfig, callback) => {
-        glob(searchPattern, {cwd: content}, callback)
-      }
-    ],
+  async.parallel(
+    {
+      siteConfig: callback =>
+        async.waterfall(
+          [
+            callback =>
+              readUserSiteConfig(path.join(cwd, 'siteConfig.yml'), callback),
+            computeSiteConfig
+          ],
+          callback
+        ),
+      files: callback =>
+        async.waterfall(
+          [
+            callback => glob(searchPattern, { cwd: content, absolute: true }, callback),
+            (files, callback) =>
+              async.map(
+                files,
+                readMarkdown,
+                callback
+              )
+          ],
+          callback
+        )
+    },
     callback
   )
 }

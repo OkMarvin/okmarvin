@@ -1,4 +1,5 @@
 {
+  "name": "okmarvin",
   "private": true,
   "bolt": {
     "workspaces": [
@@ -26,6 +27,10 @@
     "glob": "^7.1.2",
     "js-yaml": "^3.11.0",
     "neo-async": "^2.5.1",
-    "winston": "^3.0.0-rc5"
+    "winston": "^3.0.0-rc5",
+    "gray-matter": "^4.0.1",
+    "markdown-it": "^8.4.1",
+    "markdown-it-toc-x3": "^0.0.5",
+    "prismjs": "^1.14.0"
   }
 }
