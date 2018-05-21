@@ -6,6 +6,7 @@ const async = require('neo-async')
 const readUserSiteConfig = require('./readUserSiteConfig')
 const computeSiteConfig = require('./computeSiteConfig')
 const readMarkdown = require('./readMarkdown')
+const readThemeManifest = require('./readThemeManifest')
 /**
  * Collect all markdown files under `post` & `page`
  * @param {String} cwd current working directory
@@ -22,7 +23,8 @@ module.exports = function (cwd, callback) {
           [
             callback =>
               readUserSiteConfig(path.join(cwd, 'siteConfig.yml'), callback),
-            computeSiteConfig
+            computeSiteConfig,
+            readThemeManifest
           ],
           callback
         ),
