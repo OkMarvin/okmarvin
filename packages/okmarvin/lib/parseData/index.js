@@ -19,19 +19,17 @@ module.exports = function (data, callback) {
           function (file, callback) {
             const [filePath, { data, content }] = file
             callback(null, {
-              data: {
-                ...data,
-                author: computeAuthor(siteConfig, data),
-                datePublished: computeDatePublished(data),
-                dateModified: computeDateModified(data),
-                description: computeDescription(data, content),
-                permalink: computePermalink(siteConfig, data),
-                template: path.join(
-                  require.resolve(theme),
-                  '..',
-                  computeTemplate(themeManifest, data, filePath)
-                )
-              },
+              ...data,
+              author: computeAuthor(siteConfig, data),
+              datePublished: computeDatePublished(data),
+              dateModified: computeDateModified(data),
+              description: computeDescription(data, content),
+              permalink: computePermalink(siteConfig, data),
+              template: path.join(
+                require.resolve(theme),
+                '..',
+                computeTemplate(themeManifest, data, filePath)
+              ),
               content: computeToc(siteConfig, data)
                 ? md.render(`{:toc}\n${content}`)
                 : md.render(content)

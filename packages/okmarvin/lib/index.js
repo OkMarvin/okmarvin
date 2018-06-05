@@ -1,12 +1,19 @@
 const readData = require('./readData')
 const async = require('neo-async')
 const logger = require('@okmarvin/logger')
+const parseData = require('./parseData')
+const composeList = require('./composeList')
+const render = require('./render')
 module.exports = function (cwd) {
+  logger.profile('SSG')
   async.waterfall([
     (callback) => callback(null, cwd),
-    readData
+    readData,
+    parseData,
+    composeList,
+    render
   ], (err, results) => {
-    logger.profile('Collect markdown files')
+    logger.profile('SSG')
     if (err) throw err
   })
 }
