@@ -6,7 +6,7 @@ test('renders correctly', () => {
         title: 'hello okmarvin',
         description:
           'okmarvin is a static site generator with better theme support',
-        domain: '/'
+        url: '/'
       },
       files: []
     })

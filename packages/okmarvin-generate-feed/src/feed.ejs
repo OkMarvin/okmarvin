@@ -12,16 +12,16 @@ _%>
   >
   <channel>
     <title><%= site.title %></title>
-    <atom:link href="<%= site.domain %>/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="<%= site.url %>/feed.xml" rel="self" type="application/rss+xml" />
     <description><%= site.description %></description>
-    <link><%= site.domain %></link>
+    <link><%= site.url %></link>
     <language><%= site.lang %></language>
     <generator>OkMarvin</generator>
     <lastBuildDate><%= format(new Date(), 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></lastBuildDate>
     <%_
       var items = (site.posts || []).map((file) => {
         return Object.assign({}, file, {
-          permalink: site.domain + file.permalink
+          permalink: site.url + file.permalink
         })
       }).sort(function (a, b) {
         return new Date(b.datePublished) - new Date(a.datePublished)
