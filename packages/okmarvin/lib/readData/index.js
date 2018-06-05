@@ -42,6 +42,12 @@ module.exports = function (cwd, callback) {
           callback
         )
     },
-    callback
+    function (err, results) {
+      if (err) return callback(err)
+      return callback(null, {
+        ...results,
+        cwd
+      })
+    }
   )
 }

@@ -42,6 +42,7 @@ module.exports = function (data, callback) {
     (err, files) => {
       if (err) return callback(err)
       callback(null, {
+        ...data,
         siteConfig,
         files
       })
