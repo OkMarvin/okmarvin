@@ -7,10 +7,9 @@ const computeToc = require('./computeToc')
 const computePermalink = require('./computePermalink')
 const computeTemplate = require('./computeTemplate')
 const md = require('./md')
-const path = require('path')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
-  const { theme, themeManifest } = siteConfig
+  const { themeManifest } = siteConfig
   async.waterfall(
     [
       callback => {
@@ -25,11 +24,7 @@ module.exports = function (data, callback) {
               dateModified: computeDateModified(data),
               description: computeDescription(data, content),
               permalink: computePermalink(siteConfig, data),
-              template: path.join(
-                require.resolve(theme),
-                '..',
-                computeTemplate(themeManifest, data, filePath)
-              ),
+              template: computeTemplate(themeManifest, data, filePath),
               content: computeToc(siteConfig, data)
                 ? md.render(`{:toc}\n${content}`)
                 : md.render(content)
