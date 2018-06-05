@@ -1,8 +1,8 @@
 const path = require('path')
-module.exports = function (manifest, data, filePath) {
+module.exports = function (manifest, userSetTemplate, filePath) {
   let template
-  if (data.template) {
-    template = data.template
+  if (userSetTemplate) {
+    template = userSetTemplate
   } else {
     // compute from path
     let paths = filePath.split(path.sep)
