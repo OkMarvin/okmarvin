@@ -6,6 +6,9 @@
   "keywords": ["okmarvin", "static site generator", "jsxstyle", "react"],
   "author": "Sam Chen",
   "license": "MIT",
+  "scripts": {
+    "build": "NODE_ENV=production node index.js"
+  },
   "dependencies": {
     "neo-async": "^2.5.1",
     "glob": "^7.1.2",
