@@ -17,6 +17,9 @@ module.exports = function (data, callback) {
           function (file, callback) {
             const [filePath, { data, content }] = file
             const {template: userSetTemplate} = data
+            if (!data.title) throw new Error(`title is missing in ${filePath}`)
+            // FIXME
+            // ensure some fields are present in data
             callback(null, {
               ...data,
               author: computeAuthor(siteConfig, data),
