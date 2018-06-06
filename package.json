@@ -60,6 +60,8 @@
     "prismjs": "^1.14.0",
     "winston": "^3.0.0-rc5",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-helmet": "^5.2.0",
+    "prop-types": "^15.6.1"
   }
 }
