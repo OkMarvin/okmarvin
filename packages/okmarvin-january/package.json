@@ -52,7 +52,8 @@
     "react": "^16.4.0",
     "react-helmet-async": "^0.1.0",
     "prop-types": "^15.6.1",
-    "date-fns": "^1.29.0"
+    "date-fns": "^1.29.0",
+    "jsxstyle": "^2.1.1"
   },
   "browserslist": [
     "> 1%",

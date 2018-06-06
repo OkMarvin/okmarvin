@@ -63,6 +63,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "jsxstyle": "^2.1.1"
   }
 }
