@@ -6,6 +6,7 @@ const computeDescription = require('./computeDescription')
 const computeToc = require('./computeToc')
 const computePermalink = require('./computePermalink')
 const computeTemplate = require('./computeTemplate')
+const computeCss = require('./computeCss')
 const md = require('./md')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
@@ -28,6 +29,7 @@ module.exports = function (data, callback) {
               description: computeDescription(data, content),
               permalink: computePermalink(siteConfig, data),
               template: computeTemplate(siteConfig.themeManifest, userSetTemplate, filePath),
+              css: computeCss(siteConfig.themeManifest, userSetTemplate, filePath), //  template's css file
               content: computeToc(siteConfig, data)
                 ? md.render(`{:toc}\n${content}`)
                 : md.render(content)
