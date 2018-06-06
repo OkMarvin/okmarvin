@@ -6,7 +6,7 @@ module.exports = function (data, callback) {
     title: siteConfig.title,
     description: siteConfig.description,
     author: siteConfig.author,
-    permalink: '/',
+    permalink: '',
     template: computeTemplate(siteConfig.themeManifest, 'index')
   })
 }
