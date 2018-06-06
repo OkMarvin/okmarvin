@@ -58,12 +58,13 @@
     "markdown-it": "^8.4.1",
     "markdown-it-toc-x3": "^0.0.5",
     "neo-async": "^2.5.1",
-    "prismjs": "^1.14.0",
     "winston": "^3.0.0-rc5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
     "prop-types": "^15.6.1",
-    "jsxstyle": "^2.1.1"
+    "jsxstyle": "^2.1.1",
+    "sanitize.css": "^5.0.0",
+    "prismjs": "^1.14.0"
   }
 }

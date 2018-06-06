@@ -1,6 +1,9 @@
 import React from 'react'
 import Helmet from 'react-helmet-async'
 import PropTypes from 'prop-types'
+import '../../node_modules/sanitize.css'
+import '../../node_modules/prismjs/themes/prism-tomorrow.css'
+import '../common.css'
 export default class Html extends React.Component {
   static propTypes = {
     children: PropTypes.node,
