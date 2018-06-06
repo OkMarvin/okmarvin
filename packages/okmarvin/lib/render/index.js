@@ -32,6 +32,7 @@ module.exports = function (data, callback) {
   </head>
   <body ${helmet.bodyAttributes.toString()}>
     <div id="___OkMarvin___">${rendered}</div>
+    ${helmet.script.toString()}
   </body>
 </html>`
       callback(null, { ...file, html })
