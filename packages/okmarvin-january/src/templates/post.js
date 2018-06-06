@@ -1,7 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet-async'
 import PropTypes from 'prop-types'
-export default class Post extends React.Component {
+import Html from '../components/Html'
+class Post extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
@@ -12,17 +13,6 @@ export default class Post extends React.Component {
   render () {
     return (
       <React.StrictMode>
-        <Helmet htmlAttributes={{
-          lang: this.props.siteConfig.lang
-        }}>
-          <meta charSet='utf-8' />
-          <meta httpEquiv='x-ua-compatible' content='ie=edge' />
-          <meta
-            name='viewport'
-            content='width=device-width, initial-scale=1'
-          />
-          <title>{this.props.title}</title>
-        </Helmet>
         <section
           dangerouslySetInnerHTML={{
             __html: this.props.content
@@ -33,3 +23,8 @@ export default class Post extends React.Component {
     )
   }
 }
+export default props => (
+  <Html {...props}>
+    <Post {...props} />
+  </Html>
+)
