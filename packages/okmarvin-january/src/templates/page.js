@@ -1,5 +1,6 @@
 import React from 'react'
-export default class Page extends React.Component {
+import Html from '../components/Html'
+class Page extends React.Component {
   render () {
     return (
       <React.StrictMode>
@@ -8,3 +9,8 @@ export default class Page extends React.Component {
     )
   }
 }
+export default props => (
+  <Html {...props}>
+    <Page {...props} />
+  </Html>
+)
