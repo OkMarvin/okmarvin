@@ -8,6 +8,7 @@ const computePermalink = require('./computePermalink')
 const computeTemplate = require('./computeTemplate')
 const computeCss = require('./computeCss')
 const md = require('./md')
+const findSiblings = require('./findSiblings')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
   async.waterfall(
@@ -43,7 +44,8 @@ module.exports = function (data, callback) {
         // TODO make sure no duplicated permalink
         // TODO how to export data for theme developing
         callback(null, data)
-      }
+      },
+      findSiblings
     ],
     (err, files) => {
       if (err) return callback(err)
