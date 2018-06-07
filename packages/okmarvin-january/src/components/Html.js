@@ -35,7 +35,6 @@ export default class Html extends React.Component {
           <meta name='twitter:card' content='summary' />
           <meta property='og:title' content={title} />
           <meta property='og:description' content={description} />
-          <meta property='og:type' content='article' />
           <meta property='og:url' content={url + permalink + '/'} />
         </Helmet>
         {this.props.children}

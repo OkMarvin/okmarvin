@@ -31,6 +31,7 @@ class Single extends React.Component {
     return (
       <React.Fragment>
         <Helmet>
+          <meta property='og:type' content='article' />
           <script type='application/ld+json'>
             {`
               {
