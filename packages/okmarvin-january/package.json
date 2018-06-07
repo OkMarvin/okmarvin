@@ -56,7 +56,8 @@
     "jsxstyle": "^2.1.1",
     "sanitize.css": "^5.0.0",
     "prismjs": "^1.14.0",
-    "@reach/router": "^1.0.7"
+    "@reach/router": "^1.0.7",
+    "lodash": "^4.17.10"
   },
   "browserslist": [
     "> 1%",
