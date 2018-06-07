@@ -6,7 +6,8 @@ it('renders without crashing', () => {
   const div = document.createElement('div')
   const props = {
     siteConfig: {
-      lang: 'zh'
+      lang: 'zh',
+      title: 'okmarvin'
     },
     title: 'okmarvin',
     description: 'static site generator with better theme support'

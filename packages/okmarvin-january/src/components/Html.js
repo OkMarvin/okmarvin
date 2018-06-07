@@ -14,7 +14,8 @@ export default class Html extends React.Component {
     permalink: PropTypes.string,
     siteConfig: PropTypes.shape({
       lang: PropTypes.string.isRequired,
-      url: PropTypes.string
+      url: PropTypes.string,
+      title: PropTypes.string.isRequired
     })
   }
   render () {

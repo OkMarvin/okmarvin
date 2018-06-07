@@ -7,7 +7,8 @@ it('renders without crashing', () => {
   const props = {
     siteConfig: {
       lang: 'zh',
-      url: 'https://okmarvin.com'
+      url: 'https://okmarvin.com',
+      title: 'okmarvin'
     },
     title: 'okmarvin',
     description: 'static site generator with better theme support',
