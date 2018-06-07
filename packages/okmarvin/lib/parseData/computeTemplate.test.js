@@ -6,7 +6,7 @@ test('returns post', () => {
       'post',
       ''
     )
-  ).toBe('a.js')
+  ).toBe('post.js')
 })
 test('returns page', () => {
   expect(
@@ -15,5 +15,5 @@ test('returns page', () => {
       null,
       '/content/page/intro.md'
     )
-  ).toBe('page.p.js')
+  ).toBe('page.js')
 })
