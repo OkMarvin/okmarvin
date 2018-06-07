@@ -2,7 +2,7 @@ const ReactDOMServer = require('react-dom/server')
 const React = require('react')
 const async = require('neo-async')
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 module.exports = function (data, callback) {
@@ -24,7 +24,6 @@ module.exports = function (data, callback) {
           (styles, callback) => {
             const Component = require(path.join(themeRoot, file.template))
               .default
-            // TODO need to read component css
             const helmetContext = {}
             const rendered = ReactDOMServer.renderToStaticMarkup(
               React.createElement(
