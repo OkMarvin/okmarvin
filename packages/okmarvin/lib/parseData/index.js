@@ -38,6 +38,11 @@ module.exports = function (data, callback) {
           },
           callback
         )
+      },
+      (data, callback) => {
+        // TODO make sure no duplicated permalink
+        // TODO how to export data for theme developing
+        callback(null, data)
       }
     ],
     (err, files) => {
