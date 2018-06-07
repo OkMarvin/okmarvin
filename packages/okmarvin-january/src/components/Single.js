@@ -29,7 +29,7 @@ class Single extends React.Component {
     } = this.props
     const { url } = siteConfig
     return (
-      <React.StrictMode>
+      <React.Fragment>
         <Helmet>
           <script type='application/ld+json'>
             {`
@@ -51,7 +51,7 @@ class Single extends React.Component {
           </script>
         </Helmet>
         {this.props.children}
-      </React.StrictMode>
+      </React.Fragment>
     )
   }
 }
