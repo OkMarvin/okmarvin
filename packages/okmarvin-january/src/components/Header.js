@@ -26,14 +26,14 @@ const Header = props => (
       textDecoration='none'
       linkColor='#4a4a4a'
     >
-      {props.title}
+      {props.siteTitle}
     </Inline>
     <Menu menu={props.menu} currentUrl={props.currentUrl} />
   </Col>
 )
 export default Header
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  siteTitle: PropTypes.string.isRequired,
   menu: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -44,6 +44,5 @@ Header.propTypes = {
 }
 Header.defaultProps = {
   menu: [],
-  currentUrl: '',
-  title: ''
+  currentUrl: ''
 }

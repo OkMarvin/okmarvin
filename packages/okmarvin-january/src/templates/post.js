@@ -4,11 +4,11 @@ import Main from '../styled/Main'
 import Header from '../components/Header'
 class Post extends React.Component {
   render () {
-    const {permalink, siteConfig} = this.props
-    const {title, menu} = siteConfig
+    const { permalink, siteConfig } = this.props
+    const { title: siteTitle, menu } = siteConfig
     return (
       <React.StrictMode>
-        <Header title={title} menu={menu} currentUrl={permalink} />
+        <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} />
         <Main>
           <section
             dangerouslySetInnerHTML={{
