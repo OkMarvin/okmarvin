@@ -1,4 +1,5 @@
 const computeTemplate = require('../parseData/computeTemplate')
+const computeCss = require('../parseData/computeCss')
 module.exports = function (data, callback) {
   const {siteConfig} = data
   // which data an index page would need?
@@ -7,6 +8,7 @@ module.exports = function (data, callback) {
     description: siteConfig.description,
     author: siteConfig.author,
     permalink: '',
-    template: computeTemplate(siteConfig.themeManifest, 'index')
+    template: computeTemplate(siteConfig.themeManifest, 'index'),
+    css: computeCss(siteConfig.themeManifest, 'index')
   })
 }
