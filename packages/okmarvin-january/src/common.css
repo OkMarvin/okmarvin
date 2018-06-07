@@ -111,15 +111,15 @@ h2 {
 .toc + * {
   margin-top: 0;
 }
-.markdown {
+.okmarvin-content {
   line-height: 1.4;
   color: #222;
 }
-.markdown > p {
+.okmarvin-content > p {
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
-.markdown a:link {
+.okmarvin-content a:link {
   border-bottom: 1px solid #0000ff40;
 }
 .toc a:link {

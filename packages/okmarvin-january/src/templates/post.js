@@ -14,7 +14,7 @@ class Post extends React.Component {
             dangerouslySetInnerHTML={{
               __html: this.props.content
             }}
-            className='markdown'
+            className='okmarvin-content'
           />
         </Main>
       </React.StrictMode>
