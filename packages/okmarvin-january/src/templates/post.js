@@ -3,6 +3,7 @@ import { Block } from 'jsxstyle'
 import PostContentHeader from '../components/PostContentHeader'
 import SingularHelmet from '../components/SingularHelmet'
 import Main from '../styled/Main'
+import PostSiblings from '../components/PostSiblings'
 class Post extends React.Component {
   render () {
     return (
@@ -17,6 +18,7 @@ class Post extends React.Component {
               className='okmarvin-content'
             />
           </Block>
+          <PostSiblings {...this.props} />
         </Main>
       </React.StrictMode>
     )
