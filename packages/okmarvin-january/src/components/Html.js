@@ -1,5 +1,5 @@
 import React from 'react'
-import Helmet, { HelmetProvider } from 'react-helmet-async'
+import Helmet from 'react-helmet-async'
 import PropTypes from 'prop-types'
 import '../../node_modules/sanitize.css'
 import '../../node_modules/prismjs/themes/prism-tomorrow.css'
@@ -19,7 +19,7 @@ export default class Html extends React.Component {
     const { siteConfig, title, description, permalink } = this.props
     const { lang, url } = siteConfig
     return (
-      <HelmetProvider>
+      <React.Fragment>
         <Helmet
           htmlAttributes={{
             lang: lang
@@ -39,7 +39,7 @@ export default class Html extends React.Component {
           <meta property='og:url' content={url + permalink + '/'} />
         </Helmet>
         {this.props.children}
-      </HelmetProvider>
+      </React.Fragment>
     )
   }
 }

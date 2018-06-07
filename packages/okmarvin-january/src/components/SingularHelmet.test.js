@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Single from './Single'
+import { HelmetProvider } from 'react-helmet-async'
+import SingularHelmet from './SingularHelmet'
 it('renders without crashing', () => {
   const div = document.createElement('div')
   const props = {
@@ -16,5 +17,10 @@ it('renders without crashing', () => {
     permalink: '/hello-okmarvin',
     content: 'well'
   }
-  ReactDOM.render(<Single {...props}>okmarvin</Single>, div)
+  ReactDOM.render(
+    <HelmetProvider>
+      <SingularHelmet {...props}>okmarvin</SingularHelmet>
+    </HelmetProvider>,
+    div
+  )
 })
