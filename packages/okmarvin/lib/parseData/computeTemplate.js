@@ -10,7 +10,7 @@ module.exports = function (manifest, userSetTemplate, filePath) {
   }
   // check if theme provide it
   if (manifest[template + '.js']) {
-    return manifest[template + '.js']
+    return template + '.js'
   } else {
     throw new Error(`${template} template does not exists`)
   }

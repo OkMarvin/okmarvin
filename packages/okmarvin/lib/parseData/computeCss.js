@@ -10,7 +10,7 @@ module.exports = function (manifest, userSetTemplate, filePath) {
   }
   // check if theme provide it
   if (manifest[template + '.css']) {
-    return manifest[template + '.css']
+    return template + '.css'
   } else {
     return null
   }

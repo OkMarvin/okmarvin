@@ -7,7 +7,7 @@ const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 module.exports = function (data, callback) {
   const { files, siteConfig } = data
-  const { theme } = siteConfig
+  const { theme, themeManifest } = siteConfig
   const themeRoot = path.join(require.resolve(theme), '..')
   async.map(
     files,
@@ -16,13 +16,13 @@ module.exports = function (data, callback) {
         [
           callback => {
             if (file.css) {
-              fs.readFile(path.join(themeRoot, file.css), 'utf8', callback)
+              fs.readFile(path.join(themeRoot, themeManifest[file.css]), 'utf8', callback)
             } else {
               callback(null, '')
             }
           },
           (styles, callback) => {
-            const Component = require(path.join(themeRoot, file.template))
+            const Component = require(path.join(themeRoot, themeManifest[file.template]))
               .default
             const helmetContext = {}
             const rendered = ReactDOMServer.renderToStaticMarkup(
