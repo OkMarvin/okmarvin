@@ -2,6 +2,7 @@ import React from 'react'
 import Single from '../components/Single'
 import Main from '../styled/Main'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 class Post extends React.Component {
   render () {
     const { permalink, siteConfig } = this.props
@@ -17,6 +18,7 @@ class Post extends React.Component {
             className='okmarvin-content'
           />
         </Main>
+        <Footer {...siteConfig} />
       </React.StrictMode>
     )
   }
