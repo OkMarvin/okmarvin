@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 module.exports = function (data, callback) {
   const {files, cwd} = data
-  async.map(files, function (file, callback) {
+  async.each(files, function (file, callback) {
     fs.outputFile(
       path.join(
         cwd, 'dist', file.permalink, 'index.html'
@@ -11,5 +11,8 @@ module.exports = function (data, callback) {
       file.html,
       callback
     )
-  }, callback)
+  }, (err) => {
+    if (err) return callback(err)
+    return callback(null, data)
+  })
 }

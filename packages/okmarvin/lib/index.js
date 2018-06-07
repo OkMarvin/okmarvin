@@ -5,6 +5,7 @@ const parseData = require('./parseData')
 const composeList = require('./composeList')
 const render = require('./render')
 const writeFiles = require('./writeFiles')
+const copyFileAssets = require('./copyFileAssets')
 module.exports = function (cwd) {
   logger.profile('SSG')
   async.waterfall([
@@ -13,7 +14,8 @@ module.exports = function (cwd) {
     parseData,
     composeList,
     render,
-    writeFiles
+    writeFiles,
+    copyFileAssets
   ], (err, results) => {
     logger.profile('SSG')
     if (err) throw err

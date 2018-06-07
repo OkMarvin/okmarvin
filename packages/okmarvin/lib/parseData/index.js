@@ -23,6 +23,7 @@ module.exports = function (data, callback) {
             // ensure some fields are present in data
             callback(null, {
               ...data,
+              filePath,
               author: computeAuthor(siteConfig, data),
               datePublished: computeDatePublished(data),
               dateModified: computeDateModified(data),
