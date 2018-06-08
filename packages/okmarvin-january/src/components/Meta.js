@@ -16,16 +16,18 @@ const Meta = props => (
       fontSize='0.79rem'
       color='#777'
     >
-      Made with OkMarvin &{' '}
+      Made with{' '}
       <Inline
-        textDecoration='none'
+        component='a'
         marginLeft={3}
+        marginRight={3}
         props={{
-          href: 'https://github.com/OkMarvin/january'
+          href: 'https://github.com/OkMarvin/okmarvin'
         }}
       >
-        January
-      </Inline>
+        OkMarvin
+      </Inline>{' '}
+      & <Inline>January</Inline>
     </Row>
   </Fragment>
 )
