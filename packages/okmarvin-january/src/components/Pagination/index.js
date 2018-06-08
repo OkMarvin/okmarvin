@@ -27,12 +27,13 @@ export default class Pagination extends React.Component {
         {[...Array(total).keys()].slice(begin, begin + max).map(idx => {
           if (idx === current) {
             // current has no link
-            return <InlineBlock {...styles} fontWeight='bold'>{current}</InlineBlock>
+            return <InlineBlock key={idx} {...styles} fontWeight='bold'>{current}</InlineBlock>
           }
           if (idx === 1) {
             // first page has special url
             return (
               <InlineBlock
+                key={idx}
                 {...styles}
                 component={Link}
                 props={{ to: urlFormat.replace('page:num', '') }}
@@ -43,6 +44,7 @@ export default class Pagination extends React.Component {
           } else {
             return (
               <InlineBlock
+                key={idx}
                 {...styles}
                 component={Link}
                 props={{ to: urlFormat.replace(':num', idx) }}
