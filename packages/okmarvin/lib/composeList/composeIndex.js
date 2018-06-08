@@ -6,12 +6,15 @@ module.exports = function (data, callback) {
   const list = files
     .filter(file => file.template === 'post.js')
     .sort((a, b) => b.datePublished - a.datePublished)
+  const date = new Date().getTime()
   const base = {
     title: siteConfig.title,
     description: siteConfig.description,
     author: siteConfig.author,
     template: computeTemplate(siteConfig.themeManifest, 'index'),
     css: computeCss(siteConfig.themeManifest, 'index'),
+    datePublished: date,
+    dateModified: date,
     permalink: ''
   }
   // which data an index page would need?
