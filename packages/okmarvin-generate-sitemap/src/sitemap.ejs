@@ -1,7 +1,7 @@
 <%_
   var items = data.files.map((file) => {
     return {
-      permalink: data.site.url + file.permalink,
+      permalink: data.siteConfig.url + file.permalink,
       dateModified: file.dateModified
     }
   });

@@ -1,5 +1,6 @@
 <%_
-  var site = data.site;
+  var site = data.siteConfig;
+  var posts = data.files.filter(file => file.template === 'post.js');
 _%>
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"
@@ -19,13 +20,13 @@ _%>
     <generator>OkMarvin</generator>
     <lastBuildDate><%= format(new Date(), 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></lastBuildDate>
     <%_
-      var items = (site.posts || []).map((file) => {
+      var items = (posts || []).map((file) => {
         return Object.assign({}, file, {
           permalink: site.url + file.permalink
         })
       }).sort(function (a, b) {
         return new Date(b.datePublished) - new Date(a.datePublished)
-      })
+      });
     _%>
     <%_ for (var i = 0, len = items.length; i < len; i++) { var item = items[i]; _%>
     <item>
