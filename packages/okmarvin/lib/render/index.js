@@ -4,6 +4,7 @@ const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
 const generateHtml = require('./generateHtml')
+const logger = require('@okmarvin/logger')
 const { HelmetProvider } = require('react-helmet-async')
 module.exports = function (data, callback) {
   const { files, siteConfig } = data
@@ -50,6 +51,7 @@ module.exports = function (data, callback) {
       )
     },
     function (err, files) {
+      logger.info(`${files.length} html files generated.`)
       if (err) return callback(err)
       callback(null, {
         ...data,
