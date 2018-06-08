@@ -24,6 +24,7 @@
     "@okmarvin/january": "^1.0.90",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-helmet-async": "^0.1.0"
+    "react-helmet-async": "^0.1.0",
+    "purgecss": "^1.0.1"
   }
 }
