@@ -83,10 +83,10 @@ let config = {
   externals: [nodeExternals()],
   target: 'node'
 }
-// bundle client.js too when it exists
+// bundle client/index.js too when it exists
 // TODO what if we wanna separate those client js template by template
 // it should target web
-if (fs.existsSync(path.resolve(__dirname, 'src/client.js'))) {
+if (fs.existsSync(path.resolve(__dirname, 'src/client/index.js'))) {
   config = [
     config,
     {

@@ -4,7 +4,7 @@ const fs = require('fs-extra')
 const entry = {
   main: './src/index'
 }
-if (fs.pathExistsSync(path.join('./src/client.js'))) {
+if (fs.pathExistsSync(path.join('./src/client/index.js'))) {
   entry['client'] = './src/client'
 }
 module.exports = {

@@ -6,6 +6,7 @@ const composeList = require('./composeList')
 const render = require('./render')
 const writeFiles = require('./writeFiles')
 const copyFileAssets = require('./copyFileAssets')
+const copyThemeStatic = require('./copyThemeStatic')
 module.exports = function (cwd) {
   logger.profile('SSG')
   async.waterfall([
@@ -15,7 +16,8 @@ module.exports = function (cwd) {
     composeList,
     render,
     writeFiles,
-    copyFileAssets
+    copyFileAssets,
+    copyThemeStatic
   ], (err, results) => {
     logger.profile('SSG')
     if (err) throw err
