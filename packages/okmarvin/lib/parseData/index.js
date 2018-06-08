@@ -9,6 +9,7 @@ const computeTemplate = require('./computeTemplate')
 const computeCss = require('./computeCss')
 const md = require('./md')
 const findSiblings = require('./findSiblings')
+const findRelated = require('./findRelated')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
   async.waterfall(
@@ -45,7 +46,8 @@ module.exports = function (data, callback) {
         // TODO how to export data for theme developing
         callback(null, data)
       },
-      findSiblings
+      findSiblings,
+      findRelated
     ],
     (err, files) => {
       if (err) return callback(err)

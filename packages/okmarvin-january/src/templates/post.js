@@ -4,6 +4,7 @@ import PostContentHeader from '../components/PostContentHeader'
 import SingularHelmet from '../components/SingularHelmet'
 import Main from '../styled/Main'
 import PostSiblings from '../components/PostSiblings'
+import RelatedPost from '../components/RelatedPost'
 class Post extends React.Component {
   render () {
     return (
@@ -18,6 +19,9 @@ class Post extends React.Component {
               className='okmarvin-content'
             />
           </Block>
+          {this.props.related && (
+            <RelatedPost data={this.props.related.slice(0, 5)} />
+          )}
           <PostSiblings {...this.props} />
         </Main>
       </React.StrictMode>
