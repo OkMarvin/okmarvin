@@ -41,12 +41,7 @@ module.exports = function (data, callback) {
           callback
         )
       },
-      (files, callback) => {
-        // TODO make sure no duplicated permalink
-        // TODO make sure /static is preserved
-        // TODO how to export data for theme developing
-        callback(null, files)
-      },
+
       findSiblings,
       findRelated
     ],

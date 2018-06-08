@@ -3,6 +3,7 @@ const async = require('neo-async')
 const logger = require('@okmarvin/logger')
 const parseData = require('./parseData')
 const composeList = require('./composeList')
+const guard = require('./guard')
 const render = require('./render')
 const writeFiles = require('./writeFiles')
 const copyFileAssets = require('./copyFileAssets')
@@ -14,6 +15,7 @@ module.exports = function (cwd) {
     readData,
     parseData,
     composeList,
+    guard,
     render,
     writeFiles,
     copyFileAssets,
