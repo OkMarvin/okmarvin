@@ -4,6 +4,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const JsxstyleLoaderPlugin = require('jsxstyle-loader/plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CssoWebpackPlugin = require('csso-webpack-plugin').default
 const fs = require('fs')
 const { readdirSync } = fs
@@ -49,6 +51,16 @@ let config = {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[chunkhash].js',
     libraryTarget: 'umd'
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   module: {
     rules: [
