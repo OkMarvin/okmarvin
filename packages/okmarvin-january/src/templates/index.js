@@ -8,9 +8,11 @@ import groupBy from 'lodash/groupBy'
 import { getYear } from 'date-fns'
 import { bps, lineHeight, mobileScale, scale } from '../constants'
 import ArchiveItem from '../components/ArchiveItem'
+import Pagination from '../components/Pagination'
 class Index extends React.Component {
   render () {
-    const { title, description, list } = this.props
+    const { title, description, list, siteConfig } = this.props
+    const { paginate } = siteConfig
     const archives = groupBy(list, file =>
       getYear(new Date(file.datePublished))
     )
@@ -61,6 +63,7 @@ class Index extends React.Component {
                 </React.Fragment>
               )
             })}
+          {paginate && <Pagination {...this.props.paginator} />}
         </Main>
       </React.Fragment>
     )
@@ -72,7 +75,8 @@ Index.propTypes = {
   siteConfig: PropTypes.shape({
     menu: PropTypes.array
   }),
-  list: PropTypes.array
+  list: PropTypes.array,
+  paginator: PropTypes.object
 }
 export default props => (
   <Html {...props}>

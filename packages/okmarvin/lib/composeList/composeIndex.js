@@ -40,6 +40,7 @@ module.exports = function (data, callback) {
       } else {
         results = results.concat({
           ...base,
+          title: base.title + ' - Page ' + (i + 1),
           list: list.slice(i * paginate, i * paginate + paginate),
           paginator: {
             current: i + 1,
