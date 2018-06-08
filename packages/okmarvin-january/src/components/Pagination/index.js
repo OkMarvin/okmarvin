@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Block, InlineBlock } from 'jsxstyle'
 import { Link } from '@reach/router'
+import findBegin from './findBegin'
 const styles = {
   marginLeft: 5,
   marginRight: 5,
@@ -17,14 +18,18 @@ export default class Pagination extends React.Component {
   }
   render () {
     const { current, total, urlFormat } = this.props
+    // show 10 items at most
+    const max = 10
+    const begin = findBegin(total, current, max)
+
     return (
       <Block marginTop={'3rem'}>
-        {[...Array(total).keys()].map(idx => {
-          if (idx + 1 === current) {
+        {[...Array(total).keys()].slice(begin, begin + max).map(idx => {
+          if (idx === current) {
             // current has no link
             return <InlineBlock {...styles} fontWeight='bold'>{current}</InlineBlock>
           }
-          if (idx === 0) {
+          if (idx === 1) {
             // first page has special url
             return (
               <InlineBlock
@@ -40,9 +45,9 @@ export default class Pagination extends React.Component {
               <InlineBlock
                 {...styles}
                 component={Link}
-                props={{ to: urlFormat.replace(':num', idx + 1) }}
+                props={{ to: urlFormat.replace(':num', idx) }}
               >
-                {idx + 1}
+                {idx}
               </InlineBlock>
             )
           }
