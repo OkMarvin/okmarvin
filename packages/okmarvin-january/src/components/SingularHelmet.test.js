@@ -11,7 +11,7 @@ it('renders without crashing', () => {
       title: 'okmarvin'
     },
     title: 'okmarvin',
-    description: 'static site generator with better theme support',
+    description: 'static site generator with better theme developer experience',
     author: 'Sam Chen',
     datePublished: new Date().getTime(),
     dateModified: new Date().getTime(),

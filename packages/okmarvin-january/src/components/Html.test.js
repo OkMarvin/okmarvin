@@ -10,7 +10,7 @@ it('renders without crashing', () => {
       title: 'okmarvin'
     },
     title: 'okmarvin',
-    description: 'static site generator with better theme support'
+    description: 'static site generator with better theme developer experience'
   }
   ReactDOM.render(
     <HelmetProvider>
