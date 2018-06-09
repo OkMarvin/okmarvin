@@ -38,7 +38,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-loader": "^2.1.5",
     "prettier": "^1.13.4",
-    "react-hot-loader": "^4.2.0",
+    "react-hot-loader": "^4.3.0",
     "react-test-renderer": "^16.4.0",
     "regenerator-runtime": "^0.11.1",
     "standard": "^11.0.1",
