@@ -35,7 +35,7 @@ const webpackConfigPromise = new Promise((resolve, reject) => {
             historyApiFallback: true
           },
           resolve: {
-            symlinks: false
+            symlinks: true
           },
           module: {
             rules: [
@@ -44,15 +44,7 @@ const webpackConfigPromise = new Promise((resolve, reject) => {
                 include: path.resolve(__dirname, 'src'),
                 use: [
                   {
-                    loader: 'babel-loader',
-                    options: {
-                      presets: ['@babel/preset-env', '@babel/preset-react'],
-                      cacheDirectory: true,
-                      plugins: [
-                        'react-hot-loader/babel',
-                        '@babel/plugin-proposal-object-rest-spread'
-                      ]
-                    }
+                    loader: 'babel-loader'
                   }
                 ]
               },
