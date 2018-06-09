@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Meta from './Meta'
 import { bps } from '../constants'
@@ -14,12 +14,7 @@ const Link = ({ children, ...rest }) => (
     {children}
   </Inline>
 )
-const Seperator = ({ children }) => (
-  <Inline component='span' color='#c03'>
-    {children}
-  </Inline>
-)
-const Footer = ({ feed, url, author, github, twitter }) => (
+const Footer = ({ feed, url, author, github, twitter, rss }) => (
   <Block
     component='footer'
     textAlign='center'
@@ -33,28 +28,22 @@ const Footer = ({ feed, url, author, github, twitter }) => (
   >
     <Row alignItems='center' justifyContent='center' marginBottom='1em'>
       {github ? (
-        <Fragment>
-          <Link href={`https://github.com/${github}`}>Github</Link>
-          <Seperator>·</Seperator>
-        </Fragment>
+        <Link href={`https://github.com/${github}`}>Github</Link>
       ) : null}
       {twitter ? (
-        <Fragment>
-          <Link href={`https://twitter.com/${twitter}`}>Twitter</Link>
-          <Seperator>·</Seperator>
-        </Fragment>
+        <Link href={`https://twitter.com/${twitter}`}>Twitter</Link>
       ) : null}
-      <Link href={feed || url + '/feed.xml'}>RSS</Link>
+      {rss && <Link href={url + '/feed.xml'}>RSS</Link>}
     </Row>
     <Meta author={author} />
-    {/* show BackToTop according to the page height */}
     <BackToTop />
   </Block>
 )
 Footer.propTypes = {
   author: PropTypes.string.isRequired,
   github: PropTypes.string,
-  twitter: PropTypes.string
+  twitter: PropTypes.string,
+  rss: PropTypes.bool
 }
 Footer.defaultProps = {
   author: '',

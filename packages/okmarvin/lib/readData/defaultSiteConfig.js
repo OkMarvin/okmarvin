@@ -6,5 +6,6 @@ module.exports = {
   lang: 'en',
   theme: '@okmarvin/january',
   toc: true,
-  permalink: '/:title'
+  permalink: '/:title',
+  rss: true
 }
