@@ -26,8 +26,7 @@ const Meta = props => (
         }}
       >
         OkMarvin
-      </Inline>{' '}
-      & <Inline>January</Inline>
+      </Inline>
     </Row>
   </Fragment>
 )
