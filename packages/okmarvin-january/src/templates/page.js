@@ -6,7 +6,7 @@ import Main from '../styled/Main'
 class Page extends React.Component {
   render () {
     return (
-      <React.StrictMode>
+      <React.Fragment>
         <Main>
           <Block component='article'>
             <PageContentHeader {...this.props} />
@@ -18,7 +18,7 @@ class Page extends React.Component {
             />
           </Block>
         </Main>
-      </React.StrictMode>
+      </React.Fragment>
     )
   }
 }

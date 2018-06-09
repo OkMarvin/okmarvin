@@ -8,7 +8,7 @@ import RelatedPost from '../components/RelatedPost'
 class Post extends React.Component {
   render () {
     return (
-      <React.StrictMode>
+      <React.Fragment>
         <Main>
           <Block component='article'>
             <PostContentHeader {...this.props} />
@@ -24,7 +24,7 @@ class Post extends React.Component {
           )}
           <PostSiblings {...this.props} />
         </Main>
-      </React.StrictMode>
+      </React.Fragment>
     )
   }
 }
