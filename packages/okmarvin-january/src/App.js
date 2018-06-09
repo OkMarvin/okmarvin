@@ -7,6 +7,7 @@ class App extends React.Component {
     const { files, siteConfig } = data
     return (
       <Router>
+        {/* FIXME Router renders a div breaks our layout now */}
         {files.map(file => {
           const Component = require(`./templates/${file.template}`).default
           return (
