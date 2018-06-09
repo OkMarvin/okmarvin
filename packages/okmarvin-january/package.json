@@ -47,10 +47,12 @@
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.6.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "optimize-css-assets-webpack-plugin": "^4.0.2"
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
+    "neo-async": "^2.5.1"
   },
   "dependencies": {
     "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
     "prop-types": "^15.6.1",
     "date-fns": "^1.29.0",
@@ -58,7 +60,8 @@
     "sanitize.css": "^5.0.0",
     "prismjs": "^1.14.0",
     "@reach/router": "^1.0.7",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "@okmarvin/okmarvin": "^0.0.1"
   },
   "browserslist": [
     "> 1%",
