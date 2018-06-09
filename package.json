@@ -36,6 +36,7 @@
     "jsxstyle-loader": "^1.1.1",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.4.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
     "prettier": "^1.13.4",
     "react-hot-loader": "^4.3.0",
@@ -43,13 +44,12 @@
     "regenerator-runtime": "^0.11.1",
     "standard": "^11.0.1",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.10.2",
     "webpack-cli": "^3.0.2",
     "webpack-dev-server": "^3.1.4",
     "webpack-manifest-plugin": "^2.0.3",
-    "webpack-node-externals": "^1.6.0",
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "optimize-css-assets-webpack-plugin": "^4.0.2"
+    "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "@reach/router": "^1.0.7",
@@ -60,6 +60,7 @@
     "gray-matter": "^4.0.1",
     "js-yaml": "^3.11.0",
     "jsxstyle": "^2.1.1",
+    "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
     "markdown-it-toc-x3": "^0.0.5",
     "neo-async": "^2.5.1",
@@ -69,9 +70,7 @@
     "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
     "sanitize.css": "^5.0.0",
-    "winston": "^3.0.0-rc5",
-    "lodash": "^4.17.10"
-    
+    "winston": "^3.0.0-rc5"
   },
   "jest": {
     "moduleNameMapper": {
