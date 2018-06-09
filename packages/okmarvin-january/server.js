@@ -47,7 +47,7 @@ loadData(() => {
     server.on('listening', ({ server, options }) => {
       console.log('i am running')
     })
-    const watcher = chokidar.watch('./content')
+    const watcher = chokidar.watch(['./content', './_config.yml'])
     watcher.on('all', () => {
       loadData()
     })
