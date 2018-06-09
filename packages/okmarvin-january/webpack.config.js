@@ -31,9 +31,6 @@ const webpackConfigPromise = new Promise((resolve, reject) => {
           output: {
             publicPath: '/'
           },
-          devServer: {
-            historyApiFallback: true
-          },
           resolve: {
             symlinks: true
           },
