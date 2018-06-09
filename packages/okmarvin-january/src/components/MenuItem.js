@@ -7,7 +7,7 @@ const MenuItem = props => (
   <Block margin='0 0.702em' fontSize='1em'>
     {!props.current ? (
       <InlineBlock
-        props={{ current: props.current + '', to: props.permalink }}
+        props={{ current: props.current + '', to: props.permalink + '/' }}
         component={Link}
         textDecoration='none'
         fontWeight={props.current === 'true' ? 'bold' : 'normal'}
