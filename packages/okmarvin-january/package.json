@@ -11,7 +11,7 @@
   "license": "MIT",
   "main": "build/manifest.json",
   "scripts": {
-    "start": "webpack-dev-server --mode development --hot",
+    "start": "node server.js",
     "build": "standard && webpack --config webpack.prod.config.js",
     "test": "standard && jest",
     "prepublishOnly": "npm run build"
