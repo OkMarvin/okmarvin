@@ -12,7 +12,7 @@ module.exports = function (data, callback) {
           files,
           function (file, callback) {
             fs.outputFile(
-              path.join(cwd, destination, file.permalink, 'index.html'),
+              path.join(cwd, destination, decodeURIComponent(file.permalink), 'index.html'),
               file.html,
               callback
             )
