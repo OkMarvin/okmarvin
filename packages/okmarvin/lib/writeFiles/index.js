@@ -4,7 +4,7 @@ const path = require('path')
 const writeFeed = require('./writeFeed')
 const writeSitemap = require('./writeSitemap')
 module.exports = function (data, callback) {
-  const { files, cwd } = data
+  const { files, cwd, destination } = data
   async.parallel(
     [
       callback =>
@@ -12,7 +12,7 @@ module.exports = function (data, callback) {
           files,
           function (file, callback) {
             fs.outputFile(
-              path.join(cwd, 'dist', file.permalink, 'index.html'),
+              path.join(cwd, destination, file.permalink, 'index.html'),
               file.html,
               callback
             )

@@ -3,7 +3,7 @@ const path = require('path')
 const glob = require('glob')
 const fs = require('fs-extra')
 module.exports = function (data, callback) {
-  const { files, cwd } = data
+  const { files, cwd, destination } = data
   async.each(
     files,
     function (file, callback) {
@@ -32,7 +32,7 @@ module.exports = function (data, callback) {
                 asset =>
                   function (callback) {
                     const basename = path.basename(asset)
-                    const dest = path.join(cwd, 'dist', file.permalink, basename)
+                    const dest = path.join(cwd, destination, file.permalink, basename)
                     fs.copy(asset, dest, callback)
                   }
               ),
