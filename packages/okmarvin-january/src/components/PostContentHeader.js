@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Link } from '@reach/router'
 import ArticleHeader from '../styled/ArticleHeader'
 import ArticleHeading from '../styled/ArticleHeading'
+import slugger from 'slugger'
 const PostContentHeader = ({ title, author, datePublished, tags }) => (
   <ArticleHeader>
     <ArticleHeading>{title}</ArticleHeading>
@@ -21,7 +22,7 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
               marginRight={10}
               key={tag}
               component={Link}
-              props={{ to: `/topic/${encodeURIComponent(tag)}` }}
+              props={{ to: `/topic/${encodeURIComponent(slugger(tag))}` }}
             >
               {tag}
             </InlineBlock>

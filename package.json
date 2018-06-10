@@ -74,7 +74,7 @@
     "react-helmet-async": "^0.1.0",
     "sanitize.css": "^5.0.0",
     "winston": "^3.0.0-rc5",
-    "github-slugger": "^1.2.0"
+    "slugger": "^1.0.1"
   },
   "jest": {
     "moduleNameMapper": {
