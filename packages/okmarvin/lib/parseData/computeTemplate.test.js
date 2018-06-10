@@ -13,6 +13,7 @@ test('returns page', () => {
     fn(
       { 'page.js': 'page.p.js' },
       null,
+      'content',
       '/content/page/intro.md'
     )
   ).toBe('page.js')

@@ -12,8 +12,8 @@ const readThemeManifest = require('./readThemeManifest')
  * @param {String} cwd current working directory
  * @param {Function} callback
  */
-module.exports = function (cwd, callback) {
-  const content = path.join(cwd, 'content')
+module.exports = function (cwd, source, destination, callback) {
+  const content = path.join(cwd, source)
   assert.ok(fs.pathExistsSync(content), `${content} folder doesn't exist`)
   const searchPattern = '{post,page}/**/*.md'
   async.parallel(
@@ -46,7 +46,9 @@ module.exports = function (cwd, callback) {
       if (err) return callback(err)
       return callback(null, {
         ...results,
-        cwd
+        cwd,
+        source,
+        destination
       })
     }
   )

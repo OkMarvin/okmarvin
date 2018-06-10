@@ -8,7 +8,13 @@ const render = require('./render')
 const writeFiles = require('./writeFiles')
 const copyFileAssets = require('./copyFileAssets')
 const copyThemeStatic = require('./copyThemeStatic')
-module.exports = function (cwd) {
+/**
+ * Static site generator
+ * @param {string} cwd Current working directory
+ * @param {string} source Content source directory
+ * @param {string} destination Build target
+ */
+module.exports = function (cwd, source = 'content', destination = 'dist') {
   logger.profile('SSG')
   async.waterfall([
     (callback) => callback(null, cwd),

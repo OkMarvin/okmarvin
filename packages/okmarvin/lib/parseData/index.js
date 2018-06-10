@@ -12,7 +12,7 @@ const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
 const path = require('path')
 module.exports = function (data, callback) {
-  const { siteConfig, files, cwd } = data
+  const { siteConfig, files, cwd, source } = data
   async.waterfall(
     [
       callback => {
@@ -39,11 +39,13 @@ module.exports = function (data, callback) {
               template: computeTemplate(
                 siteConfig.themeManifest,
                 userSetTemplate,
+                source,
                 filePath
               ),
               css: computeCss(
                 siteConfig.themeManifest,
                 userSetTemplate,
+                source,
                 filePath
               ), //  template's css file
               content: computeToc(siteConfig, data)
