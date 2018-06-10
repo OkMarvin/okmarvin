@@ -30,26 +30,23 @@ module.exports = function (data, callback) {
     }
     let results = []
     for (let i = 0; i < num; i++) {
+      let paginator = {
+        current: i + 1,
+        total: num,
+        urlFormat: '/page:num'
+      }
       if (i === 0) {
         results = results.concat({
           ...base,
           list: list.slice(i * paginate, i * paginate + paginate),
-          paginator: {
-            current: i + 1,
-            total: num,
-            urlFormat: '/page:num'
-          }
+          paginator
         })
       } else {
         results = results.concat({
           ...base,
           title: base.title + ' - Page ' + (i + 1),
           list: list.slice(i * paginate, i * paginate + paginate),
-          paginator: {
-            current: i + 1,
-            total: num,
-            urlFormat: '/page:num'
-          },
+          paginator,
           permalink: `/page${i + 1}`
         })
       }
