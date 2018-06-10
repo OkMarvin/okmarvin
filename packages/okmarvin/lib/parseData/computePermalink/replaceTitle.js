@@ -1,4 +1,4 @@
-const slugger = require('./slugger')
+const slugger = require('slugger')
 module.exports = function (permalink, data) {
   return permalink.replace(
     /:title/g,
