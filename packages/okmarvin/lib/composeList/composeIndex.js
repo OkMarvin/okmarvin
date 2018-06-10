@@ -15,7 +15,7 @@ module.exports = function (data, callback) {
     css: computeCss(siteConfig.themeManifest, 'index'),
     datePublished: date,
     dateModified: date,
-    permalink: ''
+    permalink: '/'
   }
   // which data an index page would need?
   if (!paginate) {
