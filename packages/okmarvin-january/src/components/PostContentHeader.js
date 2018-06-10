@@ -2,6 +2,7 @@ import React from 'react'
 import { Block, InlineBlock, Row, Inline } from 'jsxstyle'
 import { format } from 'date-fns'
 import PropTypes from 'prop-types'
+import { Link } from '@reach/router'
 import ArticleHeader from '../styled/ArticleHeader'
 import ArticleHeading from '../styled/ArticleHeading'
 const PostContentHeader = ({ title, author, datePublished, tags }) => (
@@ -19,8 +20,8 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
             <InlineBlock
               marginRight={10}
               key={tag}
-              component={'span'}
-              props={{ to: `/topic/${tag}` }}
+              component={Link}
+              props={{ to: `/topic/${encodeURIComponent(tag)}` }}
             >
               {tag}
             </InlineBlock>
