@@ -1,10 +1,11 @@
 const computeTemplate = require('../parseData/computeTemplate')
 const computeCss = require('../parseData/computeCss')
+const isPost = require('../parseData/isPost')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
   const { paginate } = siteConfig
   const list = files
-    .filter(file => file.template === 'post.js')
+    .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
   const date = new Date().getTime()
   const base = {

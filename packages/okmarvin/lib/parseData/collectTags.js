@@ -1,7 +1,8 @@
 const async = require('async')
+const isPost = require('./isPost')
 module.exports = function (files, callback) {
   const topics = Object.create(null)
-  const posts = files.filter(file => file.template === 'post.js')
+  const posts = files.filter(isPost)
   async.each(
     posts,
     (file, callback) => {

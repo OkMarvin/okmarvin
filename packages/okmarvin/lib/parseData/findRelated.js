@@ -1,8 +1,9 @@
 const async = require('neo-async')
 const uniqBy = require('lodash/uniqby')
 const collectTags = require('./collectTags')
+const isPost = require('./isPost')
 module.exports = function (files, callback) {
-  const posts = files.filter(file => file.template === 'post.js')
+  const posts = files.filter(isPost)
   const others = files.filter(file => file.template !== 'post.js')
   async.waterfall(
     [

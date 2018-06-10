@@ -1,7 +1,8 @@
 const async = require('neo-async')
+const isPost = require('./isPost')
 module.exports = function (files, callback) {
   const listOfPosts = files
-    .filter(file => file.template === 'post.js')
+    .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
   async.map(
     files,
