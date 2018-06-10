@@ -10,13 +10,16 @@ export default class Html extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     permalink: PropTypes.string,
     siteConfig: PropTypes.shape({
       lang: PropTypes.string.isRequired,
       url: PropTypes.string,
       title: PropTypes.string.isRequired
     })
+  }
+  static defaultProps = {
+    description: ''
   }
   render () {
     const { siteConfig, title, description, permalink } = this.props
