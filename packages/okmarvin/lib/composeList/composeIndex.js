@@ -20,15 +20,17 @@ module.exports = function (data, callback) {
   }
   // which data an index page would need?
   if (!paginate) {
-    callback(null, [{
-      ...base,
-      list
-    }])
+    callback(null, [
+      {
+        ...base,
+        list
+      }
+    ])
   } else {
-    let num = Math.ceil(list.length / paginate)
-    if (num === 1) {
-      return callback(null, [{...base, list}])
+    if (list.length < paginate + 1) {
+      return callback(null, [{ ...base, list }])
     }
+    let num = Math.ceil(list.length / paginate)
     let results = []
     for (let i = 0; i < num; i++) {
       let paginator = {
