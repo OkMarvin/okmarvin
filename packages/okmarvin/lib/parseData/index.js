@@ -10,8 +10,9 @@ const computeCss = require('./computeCss')
 const md = require('./md')
 const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
+const path = require('path')
 module.exports = function (data, callback) {
-  const { siteConfig, files } = data
+  const { siteConfig, files, cwd } = data
   async.waterfall(
     [
       callback => {
@@ -19,7 +20,7 @@ module.exports = function (data, callback) {
           files,
           function (file, callback) {
             const [filePath, { data, content }] = file
-            const {template: userSetTemplate} = data
+            const { template: userSetTemplate } = data
             if (!data.title) throw new Error(`title is missing in ${filePath}`)
             // FIXME
             // ensure some fields are present in data
@@ -30,9 +31,21 @@ module.exports = function (data, callback) {
               datePublished: computeDatePublished(data),
               dateModified: computeDateModified(data),
               description: computeDescription(data, content),
-              permalink: computePermalink(siteConfig, data),
-              template: computeTemplate(siteConfig.themeManifest, userSetTemplate, filePath),
-              css: computeCss(siteConfig.themeManifest, userSetTemplate, filePath), //  template's css file
+              permalink: computePermalink(
+                siteConfig,
+                data,
+                path.relative(cwd, filePath)
+              ),
+              template: computeTemplate(
+                siteConfig.themeManifest,
+                userSetTemplate,
+                filePath
+              ),
+              css: computeCss(
+                siteConfig.themeManifest,
+                userSetTemplate,
+                filePath
+              ), //  template's css file
               content: computeToc(siteConfig, data)
                 ? md.render(`{:toc}\n${content}`)
                 : md.render(content)
