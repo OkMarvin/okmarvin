@@ -73,7 +73,8 @@
     "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
     "sanitize.css": "^5.0.0",
-    "winston": "^3.0.0-rc5"
+    "winston": "^3.0.0-rc5",
+    "github-slugger": "^1.2.0"
   },
   "jest": {
     "moduleNameMapper": {
