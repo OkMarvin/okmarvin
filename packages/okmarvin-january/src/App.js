@@ -13,7 +13,7 @@ class App extends React.Component {
           return (
             <Component
               key={file.permalink}
-              path={file.permalink + '/'}
+              path={file.permalink}
               {...file}
               siteConfig={siteConfig}
             />

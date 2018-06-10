@@ -10,7 +10,7 @@ _%>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <%_ for (var i = 0, len = items.length; i < len; i++) { _%>
     <url>
-      <loc><%= items[i]['permalink'] + '/' %></loc>
+      <loc><%= items[i]['permalink'] %></loc>
       <lastmod><%= format(items[i]['dateModified'], 'YYYY-MM-DD') %></lastmod>
     </url>
   <%_ } _%>

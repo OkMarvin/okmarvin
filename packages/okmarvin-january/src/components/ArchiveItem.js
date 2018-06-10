@@ -12,7 +12,7 @@ const ArchiveItem = ({ title, datePublished, permalink }) => (
   >
     <Inline
       props={{
-        to: permalink + '/'
+        to: permalink
       }}
       component={Link}
       textDecoration='none'

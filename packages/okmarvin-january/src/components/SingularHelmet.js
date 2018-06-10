@@ -37,8 +37,8 @@ class Single extends React.Component {
               {
                 "@context": "http://schema.org",
                 "@type": "BlogPosting",
-                "mainEntityOfPage": "${url + permalink + '/'}",
-                "url": "${url + permalink + '/'}",
+                "mainEntityOfPage": "${url + permalink}",
+                "url": "${url + permalink}",
                 "headline": "${title}",
                 "description": "${description}",
                 "datePublished": "${format(datePublished, 'YYYY-MM-DD')}",

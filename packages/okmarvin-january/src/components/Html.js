@@ -33,12 +33,12 @@ export default class Html extends React.Component {
           <meta httpEquiv='x-ua-compatible' content='ie=edge' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta name='description' content={description} />
-          <link rel='canonical' href={url + permalink + '/'} />
+          <link rel='canonical' href={url + permalink} />
 
           <meta name='twitter:card' content='summary' />
           <meta property='og:title' content={title} />
           <meta property='og:description' content={description} />
-          <meta property='og:url' content={url + permalink + '/'} />
+          <meta property='og:url' content={url + permalink} />
         </Helmet>
         <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} />
         {this.props.children}

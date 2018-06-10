@@ -31,11 +31,11 @@ _%>
     <%_ for (var i = 0, len = items.length; i < len; i++) { var item = items[i]; _%>
     <item>
       <title><%= item['title'] %></title>
-      <link><%= item['permalink'] + '/' %></link>
+      <link><%= item['permalink'] %></link>
       <description><%= item['description'] %></description>
       <pubDate><%= format(item['datePublished'], 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></pubDate>
       <dc:creator><![CDATA[<%= item['author'] %>]]></dc:creator>
-      <guid isPermaLink="false"><%= item['permalink'] + '/' %></guid>
+      <guid isPermaLink="false"><%= item['permalink'] %></guid>
       <content:encoded><![CDATA[<%- item['html'] %>]]></content:encoded>
     </item>
     <%_ } _%>
