@@ -17,7 +17,7 @@ const path = require('path')
 function loadData (callback) {
   async.waterfall(
     [
-      callback => callback(null, __dirname),
+      callback => callback(null, __dirname, 'content', 'dist'),
       readData,
       parseData,
       composeList,
