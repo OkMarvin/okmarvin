@@ -6,7 +6,7 @@ toc: true
 theme: '@okmarvin/january'
 menu:
   - text: Home
-    permalink: ''
+    permalink: '/'
   - text: 看书
     permalink: /read
   - text: 关于
