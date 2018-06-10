@@ -1,6 +1,6 @@
 module.exports = function (permalink, data) {
   return permalink.replace(
     /:category/g,
-    (data.categories || []).join('/')
+    (data.categories || []).map(c => encodeURIComponent(c)).join('/')
   )
 }
