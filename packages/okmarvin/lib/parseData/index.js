@@ -34,7 +34,7 @@ module.exports = function (data, callback) {
               permalink: computePermalink(
                 siteConfig,
                 data,
-                path.relative(cwd, filePath)
+                path.relative(path.join(cwd, source), filePath)
               ),
               template: computeTemplate(
                 siteConfig.themeManifest,

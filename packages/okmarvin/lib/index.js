@@ -17,7 +17,7 @@ const copyThemeStatic = require('./copyThemeStatic')
 module.exports = function (cwd, source = 'content', destination = 'dist') {
   logger.profile('SSG')
   async.waterfall([
-    (callback) => callback(null, cwd),
+    (callback) => callback(null, cwd, source, destination),
     readData,
     parseData,
     composeList,

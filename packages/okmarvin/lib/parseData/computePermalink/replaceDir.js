@@ -4,7 +4,7 @@ module.exports = function (permalink, dir = '') {
     /:dir/g,
     dir
       .split(path.sep)
-      .slice(2)
+      .slice(1)
       .join(path.sep)
   )
 }
