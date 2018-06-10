@@ -1,28 +1,13 @@
 const async = require('neo-async')
 const uniqBy = require('lodash/uniqby')
+const collectTags = require('./collectTags')
 module.exports = function (files, callback) {
-  const topics = Object.create(null)
   const posts = files.filter(file => file.template === 'post.js')
   const others = files.filter(file => file.template !== 'post.js')
   async.waterfall(
     [
-      callback =>
-        async.each(
-          posts,
-          (file, callback) => {
-            file.tags &&
-              file.tags.map(tag => {
-                if (!topics[tag]) {
-                  // init
-                  topics[tag] = []
-                }
-                topics[tag] = topics[tag].concat(file)
-              })
-            callback()
-          },
-          callback
-        ),
-      callback => {
+      callback => collectTags(files, callback),
+      (topics, callback) => {
         async.map(
           posts,
           (file, callback) => {
