@@ -63,7 +63,7 @@ class Index extends React.Component {
                 </React.Fragment>
               )
             })}
-          {paginate && <Pagination {...this.props.paginator} />}
+          {paginate && this.props.paginator && <Pagination {...this.props.paginator} />}
         </Main>
       </React.Fragment>
     )
