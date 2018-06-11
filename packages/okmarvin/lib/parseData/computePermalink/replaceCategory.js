@@ -1,6 +1,7 @@
+const slug = require('../../helpers/slug')
 module.exports = function (permalink, data) {
   return permalink.replace(
-    /:category/g,
-    (data.categories || []).map(c => encodeURIComponent(c)).join('/')
+    /:categories/g,
+    (data.categories || []).map(c => encodeURIComponent(slug(c))).join('/')
   )
 }
