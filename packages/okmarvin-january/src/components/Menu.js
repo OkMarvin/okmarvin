@@ -8,7 +8,7 @@ const Menu = props => (
     listStyle='none'
     paddingLeft={0}
     margin={0}
-    background='#00cc99'
+    background='#ffd54f'
     width='100%'
     alignItems='center'
     justifyContent='center'

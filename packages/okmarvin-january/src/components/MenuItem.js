@@ -11,12 +11,12 @@ const MenuItem = props => (
         component={Link}
         textDecoration='none'
         fontWeight={props.current === 'true' ? 'bold' : 'normal'}
-        color='#fff'
+        color='#000'
         paddingTop='1em'
         paddingBottom='1em'
         transition='color 0.1s'
-        linkColor='#fff'
-        hoverColor='#fff'
+        linkColor='#000'
+        hoverColor='#000'
         hoverTextDecoration='underline'
         mediaQueries={bps}
         smLinkColor='#03c'
@@ -33,6 +33,7 @@ const MenuItem = props => (
         paddingTop='1em'
         paddingBottom='1em'
         color='#000'
+        fontWeight='bold'
         cursor='text'
         mediaQueries={bps}
         smColor='#000'

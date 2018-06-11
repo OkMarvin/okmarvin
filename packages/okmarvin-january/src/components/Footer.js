@@ -22,7 +22,7 @@ const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
     fontSize='0.889em'
     padding='1em 0'
     marginTop='4.11em'
-    borderBottom='1em solid #00cc99'
+    borderBottom='1em solid #ffd54f'
     mediaQueries={bps}
     smBorderBottom='none'
   >
