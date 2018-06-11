@@ -23,7 +23,7 @@ class Tag extends React.Component {
             </React.Fragment>
           }
           {paginate &&
-            this.props.paginator && <Pagination {...this.props.paginator} />}
+            this.props.paginator && <Pagination {...this.props.paginator} paginate={paginate} />}
         </Main>
       </React.Fragment>
     )
