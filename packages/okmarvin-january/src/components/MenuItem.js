@@ -32,7 +32,7 @@ const MenuItem = props => (
         component='span'
         paddingTop='1em'
         paddingBottom='1em'
-        color='#333'
+        color='#000'
         cursor='text'
         mediaQueries={bps}
         smColor='#000'
