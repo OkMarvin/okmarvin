@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 import App from './App'
 import { HelmetProvider } from 'react-helmet-async'
 
-const root = document.getElementById('___OkMarvin___')
+const root = document.getElementById('app')
 
 class ErrorBoundary extends React.Component {
   constructor (props) {

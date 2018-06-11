@@ -37,7 +37,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       template: require('html-webpack-template'),
-      appMountId: '___OkMarvin___',
+      appMountId: 'app',
       title: 'January for OkMarvin'
     })
   ]
