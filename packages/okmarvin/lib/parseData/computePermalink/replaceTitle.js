@@ -1,4 +1,4 @@
-const slug = require('../../helpers/slug')
+const slug = require('@okmarvin/slug')
 module.exports = function (permalink, data) {
   return permalink.replace(
     /:title/g,
