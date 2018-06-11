@@ -14,7 +14,7 @@ const Link = ({ children, ...rest }) => (
     {children}
   </Inline>
 )
-const Footer = ({ feed, url, author, github, twitter, rss }) => (
+const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
   <Block
     component='footer'
     textAlign='center'
@@ -35,7 +35,7 @@ const Footer = ({ feed, url, author, github, twitter, rss }) => (
       ) : null}
       {rss && <Link href={url + '/feed.xml'}>RSS</Link>}
     </Row>
-    <Meta author={author} />
+    <Meta author={author} theme={theme} />
     <BackToTop />
   </Block>
 )
@@ -43,7 +43,8 @@ Footer.propTypes = {
   author: PropTypes.string.isRequired,
   github: PropTypes.string,
   twitter: PropTypes.string,
-  rss: PropTypes.bool
+  rss: PropTypes.bool,
+  theme: PropTypes.string
 }
 Footer.defaultProps = {
   author: '',

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Row, Inline } from 'jsxstyle'
+import { Row, InlineBlock, Block } from 'jsxstyle'
 const Meta = props => (
   <Fragment>
     <Row
@@ -10,24 +10,23 @@ const Meta = props => (
     >
       Copyright © {props.author}
     </Row>
-    <Row
-      alignItems='center'
-      justifyContent='center'
+    <Block
+      marginLeft='auto'
+      marginRight='auto'
       fontSize='0.79rem'
       color='#777'
     >
-      Made with{' '}
-      <Inline
+      Made with{` `}
+      <InlineBlock
         component='a'
-        marginLeft={3}
-        marginRight={3}
         props={{
           href: 'https://github.com/OkMarvin/okmarvin'
         }}
       >
-        OkMarvin
-      </Inline>
-    </Row>
+        okmarvin
+      </InlineBlock> & {` `}
+      <InlineBlock component='span'>{props.theme}</InlineBlock>
+    </Block>
   </Fragment>
 )
 export default Meta
