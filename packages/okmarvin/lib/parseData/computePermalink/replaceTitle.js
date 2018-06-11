@@ -1,7 +1,7 @@
-const slugger = require('slugger')
+const slug = require('../../helpers/slug')
 module.exports = function (permalink, data) {
   return permalink.replace(
     /:title/g,
-    encodeURIComponent(slugger(data.title))
+    encodeURIComponent(slug(data.title))
   )
 }

@@ -71,7 +71,7 @@
     "@reach/router": "^1.0.7",
     "lodash": "^4.17.10",
     "@okmarvin/okmarvin": "^0.0.1",
-    "slugger": "^1.0.1"
+    "github-slugger": "^1.2.0"
   },
   "browserslist": [
     "> 1%",
