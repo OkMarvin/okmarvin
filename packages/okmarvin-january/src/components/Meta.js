@@ -6,7 +6,7 @@ const Meta = props => (
       alignItems='center'
       justifyContent='center'
       fontSize='0.79rem'
-      color='#777'
+      color='#333'
     >
       Copyright © {props.author}
     </Row>
@@ -14,7 +14,7 @@ const Meta = props => (
       marginLeft='auto'
       marginRight='auto'
       fontSize='0.79rem'
-      color='#777'
+      color='#333'
     >
       Made with{` `}
       <InlineBlock
