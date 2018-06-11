@@ -33,7 +33,7 @@ Tag.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   siteConfig: PropTypes.shape({
-    paginate: PropTypes.bool
+    paginate: PropTypes.number
   }),
   list: PropTypes.array,
   paginator: PropTypes.object
