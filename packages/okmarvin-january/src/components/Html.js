@@ -23,7 +23,13 @@ export default class Html extends React.Component {
   }
   render () {
     const { siteConfig, title, description, permalink } = this.props
-    const { lang, url, title: siteTitle, menu } = siteConfig
+    const {
+      lang,
+      url,
+      title: siteTitle,
+      menu,
+      google_analytics: googleAnalytics
+    } = siteConfig
     return (
       <React.Fragment>
         <Helmet
@@ -42,6 +48,22 @@ export default class Html extends React.Component {
           <meta property='og:title' content={title} />
           <meta property='og:description' content={description} />
           <meta property='og:url' content={url + permalink} />
+          {googleAnalytics ? (
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
+            />
+          ) : null}
+          {googleAnalytics ? (
+            <script>
+              {`window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+              
+                gtag('config', '${googleAnalytics}');
+              `}
+            </script>
+          ) : null}
         </Helmet>
         <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} />
         {this.props.children}
