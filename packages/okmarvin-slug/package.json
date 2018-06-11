@@ -1,0 +1,10 @@
+{
+  "name": "@okmarvin/slug",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Sam Chen",
+  "license": "MIT",
+  "dependencies": {
+    "github-slugger": "^1.2.0"
+  }
+}
