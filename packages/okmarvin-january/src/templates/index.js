@@ -52,7 +52,7 @@ class Index extends React.Component {
                     lineHeight={lineHeight - 0.3}
                     mediaQueries={bps}
                     lgFontSize={`${Math.pow(scale, 5)}rem`}
-                    lgMarginTop={`${lineHeight * 3}rem`}
+                    lgMarginTop={`${lineHeight * 2}rem`}
                     lgMarginBottom={0}
                   >
                     {year}
