@@ -10,11 +10,14 @@ const parseData = require('@okmarvin/okmarvin/lib/parseData')
 const composeList = require('@okmarvin/okmarvin/lib/composeList')
 const guard = require('@okmarvin/okmarvin/lib/guard')
 const path = require('path')
+const debounce = require('lodash/debounce')
+console.log(debounce)
 /**
  *  Generate _data.json
  * @param {function|null} callback
  */
 function loadData (callback) {
+  console.log('loadData')
   async.waterfall(
     [
       callback => callback(null, __dirname, 'content', 'dist'),
@@ -27,7 +30,7 @@ function loadData (callback) {
       if (err) return console.error(err)
       fs.outputJSON(path.join(__dirname, '_data.json'), results, err => {
         if (err) return console.error(err)
-        callback && callback(null)
+        callback && typeof callback === 'function' && callback(null)
       })
     }
   )
@@ -51,9 +54,6 @@ loadData(() => {
       ignored: /(^|[/\\])\../,
       ignoreInitial: true
     })
-    watcher.on('all', (e, path) => {
-      console.log(e, path)
-      loadData()
-    })
+    watcher.on('all', debounce(loadData, 200))
   })
 })
