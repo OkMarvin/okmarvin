@@ -47,8 +47,11 @@ loadData(() => {
     server.on('listening', ({ server, options }) => {
       console.log('i am running')
     })
-    const watcher = chokidar.watch(['./content', './_config.yml'])
-    watcher.on('all', () => {
+    const watcher = chokidar.watch(['./content', './_config.yml'], {
+      ignored: /(^|[/\\])\../,
+      ignoreInitial: true
+    })
+    watcher.on('all', (e, path) => {
       loadData()
     })
   })
