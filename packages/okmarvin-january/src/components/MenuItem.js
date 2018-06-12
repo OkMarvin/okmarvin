@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from '@reach/router'
 import { Block, InlineBlock } from 'jsxstyle'
 const MenuItem = props => (
-  <Block margin='0 0.702em' fontSize='1em'>
+  <Block margin='0 0.702em' fontSize='1em' flexShrink={0}>
     {!props.current ? (
       <InlineBlock
         props={{ current: props.current + '', to: props.permalink }}
@@ -23,7 +23,6 @@ const MenuItem = props => (
         smHoverColor='#03c'
         smFontSize='1.125em'
         smColor='rgb(0, 0, 238)'
-
       >
         {props.text}
       </InlineBlock>
