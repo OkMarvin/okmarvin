@@ -52,6 +52,7 @@ loadData(() => {
       ignoreInitial: true
     })
     watcher.on('all', (e, path) => {
+      console.log(e, path)
       loadData()
     })
   })
