@@ -14,6 +14,7 @@ const Menu = props => (
     justifyContent='center'
     boxShadow='0 0 1px #ccc'
     overflowX='auto'
+    overflowY='hidden'
     textAlign='right'
     maskImage={props.menu.length > 4 ? 'linear-gradient(to right, rgba(255, 213, 79, 0.5), black 20px, black 90%, rgba(255, 213, 79, 0.5))' : 'none'}
     mediaQueries={bps}
