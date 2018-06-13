@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const writeFeed = require('./writeFeed')
 const writeSitemap = require('./writeSitemap')
+const logger = require('@okmarvin/logger')
 module.exports = function (data, callback) {
   const { files, cwd, destination } = data
   async.parallel(
@@ -11,8 +12,12 @@ module.exports = function (data, callback) {
         async.each(
           files,
           function (file, callback) {
+            const target =
+              path.extname(file.permalink) !== ''
+                ? file.permalink
+                : path.join(file.permalink, 'index.html')
             fs.outputFile(
-              path.join(cwd, destination, decodeURIComponent(file.permalink), 'index.html'),
+              path.join(cwd, destination, decodeURIComponent(target)),
               file.html,
               callback
             )
@@ -24,6 +29,7 @@ module.exports = function (data, callback) {
     ],
     err => {
       if (err) return callback(err)
+      logger.info(`${files.length} files generated.`)
       return callback(null, data)
     }
   )
