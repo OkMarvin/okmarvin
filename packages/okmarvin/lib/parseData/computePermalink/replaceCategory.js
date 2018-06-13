@@ -1,7 +1,7 @@
 const slug = require('@okmarvin/slug')
-module.exports = function (permalink, data) {
+module.exports = function (permalink, categories = []) {
   return permalink.replace(
     /:categories/g,
-    (data.categories || []).map(c => encodeURIComponent(slug(c))).join('/')
+    categories.map(c => encodeURIComponent(slug(c))).join('/')
   )
 }
