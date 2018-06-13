@@ -22,7 +22,7 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
               marginRight={10}
               key={tag}
               component={Link}
-              props={{ to: `/topics/${encodeURIComponent(slug(tag))}` }}
+              props={{ to: `/topics/${encodeURIComponent(slug(tag))}/` }}
             >
               {tag}
             </InlineBlock>
