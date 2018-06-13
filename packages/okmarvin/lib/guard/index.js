@@ -1,12 +1,10 @@
 const groupBy = require('lodash/groupby')
 const async = require('async')
-const ensureMiniTemplates = require('./ensureMiniTemplates')
 function print (arr) {
   return arr.map(i => `\n` + i.filePath || i.title)
 }
 module.exports = function (data, callback) {
-  const { files, siteConfig } = data
-  const { themeManifest } = siteConfig
+  const { files } = data
   const groupsByPermalink = groupBy(files, file => file.permalink)
   async.parallel(
     [
@@ -32,8 +30,7 @@ module.exports = function (data, callback) {
           },
           callback
         )
-      },
-      callback => callback(null, ensureMiniTemplates(themeManifest))
+      }
     ],
     err => {
       if (err) return callback(err)

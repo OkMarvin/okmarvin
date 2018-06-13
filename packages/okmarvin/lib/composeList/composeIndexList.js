@@ -2,6 +2,9 @@ const isPost = require('../parseData/isPost')
 const composePaginator = require('./composePaginator')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
+  const { themeManifest } = siteConfig
+  // if no index.js template, no need to compose indexList
+  if (!themeManifest['index.js']) return callback(null, [])
   const { paginate } = siteConfig
   const list = files
     .filter(isPost)

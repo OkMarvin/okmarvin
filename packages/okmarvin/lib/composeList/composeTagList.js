@@ -5,7 +5,7 @@ const composePaginator = require('./composePaginator')
 module.exports = function (data, callback) {
   const { files, siteConfig } = data
   const { paginate, themeManifest } = siteConfig
-  // if no tag.js, no need to compose tags page
+  // if no tag.js template, no need to compose tagList
   if (!themeManifest['tag.js']) return callback(null, [])
   const date = new Date().getTime()
   async.waterfall(
