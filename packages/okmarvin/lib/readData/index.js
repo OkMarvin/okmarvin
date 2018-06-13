@@ -48,7 +48,8 @@ module.exports = function (cwd, source, destination, callback) {
         ...results,
         cwd,
         source,
-        destination
+        destination,
+        now: new Date().getTime()
       })
     }
   )

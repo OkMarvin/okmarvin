@@ -3,11 +3,10 @@ const collectTags = require('../parseData/collectTags')
 const slug = require('@okmarvin/slug')
 const composePaginator = require('./composePaginator')
 module.exports = function (data, callback) {
-  const { files, siteConfig } = data
+  const { files, siteConfig, now } = data
   const { paginate, themeManifest } = siteConfig
   // if no tag.js template, no need to compose tagList
   if (!themeManifest['tag.js']) return callback(null, [])
-  const date = new Date().getTime()
   async.waterfall(
     [
       callback => collectTags(files, callback),
@@ -21,8 +20,8 @@ module.exports = function (data, callback) {
               author: siteConfig.auhor,
               template: 'tag.js',
               css: 'tag.css',
-              datePublished: date,
-              dateModified: date,
+              datePublished: now,
+              dateModified: now,
               permalink: `/topics/${encodeURIComponent(slug(topic))}/`,
               list: topics[topic].sort((a, b) => b.datePublished - a.datePublished)
             }
