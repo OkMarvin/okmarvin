@@ -3,11 +3,11 @@ const fn = require('./computeDatePublished')
 const year2017 = 1483228800000
 test('returns date from data', () => {
   expect(
-    fn({date: '2017-01-01'})
+    fn('2017-01-01')
   ).toBe(year2017)
 })
 test('returns current date', () => {
   expect(
-    fn({})
+    fn()
   ).toBeGreaterThan(year2017)
 })

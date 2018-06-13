@@ -4,6 +4,7 @@ test('returns permalink', () => {
     fn(
       { permalink: '/:month/:title' },
       { permalink: '/hello-:title', title: 'okmarvin' },
+      new Date(),
       'content/page/hello'
     )
   ).toBe('/hello-okmarvin/')
