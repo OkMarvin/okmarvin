@@ -1,10 +1,13 @@
 const fn = require('./replaceTitle')
 test(':title replaced', () => {
-  expect(fn('/:title', {title: 'okmarvin'})).toBe('/okmarvin')
+  expect(fn('/:title', 'okmarvin')).toBe('/okmarvin')
 })
 test('returns original str', () => {
-  expect(fn('/okmarvin', {title: 'hello'})).toBe('/okmarvin')
+  expect(fn('/okmarvin', 'hello')).toBe('/okmarvin')
 })
 test('replaces all :title', () => {
-  expect(fn('/:title/:title', {title: 'okmarvin'})).toBe('/okmarvin/okmarvin')
+  expect(fn('/:title/:title', 'okmarvin')).toBe('/okmarvin/okmarvin')
+})
+test('replaces all :title', () => {
+  expect(fn('/:title/:title')).toBe('//')
 })
