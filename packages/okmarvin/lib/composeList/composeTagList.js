@@ -12,7 +12,6 @@ module.exports = function (data, callback) {
     [
       callback => collectTags(files, callback),
       (topics, callback) => {
-        // TODO
         async.map(
           Object.keys(topics),
           (topic, callback) => {
