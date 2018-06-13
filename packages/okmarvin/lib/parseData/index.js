@@ -21,6 +21,7 @@ module.exports = function (data, callback) {
           function (file, callback) {
             const [filePath, { data, content }] = file
             const { template: userSetTemplate } = data
+            // FIXME throw cause problem in theme devloping
             if (!data.title) throw new Error(`title is missing in ${filePath}`)
             // FIXME
             // ensure some fields are present in data
