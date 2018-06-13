@@ -1,5 +1,3 @@
-const computeTemplate = require('../parseData/computeTemplate')
-const computeCss = require('../parseData/computeCss')
 const isPost = require('../parseData/isPost')
 const composePaginator = require('./composePaginator')
 module.exports = function (data, callback) {
@@ -13,8 +11,8 @@ module.exports = function (data, callback) {
     title: siteConfig.title,
     description: siteConfig.description,
     author: siteConfig.author,
-    template: computeTemplate(siteConfig.themeManifest, 'index'),
-    css: computeCss(siteConfig.themeManifest, 'index'),
+    template: 'index.js',
+    css: 'index.css',
     datePublished: date,
     dateModified: date,
     permalink: '/'

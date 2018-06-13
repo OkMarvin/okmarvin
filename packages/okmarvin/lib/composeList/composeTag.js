@@ -1,7 +1,5 @@
 const async = require('async')
 const collectTags = require('../parseData/collectTags')
-const computeTemplate = require('../parseData/computeTemplate')
-const computeCss = require('../parseData/computeCss')
 const slug = require('@okmarvin/slug')
 const composePaginator = require('./composePaginator')
 module.exports = function (data, callback) {
@@ -22,8 +20,8 @@ module.exports = function (data, callback) {
               title: topic,
               desciption: '',
               author: siteConfig.auhor,
-              template: computeTemplate(themeManifest, 'tag'),
-              css: computeCss(themeManifest, 'tag'),
+              template: 'tag.js',
+              css: 'tag.css',
               datePublished: date,
               dateModified: date,
               permalink: `/topics/${encodeURIComponent(slug(topic))}/`,
