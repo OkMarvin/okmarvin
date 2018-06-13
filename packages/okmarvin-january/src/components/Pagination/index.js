@@ -14,11 +14,11 @@ export default class Pagination extends React.Component {
   static propTypes = {
     current: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
-    urlFormat: PropTypes.string.isRequired,
+    permalinkFormat: PropTypes.string.isRequired,
     paginate: PropTypes.number.isRequired
   }
   render () {
-    const { current, total, urlFormat } = this.props
+    const { current, total, permalinkFormat } = this.props
     const paginate = 10
     const begin = findBegin(total, current, paginate)
     return (
@@ -41,7 +41,7 @@ export default class Pagination extends React.Component {
                   key={idx}
                   {...styles}
                   component={Link}
-                  props={{ to: urlFormat.replace('page:num', '') }}
+                  props={{ to: permalinkFormat.replace('/page:num', '') }}
                 >
                   1
                 </InlineBlock>
@@ -52,7 +52,7 @@ export default class Pagination extends React.Component {
                   key={idx}
                   {...styles}
                   component={Link}
-                  props={{ to: urlFormat.replace(':num', idx) }}
+                  props={{ to: permalinkFormat.replace(':num', idx) }}
                 >
                   {idx}
                 </InlineBlock>
