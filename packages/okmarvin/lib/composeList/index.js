@@ -1,16 +1,14 @@
 const async = require('neo-async')
-const composeIndex = require('./composeIndex')
-const composeTag = require('./composeTag')
+const composeIndexList = require('./composeIndexList')
+const composeTagList = require('./composeTagList')
 const composeFeed = require('./composeFeed')
 const composeSitemap = require('./composeSitemap')
 module.exports = function (data, callback) {
   const { siteConfig, files } = data
-  // const lists = ['index', 'topic', 'author', 'date']
-  // figure out which list pages do we want to render
   async.parallel(
     [
-      callback => composeIndex(data, callback),
-      callback => composeTag(data, callback),
+      callback => composeIndexList(data, callback),
+      callback => composeTagList(data, callback),
       callback => composeFeed(data, callback),
       callback => composeSitemap(data, callback)
     ],
