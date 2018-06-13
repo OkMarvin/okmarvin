@@ -41,12 +41,14 @@ export default class Html extends React.Component {
           <meta charSet='utf-8' />
           <meta httpEquiv='x-ua-compatible' content='ie=edge' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <meta name='description' content={description} />
+          {description && <meta name='description' content={description} />}
           <link rel='canonical' href={url + permalink} />
 
           <meta name='twitter:card' content='summary' />
           <meta property='og:title' content={title} />
-          <meta property='og:description' content={description} />
+          {description && (
+            <meta property='og:description' content={description} />
+          )}
           <meta property='og:url' content={url + permalink} />
           {googleAnalytics ? (
             <script
