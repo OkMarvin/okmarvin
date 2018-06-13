@@ -1,7 +1,4 @@
+const path = require('path')
 module.exports = function (url) {
-  if (url.endsWith('/')) {
-    return url
-  } else {
-    return url + '/'
-  }
+  return path.join(url, 'index.html').replace(/index\.html$/, '')
 }
