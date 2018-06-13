@@ -1,7 +1,6 @@
-const computeDatePublished = require('../computeDatePublished')
-module.exports = function (permalink, data) {
+module.exports = function (permalink, day) {
   return permalink.replace(
     /:day/g,
-    new Date(computeDatePublished(data)).getDate()
+    day
   )
 }

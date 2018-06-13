@@ -19,22 +19,22 @@ module.exports = function (data, callback) {
         async.map(
           files,
           function (file, callback) {
-            const [filePath, { data, content }] = file
-            const { template: userSetTemplate } = data
+            const [filePath, { data: fileData, content }] = file
+            const { template: userSetTemplate } = fileData
             // FIXME throw cause problem in theme devloping
-            if (!data.title) throw new Error(`title is missing in ${filePath}`)
+            if (!fileData.title) throw new Error(`title is missing in ${filePath}`)
             // FIXME
-            // ensure some fields are present in data
+            // ensure some fields are present in fileData
             callback(null, {
-              ...data,
+              ...fileData,
               filePath,
-              author: computeAuthor(siteConfig, data),
-              datePublished: computeDatePublished(data),
-              dateModified: computeDateModified(data),
-              description: computeDescription(data, content),
+              author: computeAuthor(siteConfig, fileData),
+              datePublished: computeDatePublished(fileData),
+              dateModified: computeDateModified(fileData),
+              description: computeDescription(fileData, content),
               permalink: computePermalink(
                 siteConfig,
-                data,
+                fileData,
                 path.relative(path.join(cwd, source), filePath)
               ),
               template: computeTemplate(
@@ -49,7 +49,7 @@ module.exports = function (data, callback) {
                 source,
                 filePath
               ), //  template's css file
-              content: computeToc(siteConfig, data)
+              content: computeToc(siteConfig, fileData)
                 ? md.render(`{:toc}\n${content}`)
                 : md.render(content)
             })
