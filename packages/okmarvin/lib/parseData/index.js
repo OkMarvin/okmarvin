@@ -21,7 +21,7 @@ module.exports = function (data, callback) {
           function (file, callback) {
             const [filePath, { data: fileData, content }] = file
             const { template: userSetTemplate, date } = fileData
-            const { template, themeManifest } = siteConfig
+            const { permalink, themeManifest } = siteConfig
             // FIXME throw cause problem in theme devloping
             if (!fileData.title) {
               throw new Error(`title is missing in ${filePath}`)
@@ -36,7 +36,7 @@ module.exports = function (data, callback) {
               dateModified: computeDateModified(fileData),
               description: computeDescription(fileData, content),
               permalink: computePermalink(
-                template,
+                permalink,
                 fileData,
                 new Date(computeDatePublished(date, now)),
                 path.relative(path.join(cwd, source), filePath)
