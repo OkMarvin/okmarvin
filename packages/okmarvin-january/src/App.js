@@ -6,7 +6,6 @@ class App extends React.Component {
     const { files, siteConfig } = REACT_DATA
     return (
       <Router id='___OkMarvin___'>
-        {/* FIXME Router renders a div https://github.com/reach/router/issues/63 */}
         {files.map(file => {
           const Component = require(`./templates/${file.template}`).default
           return (
