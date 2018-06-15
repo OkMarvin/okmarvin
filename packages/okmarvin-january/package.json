@@ -20,13 +20,14 @@
     "parser": "babel-eslint",
     "env": [
       "jest"
-    ]
+    ],
+    "ignore": ["content"]
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.49",
-    "@babel/preset-react": "^7.0.0-beta.49",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
     "autoprefixer": "^8.6.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^8.2.3",
@@ -51,7 +52,7 @@
     "webpack-cli": "^3.0.2",
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "neo-async": "^2.5.1",
     "chokidar": "^2.0.3",
