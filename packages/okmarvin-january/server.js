@@ -11,13 +11,11 @@ const composeList = require('@okmarvin/okmarvin/lib/composeList')
 const guard = require('@okmarvin/okmarvin/lib/guard')
 const path = require('path')
 const debounce = require('lodash/debounce')
-console.log(debounce)
 /**
  *  Generate _data.json
  * @param {function|null} callback
  */
-function loadData (callback) {
-  console.log('loadData')
+function loadData (initial = false) {
   async.waterfall(
     [
       callback => callback(null, __dirname, 'content', 'dist'),
@@ -28,32 +26,64 @@ function loadData (callback) {
     ],
     (err, results) => {
       if (err) return console.error(err)
-      fs.outputJSON(path.join(__dirname, '_data.json'), results, err => {
+      const data = {
+        ...results,
+        files: results.files.filter(r => path.extname(r.permalink) === '')
+      }
+      fs.outputJson(path.join(__dirname, '_data.json'), data, err => {
         if (err) return console.error(err)
-        callback && typeof callback === 'function' && callback(null)
+        initial && startServer(data)
       })
     }
   )
 }
-loadData(() => {
+function startServer (INITIAL_DATA) {
   serve({
-    config,
+    content: [__dirname],
+    config: config,
     hot: {
       host: 'localhost',
       port: 8090
     },
     add: (app, middleware, options) => {
-      const historyOptions = {}
+      // we need to rewrite all static path to content folder
+      // FIXME INITIAL_DATA is always changing
+      const { files } = INITIAL_DATA
+      const historyOptions = {
+        verbose: true,
+        rewrites: [
+          {
+            from: /\.(jpg|jpeg|png|gif|webp)$/i,
+            to: function (context) {
+              const pathname = context.parsedUrl.pathname
+              const findParent = files.find(
+                file =>
+                  file.permalink ===
+                  pathname.replace(path.basename(pathname), '')
+              )
+              return `/content${path.dirname(
+                findParent.filePath.split('content')[1]
+              )}/${path.basename(context.parsedUrl.pathname)}`
+            }
+          }
+        ]
+      }
       app.use(convert(history(historyOptions)))
     }
   }).then(server => {
     server.on('listening', ({ server, options }) => {
-      console.log('i am running')
+      const watcher = chokidar.watch(['./content', './_config.yml'], {
+        ignored: /(^|[/\\])\../,
+        ignoreInitial: true
+      })
+      function loadDataWrapper () {
+        loadData()
+      }
+      watcher.on('all', debounce(loadDataWrapper, 200))
+      server.on('close', () => {
+        watcher.close()
+      })
     })
-    const watcher = chokidar.watch(['./content', './_config.yml'], {
-      ignored: /(^|[/\\])\../,
-      ignoreInitial: true
-    })
-    watcher.on('all', debounce(loadData, 200))
   })
-})
+}
+loadData(true)
