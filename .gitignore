@@ -58,7 +58,7 @@ typings/
 .env
 
 .DS_Store
-content
+packages/okmarvin/content
 build
 dist
 _data.json
