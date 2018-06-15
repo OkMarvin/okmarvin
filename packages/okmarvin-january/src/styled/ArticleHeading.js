@@ -5,7 +5,7 @@ const ArticleHeading = ({ children }) => (
   <Block
     component='h1'
     fontSize={`${Math.pow(mobileScale, 4)}em`}
-    lineHeight={1}
+    lineHeight={lineHeight / scale}
     marginBottom={`${lineHeight / 2}rem`}
     marginTop={`${lineHeight * 2}rem`}
     mediaQueries={bps}
