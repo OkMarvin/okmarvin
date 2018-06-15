@@ -1,10 +1,9 @@
 import React from 'react'
 import { Router } from '@reach/router'
-import data from '../_data.json'
-import { hot } from 'react-hot-loader'
+import REACT_DATA from '../_data.json'
 class App extends React.Component {
   render () {
-    const { files, siteConfig } = data
+    const { files, siteConfig } = REACT_DATA
     return (
       <Router id='___OkMarvin___'>
         {/* FIXME Router renders a div https://github.com/reach/router/issues/63 */}
@@ -23,4 +22,4 @@ class App extends React.Component {
     )
   }
 }
-export default hot(module)(App)
+export default App
