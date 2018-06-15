@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Row, InlineBlock, Block } from 'jsxstyle'
+import PropTypes from 'prop-types'
 const Meta = props => (
   <Fragment>
     <Row
@@ -30,3 +31,7 @@ const Meta = props => (
   </Fragment>
 )
 export default Meta
+Meta.propTypes = {
+  author: PropTypes.string.isRequired,
+  theme: PropTypes.string.isRequired
+}
