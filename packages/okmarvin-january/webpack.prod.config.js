@@ -81,6 +81,23 @@ let config = {
             }
           }
         ]
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: '/static/img/'
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              disable: true
+            }
+          }
+        ]
       }
     ]
   },
@@ -107,7 +124,7 @@ if (fs.existsSync(path.resolve(__dirname, 'src/client/index.js'))) {
         client: './src/client'
       },
       output: {
-        path: path.resolve(__dirname, 'build'),
+        path: path.resolve(__dirname, 'build/static/js'),
         filename: '[name].[chunkhash].js',
         libraryTarget: 'umd',
         library: '[name]'
