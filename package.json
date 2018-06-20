@@ -51,7 +51,9 @@
     "webpack-cli": "^3.0.2",
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.6.0",
-    "webpack-serve": "^1.0.4"
+    "webpack-serve": "^1.0.4",
+    "image-webpack-loader": "^4.3.1",
+    "file-loader": "^1.1.11"
   },
   "dependencies": {
     "@reach/router": "^1.0.7",
