@@ -2,7 +2,7 @@
   "name": "@okmarvin/okmarvin",
   "version": "0.0.1",
   "description": "Static site generator with better theme developer experience",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "keywords": ["okmarvin", "static site generator", "jsxstyle", "react"],
   "author": "Sam Chen",
   "license": "MIT",
