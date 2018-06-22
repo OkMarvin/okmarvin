@@ -44,7 +44,7 @@ Footer.propTypes = {
   github: PropTypes.string,
   twitter: PropTypes.string,
   rss: PropTypes.bool,
-  theme: PropTypes.string
+  theme: PropTypes.string.isRequired
 }
 Footer.defaultProps = {
   author: '',

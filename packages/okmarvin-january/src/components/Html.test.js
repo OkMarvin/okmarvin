@@ -7,7 +7,8 @@ it('renders without crashing', () => {
   const props = {
     siteConfig: {
       lang: 'zh',
-      title: 'okmarvin'
+      title: 'okmarvin',
+      theme: '@okmarvin/january'
     },
     title: 'okmarvin',
     description: 'static site generator with better theme developer experience'

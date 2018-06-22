@@ -8,7 +8,8 @@ it('renders without crashing', () => {
     siteConfig: {
       lang: 'zh',
       url: 'https://okmarvin.com',
-      title: 'okmarvin'
+      title: 'okmarvin',
+      theme: '@okmarvin/january'
     },
     title: 'okmarvin',
     description: 'static site generator with better theme developer experience',
