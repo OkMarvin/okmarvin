@@ -5065,6 +5065,14 @@ jest-jasmine2@^23.1.0:
     jest-util "^23.1.0"
     pretty-format "^23.0.1"
 
+jest-jsxstyle@chenxsan/jest-jsxstyle#upgrade-deps:
+  version "3.0.0"
+  resolved "https://codeload.github.com/chenxsan/jest-jsxstyle/tar.gz/4191fd35f204757eaf137307cf199f858a4d34dd"
+  dependencies:
+    jest-diff "^23.0.1"
+    jest-snapshot "^23.0.1"
+    jsxstyle "^2.1.1"
+
 jest-leak-detector@^23.0.1:
   version "23.0.1"
   resolved "https://registry.yarnpkg.com/jest-leak-detector/-/jest-leak-detector-23.0.1.tgz#9dba07505ac3495c39d3ec09ac1e564599e861a0"
