@@ -38,7 +38,7 @@
     "image-webpack-loader": "^4.3.1",
     "jest": "^23.1.0",
     "jest-jsxstyle": "chenxsan/jest-jsxstyle#upgrade-deps",
-    "jsxstyle-loader": "^1.1.1",
+    "jsxstyle-webpack-plugin": "^1.1.2",
     "koa-connect": "^2.0.1",
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.4.0",
@@ -54,7 +54,7 @@
     "webpack-cli": "^3.0.2",
     "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.6.0",
-    "webpack-serve": "^1.0.4"
+    "webpack-serve": "^2.0.0-beta.1"
   },
   "dependencies": {
     "@reach/router": "^1.0.7",
@@ -65,7 +65,7 @@
     "glob": "^7.1.2",
     "gray-matter": "^4.0.1",
     "js-yaml": "^3.11.0",
-    "jsxstyle": "^2.1.1",
+    "jsxstyle": "^2.1.2",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
     "markdown-it-toc-x3": "^0.0.6",
@@ -75,7 +75,7 @@
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet-async": "^0.1.0",
-    "sanitize.css": "^5.0.0",
+    "sanitize.css": "^6.0.0",
     "winston": "^3.0.0"
   },
   "jest": {

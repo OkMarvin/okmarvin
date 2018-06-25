@@ -38,51 +38,52 @@ function loadData (initial = false) {
   )
 }
 function startServer (INITIAL_DATA) {
-  serve({
-    content: [__dirname],
-    config: config,
-    hot: {
-      host: 'localhost',
-      port: 8090
-    },
-    add: (app, middleware, options) => {
-      // we need to rewrite all static path to content folder
-      // FIXME INITIAL_DATA is always changing
-      const { files } = INITIAL_DATA
-      const historyOptions = {
-        verbose: true,
-        rewrites: [
-          {
-            from: /\.(jpg|jpeg|png|gif|webp)$/i,
-            to: function (context) {
-              const pathname = context.parsedUrl.pathname
-              const findParent = files.find(
-                file =>
-                  file.permalink ===
-                  pathname.replace(path.basename(pathname), '')
-              )
-              return `/content${path.dirname(
-                findParent.filePath.split('content')[1]
-              )}/${path.basename(context.parsedUrl.pathname)}`
+  serve(
+    {},
+    {
+      content: [__dirname],
+      config: config,
+      hotClient: {
+        host: 'localhost',
+        port: 8090
+      },
+      add: (app, middleware, options) => {
+        // we need to rewrite all static path to content folder
+        // FIXME INITIAL_DATA is always changing
+        const { files } = INITIAL_DATA
+        const historyOptions = {
+          verbose: true,
+          rewrites: [
+            {
+              from: /\.(jpg|jpeg|png|gif|webp)$/i,
+              to: function (context) {
+                const pathname = context.parsedUrl.pathname
+                const findParent = files.find(
+                  file =>
+                    file.permalink ===
+                    pathname.replace(path.basename(pathname), '')
+                )
+                return `/content${path.dirname(
+                  findParent.filePath.split('content')[1]
+                )}/${path.basename(context.parsedUrl.pathname)}`
+              }
             }
-          }
-        ]
+          ]
+        }
+        app.use(convert(history(historyOptions)))
       }
-      app.use(convert(history(historyOptions)))
     }
-  }).then(server => {
-    server.on('listening', ({ server, options }) => {
-      const watcher = chokidar.watch(['./content', './_config.yml'], {
-        ignored: /(^|[/\\])\../,
-        ignoreInitial: true
-      })
-      function loadDataWrapper () {
-        loadData()
-      }
-      watcher.on('all', debounce(loadDataWrapper, 200))
-      server.on('close', () => {
-        watcher.close()
-      })
+  ).then(({app, on, options}) => {
+    const watcher = chokidar.watch(['./content', './_config.yml'], {
+      ignored: /(^|[/\\])\../,
+      ignoreInitial: true
+    })
+    function loadDataWrapper () {
+      loadData()
+    }
+    watcher.on('all', debounce(loadDataWrapper, 200))
+    app.on('close', () => {
+      watcher.close()
     })
   })
 }
