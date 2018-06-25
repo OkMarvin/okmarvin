@@ -29,6 +29,7 @@ export default class Html extends React.Component {
       url,
       favicon,
       title: siteTitle,
+      logo,
       menu,
       google_analytics: googleAnalytics
     } = siteConfig
@@ -70,7 +71,7 @@ export default class Html extends React.Component {
             </script>
           ) : null}
         </Helmet>
-        <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} />
+        <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} logo={logo} />
         {this.props.children}
         <Footer {...siteConfig} />
       </React.Fragment>

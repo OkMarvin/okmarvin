@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Menu from './Menu'
 import { maxWidth, bps } from '../constants'
 import { Link } from '@reach/router'
-import { Col, Inline } from 'jsxstyle'
+import { Col, InlineFlex, Inline } from 'jsxstyle'
 const Header = props => (
   <Col
     flexShrink={0}
@@ -17,23 +17,34 @@ const Header = props => (
     smPaddingLeft={`calc((100% - ${maxWidth}) / 2)`}
     smPaddingRight={`calc((100% - ${maxWidth}) / 2)`}
   >
-    <Inline
+    <InlineFlex
       props={{ to: '/' }}
       component={Link}
+      alignItems='center'
       color='#4a4a4a'
       fontSize='1.618em'
       lineHeight='2.625em'
       textDecoration='none'
       linkColor='#4a4a4a'
     >
+      {props.logo && (
+        <Inline
+          component='img'
+          maxWidth={42}
+          border='none'
+          marginRight={10}
+          props={{ src: props.logo, alt: props.siteTitle }}
+        />
+      )}
       {props.siteTitle}
-    </Inline>
+    </InlineFlex>
     <Menu menu={props.menu} currentUrl={props.currentUrl} />
   </Col>
 )
 export default Header
 Header.propTypes = {
   siteTitle: PropTypes.string.isRequired,
+  logo: PropTypes.string,
   menu: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
