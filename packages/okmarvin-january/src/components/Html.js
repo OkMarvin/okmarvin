@@ -1,8 +1,9 @@
 import React from 'react'
-import Helmet from 'react-helmet-async'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
+import Favicon from './Favicon'
 import '../../node_modules/sanitize.css'
 import '../../node_modules/prismjs/themes/prism-tomorrow.css'
 import '../common.css'
@@ -26,6 +27,7 @@ export default class Html extends React.Component {
     const {
       lang,
       url,
+      favicon,
       title: siteTitle,
       menu,
       google_analytics: googleAnalytics
@@ -46,6 +48,7 @@ export default class Html extends React.Component {
 
           <meta name='twitter:card' content='summary' />
           <meta property='og:title' content={title} />
+          {favicon && <Favicon favicon={favicon} />}
           {description && (
             <meta property='og:description' content={description} />
           )}

@@ -1,7 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import App from './App'
-import { HelmetProvider } from 'react-helmet-async'
 
 const root = document.getElementById('app')
 
@@ -25,9 +24,7 @@ class ErrorBoundary extends React.Component {
 
 render(
   <ErrorBoundary>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
+    <App />
   </ErrorBoundary>,
   root
 )

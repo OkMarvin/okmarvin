@@ -1,6 +1,6 @@
 import React from 'react'
 import Html from '../components/Html'
-import Helmet from 'react-helmet-async'
+import {Helmet} from 'react-helmet'
 import PropTypes from 'prop-types'
 import Main from '../styled/Main'
 import ArchiveItem from '../components/ArchiveItem'

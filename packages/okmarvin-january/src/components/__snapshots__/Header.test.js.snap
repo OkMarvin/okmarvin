@@ -1,54 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-._r778rk {
-  align-items: center;
-  background: #fafafa;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  justify-content: center;
-}
-@media screen and (min-width: 45em) { ._r778rk {
-  box-shadow: 0 1px 0 0 #e8e8e8;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: calc((100% - 47em) / 2);
-  padding-right: calc((100% - 47em) / 2);
-} }
-._1q53q15 {
-  color: #4a4a4a;
-  display: inline;
-  font-size: 1.618em;
-  line-height: 2.625em;
-  link-color: #4a4a4a;
-  text-decoration: none;
-}
-._1u3u2z {
-  align-items: center;
-  background: #ffd54f;
-  box-shadow: 0 0 1px #ccc;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  mask-image: none;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-left: 0;
-  text-align: right;
-  width: 100%;
-}
-@media screen and (min-width: 45em) { ._1u3u2z {
-  background: none;
-  box-shadow: none;
-  mask-image: none;
-  position: static;
-  width: auto;
-} }
-
-
 <div
   className="_r778rk"
 >

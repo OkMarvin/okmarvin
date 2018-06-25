@@ -4,7 +4,7 @@ const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
 const generateHtml = require('./generateHtml')
-const { HelmetProvider } = require('react-helmet-async')
+const { Helmet } = require('react-helmet')
 module.exports = function (data, callback) {
   const { files, siteConfig } = data
   const { theme, themeManifest } = siteConfig
@@ -53,15 +53,10 @@ module.exports = function (data, callback) {
                     themeRoot,
                     themeManifest[file.template]
                   )).default
-                  const helmetContext = {}
                   const rendered = ReactDOMServer.renderToStaticMarkup(
-                    React.createElement(
-                      HelmetProvider,
-                      { context: helmetContext },
-                      React.createElement(Component, { ...file, siteConfig })
-                    )
+                    React.createElement(Component, { ...file, siteConfig })
                   )
-                  const { helmet } = helmetContext
+                  const helmet = Helmet.renderStatic()
                   const html = generateHtml(helmet, styles, rendered, clientJS)
                   callback(null, { ...file, html })
                 }
