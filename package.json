@@ -74,7 +74,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-helmet": "^5.2.0",
+    "react-helmet-async": "^0.1.0",
     "sanitize.css": "^6.0.0",
     "winston": "^3.0.0"
   },

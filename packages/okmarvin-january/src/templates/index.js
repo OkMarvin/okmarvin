@@ -1,6 +1,6 @@
 import React from 'react'
 import Html from '../components/Html'
-import {Helmet} from 'react-helmet'
+import Helmet from 'react-helmet-async'
 import PropTypes from 'prop-types'
 import Main from '../styled/Main'
 import { Block } from 'jsxstyle'
