@@ -31,15 +31,3 @@ render(
   </ErrorBoundary>,
   root
 )
-// if (module.hot) {
-//   module.hot.accept('./App', () => {
-//     render(
-//       <ErrorBoundary>
-//         <HelmetProvider>
-//           <App />
-//         </HelmetProvider>
-//       </ErrorBoundary>,
-//       root
-//     )
-//   })
-// }
