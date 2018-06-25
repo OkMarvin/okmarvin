@@ -7,5 +7,6 @@ module.exports = {
   theme: '@okmarvin/january',
   toc: true,
   permalink: '/:dir/:filename',
-  rss: true
+  rss: true,
+  favicon: ''
 }

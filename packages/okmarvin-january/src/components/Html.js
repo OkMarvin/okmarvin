@@ -3,6 +3,7 @@ import Helmet from 'react-helmet-async'
 import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
+import Favicon from './Favicon'
 import '../../node_modules/sanitize.css'
 import '../../node_modules/prismjs/themes/prism-tomorrow.css'
 import '../common.css'
@@ -26,12 +27,14 @@ export default class Html extends React.Component {
     const {
       lang,
       url,
+      favicon,
       title: siteTitle,
       menu,
       google_analytics: googleAnalytics
     } = siteConfig
     return (
       <React.Fragment>
+        {favicon && <Favicon favicon={favicon} />}
         <Helmet
           htmlAttributes={{
             lang: lang

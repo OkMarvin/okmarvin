@@ -55,6 +55,12 @@ function startServer (INITIAL_DATA) {
           verbose: true,
           rewrites: [
             {
+              from: /\/static/i,
+              to: function (context) {
+                return context.parsedUrl.pathname
+              }
+            },
+            {
               from: /\.(jpg|jpeg|png|gif|webp)$/i,
               to: function (context) {
                 const pathname = context.parsedUrl.pathname
