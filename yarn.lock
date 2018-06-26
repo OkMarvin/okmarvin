@@ -9084,9 +9084,9 @@ webpack-node-externals@^1.6.0:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.7.2.tgz#6e1ee79ac67c070402ba700ef033a9b8d52ac4e3"
 
-webpack-serve@^2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/webpack-serve/-/webpack-serve-2.0.0-beta.1.tgz#f5d8420294ec8619764b1e9c329bbad49ea4e62d"
+webpack-serve@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/webpack-serve/-/webpack-serve-2.0.0-beta.2.tgz#7640d4959e16de6794f516bb77f94bf0ad5c8f7b"
   dependencies:
     "@shellscape/koa-static" "^4.0.4"
     "@webpack-contrib/cli-utils" "^1.0.1"
