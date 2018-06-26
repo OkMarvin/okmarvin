@@ -4,7 +4,7 @@ import { Block } from 'jsxstyle'
 const ArticleHeading = ({ children }) => (
   <Block
     component='h1'
-    fontSize={`${Math.pow(mobileScale, 4)}em`}
+    fontSize={`${Math.pow(mobileScale, 3)}em`}
     lineHeight={lineHeight / scale}
     marginBottom={`${lineHeight / 2}rem`}
     marginTop={`${lineHeight * 2}rem`}
