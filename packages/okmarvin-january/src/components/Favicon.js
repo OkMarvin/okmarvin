@@ -6,7 +6,7 @@ export default class Favicon extends React.Component {
     const { favicon } = this.props
     let result
     if (!favicon) {
-      result = <link href='haha' />
+      result = null
     }
     if (favicon.endsWith('.ico')) {
       result = <link rel='shortcut icon' href={favicon} />
