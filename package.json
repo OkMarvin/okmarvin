@@ -84,7 +84,7 @@
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     },
     "snapshotSerializers": [
-      "jest-jsxstyle"
+      
     ]
   }
 }
