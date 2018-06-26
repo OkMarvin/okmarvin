@@ -6,8 +6,7 @@ const composeList = require('./composeList')
 const guard = require('./guard')
 const render = require('./render')
 const writeFiles = require('./writeFiles')
-const copyFileAssets = require('./copyFileAssets')
-const copyThemeStatic = require('./copyThemeStatic')
+const copy = require('./copy')
 /**
  * Static site generator
  * @param {string} cwd Current working directory
@@ -24,8 +23,7 @@ module.exports = function (cwd, source = 'content', destination = 'dist') {
     guard,
     render,
     writeFiles,
-    copyFileAssets,
-    copyThemeStatic
+    copy
   ], (err, results) => {
     logger.profile('SSG')
     if (err) throw err
