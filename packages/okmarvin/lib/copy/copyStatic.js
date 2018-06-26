@@ -1,5 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
+// if any static exists just copy them
 module.exports = function (data, callback) {
   const { cwd, destination } = data
   fs.copy(
