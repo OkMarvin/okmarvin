@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Menu from './Menu'
 import { maxWidth, bps } from '../constants'
 import { Link } from '@reach/router'
-import { Col, InlineFlex, Inline } from 'jsxstyle'
+import { Col, Row, Inline } from 'jsxstyle'
 const Header = props => (
   <Col
     flexShrink={0}
@@ -17,7 +17,8 @@ const Header = props => (
     smPaddingLeft={`calc((100% - ${maxWidth}) / 2)`}
     smPaddingRight={`calc((100% - ${maxWidth}) / 2)`}
   >
-    <InlineFlex
+    <Row
+      display='inline-flex'
       props={{ to: '/' }}
       component={Link}
       alignItems='center'
@@ -37,7 +38,7 @@ const Header = props => (
         />
       )}
       {props.siteTitle}
-    </InlineFlex>
+    </Row>
     <Menu menu={props.menu} currentUrl={props.currentUrl} />
   </Col>
 )
