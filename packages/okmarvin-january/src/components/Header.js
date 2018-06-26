@@ -4,6 +4,7 @@ import Menu from './Menu'
 import { maxWidth, bps } from '../constants'
 import { Link } from '@reach/router'
 import { Col, Row, Inline } from 'jsxstyle'
+import Helmet from 'react-helmet-async'
 const Header = props => (
   <Col
     flexShrink={0}
@@ -29,13 +30,19 @@ const Header = props => (
       linkColor='#4a4a4a'
     >
       {props.logo && (
-        <Inline
-          component='img'
-          maxWidth={42}
-          border='none'
-          marginRight={10}
-          props={{ src: props.logo, alt: props.siteTitle }}
-        />
+        <React.Fragment>
+          <Inline
+            component='img'
+            width={42}
+            fontSize={14}
+            border='none'
+            marginRight={10}
+            props={{ src: props.logo, alt: props.siteTitle }}
+          />
+          <Helmet>
+            <link rel='preload' href={props.logo} as='image' />
+          </Helmet>
+        </React.Fragment>
       )}
       {props.siteTitle}
     </Row>
