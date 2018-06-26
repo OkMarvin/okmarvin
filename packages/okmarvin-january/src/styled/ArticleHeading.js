@@ -9,7 +9,7 @@ const ArticleHeading = ({ children }) => (
     marginBottom={`${lineHeight / 2}rem`}
     marginTop={`${lineHeight * 2}rem`}
     mediaQueries={bps}
-    smFontSize={`${Math.pow(scale, 4)}em`}
+    smFontSize={`${Math.pow(scale, 3)}em`}
   >
     {children}
   </Block>
