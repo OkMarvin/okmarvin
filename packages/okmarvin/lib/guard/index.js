@@ -4,7 +4,7 @@ function print (arr) {
   return arr.map(i => `\n` + i.filePath || i.title)
 }
 module.exports = function (data, callback) {
-  const { files } = data
+  const { files, siteConfig } = data
   const groupsByPermalink = groupBy(files, file => file.permalink)
   async.parallel(
     [
@@ -30,6 +30,16 @@ module.exports = function (data, callback) {
           },
           callback
         )
+      },
+      callback => {
+        if (
+          siteConfig &&
+          siteConfig.favicon &&
+          !/(\.gif|\.png|\.ico)$/.test(siteConfig.favicon)
+        ) {
+          return callback(new Error(`favicon only support gif, png, ico`))
+        }
+        callback()
       }
     ],
     err => {
