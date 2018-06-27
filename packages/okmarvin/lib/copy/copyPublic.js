@@ -1,13 +1,13 @@
 const fs = require('fs-extra')
 const path = require('path')
-// if any static exists just copy them
+// copy public
 module.exports = function (data, callback) {
   const { cwd, destination } = data
   fs.copy(
-    path.join(cwd, 'static'),
-    path.join(cwd, destination, 'static'),
+    path.join(cwd, 'public'),
+    path.join(cwd, destination),
     err => {
-      // maybe static doesn't exist?
+      // maybe public doesn't exist?
       if (err) return callback(null, data)
       return callback(null, data)
     }
