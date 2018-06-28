@@ -5393,15 +5393,15 @@ jsxstyle-utils@^2.1.1:
   dependencies:
     csstype "^2.2.0"
 
-jsxstyle-utils@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/jsxstyle-utils/-/jsxstyle-utils-2.1.2.tgz#d7cbcdbdf634569bcc4476f173231b92eb4720b9"
+jsxstyle-utils@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/jsxstyle-utils/-/jsxstyle-utils-2.1.3.tgz#8f5decdca3290c68d0b716ed5f5f1471cf5784bb"
   dependencies:
     csstype "^2.2.0"
 
-jsxstyle-webpack-plugin@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/jsxstyle-webpack-plugin/-/jsxstyle-webpack-plugin-1.1.2.tgz#c874e31834d8e556ac878eabb3135242eeb55a81"
+jsxstyle-webpack-plugin@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/jsxstyle-webpack-plugin/-/jsxstyle-webpack-plugin-1.1.3.tgz#7502766b505ce440070f1c0ca90a0fd6eba041c7"
   dependencies:
     "@babel/generator" "^7.0.0-beta.51"
     "@babel/parser" "^7.0.0-beta.51"
@@ -5412,8 +5412,8 @@ jsxstyle-webpack-plugin@^1.1.2:
     "@types/webpack" "^4.4.0"
     ajv "^6.5.0"
     invariant "^2.2.1"
-    jsxstyle "^2.1.2"
-    jsxstyle-utils "^2.1.2"
+    jsxstyle "^2.1.3"
+    jsxstyle-utils "^2.1.3"
     loader-utils "^1.1.0"
 
 jsxstyle@^2.1.1:
@@ -5422,11 +5422,11 @@ jsxstyle@^2.1.1:
   dependencies:
     jsxstyle-utils "^2.1.1"
 
-jsxstyle@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.1.2.tgz#ccd9ab9fd60abcaf353f468f6a5692ea276ccc02"
+jsxstyle@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/jsxstyle/-/jsxstyle-2.1.3.tgz#dd3be4d4c338ac35b08140bf16fd592e99241060"
   dependencies:
-    jsxstyle-utils "^2.1.2"
+    jsxstyle-utils "^2.1.3"
 
 keygrip@~1.0.2:
   version "1.0.2"
@@ -7546,14 +7546,14 @@ regexpu-core@^4.1.3, regexpu-core@^4.2.0:
     unicode-match-property-ecmascript "^1.0.4"
     unicode-match-property-value-ecmascript "^1.0.2"
 
-registry-auth-token@^3.0.1:
+registry-auth-token@3.3.2, registry-auth-token@^3.0.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-3.3.2.tgz#851fd49038eecb586911115af845260eec983f20"
   dependencies:
     rc "^1.1.6"
     safe-buffer "^5.0.1"
 
-registry-url@^3.0.3:
+registry-url@3.1.0, registry-url@^3.0.3:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/registry-url/-/registry-url-3.1.0.tgz#3d4ef870f73dde1d77f0cf9a381432444e174942"
   dependencies:
@@ -8788,6 +8788,13 @@ unzip-response@^2.0.1:
 upath@^1.0.5:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.1.0.tgz#35256597e46a581db4793d0ce47fa9aebfc9fabd"
+
+update-check@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/update-check/-/update-check-1.5.2.tgz#2fe09f725c543440b3d7dabe8971f2d5caaedc28"
+  dependencies:
+    registry-auth-token "3.3.2"
+    registry-url "3.1.0"
 
 update-notifier@^2.3.0:
   version "2.5.0"
