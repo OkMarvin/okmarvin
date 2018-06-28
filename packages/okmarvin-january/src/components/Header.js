@@ -33,7 +33,7 @@ const Header = props => (
         <React.Fragment>
           <Inline
             component='img'
-            width={42}
+            maxHeight={42}
             fontSize={14}
             border='none'
             marginRight={10}
