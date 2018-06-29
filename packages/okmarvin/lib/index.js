@@ -13,7 +13,8 @@ const copy = require('./copy')
  * @param {string} source Content source directory
  * @param {string} destination Build target
  */
-module.exports = function (cwd, source = 'content', destination = 'dist') {
+module.exports = function (source = 'content', destination = 'dist') {
+  const cwd = process.cwd()
   logger.profile('SSG')
   async.waterfall([
     (callback) => callback(null, cwd, source, destination),
