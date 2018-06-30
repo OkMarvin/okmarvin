@@ -57,7 +57,7 @@ function startServer (INITIAL_DATA) {
             {
               from: /\/static/i,
               to: function (context) {
-                return context.parsedUrl.pathname
+                return '/public' + context.parsedUrl.pathname
               }
             },
             {
