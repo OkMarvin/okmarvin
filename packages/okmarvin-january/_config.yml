@@ -11,3 +11,5 @@ menu:
     permalink: /about
 rss: false
 paginate: 20
+favicon: /static/img/favicon.png
+logo: /static/img/logo.svg
