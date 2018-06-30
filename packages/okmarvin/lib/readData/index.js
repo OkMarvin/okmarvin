@@ -18,6 +18,17 @@ module.exports = function (cwd, source, destination, callback) {
   const searchPattern = '{post,page}/**/*.md'
   async.parallel(
     {
+      config: callback => {
+        // read custom config
+        try {
+          const config = require(
+            path.join(cwd, '.okmarvin', 'config.js')
+          )
+          callback(null, config)
+        } catch (e) {
+          callback(null)
+        }
+      },
       siteConfig: callback =>
         async.waterfall(
           [
