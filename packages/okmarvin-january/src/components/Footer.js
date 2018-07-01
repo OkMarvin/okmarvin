@@ -17,32 +17,37 @@ const Link = ({ children, ...rest }) => (
 const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
   <Block
     component='footer'
+    paddingTop='3rem'
+    paddingLeft='1em'
+    paddingRight='1em'
+    background='#fafafa'
     color='#444'
-    width={846}
-    maxWidth={maxWidth}
-    marginLeft='auto'
-    marginRight='auto'
-    padding='1em 0'
     marginTop='4.11em'
+    borderTop='1px solid #e4e4e4'
     borderBottom='1em solid #ffd54f'
     mediaQueries={bps}
     smBorderBottom='none'
+    lgPaddingLeft={0}
+    lgPaddingRight={0}
   >
-    <Row
-      alignItems='center'
-      marginBottom='1em'
-      fontSize='0.889em'
+    <Block
+      maxWidth={maxWidth}
+      marginLeft='auto'
+      marginRight='auto'
+      padding='1em 0'
     >
-      {github ? (
-        <Link href={`https://github.com/${github}`}>Github</Link>
-      ) : null}
-      {twitter ? (
-        <Link href={`https://twitter.com/${twitter}`}>Twitter</Link>
-      ) : null}
-      {rss && <Link href={url + '/feed.xml'}>RSS</Link>}
-    </Row>
-    <Meta author={author} theme={theme} />
-    <BackToTop />
+      <Row alignItems='center' marginBottom='1em' fontSize='0.889em'>
+        {github ? (
+          <Link href={`https://github.com/${github}`}>Github</Link>
+        ) : null}
+        {twitter ? (
+          <Link href={`https://twitter.com/${twitter}`}>Twitter</Link>
+        ) : null}
+        {rss && <Link href={url + '/feed.xml'}>RSS</Link>}
+      </Row>
+      <Meta author={author} theme={theme} />
+      <BackToTop />
+    </Block>
   </Block>
 )
 Footer.propTypes = {
