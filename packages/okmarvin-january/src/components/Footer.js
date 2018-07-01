@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Meta from './Meta'
-import { bps } from '../constants'
+import { bps, maxWidth } from '../constants'
 import BackToTop from './BackToTop'
 import { Block, Row, Inline } from 'jsxstyle'
 const Link = ({ children, ...rest }) => (
   <Inline
     component='a'
-    margin='0 5px'
+    marginRight={10}
     color='rgb(0, 51, 204)'
     props={{ ...rest }}
   >
@@ -17,16 +17,22 @@ const Link = ({ children, ...rest }) => (
 const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
   <Block
     component='footer'
-    textAlign='center'
     color='#444'
-    fontSize='0.889em'
+    width={846}
+    maxWidth={maxWidth}
+    marginLeft='auto'
+    marginRight='auto'
     padding='1em 0'
     marginTop='4.11em'
     borderBottom='1em solid #ffd54f'
     mediaQueries={bps}
     smBorderBottom='none'
   >
-    <Row alignItems='center' justifyContent='center' marginBottom='1em'>
+    <Row
+      alignItems='center'
+      marginBottom='1em'
+      fontSize='0.889em'
+    >
       {github ? (
         <Link href={`https://github.com/${github}`}>Github</Link>
       ) : null}

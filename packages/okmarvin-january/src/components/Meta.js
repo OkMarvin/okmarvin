@@ -5,7 +5,6 @@ const Meta = ({author, theme}) => (
   <Fragment>
     <Row
       alignItems='center'
-      justifyContent='center'
       fontSize='0.79rem'
       color='#333'
     >
