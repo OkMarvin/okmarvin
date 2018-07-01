@@ -1,3 +1,3 @@
 import React from 'react'
-const localeContext = React.createContext('i18n')
+const localeContext = React.createContext('en')
 export default localeContext
