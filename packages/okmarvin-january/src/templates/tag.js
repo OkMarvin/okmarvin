@@ -6,6 +6,8 @@ import Main from '../styled/Main'
 import ArchiveItem from '../components/ArchiveItem'
 import Pagination from '../components/Pagination'
 import PageContentHeader from '../components/PageContentHeader'
+import LocaleContext from '../LocaleContext'
+import i18n from '../i18n'
 class Tag extends React.Component {
   render () {
     const { title, list, siteConfig } = this.props
@@ -18,7 +20,11 @@ class Tag extends React.Component {
         <Main>
           {
             <React.Fragment>
-              <PageContentHeader title={`Topic: ${title}`} />
+              <LocaleContext.Consumer>
+                {
+                  locale => <PageContentHeader title={`${i18n('Topic:', locale)}: ${title}`} />
+                }
+              </LocaleContext.Consumer>
               {list.map(d => <ArchiveItem key={d.permalink} {...d} />)}
             </React.Fragment>
           }

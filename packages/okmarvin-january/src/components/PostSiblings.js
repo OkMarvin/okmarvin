@@ -2,6 +2,8 @@ import React from 'react'
 import { Col, Block, Inline } from 'jsxstyle'
 import { lineHeight, mobileScale, scale } from '../constants'
 import { Link } from '@reach/router'
+import localeContext from '../LocaleContext'
+import i18n from '../i18n'
 const navTextStyle = {
   color: '#ccc',
   fontSize: '0.7rem'
@@ -29,7 +31,13 @@ export default class PostSiblings extends React.Component {
       >
         {newerSibling && (
           <PreviousLink>
-            <Block {...navTextStyle}>NEWER</Block>
+            <Block {...navTextStyle}>
+              <localeContext.Consumer>
+                {
+                  locale => i18n('NEWER', locale)
+                }
+              </localeContext.Consumer>
+            </Block>
             <div>
               <Inline
                 component={Link}
@@ -45,7 +53,13 @@ export default class PostSiblings extends React.Component {
         )}
         {olderSibling && (
           <NextLink to={olderSibling.permalink}>
-            <Block {...navTextStyle}>OLDER</Block>
+            <Block {...navTextStyle}>
+              <localeContext.Consumer>
+                {
+                  locale => i18n('OLDER', locale)
+                }
+              </localeContext.Consumer>
+            </Block>
             <div>
               <Inline
                 component={Link}

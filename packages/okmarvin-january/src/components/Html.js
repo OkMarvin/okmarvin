@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
 import Favicon from './Favicon'
+import localeContext from '../LocaleContext'
 import '../../node_modules/sanitize.css'
 import '../../node_modules/prismjs/themes/prism-tomorrow.css'
 import '../common.css'
@@ -35,45 +36,47 @@ export default class Html extends React.Component {
     } = siteConfig
     return (
       <React.Fragment>
-        {favicon && <Favicon favicon={favicon} />}
-        <Helmet
-          htmlAttributes={{
-            lang: lang
-          }}
-        >
-          <title>{title}</title>
-          <meta charSet='utf-8' />
-          <meta httpEquiv='x-ua-compatible' content='ie=edge' />
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-          {description && <meta name='description' content={description} />}
-          <link rel='canonical' href={url + permalink} />
+        <localeContext.Provider value={lang}>
+          {favicon && <Favicon favicon={favicon} />}
+          <Helmet
+            htmlAttributes={{
+              lang: lang
+            }}
+          >
+            <title>{title}</title>
+            <meta charSet='utf-8' />
+            <meta httpEquiv='x-ua-compatible' content='ie=edge' />
+            <meta name='viewport' content='width=device-width, initial-scale=1' />
+            {description && <meta name='description' content={description} />}
+            <link rel='canonical' href={url + permalink} />
 
-          <meta name='twitter:card' content='summary' />
-          <meta property='og:title' content={title} />
-          {description && (
-            <meta property='og:description' content={description} />
-          )}
-          <meta property='og:url' content={url + permalink} />
-          {googleAnalytics ? (
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
-            />
-          ) : null}
-          {googleAnalytics ? (
-            <script>
-              {`window.dataLayer = window.dataLayer || [];
+            <meta name='twitter:card' content='summary' />
+            <meta property='og:title' content={title} />
+            {description && (
+              <meta property='og:description' content={description} />
+            )}
+            <meta property='og:url' content={url + permalink} />
+            {googleAnalytics ? (
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
+              />
+            ) : null}
+            {googleAnalytics ? (
+              <script>
+                {`window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
               
                 gtag('config', '${googleAnalytics}');
               `}
-            </script>
-          ) : null}
-        </Helmet>
-        <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} logo={logo} />
-        {this.props.children}
-        <Footer {...siteConfig} />
+              </script>
+            ) : null}
+          </Helmet>
+          <Header siteTitle={siteTitle} menu={menu} currentUrl={permalink} logo={logo} />
+          {this.props.children}
+          <Footer {...siteConfig} />
+        </localeContext.Provider>
       </React.Fragment>
     )
   }

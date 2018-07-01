@@ -6,6 +6,8 @@ import { Link } from '@reach/router'
 import ArticleHeader from '../styled/ArticleHeader'
 import ArticleHeading from '../styled/ArticleHeading'
 import slug from '@okmarvin/slug'
+import LocaleContext from '../LocaleContext'
+import i18n from '../i18n'
 const PostContentHeader = ({ title, author, datePublished, tags }) => (
   <ArticleHeader>
     <ArticleHeading>{title}</ArticleHeading>
@@ -16,7 +18,10 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
       </InlineBlock>
       {tags && tags.length ? (
         <Row>
-          Topics:<Inline component='span'>&nbsp;</Inline>{' '}
+          <LocaleContext>
+            {locale => <span>{i18n('Topics:', locale)}</span>}
+          </LocaleContext>
+          <Inline component='span'>&nbsp;</Inline>{' '}
           {tags.map(tag => (
             <InlineBlock
               marginRight={10}
@@ -24,7 +29,9 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
               component={Link}
               props={{ to: `/topics/${encodeURIComponent(slug(tag))}/` }}
             >
-              <Inline component='span' beforeContent="'#'">{tag}</Inline>
+              <Inline component='span' beforeContent="'#'">
+                {tag}
+              </Inline>
             </InlineBlock>
           ))}
         </Row>
