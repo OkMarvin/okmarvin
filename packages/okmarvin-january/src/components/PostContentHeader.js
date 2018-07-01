@@ -24,7 +24,7 @@ const PostContentHeader = ({ title, author, datePublished, tags }) => (
               component={Link}
               props={{ to: `/topics/${encodeURIComponent(slug(tag))}/` }}
             >
-              {tag}
+              <Inline component='span' beforeContent="'#'">{tag}</Inline>
             </InlineBlock>
           ))}
         </Row>
