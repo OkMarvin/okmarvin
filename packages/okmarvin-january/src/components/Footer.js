@@ -18,6 +18,7 @@ const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
   <Block
     component='footer'
     paddingTop='3rem'
+    paddingBottom='3rem'
     paddingLeft='1em'
     paddingRight='1em'
     background='#fafafa'
