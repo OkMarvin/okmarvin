@@ -8,11 +8,12 @@ module.exports = function (files, callback) {
     (file, callback) => {
       file.tags &&
         file.tags.map(tag => {
-          if (!topics[tag]) {
+          const tagLowerCase = tag.toLowerCase()
+          if (!topics[tagLowerCase]) {
             // init
-            topics[tag] = []
+            topics[tagLowerCase] = []
           }
-          topics[tag] = topics[tag].concat(file)
+          topics[tagLowerCase] = topics[tagLowerCase].concat(file)
         })
       callback()
     },
