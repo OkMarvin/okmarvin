@@ -19,12 +19,13 @@
     "js-yaml": "^3.11.0",
     "gray-matter": "^4.0.1",
     "markdown-it": "^8.4.1",
-    "markdown-it-toc-x3": "^0.0.6",
+    "markdown-it-toc-x3": "^0.0.7",
     "prismjs": "^1.14.0",
     "@okmarvin/january": "^1.1.99",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-helmet-async": "^0.1.0",
-    "@okmarvin/slug": "^0.0.1"
+    "react-helmet-async": "0.1.0-alpha",
+    "@okmarvin/slug": "^0.0.1",
+    "invariant": "^2.2.4"
   }
 }
