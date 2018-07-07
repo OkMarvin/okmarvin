@@ -101,7 +101,7 @@ h2 {
   margin-top: 0;
 }
 .toc ol {
-  padding-left: 1rem;
+  padding-left: 1.5rem;
   list-style: decimal;
 }
 .toc + * {
