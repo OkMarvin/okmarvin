@@ -26,7 +26,7 @@ module.exports = function ({ markdown = {} } = {}) {
       )
     }
   }).use(
-    require('markdown-it-toc-x3'),
+    require('@okmarvin/markdown-it-toc'),
     Object.assign(
       {},
       {
