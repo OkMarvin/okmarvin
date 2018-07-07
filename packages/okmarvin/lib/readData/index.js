@@ -1,12 +1,13 @@
 const path = require('path')
 const glob = require('glob')
-const assert = require('assert')
 const fs = require('fs-extra')
 const async = require('neo-async')
+const invariant = require('invariant')
 const readUserSiteConfig = require('./readUserSiteConfig')
 const computeSiteConfig = require('./computeSiteConfig')
 const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
+const chalk = require('chalk')
 /**
  * Collect all markdown files under `post` & `page`
  * @param {String} cwd current working directory
@@ -14,7 +15,7 @@ const readThemeManifest = require('./readThemeManifest')
  */
 module.exports = function (cwd, source, destination, callback) {
   const content = path.join(cwd, source)
-  assert.ok(fs.pathExistsSync(content), `${content} folder doesn't exist`)
+  invariant(fs.pathExistsSync(content), chalk.red(`${content} folder doesn't exist`))
   const searchPattern = '{post,page}/**/*.md'
   async.parallel(
     {

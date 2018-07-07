@@ -26,6 +26,7 @@
     "react-dom": "^16.4.0",
     "react-helmet-async": "0.1.0-alpha",
     "@okmarvin/slug": "^0.0.1",
-    "invariant": "^2.2.4"
+    "invariant": "^2.2.4",
+    "chalk": "^2.4.1"
   }
 }
