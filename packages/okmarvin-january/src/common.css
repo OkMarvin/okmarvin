@@ -94,19 +94,15 @@ h2 {
 .toc {
   margin-top: 1.6rem;
 }
-.toc > ul:before {
-  /* FIXME should change by lang */
-  content: 'Table of contents';
-  display: block;
+.toc__heading {
   font-size: 1.728rem;
-  line-height: 3.2rem;
-  margin-left: -1rem;
+  font-weight: normal;
+  margin-bottom: 0;
+  margin-top: 0;
 }
-.toc > ul {
+.toc ol {
   padding-left: 1rem;
-}
-.toc > ul ul {
-  padding-left: 1rem;
+  list-style: decimal;
 }
 .toc + * {
   margin-top: 0;
