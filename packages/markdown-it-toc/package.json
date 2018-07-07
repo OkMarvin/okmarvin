@@ -1,0 +1,42 @@
+{
+  "name": "@okmarvin/markdown-it-toc",
+  "version": "0.0.12",
+  "description": "markdown-it plugin for adding table of contents",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin",
+    "table-of-contents",
+    "toc"
+  ],
+  "author": "Sam Chen",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "jest": "^23.3.0",
+    "markdown-it": "^8.4.1",
+    "standard": "^11.0.1"
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "expect"
+    ],
+    "parser": "babel-eslint",
+    "env": ["jest"]
+  },
+  "dependencies": {
+    "clone": "^2.1.1",
+    "github-slugger": "^1.2.0",
+    "innertext": "^1.0.3"
+  },
+  "files": [
+    "index.js",
+    "package.json",
+    "package-lock.json",
+    "readme.md"
+  ]
+}
