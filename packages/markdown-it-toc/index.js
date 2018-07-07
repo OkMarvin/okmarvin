@@ -163,7 +163,7 @@ module.exports = function (md, options) {
       return heading.level * 1
     })
     var topLevel = Math.min.apply(null, levels)
-    headings.forEach(function (heading, index) {
+    headings.forEach(function (heading) {
       if (heading.level < options.hMin || heading.level > options.hMax) {
         return
       }
