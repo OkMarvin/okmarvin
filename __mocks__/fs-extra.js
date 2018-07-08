@@ -9,4 +9,5 @@ function __setPathExists (v) {
 }
 fse.pathExistsSync = pathExistsSync
 fse.__setPathExists = __setPathExists
+fse.outputFile = function (filePath, data, callback) {}
 module.exports = fse
