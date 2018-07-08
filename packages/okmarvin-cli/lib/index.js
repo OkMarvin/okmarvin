@@ -1,10 +1,9 @@
 const meow = require('meow')
-const fs = require('fs-extra')
 const chalk = require('chalk')
 const createSite = require('./createSite')
 const createArticle = require('./createArticle')
 const okmarvin = require('@okmarvin/okmarvin')
-const path = require('path')
+const buildSite = require('./buildSite')
 const checkUpdate = require('./checkUpdate')
 module.exports = async function (args) {
   const cli = meow(
@@ -43,17 +42,6 @@ module.exports = async function (args) {
     }
   }
   if (cmd === 'build') {
-    process.env.NODE_ENV = 'production'
-    const { clean } = cli.flags
-    const cwd = process.cwd()
-    if (clean) {
-      // clean dist first
-      fs.remove(path.join(cwd, 'dist'), err => {
-        if (err) console.error(err)
-        okmarvin()
-      })
-    } else {
-      okmarvin()
-    }
+    buildSite(cli, okmarvin)
   }
 }
