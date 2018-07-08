@@ -1,23 +1,24 @@
 const meow = require('meow')
 const fs = require('fs-extra')
 const chalk = require('chalk')
-const site = require('./site')
-const theme = require('./theme')
+const createSite = require('./createSite')
+const createArticle = require('./createArticle')
 const okmarvin = require('@okmarvin/okmarvin')
 const path = require('path')
-const pkg = require('../package.json')
-const checkForUpdate = require('update-check')
+const checkUpdate = require('./checkUpdate')
 module.exports = async function (args) {
   const cli = meow(
     `
   Usage
-    $ okmarvin <cmd> <type> <path>
+    $ okmarvin <cmd> <type> [<path>|<title>]
 
   Options
     --clean Clean dist directory before building
   
   Examples
     $ okmarvin new site <path>
+    $ okmarvin new post <title>
+    $ okmarvin new page <title>
     $ okmarvin new theme <path>
   `,
     {
@@ -34,34 +35,15 @@ module.exports = async function (args) {
     process.exit()
   }
   if (cmd === 'new') {
-    if (!dir) {
-      console.error(chalk.red('Please provide a path'))
-      process.exit()
-    }
-    if (fs.pathExistsSync(dir)) {
-      console.error(chalk.red(`'${dir}' path not empty, please try another`))
-      process.exit()
-    }
     if (type === 'site') {
-      // check update
-      let update = null
-
-      try {
-        update = await checkForUpdate(pkg)
-      } catch (err) {
-        console.error(`Failed to check for updates: ${err}`)
-      }
-
-      if (update) {
-        console.log(`The latest version is ${update.latest}. Please update!`)
-      }
-      return site(dir)
+      return createSite(dir, checkUpdate)
     }
-    if (type === 'theme') {
-      return theme(dir)
+    if (type === 'post' || type === 'page') {
+      return createArticle(type, dir)
     }
   }
   if (cmd === 'build') {
+    process.env.NODE_ENV = 'production'
     const { clean } = cli.flags
     const cwd = process.cwd()
     if (clean) {
