@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createArticle should warn when no title 1`] = `"[31mPlease specify post title[39m"`;

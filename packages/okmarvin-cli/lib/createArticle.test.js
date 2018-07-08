@@ -4,7 +4,7 @@ describe('createArticle', () => {
   it('should warn when no title', () => {
     expect(
       () => createArticle('post')
-    ).toThrow()
+    ).toThrowErrorMatchingSnapshot()
   })
   it('should pass', () => {
     beforeAll(() => {
