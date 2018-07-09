@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/markdown-it-toc",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "markdown-it plugin for adding table of contents",
   "main": "index.js",
   "scripts": {
