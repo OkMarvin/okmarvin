@@ -6,7 +6,7 @@ Static site generator with better theme developer experience.
 
 ## Developing
 
-okmarvin is a monorepo managed by [bolt](https://github.com/boltpkg/bolt).
+okmarvin is a monorepo managed with [bolt](https://github.com/boltpkg/bolt).
 
 1. Install bolt first
 2. Clone this repo
