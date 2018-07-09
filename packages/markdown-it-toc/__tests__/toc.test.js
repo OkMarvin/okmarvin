@@ -17,7 +17,7 @@ const md2 = require('markdown-it')({
 test('toc should be generated', () => {
   expect(md.render('{:toc}\n# 标题一')).toBe(
     `<nav class="toc" role="directory">
-<h2 class="toc__heading">Table of contents</h2><ol>
+<h2 class="toc__heading">Table of Contents</h2><ol>
 <li><a href="#${encodeURI('标题一')}">标题一</a></li>
 </ol>
 </nav>
@@ -40,7 +40,7 @@ test('toc should be generated where {:toc} locates', () => {
   expect(md.render('# heading1\n{:toc}')).toBe(
     `<h1><a id="heading1" name="heading1" class="anchor" href="#heading1"></a>heading1</h1>
 <nav class="toc" role="directory">
-<h2 class="toc__heading">Table of contents</h2><ol>
+<h2 class="toc__heading">Table of Contents</h2><ol>
 <li><a href="#${encodeURI('heading1')}">heading1</a></li>
 </ol>
 </nav>
@@ -53,7 +53,7 @@ test('heading 3 should be ignored when hMax set to 2', () => {
 ## heading2_
 ### heading3_`)).toBe(
     `<nav class="toc" role="directory">
-<h2 class="toc__heading">Table of contents</h2><ol>
+<h2 class="toc__heading">Table of Contents</h2><ol>
 <li><a href="#heading1_">heading1_</a>
 <ol>
 <li><a href="#heading2_">heading2_</a></li>
