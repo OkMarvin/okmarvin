@@ -55,7 +55,7 @@
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "neo-async": "^2.5.1",
     "chokidar": "^2.0.3",
-    "webpack-serve": "^2.0.0-beta.2",
+    "webpack-serve": "^2.0.0",
     "connect-history-api-fallback": "^1.5.0",
     "koa-connect": "^2.0.1"
   },

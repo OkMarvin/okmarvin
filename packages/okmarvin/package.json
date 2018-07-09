@@ -19,7 +19,7 @@
     "js-yaml": "^3.11.0",
     "gray-matter": "^4.0.1",
     "markdown-it": "^8.4.1",
-    "@okmarvin/markdown-it-toc": "^0.0.12",
+    "@okmarvin/markdown-it-toc": "^0.0.13",
     "prismjs": "^1.14.0",
     "@okmarvin/january": "^1.1.99",
     "react": "^16.4.0",
