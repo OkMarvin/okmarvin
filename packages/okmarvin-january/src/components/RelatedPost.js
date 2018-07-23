@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { Block } from 'jsxstyle'
+import { Block, InlineBlock } from 'jsxstyle'
 import LocaleContext from '../LocaleContext'
 import i18n from '../i18n'
 const Related = props => (
@@ -10,7 +10,7 @@ const Related = props => (
         <Block component='h2' fontSize='1rem'>
           <LocaleContext.Consumer>
             {
-              locale => <span>{i18n('Learn More', locale)}</span>
+              locale => <InlineBlock background='#f0d892'>{i18n('Learn More', locale)}</InlineBlock>
             }
           </LocaleContext.Consumer>
         </Block>
