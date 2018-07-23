@@ -5,7 +5,7 @@ import { Link } from '@reach/router'
 import localeContext from '../LocaleContext'
 import i18n from '../i18n'
 const navTextStyle = {
-  color: '#ccc',
+  color: '#777',
   fontSize: '0.7rem'
 }
 const PreviousLink = ({ children }) => (
