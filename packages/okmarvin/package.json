@@ -27,6 +27,7 @@
     "react-helmet-async": "0.1.0-alpha",
     "@okmarvin/slug": "^0.0.1",
     "invariant": "^2.2.4",
-    "chalk": "^2.4.1"
+    "chalk": "^2.4.1",
+    "markdown-it-linkify-images": "^1.1.0"
   }
 }

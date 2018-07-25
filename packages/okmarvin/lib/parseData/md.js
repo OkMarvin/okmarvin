@@ -25,16 +25,21 @@ module.exports = function ({ markdown = {} } = {}) {
         '</code></pre>'
       )
     }
-  }).use(
-    require('@okmarvin/markdown-it-toc'),
-    Object.assign(
-      {},
-      {
-        hMax: 3,
-        headingAnchorPrefix: ''
-      },
-      markdown.toc || {}
+  })
+    .use(
+      require('@okmarvin/markdown-it-toc'),
+      Object.assign(
+        {},
+        {
+          hMax: 3,
+          headingAnchorPrefix: ''
+        },
+        markdown.toc || {}
+      )
     )
-  )
+    .use(require('markdown-it-linkify-images'))
+  if (markdown.use) {
+    markdown.use(md)
+  }
   return md
 }

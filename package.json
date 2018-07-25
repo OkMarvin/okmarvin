@@ -80,7 +80,8 @@
     "update-check": "^1.5.2",
     "winston": "^3.0.0",
     "clone": "^2.1.1",
-    "innertext": "^1.0.3"
+    "innertext": "^1.0.3",
+    "markdown-it-linkify-images": "^1.1.0"
   },
   "jest": {
     "moduleNameMapper": {
