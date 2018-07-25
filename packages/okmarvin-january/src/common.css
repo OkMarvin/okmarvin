@@ -121,6 +121,11 @@ h2 {
 .toc a:link {
   border-bottom: none !important;
 }
+/* override prismjs */
+pre[class*="language-"] {
+  margin-left: -1em;
+  margin-right: -1em;
+}
 @media screen and (min-width: 45em) {
   h4 {
     font-size: 1rem;
@@ -136,5 +141,10 @@ h2 {
   }
   .toc {
     margin-top: 3.2rem;
+  }
+  /* override prismjs */
+  pre[class*="language-"] {
+    margin-left: unset;
+    margin-right: unset;
   }
 }
