@@ -18,6 +18,7 @@ module.exports = async function (args) {
     $ okmarvin new site <path>
     $ okmarvin new post <title>
     $ okmarvin new page <title>
+    $ okmarvin new draft <title>
     $ okmarvin new theme <path>
   `,
     {
@@ -37,7 +38,7 @@ module.exports = async function (args) {
     if (type === 'site') {
       return createSite(dir, checkUpdate)
     }
-    if (type === 'post' || type === 'page') {
+    if (type === 'post' || type === 'page' || type === 'draft') {
       return createArticle(type, dir)
     }
   }
