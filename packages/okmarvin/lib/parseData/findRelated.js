@@ -1,5 +1,5 @@
 const async = require('neo-async')
-const uniqBy = require('lodash/uniqby')
+const uniqBy = require('lodash/uniqBy')
 const collectTags = require('./collectTags')
 const isPost = require('./isPost')
 module.exports = function (files, callback) {
