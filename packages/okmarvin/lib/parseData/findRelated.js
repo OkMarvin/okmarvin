@@ -14,7 +14,7 @@ module.exports = function (files, callback) {
           (file, callback) => {
             const related = Object.keys(topics)
               .filter(key => {
-                return (file.tags || []).indexOf(key) !== -1
+                return (file.tags || []).map(tag => tag.toLowerCase()).indexOf(key) !== -1
               })
               .map(k => topics[k])
               .reduce((acc, topic) => {
