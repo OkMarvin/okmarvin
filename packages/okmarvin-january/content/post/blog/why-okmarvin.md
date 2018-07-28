@@ -1,6 +1,8 @@
 ---
 title: Why okmarvin
 date: 2018-6-15
+tags:
+  - introduction
 ---
 
 Have you ever wrote any CSS, you'll find them hard to maintain because all CSS rules live in one global scope.
@@ -34,4 +36,4 @@ Currently okmarvin only supports templates built with React.js + [jsxstyle](http
 
 Also, okmarvin can't modularize the client side JavaScript.
 
-As you might know, in React.js you can write event handlers for your components, but in okmarvin you should write JavaScript code like how you do in Hexo, Hugo, etc., but in a special `client/index.js` file. okmarvin won't ship React.js runtime for the static page, or it would become another gatsbyjs, that's not what I want.
+As you might know, in React.js you can write event handlers for your components, but in okmarvin you should write vanilla JavaScript code like how you do in Hexo, Hugo, etc., but in a special `client/index.js` file. okmarvin won't ship React.js runtime for the static page, or it would become another gatsbyjs, that's not what I want.
