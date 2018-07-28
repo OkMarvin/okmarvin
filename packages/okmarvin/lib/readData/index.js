@@ -34,7 +34,7 @@ module.exports = function (cwd, source, destination, callback) {
         async.waterfall(
           [
             callback =>
-              readUserSiteConfig(path.join(cwd, '_config.yml'), callback),
+              readUserSiteConfig(path.join(cwd, '_config.toml'), callback),
             computeSiteConfig,
             readThemeManifest
           ],

@@ -1,9 +1,9 @@
-const yaml = require('js-yaml')
+const TOML = require('@iarna/toml')
 const normalizePermalink = require('../parseData/computePermalink/normalizePermalink')
-module.exports = (yml, callback) => {
+module.exports = (str, callback) => {
   const defaultSiteConfig = require('./defaultSiteConfig')
   try {
-    const siteConfig = yaml.safeLoad(yml)
+    const siteConfig = TOML.parse(str)
     if (!siteConfig) return callback(null, defaultSiteConfig)
     callback(
       null,
@@ -25,11 +25,6 @@ module.exports = (yml, callback) => {
       )
     )
   } catch (e) {
-    if (e instanceof yaml.YAMLException) {
-      // yaml syntax problem, should be fixed
-      throw e
-    } else {
-      callback(e)
-    }
+    throw e
   }
 }
