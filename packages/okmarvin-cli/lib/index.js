@@ -30,6 +30,9 @@ module.exports = async function (args) {
     }
   )
   const [cmd, type, dir] = cli.input
+  if (!cmd) {
+    cli.showHelp()
+  }
   if (cmd !== 'new' && cmd !== 'build') {
     console.error(chalk.red(`'${cmd}' command not supported`))
     process.exit()
