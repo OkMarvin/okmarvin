@@ -5,6 +5,7 @@ exports[`renders correctly 1`] = `
   className="_r778rk"
 >
   <a
+    aria-current="page"
     className="_d7s2kr"
     href="/"
     onClick={[Function]}
