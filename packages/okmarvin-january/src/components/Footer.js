@@ -26,8 +26,8 @@ const Footer = ({ feed, url, author, github, twitter, rss, theme }) => (
     marginTop='4.11em'
     borderTop='1px solid #f0f0f0'
     borderBottom='1em solid #ffd54f'
+    smBorderBottom='0.5em solid #ffd54f'
     mediaQueries={bps}
-    smBorderBottom='none'
     lgPaddingLeft={0}
     lgPaddingRight={0}
   >

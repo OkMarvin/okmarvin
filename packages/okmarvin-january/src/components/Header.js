@@ -17,6 +17,7 @@ const Header = props => (
     smJustifyContent='space-between'
     smPaddingLeft={`calc((100% - ${maxWidth}) / 2)`}
     smPaddingRight={`calc((100% - ${maxWidth}) / 2)`}
+    smBackground='#ffd54f'
   >
     <Row
       display='inline-flex'
