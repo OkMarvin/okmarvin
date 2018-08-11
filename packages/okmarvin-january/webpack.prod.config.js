@@ -71,13 +71,13 @@ let config = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { minimize: true }
+            options: {}
           },
           {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: () => [require('autoprefixer')()]
+              plugins: () => [require('autoprefixer')(), require('cssnano')()]
             }
           }
         ]
