@@ -38,7 +38,7 @@ const Header = props => (
             fontSize={14}
             border='none'
             marginRight={10}
-            props={{ src: props.logo, alt: props.siteTitle }}
+            props={{ src: props.logo, alt: 'logo' }}
           />
           <Helmet>
             <link rel='preload' href={props.logo} as='image' />
