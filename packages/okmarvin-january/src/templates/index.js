@@ -45,13 +45,13 @@ class Index extends React.Component {
                   <Block
                     component='h2'
                     fontFamily='Courier, monospace'
-                    fontSize={`${Math.pow(mobileScale, 4)}rem`}
+                    fontSize={`${Math.pow(mobileScale, 3)}rem`}
                     marginTop={`${lineHeight * 2}rem`}
                     marginBottom={`${lineHeight / 2}rem`}
                     fontWeight='bold'
                     lineHeight={lineHeight - 0.3}
                     mediaQueries={bps}
-                    lgFontSize={`${Math.pow(scale, 5)}rem`}
+                    lgFontSize={`${Math.pow(scale, 4)}rem`}
                     lgMarginTop={`${lineHeight * 2}rem`}
                     lgMarginBottom={0}
                   >

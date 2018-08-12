@@ -16,7 +16,7 @@ const ArchiveItem = ({ title, datePublished, permalink }) => (
       }}
       component={Link}
       textDecoration='none'
-      fontSize='1.125rem'
+      fontSize='1rem'
       color='#333'
       linkColor='#333'
       borderBottom='1px solid #ddd'
