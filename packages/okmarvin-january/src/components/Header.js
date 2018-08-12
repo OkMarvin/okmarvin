@@ -13,7 +13,7 @@ const Header = props => (
     background='#fafafa'
     mediaQueries={bps}
     smFlexDirection='row'
-    smBoxShadow='0 1px 0 0 #e8e8e8'
+    smBoxShadow='0 2px 0 0 #f2f2f2'
     smJustifyContent='space-between'
     smPaddingLeft={`calc((100% - ${maxWidth}) / 2)`}
     smPaddingRight={`calc((100% - ${maxWidth}) / 2)`}
