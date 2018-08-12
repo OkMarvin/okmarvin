@@ -1,9 +1,13 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import Main from '../styled/Main'
-import { Block, Inline, InlineBlock } from 'jsxstyle'
-export default ({ siteConfig }) => (
+import { Block, Inline, InlineBlock, Row } from 'jsxstyle'
+import Helmet from 'react-helmet-async'
+export default ({ siteConfig, title }) => (
   <Main>
+    <Helmet>
+      <title>{title}</title>
+    </Helmet>
     <Block component='h1' borderBottom='1px solid #ddd'>
       Page Not Found
     </Block>
@@ -15,11 +19,14 @@ export default ({ siteConfig }) => (
       .
     </p>
     {siteConfig.logo && (
-      <Block
+      <Row
+        alignItems='center'
+        justifyContent='center'
         component={Link}
         props={{ to: '/' }}
         textAlign='center'
         marginTop={200}
+        textDecoration='none'
       >
         <InlineBlock
           component='img'
@@ -30,7 +37,7 @@ export default ({ siteConfig }) => (
           props={{ src: siteConfig.logo }}
         />
         {siteConfig.title}
-      </Block>
+      </Row>
     )}
   </Main>
 )
