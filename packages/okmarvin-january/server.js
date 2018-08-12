@@ -80,7 +80,7 @@ function startServer (INITIAL_DATA) {
       }
     }
   ).then(({app, on, options}) => {
-    const watcher = chokidar.watch(['./content', './_config.yml'], {
+    const watcher = chokidar.watch(['./content', './_config.toml'], {
       ignored: /(^|[/\\])\../,
       ignoreInitial: true
     })
