@@ -4,11 +4,10 @@ import { Block, InlineBlock } from 'jsxstyle'
 import { Link } from '@reach/router'
 import findBegin from './findBegin'
 const styles = {
-  marginLeft: 5,
-  marginRight: 5,
-  padding: 3,
+  padding: '6px 16px',
   fontSize: '1rem',
-  lineHeight: 1.2
+  lineHeight: 1.2,
+  transition: 'all 0.2s'
 }
 export default class Pagination extends React.Component {
   static propTypes = {
@@ -29,7 +28,13 @@ export default class Pagination extends React.Component {
             if (idx === current) {
               // current has no link
               return (
-                <InlineBlock key={idx} {...styles} fontWeight='bold'>
+                <InlineBlock
+                  key={idx}
+                  {...styles}
+                  fontWeight='bold'
+                  background='rgb(255, 213, 79)'
+                  cursor='text'
+                >
                   {current}
                 </InlineBlock>
               )
@@ -40,6 +45,8 @@ export default class Pagination extends React.Component {
                 <InlineBlock
                   key={idx}
                   {...styles}
+                  background='#f2f2f2'
+                  color='#000'
                   component={Link}
                   props={{ to: permalinkFormat.replace('/page:num', '') }}
                 >
@@ -49,6 +56,8 @@ export default class Pagination extends React.Component {
             } else {
               return (
                 <InlineBlock
+                  background='#f2f2f2'
+                  color='#000'
                   key={idx}
                   {...styles}
                   component={Link}
