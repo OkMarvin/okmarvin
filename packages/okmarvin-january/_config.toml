@@ -9,7 +9,7 @@ toc = true
 theme = "@okmarvin/january"
 
 rss = false
-paginate = 20
+paginate = 1
 favicon = "/static/img/favicon.png"
 logo = "/static/img/logo.svg"
 
