@@ -9,6 +9,7 @@ importAll(require.context('./templates', true, /\.js$/))
 class App extends React.Component {
   render () {
     const { files, siteConfig } = REACT_DATA
+    const NotFound = Components['./404.js'].default
     return (
       <Router id='___OkMarvin___'>
         {files.map(file => {
@@ -22,6 +23,9 @@ class App extends React.Component {
             />
           )
         })}
+        {
+          NotFound && <NotFound siteConfig={siteConfig} default />
+        }
       </Router>
     )
   }
