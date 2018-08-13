@@ -6,7 +6,7 @@ import Footer from './Footer'
 import Favicon from './Favicon'
 import localeContext from '../LocaleContext'
 import '../../node_modules/sanitize.css'
-import '../../node_modules/prismjs/themes/prism-tomorrow.css'
+import '../../node_modules/prismjs/themes/prism-okaidia.css'
 import '../common.css'
 export default class Html extends React.Component {
   static propTypes = {
