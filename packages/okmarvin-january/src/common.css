@@ -126,6 +126,11 @@ pre[class*="language-"] {
   margin-left: -1em;
   margin-right: -1em;
 }
+@media (max-width: 45em) {
+  pre[class*=language-] {
+    border-radius: 0;
+  }
+}
 @media screen and (min-width: 45em) {
   h4 {
     font-size: 1rem;
