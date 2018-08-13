@@ -18,7 +18,8 @@ export default class Pagination extends React.Component {
   }
   render () {
     const { current, total, permalinkFormat } = this.props
-    const paginate = 10
+    // show max 5 page button
+    const paginate = 5
     const begin = findBegin(total, current, paginate)
     return (
       <Block marginTop={'3rem'}>
