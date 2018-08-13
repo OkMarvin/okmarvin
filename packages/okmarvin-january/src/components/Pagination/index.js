@@ -34,6 +34,7 @@ export default class Pagination extends React.Component {
                   fontWeight='bold'
                   background='rgb(255, 213, 79)'
                   cursor='text'
+                  marginRight={2}
                 >
                   {current}
                 </InlineBlock>
@@ -48,6 +49,7 @@ export default class Pagination extends React.Component {
                   background='#f2f2f2'
                   color='#000'
                   component={Link}
+                  marginRight={2}
                   props={{ to: permalinkFormat.replace('/page:num', '') }}
                 >
                   1
@@ -61,6 +63,7 @@ export default class Pagination extends React.Component {
                   key={idx}
                   {...styles}
                   component={Link}
+                  marginRight={2}
                   props={{ to: permalinkFormat.replace(':num', idx) }}
                 >
                   {idx}
