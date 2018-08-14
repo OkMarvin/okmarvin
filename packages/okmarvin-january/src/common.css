@@ -153,3 +153,6 @@ pre[class*="language-"] {
     margin-right: unset;
   }
 }
+::selection {
+  background-color: #ffd54f;
+}
