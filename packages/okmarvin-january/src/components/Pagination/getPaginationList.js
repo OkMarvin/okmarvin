@@ -1,23 +1,32 @@
 export default function (totalPages, currentPage, credit = 5) {
-  // FIXME might need a better algorithm
-  if (totalPages < 6) {
+  if (totalPages <= credit) {
     return [...Array(totalPages).keys()].map(k => k + 1)
   }
-  let result = [1, totalPages] // always keep the first, last
+  let result = [1, totalPages] // always show the first, last
   credit = credit - 2
   if (currentPage !== 1 && currentPage !== totalPages) {
     result = result.concat(currentPage)
     credit = credit - 1
   } else {}
-  for (let i = 1, len = credit; i <= len; i++) {
-    if (credit === 0) break
-    if (currentPage - i > 1) {
-      result = result.concat(currentPage - i)
-      credit = credit - 1
+  let i = 1
+  let count = 0
+  while (credit > 0) {
+    if (count % 2 === 0) {
+      // left
+      if (currentPage - i > 1) {
+        result = result.concat(currentPage - i)
+        credit--
+      }
+    } else {
+      // right
+      if (currentPage + i < totalPages) {
+        result = result.concat(currentPage + i)
+        credit--
+      }
     }
-    if (currentPage + i < totalPages) {
-      result = result.concat(currentPage + i)
-      credit = credit - 1
+    count++
+    if (count % 2 === 0) {
+      i++
     }
   }
   // find where to insert ...
