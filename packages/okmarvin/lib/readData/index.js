@@ -1,6 +1,6 @@
 const path = require('path')
 const glob = require('glob')
-const fs = require('fs-extra')
+const fse = require('fs-extra')
 const async = require('neo-async')
 const invariant = require('invariant')
 const readUserSiteConfig = require('./readUserSiteConfig')
@@ -13,21 +13,24 @@ const chalk = require('chalk')
  * @param {String} cwd current working directory
  * @param {Function} callback
  */
-module.exports = function (cwd, source, destination, callback) {
+module.exports = function (
+  cwd,
+  source = 'content',
+  destination = 'dist',
+  callback = function () {}
+) {
   const content = path.join(cwd, source)
-  invariant(fs.pathExistsSync(content), chalk.red(`${content} folder doesn't exist`))
+  invariant(fse.pathExistsSync(content), chalk.red(`${content} doesn't exist`))
   const searchPattern = '{post,page}/**/*.md'
   async.parallel(
     {
       config: callback => {
-        // read custom config
+        // read custom config from .okmarvin/config.js
         try {
-          const config = require(
-            path.join(cwd, '.okmarvin', 'config.js')
-          )
+          const config = require(path.join(cwd, '.okmarvin', 'config.js'))
           callback(null, config)
         } catch (e) {
-          callback(null)
+          callback(null, {})
         }
       },
       siteConfig: callback =>
@@ -43,13 +46,9 @@ module.exports = function (cwd, source, destination, callback) {
       files: callback =>
         async.waterfall(
           [
-            callback => glob(searchPattern, { cwd: content, absolute: true }, callback),
-            (files, callback) =>
-              async.map(
-                files,
-                readMarkdown,
-                callback
-              )
+            callback =>
+              glob(searchPattern, { cwd: content, absolute: true }, callback),
+            (files, callback) => async.map(files, readMarkdown, callback)
           ],
           callback
         )
