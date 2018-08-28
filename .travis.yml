@@ -10,4 +10,4 @@ before_install:
   - yarn add global bolt
 
 install: bolt
-script: yarn test
+script: bolt test
