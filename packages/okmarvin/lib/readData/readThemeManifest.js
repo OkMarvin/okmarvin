@@ -1,3 +1,5 @@
+// read theme manifest json file
+// then merge with siteConfig object
 const fse = require('fs-extra')
 module.exports = function (
   siteConfig = { theme: '@okmarvin/january' },
