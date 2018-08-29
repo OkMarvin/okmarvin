@@ -1,6 +1,6 @@
 const readThemeManifest = require('./readThemeManifest')
 const fse = require('fs-extra')
-require.resolve = jest.fn()
+jest.mock('./requireResolve')
 describe('readThemeManifest', () => {
   const siteConfig = { theme: '@okmarvin/january' }
   describe('failed to read theme manifest file', () => {
