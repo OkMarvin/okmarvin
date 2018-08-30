@@ -8,12 +8,17 @@ import ArticleHeading from '../styled/ArticleHeading'
 import slug from '@okmarvin/slug'
 import LocaleContext from '../LocaleContext'
 import i18n from '../i18n'
-const PostContentHeader = ({ title, author, datePublished, tags }) => (
+const PostContentHeader = ({
+  title,
+  author,
+  datePublished,
+  tags
+}) => (
   <ArticleHeader>
     <ArticleHeading>{title}</ArticleHeading>
     <Block fontSize='0.889rem' marginBottom='1rem' color='#666'>
       by <span>{author}</span> on&nbsp;
-      <InlineBlock dateTime={datePublished}>
+      <InlineBlock props={{ dateTime: datePublished }} component='time'>
         {format(datePublished, 'YYYY-MM-DD')}
       </InlineBlock>
       {tags && tags.length ? (
