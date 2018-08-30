@@ -16,7 +16,7 @@ module.exports = function (files, callback) {
       if (listOfPosts[idx + 1]) {
         siblings['olderSibling'] = listOfPosts[idx + 1]
       }
-      callback(null, {...file, ...siblings})
+      callback(null, { ...file, ...siblings })
     },
     callback
   )

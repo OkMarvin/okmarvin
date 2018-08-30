@@ -20,7 +20,7 @@ const NextLink = ({ children }) => (
 )
 export default class PostSiblings extends React.Component {
   render () {
-    const {newerSibling, olderSibling} = this.props
+    const { newerSibling, olderSibling } = this.props
     return (
       <Col
         alignItems='flex-start'
@@ -33,9 +33,7 @@ export default class PostSiblings extends React.Component {
           <PreviousLink>
             <Block {...navTextStyle}>
               <localeContext.Consumer>
-                {
-                  locale => i18n('NEWER', locale)
-                }
+                {locale => i18n('NEWER', locale)}
               </localeContext.Consumer>
             </Block>
             <div>
@@ -55,9 +53,7 @@ export default class PostSiblings extends React.Component {
           <NextLink to={olderSibling.permalink}>
             <Block {...navTextStyle}>
               <localeContext.Consumer>
-                {
-                  locale => i18n('OLDER', locale)
-                }
+                {locale => i18n('OLDER', locale)}
               </localeContext.Consumer>
             </Block>
             <div>

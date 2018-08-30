@@ -1,3 +1,3 @@
 module.exports = function (siteConfig, callback) {
-  callback(null, {...siteConfig, themeManifest: {}})
+  callback(null, { ...siteConfig, themeManifest: {} })
 }

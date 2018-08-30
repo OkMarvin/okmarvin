@@ -10,10 +10,12 @@ test('should return default site config', () => {
 it('should return title = hi sam', () => {
   const cb = jest.fn()
   computeSiteConfig('title = "hi sam"', cb)
-  expect(cb).toBeCalledWith(null, {...defaultSiteConfig, title: 'hi sam'})
+  expect(cb).toBeCalledWith(null, { ...defaultSiteConfig, title: 'hi sam' })
 })
 test('should throw error', () => {
   const mockCallback = jest.fn()
-  expect(() => computeSiteConfig(`title: OkMarvin\nauthor`, mockCallback)).toThrow()
+  expect(() =>
+    computeSiteConfig(`title: OkMarvin\nauthor`, mockCallback)
+  ).toThrow()
   expect(mockCallback).not.toBeCalled()
 })

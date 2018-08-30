@@ -1,22 +1,14 @@
 import React, { Fragment } from 'react'
 import { Row, InlineBlock, Block } from 'jsxstyle'
 import PropTypes from 'prop-types'
-const Meta = ({author, theme}) => (
+const Meta = ({ author, theme }) => (
   <Fragment>
-    <Row
-      alignItems='center'
-      fontSize='0.79rem'
-      color='#333'
-    >
+    <Row alignItems='center' fontSize='0.79rem' color='#333'>
       Copyright © {author}
     </Row>
-    <Block
-      marginLeft='auto'
-      marginRight='auto'
-      fontSize='0.79rem'
-      color='#333'
-    >
-      Made with{` `}
+    <Block marginLeft='auto' marginRight='auto' fontSize='0.79rem' color='#333'>
+      Made with
+      {` `}
       <InlineBlock
         component='a'
         props={{
@@ -24,7 +16,8 @@ const Meta = ({author, theme}) => (
         }}
       >
         okmarvin
-      </InlineBlock> & {` `}
+      </InlineBlock>{' '}
+      & {` `}
       <InlineBlock component='span'>{theme}</InlineBlock>
     </Block>
   </Fragment>

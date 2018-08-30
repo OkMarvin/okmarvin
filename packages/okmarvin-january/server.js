@@ -79,7 +79,7 @@ function startServer (INITIAL_DATA) {
         app.use(convert(history(historyOptions)))
       }
     }
-  ).then(({app, on, options}) => {
+  ).then(({ app, on, options }) => {
     const watcher = chokidar.watch(['./content', './_config.toml'], {
       ignored: /(^|[/\\])\../,
       ignoreInitial: true
