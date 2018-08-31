@@ -22,7 +22,7 @@ describe('readData', () => {
     it('should readData', () => {
       const cb = jest.fn(() =>
         expect(cb).toBeCalledWith(null, {
-          config: {},
+          config: undefined,
           siteConfig: {
             ...defaultSiteconfig,
             themeManifest: {}
