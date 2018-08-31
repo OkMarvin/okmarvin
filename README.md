@@ -6,11 +6,11 @@ Static site generator with better theme developer experience.
 
 ## Developing
 
-okmarvin is a monorepo managed with [bolt](https://github.com/boltpkg/bolt).
+okmarvin is a monorepo managed with [lerna](https://github.com/lerna/lerna).
 
-1. Install bolt first
+1. Install `yarn` first
 2. Clone this repo
-3. Run `bolt` to install dependencies
+3. Run `yarn` to bootstrap
 
 ## Demo
 
