@@ -4,7 +4,7 @@ jest.mock('./readUserSiteConfig')
 jest.mock('./readThemeManifest')
 const defaultSiteconfig = require('./defaultSiteConfig')
 describe('readData', () => {
-  describe('source path not exist', () => {
+  describe('throw when source path not exist', () => {
     beforeAll(() => {
       fse.__setPathExists(false)
     })
@@ -15,7 +15,7 @@ describe('readData', () => {
       }).toThrowError('err')
     })
   })
-  describe('source path exists', () => {
+  describe('called with object when source path exists', () => {
     beforeAll(() => {
       fse.__setPathExists(true)
     })
