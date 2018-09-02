@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/generate-xml",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "generate xml content",
   "main": "src/index.js",
   "keywords": [

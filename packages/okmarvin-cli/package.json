@@ -1,6 +1,6 @@
 {
   "name": "okmarvin-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Command line tool for static site generator okmarvin",
   "main": "index.js",
   "scripts": {
@@ -14,14 +14,12 @@
     "okmarvin": "./index.js"
   },
   "dependencies": {
-    "meow": "^5.0.0",
-    "fs-extra": "^7.0.0",
+    "@okmarvin/okmarvin": "^0.0.2",
     "chalk": "^2.4.1",
-    "@okmarvin/okmarvin": "^0.0.1",
-    "update-check": "^1.5.2",
     "date-fns": "^1.29.0",
-    "invariant": "^2.2.4"
-  },
-  "devDependencies": {
+    "fs-extra": "^7.0.0",
+    "invariant": "^2.2.4",
+    "meow": "^5.0.0",
+    "update-check": "^1.5.2"
   }
 }
