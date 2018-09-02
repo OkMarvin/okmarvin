@@ -8,6 +8,9 @@
   ],
   "author": "Sam Chen",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "winston": "^3.0.0"
   }

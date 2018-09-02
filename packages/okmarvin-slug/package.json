@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Sam Chen",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "github-slugger": "^1.2.0"
   }

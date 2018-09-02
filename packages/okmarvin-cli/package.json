@@ -13,6 +13,9 @@
   "bin": {
     "okmarvin": "./index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@okmarvin/okmarvin": "^0.0.2",
     "chalk": "^2.4.1",

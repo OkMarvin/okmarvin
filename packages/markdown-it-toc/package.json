@@ -20,6 +20,9 @@
     "markdown-it": "^8.4.1",
     "standard": "^12.0.0"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "standard": {
     "globals": [
       "test",

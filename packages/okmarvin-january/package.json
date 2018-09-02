@@ -9,6 +9,9 @@
     "jsxstyle"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "build/manifest.json",
   "scripts": {
     "start": "node server.js",

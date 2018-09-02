@@ -6,6 +6,9 @@
   "keywords": [
     "okmarvin"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Sam Chen",
   "license": "MIT",
   "dependencies": {
