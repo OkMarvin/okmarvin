@@ -7,9 +7,10 @@
       "jest"
     ]
   },
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": []
+  },
   "scripts": {
     "test": "standard && jest",
     "precommit": "lint-staged"
