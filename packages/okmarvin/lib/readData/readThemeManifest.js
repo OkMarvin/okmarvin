@@ -1,7 +1,7 @@
 // read theme manifest json file
 // then merge with siteConfig object
 const fse = require('fs-extra')
-const requireResolve = require('./requireResolve')
+const requireResolve = require('../helpers/requireResolve')
 module.exports = function (
   siteConfig = { theme: '@okmarvin/january' },
   callback
