@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/january",
-  "version": "1.1.110",
+  "version": "1.1.111",
   "description": "default theme for okmarvin.",
   "author": "Sam Chen",
   "keywords": [
@@ -66,8 +66,8 @@
     "webpack-serve": "^2.0.0"
   },
   "dependencies": {
-    "@okmarvin/okmarvin": "^0.0.2",
-    "@okmarvin/slug": "^0.0.2",
+    "@okmarvin/okmarvin": "^0.0.3",
+    "@okmarvin/slug": "^0.0.3",
     "@reach/router": "^1.0.7",
     "date-fns": "^1.29.0",
     "jsxstyle": "^2.1.3",

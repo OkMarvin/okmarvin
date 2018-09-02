@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/generate-sitemap",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "generate content for sitemap.xml",
   "main": "src/index.js",
   "keywords": [
@@ -12,6 +12,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@okmarvin/generate-xml": "^0.0.2"
+    "@okmarvin/generate-xml": "^0.0.3"
   }
 }
