@@ -32,6 +32,7 @@
     "babel-jest": "^23.0.1",
     "babel-loader": "^8.0.0",
     "babel-plugin-lodash": "^3.3.2",
+    "benchmark": "^2.1.4",
     "chokidar": "^2.0.3",
     "clean-webpack-plugin": "^0.1.19",
     "connect-history-api-fallback": "^1.5.0",
