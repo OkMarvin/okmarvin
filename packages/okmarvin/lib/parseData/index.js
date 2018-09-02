@@ -11,8 +11,11 @@ const md = require('./md')
 const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
 const path = require('path')
+const logger = require('@okmarvin/logger')
 module.exports = function (data, callback) {
+  logger.profile('parseData')
   const { config, siteConfig, files, cwd, source, now } = data
+  const MD = md(config)
   async.waterfall(
     [
       callback => {
@@ -28,32 +31,50 @@ module.exports = function (data, callback) {
             }
             // FIXME
             // ensure some fields are present in fileData
-            callback(null, {
+            const author = computeAuthor(siteConfig, fileData)
+            const datePublished = computeDatePublished(date, now)
+            const dateModified = computeDateModified(fileData)
+            const description = computeDescription(fileData, content)
+            const perma = computePermalink(
+              permalink,
+              fileData,
+              new Date(computeDatePublished(date, now)),
+              path.relative(path.join(cwd, source), filePath)
+            )
+            const templ = computeTemplate(
+              themeManifest,
+              userSetTemplate,
+              source,
+              filePath
+            )
+            const css = computeCss(
+              themeManifest,
+              userSetTemplate,
+              source,
+              filePath
+            )
+
+            const cont = computeToc(siteConfig, fileData)
+              ? MD.render(`{:toc}\n${content}`)
+              : MD.render(content)
+            const res = {
               ...fileData,
               filePath,
-              author: computeAuthor(siteConfig, fileData),
-              datePublished: computeDatePublished(date, now),
-              dateModified: computeDateModified(fileData),
-              description: computeDescription(fileData, content),
-              permalink: computePermalink(
-                permalink,
-                fileData,
-                new Date(computeDatePublished(date, now)),
-                path.relative(path.join(cwd, source), filePath)
-              ),
-              template: computeTemplate(
-                themeManifest,
-                userSetTemplate,
-                source,
-                filePath
-              ),
-              css: computeCss(themeManifest, userSetTemplate, source, filePath), //  template's css file
-              content: computeToc(siteConfig, fileData)
-                ? md(config).render(`{:toc}\n${content}`)
-                : md(config).render(content)
-            })
+              author,
+              datePublished,
+              dateModified,
+              description,
+              permalink: perma,
+              template: templ,
+              css, //  template's css file
+              content: cont
+            }
+            callback(null, res)
           },
-          callback
+          function (err, files) {
+            if (err) return callback(err)
+            return callback(null, files)
+          }
         )
       },
 
@@ -61,6 +82,7 @@ module.exports = function (data, callback) {
       findRelated
     ],
     (err, files) => {
+      logger.profile('parseData')
       if (err) return callback(err)
       callback(null, {
         ...data,
