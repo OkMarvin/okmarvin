@@ -1,9 +1,10 @@
 const fs = require('fs-extra')
 const path = require('path')
+const requireResolve = require('../helpers/requireResolve')
 module.exports = function (data, callback) {
   const { siteConfig, cwd, destination } = data
   const { theme } = siteConfig
-  const themeRoot = path.join(require.resolve(theme), '..')
+  const themeRoot = path.join(requireResolve(theme), '..')
   fs.copy(
     path.join(themeRoot, 'static'),
     path.join(cwd, destination, 'static'),

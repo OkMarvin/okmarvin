@@ -5,10 +5,11 @@ const path = require('path')
 const fs = require('fs-extra')
 const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
+const requireResolve = require('../helpers/requireResolve')
 module.exports = function (data, callback) {
   const { files, siteConfig } = data
   const { theme, themeManifest } = siteConfig
-  const themeRoot = path.join(require.resolve(theme), '..')
+  const themeRoot = path.join(requireResolve(theme), '..')
   async.waterfall(
     [
       callback => {
