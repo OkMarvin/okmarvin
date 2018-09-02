@@ -4,6 +4,8 @@
   "description": "default theme for okmarvin.",
   "author": "Sam Chen",
   "keywords": [
+    "okmarvin",
+    "static site generator",
     "React",
     "React.js",
     "jsxstyle"
