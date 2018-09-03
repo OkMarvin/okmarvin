@@ -32,6 +32,7 @@
     "prismjs": "^1.14.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-helmet-async": "0.1.0-alpha"
+    "react-helmet-async": "0.1.0",
+    "tiny-glob": "^0.2.2"
   }
 }
