@@ -2,6 +2,7 @@ const readData = require('./index')
 const fse = require('fs-extra')
 jest.mock('./readUserSiteConfig')
 jest.mock('./readThemeManifest')
+jest.mock('../configStore')
 const defaultSiteconfig = require('./defaultSiteConfig')
 describe('readData', () => {
   describe('throw when source path not exist', () => {
@@ -11,7 +12,7 @@ describe('readData', () => {
     it('should readData', () => {
       const cb = jest.fn()
       expect(() => {
-        readData(__dirname, 'src', 'dist', cb)
+        readData(cb)
       }).toThrowError('err')
     })
   })
@@ -28,13 +29,10 @@ describe('readData', () => {
             themeManifest: {}
           },
           files: [],
-          cwd: __dirname,
-          source: 'src',
-          destination: 'dist',
           now: expect.any(Number)
         })
       )
-      readData(__dirname, 'src', 'dist', cb)
+      readData(cb)
     })
   })
 })

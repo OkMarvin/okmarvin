@@ -2,8 +2,10 @@ const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@okmarvin/logger')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
-  const { files, cwd, destination } = data
+  const { files } = data
+  const { cwd, destination } = configStore.get()
   async.parallel(
     [
       callback =>

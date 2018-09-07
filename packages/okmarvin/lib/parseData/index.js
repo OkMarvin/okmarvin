@@ -12,10 +12,12 @@ const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
 const path = require('path')
 const logger = require('@okmarvin/logger')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
   logger.profile('parseData')
-  const { config, siteConfig, files, cwd, source, now } = data
-  const MD = md(config)
+  const { cwd, source } = configStore.get()
+  const { config: mdConfig, siteConfig, files, now } = data
+  const MD = md(mdConfig)
   async.waterfall(
     [
       callback => {

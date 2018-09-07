@@ -2,8 +2,10 @@ const async = require('neo-async')
 const path = require('path')
 const glob = require('glob')
 const fs = require('fs-extra')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
-  const { files, cwd, destination } = data
+  const { files } = data
+  const { cwd, destination } = configStore.get()
   async.each(
     files,
     function (file, callback) {

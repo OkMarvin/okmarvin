@@ -9,19 +9,16 @@ const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
 const chalk = require('chalk')
 const logger = require('@okmarvin/logger')
+const configStore = require('../configStore')
 /**
  * Collect all markdown files under `post` & `page`
  * @param {String} cwd current working directory
  * @param {Function} callback
  */
-module.exports = function (
-  cwd,
-  source = 'content',
-  destination = 'dist',
-  callback = function () {}
-) {
+module.exports = function (callback = function () {}) {
   logger.profile('readData')
 
+  const { cwd, source } = configStore.get()
   const content = path.join(cwd, source)
   invariant(
     fse.pathExistsSync(content),
@@ -88,7 +85,12 @@ module.exports = function (
           [
             callback => {
               const searchPattern = '{post,page}/**/*.md'
-              glob(searchPattern, { cwd: content, absolute: true }, callback)
+              const opts = { cwd: content, absolute: true }
+              glob(searchPattern, opts, callback)
+              // require('tiny-glob')(searchPattern, opts).then(files => {
+              //   console.log(files)
+              //   callback(null, files)
+              // }).catch(err => callback(err))
             },
             (files, callback) => async.map(files, readMarkdown, callback)
           ],
@@ -100,9 +102,6 @@ module.exports = function (
       if (err) return callback(err)
       return callback(null, {
         ...results,
-        cwd,
-        source,
-        destination,
         now: new Date().getTime()
       })
     }
