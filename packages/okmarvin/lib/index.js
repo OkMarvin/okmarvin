@@ -7,6 +7,7 @@ const guard = require('./guard')
 const render = require('./render')
 const writeFiles = require('./writeFiles')
 const copy = require('./copy')
+const configStore = require('./configStore')
 /**
  * Static site generator
  * @param {string} cwd Current working directory
@@ -14,10 +15,13 @@ const copy = require('./copy')
  * @param {string} destination Build target
  */
 module.exports = function (source = 'content', destination = 'dist') {
-  const cwd = process.cwd()
   logger.profile('SSG')
+  configStore.add({
+    cwd: process.cwd(),
+    source,
+    destination
+  })
   async.waterfall([
-    (callback) => callback(null, cwd, source, destination),
     readData,
     parseData,
     composeList,
