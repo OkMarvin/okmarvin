@@ -15,7 +15,7 @@
     "build": "rm -rf dist && NODE_ENV=production node index.js"
   },
   "dependencies": {
-    "@iarna/toml": "^2.0.0",
+    "@iarna/toml": "^2.1.1",
     "@okmarvin/generate-feed": "^0.1.7",
     "@okmarvin/generate-sitemap": "^0.1.5",
     "@okmarvin/logger": "^0.0.4",
@@ -30,8 +30,8 @@
     "markdown-it-linkify-images": "^1.1.0",
     "neo-async": "^2.5.2",
     "prismjs": "^1.14.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
     "react-helmet-async": "0.1.0",
     "tiny-glob": "^0.2.2"
   }
