@@ -1,7 +1,9 @@
 const isPost = require('../parseData/isPost')
 const composePaginator = require('./composePaginator')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
-  const { siteConfig, files, now } = data
+  const { siteConfig, files } = data
+  const { time } = configStore.get()
   const { themeManifest } = siteConfig
   // if no index.js template, no need to compose indexList
   if (!themeManifest['index.js']) return callback(null, [])
@@ -15,8 +17,8 @@ module.exports = function (data, callback) {
     author: siteConfig.author,
     template: 'index.js',
     css: 'index.css',
-    datePublished: now,
-    dateModified: now,
+    datePublished: time,
+    dateModified: time,
     permalink: '/'
   }
   // which data an index page would need?

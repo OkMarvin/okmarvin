@@ -28,8 +28,7 @@ describe('readData', () => {
             ...defaultSiteconfig,
             themeManifest: {}
           },
-          files: [],
-          now: expect.any(Number)
+          files: []
         })
       )
       readData(cb)

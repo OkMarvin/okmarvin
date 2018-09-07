@@ -101,8 +101,7 @@ module.exports = function (callback = function () {}) {
       logger.profile('readData')
       if (err) return callback(err)
       return callback(null, {
-        ...results,
-        now: new Date().getTime()
+        ...results
       })
     }
   )

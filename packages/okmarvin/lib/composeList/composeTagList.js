@@ -2,8 +2,10 @@ const async = require('async')
 const collectTags = require('../parseData/collectTags')
 const slug = require('@okmarvin/slug')
 const composePaginator = require('./composePaginator')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
-  const { files, siteConfig, now } = data
+  const { files, siteConfig } = data
+  const { time } = configStore.get()
   const { paginate, themeManifest } = siteConfig
   // if no tag.js template, no need to compose tagList
   if (!themeManifest['tag.js']) return callback(null, [])
@@ -20,8 +22,8 @@ module.exports = function (data, callback) {
               author: siteConfig.auhor,
               template: 'tag.js',
               css: 'tag.css',
-              datePublished: now,
-              dateModified: now,
+              datePublished: time,
+              dateModified: time,
               permalink: `/topics/${encodeURIComponent(slug(topic))}/`,
               list: topics[topic].sort((a, b) => b.datePublished - a.datePublished)
             }

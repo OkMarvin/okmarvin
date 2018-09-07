@@ -15,8 +15,8 @@ const logger = require('@okmarvin/logger')
 const configStore = require('../configStore')
 module.exports = function (data, callback) {
   logger.profile('parseData')
-  const { cwd, source } = configStore.get()
-  const { config: mdConfig, siteConfig, files, now } = data
+  const { cwd, source, time } = configStore.get()
+  const { config: mdConfig, siteConfig, files } = data
   const MD = md(mdConfig)
   async.waterfall(
     [
@@ -34,13 +34,13 @@ module.exports = function (data, callback) {
             // FIXME
             // ensure some fields are present in fileData
             const author = computeAuthor(siteConfig, fileData)
-            const datePublished = computeDatePublished(date, now)
+            const datePublished = computeDatePublished(date, time)
             const dateModified = computeDateModified(fileData)
             const description = computeDescription(fileData, content)
             const perma = computePermalink(
               permalink,
               fileData,
-              new Date(computeDatePublished(date, now)),
+              new Date(computeDatePublished(date, time)),
               path.relative(path.join(cwd, source), filePath)
             )
             const templ = computeTemplate(
