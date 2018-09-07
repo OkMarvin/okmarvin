@@ -19,7 +19,8 @@ module.exports = function (source = 'content', destination = 'dist') {
   configStore.add({
     cwd: process.cwd(),
     source,
-    destination
+    destination,
+    time: new Date().getTime()
   })
   async.waterfall([
     readData,
