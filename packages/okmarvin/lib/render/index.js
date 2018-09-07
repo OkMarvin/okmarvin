@@ -6,10 +6,12 @@ const fs = require('fs-extra')
 const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 const requireResolve = require('../helpers/requireResolve')
+const logger = require('@okmarvin/logger')
 module.exports = function (data, callback) {
+  logger.profile('render')
   const { files, siteConfig } = data
   const { theme, themeManifest } = siteConfig
-  const themeRoot = path.join(requireResolve(theme), '..')
+  const themeRoot = path.join(requireResolve(theme, { paths: [process.cwd()] }), '..')
   async.waterfall(
     [
       callback => {
@@ -75,6 +77,7 @@ module.exports = function (data, callback) {
       }
     ],
     function (err, files) {
+      logger.profile('render')
       if (err) return callback(err)
       callback(null, {
         ...data,

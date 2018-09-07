@@ -6,12 +6,9 @@ module.exports = function (
   siteConfig = { theme: '@okmarvin/january' },
   callback
 ) {
-  fse.readFile(
-    requireResolve(siteConfig.theme),
-    'utf8',
-    (err, manifestStr) => {
-      if (err) return callback(err)
-      callback(null, { ...siteConfig, themeManifest: JSON.parse(manifestStr) })
-    }
-  )
+  const themeRoot = requireResolve(siteConfig.theme, { paths: [process.cwd()] })
+  fse.readFile(themeRoot, 'utf8', (err, manifestStr) => {
+    if (err) return callback(err)
+    callback(null, { ...siteConfig, themeManifest: JSON.parse(manifestStr) })
+  })
 }
