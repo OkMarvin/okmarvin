@@ -1,6 +1,6 @@
 const GithubSlugger = require('github-slugger')
 const slugger = new GithubSlugger()
-module.exports = (i) => {
+module.exports = (v) => {
   slugger.reset()
-  return slugger.slug(i)
+  return slugger.slug(v)
 }
