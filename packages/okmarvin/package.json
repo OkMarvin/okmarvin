@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/okmarvin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Static site generator with better theme developer experience",
   "main": "lib/index.js",
   "keywords": [
@@ -20,7 +20,7 @@
     "@okmarvin/generate-sitemap": "^0.1.5",
     "@okmarvin/logger": "^0.0.5",
     "@okmarvin/markdown-it-toc": "^0.0.15",
-    "@okmarvin/slug": "^0.0.3",
+    "@okmarvin/slug": "^0.0.4",
     "chalk": "^2.4.1",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
