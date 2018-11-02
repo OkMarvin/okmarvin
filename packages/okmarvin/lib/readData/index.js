@@ -8,7 +8,6 @@ const normalizePermalink = require('../parseData/computePermalink/normalizePerma
 const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
 const chalk = require('chalk')
-const logger = require('@okmarvin/logger')
 const configStore = require('../configStore')
 /**
  * Collect all markdown files under `post` & `page`
@@ -16,8 +15,6 @@ const configStore = require('../configStore')
  * @param {Function} callback
  */
 module.exports = function (callback = function () {}) {
-  logger.profile('readData')
-
   const { cwd, source } = configStore.get()
   const content = path.join(cwd, source)
   invariant(
@@ -97,12 +94,6 @@ module.exports = function (callback = function () {}) {
           callback
         )
     },
-    function (err, results) {
-      logger.profile('readData')
-      if (err) return callback(err)
-      return callback(null, {
-        ...results
-      })
-    }
+    callback
   )
 }

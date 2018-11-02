@@ -7,11 +7,13 @@ const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@okmarvin/logger')
+const configStore = require('../configStore')
 module.exports = function (data, callback) {
   logger.profile('render')
   const { files, siteConfig } = data
   const { theme, themeManifest } = siteConfig
-  const themeRoot = path.join(requireResolve(theme, { paths: [process.cwd()] }), '..')
+  const { cwd } = configStore.get()
+  const themeRoot = path.join(requireResolve(theme, { paths: [cwd] }), '..')
   async.waterfall(
     [
       callback => {
