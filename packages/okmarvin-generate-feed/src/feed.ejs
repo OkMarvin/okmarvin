@@ -14,7 +14,7 @@ _%>
   <channel>
     <title><%= site.title %></title>
     <atom:link href="<%= site.url %>/feed.xml" rel="self" type="application/rss+xml" />
-    <description><%= site.description %></description>
+    <description><![CDATA[<%= site.description %>]]></description>
     <link><%= site.url %></link>
     <language><%= site.lang %></language>
     <generator>OkMarvin</generator>
@@ -32,7 +32,7 @@ _%>
     <item>
       <title><%= item['title'] %></title>
       <link><%= item['permalink'] %></link>
-      <description><%= item['description'] %></description>
+      <description><![CDATA[<%= item['description'] %>]]></description>
       <pubDate><%= format(item['datePublished'], 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></pubDate>
       <dc:creator><![CDATA[<%= item['author'] %>]]></dc:creator>
       <guid isPermaLink="false"><%= item['permalink'] %></guid>
