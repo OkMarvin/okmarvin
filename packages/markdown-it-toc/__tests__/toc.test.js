@@ -21,7 +21,7 @@ test('toc should be generated', () => {
 <li><a href="#${encodeURI('标题一')}">标题一</a></li>
 </ol>
 </nav>
-<h1><a id="标题一" name="标题一" class="anchor" href="#标题一"></a>标题一</h1>
+<h1><a id="标题一" name="标题一" class="anchor" href="#标题一"></a><span>标题一</span></h1>
 `
   )
 })
@@ -32,13 +32,13 @@ test('toc heading not added', () => {
 <li><a href="#${encodeURI('标题')}">标题</a></li>
 </ol>
 </nav>
-<h1><a id="标题" name="标题" class="anchor" href="#标题"></a>标题</h1>
+<h1><a id="标题" name="标题" class="anchor" href="#标题"></a><span>标题</span></h1>
 `
   )
 })
 test('toc should be generated where {:toc} locates', () => {
   expect(md.render('# heading1\n{:toc}')).toBe(
-    `<h1><a id="heading1" name="heading1" class="anchor" href="#heading1"></a>heading1</h1>
+    `<h1><a id="heading1" name="heading1" class="anchor" href="#heading1"></a><span>heading1</span></h1>
 <nav class="toc" role="directory">
 <h2 class="toc__heading">Table of Contents</h2><ol>
 <li><a href="#${encodeURI('heading1')}">heading1</a></li>
@@ -61,9 +61,9 @@ test('heading 3 should be ignored when hMax set to 2', () => {
 </li>
 </ol>
 </nav>
-<h1><a id="heading1_" name="heading1_" class="anchor" href="#heading1_"></a>heading1_</h1>
-<h2><a id="heading2_" name="heading2_" class="anchor" href="#heading2_"></a>heading2_</h2>
-<h3><a id="heading3_" name="heading3_" class="anchor" href="#heading3_"></a>heading3_</h3>
+<h1><a id="heading1_" name="heading1_" class="anchor" href="#heading1_"></a><span>heading1_</span></h1>
+<h2><a id="heading2_" name="heading2_" class="anchor" href="#heading2_"></a><span>heading2_</span></h2>
+<h3><a id="heading3_" name="heading3_" class="anchor" href="#heading3_"></a><span>heading3_</span></h3>
 `
   )
 })

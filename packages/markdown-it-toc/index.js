@@ -69,7 +69,7 @@ module.exports = function (md, options) {
       )
       // new Token(type, tag, nesting),
       // and set the attr
-      let linkOpen = new gstate.Token('link_open', 'a', 1)
+      const linkOpen = new gstate.Token('link_open', 'a', 1)
       linkOpen.attrSet('id', options.headingAnchorPrefix + anchor)
       linkOpen.attrSet('name', options.headingAnchorPrefix + anchor)
       linkOpen.attrSet('class', options.headingAnchorClass)
@@ -78,8 +78,10 @@ module.exports = function (md, options) {
       if (options.enableHeadingIcon) {
         linkText.content = icon
       }
-      let linkClose = new gstate.Token('link_close', 'a', -1)
-      token.children = [linkOpen, linkText, linkClose].concat(token.children)
+      const linkClose = new gstate.Token('link_close', 'a', -1)
+      const spanOpen = new gstate.Token('span_open', 'span', 1)
+      const spanClose = new gstate.Token('span_close', 'span', -1)
+      token.children = [linkOpen, linkText, linkClose, spanOpen].concat(token.children).concat([spanClose])
     }
     // we make use of what md already has
     return md2.renderer.renderToken(tokens, idx, options, env, renderer)
