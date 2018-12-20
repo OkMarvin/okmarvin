@@ -5,7 +5,7 @@ const parse = require('./parse')
 const composeList = require('./composeList')
 const guard = require('./guard')
 const render = require('./render')
-const writeFiles = require('./writeFiles')
+const write = require('./write')
 const copy = require('./copy')
 /**
  * Static site generator
@@ -28,7 +28,7 @@ module.exports = function (source = 'content', destination = 'dist') {
     composeList,
     guard,
     render,
-    writeFiles,
+    write,
     copy
   ], (err, results) => {
     logger.profile('SSG')
