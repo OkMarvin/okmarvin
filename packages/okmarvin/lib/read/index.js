@@ -66,18 +66,21 @@ module.exports = async function (conn, callback = function () {}) {
           callback
         )
       },
-      files: callback =>
-        async.waterfall(
-          [
-            callback => {
-              const searchPattern = '{post,page}/**/*.md'
-              const opts = { cwd: content, absolute: true }
-              glob(searchPattern, opts, callback)
-            },
-            (files, callback) => async.map(files, readMarkdown, callback)
-          ],
-          callback
+      files: async callback => {
+        const promiseFilesPath = new Promise((resolve, reject) => {
+          const searchPattern = '{post,page}/**/*.md'
+          const opts = { cwd: content, absolute: true }
+          glob(searchPattern, opts, (err, files) => {
+            if (err) return reject(err)
+            resolve(files)
+          })
+        })
+        const filesPath = await promiseFilesPath
+        const files = await Promise.all(
+          filesPath.map(filePath => readMarkdown(filePath))
         )
+        callback(null, files)
+      }
     },
     (err, results) => {
       if (err) return callback(err)
