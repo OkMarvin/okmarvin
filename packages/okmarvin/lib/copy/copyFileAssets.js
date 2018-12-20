@@ -2,10 +2,9 @@ const async = require('neo-async')
 const path = require('path')
 const glob = require('glob')
 const fs = require('fs-extra')
-const configStore = require('../configStore')
-module.exports = function (data, callback) {
+module.exports = function (conn, data, callback) {
   const { files } = data
-  const { cwd, destination } = configStore.get()
+  const { root, to } = conn
   async.each(
     files,
     function (file, callback) {
@@ -34,7 +33,7 @@ module.exports = function (data, callback) {
                 asset =>
                   function (callback) {
                     const basename = path.basename(asset)
-                    const dest = path.join(cwd, destination, file.permalink, basename)
+                    const dest = path.join(root, to, file.permalink, basename)
                     fs.copy(asset, dest, callback)
                   }
               ),
@@ -46,7 +45,7 @@ module.exports = function (data, callback) {
     },
     err => {
       if (err) return callback(err)
-      return callback(null, data)
+      return callback(null, conn, data)
     }
   )
 }

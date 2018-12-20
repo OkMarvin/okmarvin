@@ -2,10 +2,9 @@ const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@okmarvin/logger')
-const configStore = require('../configStore')
-module.exports = function (data, callback) {
+module.exports = function (conn, data, callback) {
   const { files } = data
-  const { cwd, destination } = configStore.get()
+  const { root, to } = conn
   async.parallel(
     [
       callback =>
@@ -17,7 +16,7 @@ module.exports = function (data, callback) {
                 ? file.permalink
                 : path.join(file.permalink, 'index.html')
             fs.outputFile(
-              path.join(cwd, destination, decodeURIComponent(target)),
+              path.join(root, to, decodeURIComponent(target)),
               file.html,
               callback
             )
@@ -28,7 +27,7 @@ module.exports = function (data, callback) {
     err => {
       if (err) return callback(err)
       logger.info(`${files.length} files generated.`)
-      return callback(null, data)
+      return callback(null, conn, data)
     }
   )
 }

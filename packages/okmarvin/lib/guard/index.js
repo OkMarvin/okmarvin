@@ -3,7 +3,7 @@ const async = require('async')
 function print (arr) {
   return arr.map(i => `\n` + i.filePath || i.title)
 }
-module.exports = function (data, callback) {
+module.exports = function (conn, data, callback) {
   const { files, siteConfig } = data
   const groupsByPermalink = groupBy(files, file => file.permalink)
   async.parallel(
@@ -44,7 +44,7 @@ module.exports = function (data, callback) {
     ],
     err => {
       if (err) return callback(err)
-      callback(null, data)
+      callback(null, conn, data)
     }
   )
 }

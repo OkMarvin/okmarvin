@@ -85,7 +85,7 @@ module.exports = function (conn, data, callback) {
     (err, files) => {
       logger.profile('parseData')
       if (err) return callback(err)
-      callback(null, {
+      callback(null, conn, {
         ...data,
         siteConfig,
         files

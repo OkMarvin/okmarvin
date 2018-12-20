@@ -1,12 +1,11 @@
 const fs = require('fs-extra')
 const path = require('path')
-const configStore = require('@okmarvin/okmarvin/lib/configStore')
 // copy public
-module.exports = function (data, callback) {
-  const { cwd, destination } = configStore.get()
+module.exports = function (conn, data, callback) {
+  const { root, to } = conn
   fs.copy(
-    path.join(cwd, 'public'),
-    path.join(cwd, destination),
+    path.join(root, 'public'),
+    path.join(root, to),
     err => {
       // maybe public doesn't exist?
       if (err) return callback(null, data)

@@ -2,7 +2,6 @@ const readData = require('./index')
 const fse = require('fs-extra')
 jest.mock('./readUserSiteConfig')
 jest.mock('./readThemeManifest')
-jest.mock('../configStore')
 const defaultSiteconfig = require('./defaultSiteConfig')
 describe('readData', () => {
   describe('throw when source path not exist', () => {
