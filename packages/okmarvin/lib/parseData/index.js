@@ -12,10 +12,9 @@ const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
 const path = require('path')
 const logger = require('@okmarvin/logger')
-const configStore = require('../configStore')
-module.exports = function (data, callback) {
+module.exports = function (conn, data, callback) {
   logger.profile('parseData')
-  const { cwd, source, time } = configStore.get()
+  const { root, from, builtAt } = conn
   const { config: mdConfig, siteConfig, files } = data
   const MD = md(mdConfig)
   async.waterfall(
@@ -34,25 +33,25 @@ module.exports = function (data, callback) {
             // FIXME
             // ensure some fields are present in fileData
             const author = computeAuthor(siteConfig, fileData)
-            const datePublished = computeDatePublished(date, time)
+            const datePublished = computeDatePublished(date, builtAt)
             const dateModified = computeDateModified(fileData)
             const description = computeDescription(fileData, content)
             const perma = computePermalink(
               permalink,
               fileData,
-              new Date(computeDatePublished(date, time)),
-              path.relative(path.join(cwd, source), filePath)
+              new Date(computeDatePublished(date, builtAt)),
+              path.relative(path.join(root, from), filePath)
             )
             const templ = computeTemplate(
               themeManifest,
               userSetTemplate,
-              source,
+              from,
               filePath
             )
             const css = computeCss(
               themeManifest,
               userSetTemplate,
-              source,
+              from,
               filePath
             )
 

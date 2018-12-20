@@ -16,6 +16,12 @@ const configStore = require('./configStore')
  */
 module.exports = function (source = 'content', destination = 'dist') {
   logger.profile('SSG')
+  const conn = {
+    root: process.cwd(),
+    from: source,
+    to: destination,
+    builtAt: new Date().getTime()
+  }
   configStore.add({
     cwd: process.cwd(),
     source,
@@ -23,6 +29,7 @@ module.exports = function (source = 'content', destination = 'dist') {
     time: new Date().getTime()
   })
   async.waterfall([
+    (callback) => callback(null, conn),
     readData,
     parseData,
     composeList,

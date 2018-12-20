@@ -7,6 +7,7 @@ module.exports = (file, callback) => {
     try {
       callback(null, TOML.parse(data))
     } catch (e) {
+      // need user fix
       throw e
     }
   })
