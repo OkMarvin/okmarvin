@@ -1,4 +1,4 @@
-const isPost = require('../parseData/isPost')
+const isPost = require('../parse/isPost')
 const composePaginator = require('./composePaginator')
 module.exports = function (conn, data, callback) {
   const { siteConfig, files } = data

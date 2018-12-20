@@ -1,7 +1,7 @@
 const read = require('./read')
 const async = require('neo-async')
 const logger = require('@okmarvin/logger')
-const parseData = require('./parseData')
+const parse = require('./parse')
 const composeList = require('./composeList')
 const guard = require('./guard')
 const render = require('./render')
@@ -24,7 +24,7 @@ module.exports = function (source = 'content', destination = 'dist') {
   async.waterfall([
     (callback) => callback(null, conn),
     read,
-    parseData,
+    parse,
     composeList,
     guard,
     render,

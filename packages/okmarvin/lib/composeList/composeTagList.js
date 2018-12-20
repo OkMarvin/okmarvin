@@ -1,5 +1,5 @@
 const async = require('async')
-const collectTags = require('../parseData/collectTags')
+const collectTags = require('../parse/collectTags')
 const slug = require('@okmarvin/slug')
 const composePaginator = require('./composePaginator')
 module.exports = function (conn, data, callback) {

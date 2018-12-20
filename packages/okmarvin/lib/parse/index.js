@@ -13,7 +13,7 @@ const findRelated = require('./findRelated')
 const path = require('path')
 const logger = require('@okmarvin/logger')
 module.exports = function (conn, data, callback) {
-  logger.profile('parseData')
+  logger.profile('parse')
   const { root, from, builtAt } = conn
   const { config: mdConfig, siteConfig, files } = data
   const MD = md(mdConfig)
@@ -83,7 +83,7 @@ module.exports = function (conn, data, callback) {
       findRelated
     ],
     (err, files) => {
-      logger.profile('parseData')
+      logger.profile('parse')
       if (err) return callback(err)
       callback(null, conn, {
         ...data,
