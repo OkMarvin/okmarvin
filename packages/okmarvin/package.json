@@ -21,6 +21,7 @@
     "@okmarvin/logger": "^0.0.5",
     "@okmarvin/markdown-it-toc": "^0.0.17",
     "@okmarvin/slug": "^0.0.7",
+    "ajv": "^6.6.2",
     "chalk": "^2.4.1",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
