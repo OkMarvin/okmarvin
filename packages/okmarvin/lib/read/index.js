@@ -1,14 +1,16 @@
 const path = require('path')
 const fse = require('fs-extra')
 const async = require('neo-async')
-const readUserSiteConfig = require('./readUserSiteConfig')
 const normalizePermalink = require('../parse/computePermalink/normalizePermalink')
 const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
 
 const promiseCatcher = require('../helpers/promiseCatcher')
+const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 const promiseFilesPath = require('./promiseFilesPath')
+
+const defaultSiteConfig = require('./defaultSiteConfig')
 
 module.exports = async function (conn, callback = function () {}) {
   const { root, from } = conn
@@ -31,40 +33,32 @@ module.exports = async function (conn, callback = function () {}) {
       siteConfig: callback => {
         async.waterfall(
           [
-            callback => {
-              async.parallel(
-                {
-                  userSiteConfig: callback =>
-                    readUserSiteConfig(
-                      path.join(root, '_config.toml'),
-                      callback
-                    ),
-                  defaultSiteConfig: callback =>
-                    callback(null, require('./defaultSiteConfig'))
-                },
-                function (err, results) {
-                  if (err) return callback(err)
-                  const { userSiteConfig, defaultSiteConfig } = results
-                  callback(
-                    null,
-                    Object.assign(
-                      {},
-                      defaultSiteConfig,
-                      Object.assign(
-                        {},
-                        userSiteConfig,
-                        userSiteConfig.menu
-                          ? {
-                            menu: userSiteConfig.menu.map(m => ({
-                              ...m,
-                              permalink: normalizePermalink(m.permalink)
-                            }))
-                          }
-                          : {}
-                      )
-                    )
+            async callback => {
+              const [err, userSiteConfig] = await promiseCatcher(
+                promiseUserSiteConfig(path.join(root, '_config.toml'))
+              )
+              if (!userSiteConfig) {
+                // oops something wrong with _config.toml
+                return callback(err)
+              }
+              callback(
+                null,
+                Object.assign(
+                  {},
+                  defaultSiteConfig,
+                  Object.assign(
+                    {},
+                    userSiteConfig,
+                    userSiteConfig.menu
+                      ? {
+                        menu: userSiteConfig.menu.map(m => ({
+                          ...m,
+                          permalink: normalizePermalink(m.permalink)
+                        }))
+                      }
+                      : {}
                   )
-                }
+                )
               )
             },
             readThemeManifest
@@ -75,13 +69,18 @@ module.exports = async function (conn, callback = function () {}) {
       files: async callback => {
         // we might need pattern matching to catch error here
         // https://github.com/tc39/proposal-pattern-matching
-        const [err, filesPath] = await promiseCatcher(promiseFilesPath(content))
-        if (!filesPath) {
-          return callback(err)
-        }
-        const files = await Promise.all(
-          filesPath.map(filePath => readMarkdown(filePath))
+        const [readFilesPathErr, filesPath] = await promiseCatcher(
+          promiseFilesPath(content)
         )
+        if (!filesPath) {
+          return callback(readFilesPathErr)
+        }
+        const [readMarkdownErr, files] = await promiseCatcher(
+          Promise.all(filesPath.map(filePath => readMarkdown(filePath)))
+        )
+        if (!files) {
+          return callback(readMarkdownErr)
+        }
         callback(null, files)
       }
     },
