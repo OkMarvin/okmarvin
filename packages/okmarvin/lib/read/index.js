@@ -67,6 +67,7 @@ module.exports = async function (conn, callback = function () {}) {
         )
       },
       files: async callback => {
+        // we can wait for pattern matching to catch error here
         const filesPath = await promiseFilesPath(content)
         const files = await Promise.all(
           filesPath.map(filePath => readMarkdown(filePath))
