@@ -20,11 +20,10 @@ module.exports = function (filePath) {
           file
         )
       ) {
-        const [error] = ajv.errors
         return console.log(
           'Oops! Something is wrong, ',
           filePath,
-          error.message
+          ajv.errors
         )
       }
       resolve([filePath, file]) // we return file with its filePath
