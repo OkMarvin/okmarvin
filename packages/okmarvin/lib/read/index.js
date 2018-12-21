@@ -5,8 +5,11 @@ const readUserSiteConfig = require('./readUserSiteConfig')
 const normalizePermalink = require('../parse/computePermalink/normalizePermalink')
 const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
+
+const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 const promiseFilesPath = require('./promiseFilesPath')
+
 module.exports = async function (conn, callback = function () {}) {
   const { root, from } = conn
   const content = path.join(root, from)
@@ -19,7 +22,10 @@ module.exports = async function (conn, callback = function () {}) {
   async.parallel(
     {
       config: async callback => {
-        const config = await promiseOkmarvinConfig(root)
+        const [err, config] = await promiseCatcher(promiseOkmarvinConfig(root))
+        if (!config) {
+          return callback(err)
+        }
         callback(null, config)
       },
       siteConfig: callback => {
@@ -69,7 +75,10 @@ module.exports = async function (conn, callback = function () {}) {
       files: async callback => {
         // we might need pattern matching to catch error here
         // https://github.com/tc39/proposal-pattern-matching
-        const filesPath = await promiseFilesPath(content)
+        const [err, filesPath] = await promiseCatcher(promiseFilesPath(content))
+        if (!filesPath) {
+          return callback(err)
+        }
         const files = await Promise.all(
           filesPath.map(filePath => readMarkdown(filePath))
         )
