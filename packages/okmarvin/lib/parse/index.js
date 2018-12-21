@@ -14,8 +14,8 @@ const path = require('path')
 const logger = require('@okmarvin/logger')
 module.exports = function (conn, callback) {
   logger.profile('parse')
-  const { root, from, builtAt, config: mdConfig, siteConfig, files } = conn
-  const MD = md(mdConfig)
+  const { root, from, builtAt, config, siteConfig, files } = conn
+  const MD = md(config)
   async.waterfall(
     [
       callback => {
@@ -25,12 +25,6 @@ module.exports = function (conn, callback) {
             const [filePath, { data: fileData, content }] = file
             const { template: userSetTemplate, date } = fileData
             const { permalink, themeManifest } = siteConfig
-            // FIXME throw cause problem in theme devloping
-            if (!fileData.title) {
-              throw new Error(`title is missing in ${filePath}`)
-            }
-            // FIXME
-            // ensure some fields are present in fileData
             const author = computeAuthor(siteConfig, fileData)
             const datePublished = computeDatePublished(date, builtAt)
             const dateModified = computeDateModified(fileData)
@@ -86,7 +80,6 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       callback(null, {
         ...conn,
-        siteConfig,
         files
       })
     }
