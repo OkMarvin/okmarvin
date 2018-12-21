@@ -1,5 +1,4 @@
 const path = require('path')
-const glob = require('glob')
 const fse = require('fs-extra')
 const async = require('neo-async')
 const readUserSiteConfig = require('./readUserSiteConfig')
@@ -7,6 +6,7 @@ const normalizePermalink = require('../parse/computePermalink/normalizePermalink
 const readMarkdown = require('./readMarkdown')
 const readThemeManifest = require('./readThemeManifest')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
+const promiseFilesPath = require('./promiseFilesPath')
 module.exports = async function (conn, callback = function () {}) {
   const { root, from } = conn
   const content = path.join(root, from)
@@ -67,15 +67,7 @@ module.exports = async function (conn, callback = function () {}) {
         )
       },
       files: async callback => {
-        const promiseFilesPath = new Promise((resolve, reject) => {
-          const searchPattern = '{post,page}/**/*.md'
-          const opts = { cwd: content, absolute: true }
-          glob(searchPattern, opts, (err, files) => {
-            if (err) return reject(err)
-            resolve(files)
-          })
-        })
-        const filesPath = await promiseFilesPath
+        const filesPath = await promiseFilesPath(content)
         const files = await Promise.all(
           filesPath.map(filePath => readMarkdown(filePath))
         )
