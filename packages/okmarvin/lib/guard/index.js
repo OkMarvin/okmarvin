@@ -19,13 +19,6 @@ module.exports = function (conn, callback) {
                 )
               )
             }
-            if (key.startsWith('/static')) {
-              return callback(
-                new Error(
-                  `Preserved permalink: ${print(groupsByPermalink[key])}}`
-                )
-              )
-            }
             return callback()
           },
           callback

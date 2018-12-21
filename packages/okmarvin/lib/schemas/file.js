@@ -26,7 +26,7 @@ module.exports = {
           type: ['string', 'object']
         },
         permalink: {
-          type: 'string'
+          pattern: '^/(?!static/)' // do not begin with preserved `/static/`
         },
         toc: {
           type: 'boolean'
