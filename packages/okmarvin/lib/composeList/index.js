@@ -4,20 +4,20 @@ const composeTagList = require('./composeTagList')
 const composeFeed = require('./composeFeed')
 const composeSitemap = require('./composeSitemap')
 const compose404 = require('./compose404')
-module.exports = function (conn, data, callback) {
-  const { siteConfig, files } = data
+module.exports = function (conn, callback) {
+  const { siteConfig, files } = conn
   async.parallel(
     [
-      callback => compose404(data, callback),
-      callback => composeIndexList(conn, data, callback),
-      callback => composeTagList(conn, data, callback),
-      callback => composeFeed(data, callback),
-      callback => composeSitemap(data, callback)
+      callback => compose404(conn, callback),
+      callback => composeIndexList(conn, conn, callback),
+      callback => composeTagList(conn, conn, callback),
+      callback => composeFeed(conn, callback),
+      callback => composeSitemap(conn, callback)
     ],
     function (err, results) {
       if (err) return callback(err)
-      callback(null, conn, {
-        ...data,
+      callback(null, {
+        ...conn,
         siteConfig,
         files: files.concat(
           results.reduce((acc, result) => acc.concat(result), [])

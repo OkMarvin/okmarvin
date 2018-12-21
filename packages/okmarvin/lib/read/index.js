@@ -86,7 +86,7 @@ module.exports = async function (conn, callback = function () {}) {
     },
     (err, results) => {
       if (err) return callback(err)
-      callback(null, conn, results)
+      callback(null, { ...conn, ...results })
     }
   )
 }

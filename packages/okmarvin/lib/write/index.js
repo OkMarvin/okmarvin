@@ -2,8 +2,8 @@ const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@okmarvin/logger')
-module.exports = function (conn, data, callback) {
-  const { files } = data
+module.exports = function (conn, callback) {
+  const { files } = conn
   const { root, to } = conn
   async.parallel(
     [
@@ -27,7 +27,7 @@ module.exports = function (conn, data, callback) {
     err => {
       if (err) return callback(err)
       logger.info(`${files.length} files generated.`)
-      return callback(null, conn, data)
+      return callback(null, conn)
     }
   )
 }

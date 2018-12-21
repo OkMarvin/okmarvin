@@ -7,9 +7,9 @@ const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@okmarvin/logger')
-module.exports = function (conn, data, callback) {
+module.exports = function (conn, callback) {
   logger.profile('render')
-  const { files, siteConfig } = data
+  const { files, siteConfig } = conn
   const { theme, themeManifest } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
@@ -80,8 +80,8 @@ module.exports = function (conn, data, callback) {
     function (err, files) {
       logger.profile('render')
       if (err) return callback(err)
-      callback(null, conn, {
-        ...data,
+      callback(null, {
+        ...conn,
         files
       })
     }
