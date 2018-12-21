@@ -12,12 +12,17 @@ const promiseFilesPath = require('./promiseFilesPath')
 
 const defaultSiteConfig = require('./defaultSiteConfig')
 
-module.exports = async function (conn, callback = function () {}) {
+const ajv = require('../helpers/ajv')
+
+const siteConfigSchema = require('../schemas/siteConfig')
+
+module.exports = async function (conn, callback) {
   const { root, from } = conn
-  const content = path.join(root, from)
-  if (!fse.pathExistsSync(content)) {
+  const absoluteContentPath = path.join(root, from)
+
+  if (!fse.pathExistsSync(absoluteContentPath)) {
     return console.log(
-      `🤖 : Oops, nothing I can do because "${from}" folder does not exist :(`
+      `Oops, nothing I can do because "${from}" folder does not exist :(`
     )
   }
 
@@ -40,6 +45,13 @@ module.exports = async function (conn, callback = function () {}) {
               if (!userSiteConfig) {
                 // oops something wrong with _config.toml
                 return callback(err)
+              }
+              // here we want to make sure _config.toml has correct data
+              if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
+                return console.log(
+                  'You have invalid configuration in _config.toml:\n',
+                  ajv.errors
+                )
               }
               callback(
                 null,
@@ -70,7 +82,7 @@ module.exports = async function (conn, callback = function () {}) {
         // we might need pattern matching to catch error here
         // https://github.com/tc39/proposal-pattern-matching
         const [readFilesPathErr, filesPath] = await promiseCatcher(
-          promiseFilesPath(content)
+          promiseFilesPath(absoluteContentPath)
         )
         if (!filesPath) {
           return callback(readFilesPathErr)
