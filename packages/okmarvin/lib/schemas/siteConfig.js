@@ -1,4 +1,5 @@
 module.exports = {
+  required: ['title', 'description', 'author', 'url'],
   properties: {
     title: {
       type: 'string'
