@@ -1,7 +1,7 @@
 const path = require('path')
 const fse = require('fs-extra')
 const async = require('neo-async')
-const readMarkdown = require('./readMarkdown')
+const promiseFileData = require('./promiseFileData')
 
 const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
@@ -68,7 +68,7 @@ module.exports = async function (conn, callback) {
           return callback(readFilesPathErr)
         }
         const [readMarkdownErr, files] = await promiseCatcher(
-          Promise.all(filesPath.map(filePath => readMarkdown(filePath)))
+          Promise.all(filesPath.map(filePath => promiseFileData(filePath)))
         )
         if (!files) {
           return callback(readMarkdownErr)
