@@ -1,14 +1,13 @@
 const path = require('path')
 const fse = require('fs-extra')
 const async = require('neo-async')
-const normalizePermalink = require('../parse/computePermalink/normalizePermalink')
 const readMarkdown = require('./readMarkdown')
-const readThemeManifest = require('./readThemeManifest')
 
 const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 const promiseFilesPath = require('./promiseFilesPath')
+const promiseThemeManifest = require('./promiseThemeManifest')
 
 const defaultSiteConfig = require('./defaultSiteConfig')
 
@@ -35,48 +34,29 @@ module.exports = async function (conn, callback) {
         }
         callback(null, config)
       },
-      siteConfig: callback => {
-        async.waterfall(
-          [
-            async callback => {
-              const [err, userSiteConfig] = await promiseCatcher(
-                promiseUserSiteConfig(path.join(root, '_config.toml'))
-              )
-              if (!userSiteConfig) {
-                // oops something wrong with _config.toml
-                return callback(err)
-              }
-              // here we want to make sure _config.toml has correct data
-              if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
-                return console.log(
-                  'You have invalid configuration in _config.toml:\n',
-                  ajv.errors
-                )
-              }
-              callback(
-                null,
-                Object.assign(
-                  {},
-                  defaultSiteConfig,
-                  Object.assign(
-                    {},
-                    userSiteConfig,
-                    userSiteConfig.menu
-                      ? {
-                        menu: userSiteConfig.menu.map(m => ({
-                          ...m,
-                          permalink: normalizePermalink(m.permalink)
-                        }))
-                      }
-                      : {}
-                  )
-                )
-              )
-            },
-            readThemeManifest
-          ],
-          callback
+      siteConfig: async callback => {
+        const [err, userSiteConfig] = await promiseCatcher(
+          promiseUserSiteConfig(path.join(root, '_config.toml'))
         )
+        if (!userSiteConfig) {
+          // oops something wrong with _config.toml
+          return callback(err)
+        }
+        // here we want to make sure _config.toml has correct data
+        if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
+          return console.log(
+            'You have invalid configuration in _config.toml:\n',
+            ajv.errors
+          )
+        }
+        const siteConfig = { ...defaultSiteConfig, ...userSiteConfig }
+        const [readThemeManifestErr, themeManifest] = await promiseCatcher(
+          promiseThemeManifest(root, siteConfig.theme)
+        )
+        if (!themeManifest) {
+          return callback(readThemeManifestErr)
+        }
+        callback(null, { ...siteConfig, themeManifest: themeManifest })
       },
       files: async callback => {
         // we might need pattern matching to catch error here
