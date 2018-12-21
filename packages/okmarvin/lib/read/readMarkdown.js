@@ -62,12 +62,12 @@ module.exports = function (filePath) {
       ) {
         const [error] = ajv.errors
         return console.log(
-          '🤖 : Oops! Something is wrong, ',
+          'Oops! Something is wrong, ',
           filePath,
           error.message
         )
       }
-      resolve([filePath, file])
+      resolve([filePath, file]) // we return file with its filePath
     })
   })
 }
