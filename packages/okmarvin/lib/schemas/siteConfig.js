@@ -27,7 +27,7 @@ module.exports = {
       type: 'number'
     },
     favicon: {
-      type: 'string'
+      pattern: '(.gif|.png|.ico)$'
     },
     logo: {
       type: 'string'
