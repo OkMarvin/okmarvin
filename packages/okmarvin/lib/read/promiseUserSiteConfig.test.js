@@ -16,7 +16,7 @@ test('returns site configuration object', () => {
 test('throws', () => {
   const catcher = jest.fn()
   return promiseUserSiteConfig(
-    path.join(__dirname, 'fixtures', '_config.wrong.toml')
+    path.join(__dirname, 'fixtures', '_config.toml.x')
   )
     .catch(catcher)
     .then(() => expect(catcher).toBeCalled())
