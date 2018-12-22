@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns site configuration object 1`] = `
+Object {
+  "author": "陈三",
+  "description": "记录人、事与代码",
+  "lang": "zh",
+  "theme": "./themes/hello",
+  "title": "陈三",
+  "url": "https://blog.zfanw.com",
+  Symbol(type): Symbol(table),
+  Symbol(declared): false,
+}
+`;

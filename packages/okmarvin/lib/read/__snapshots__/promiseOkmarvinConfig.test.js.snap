@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns module content when configuration file do exist 1`] = `
+Object {
+  "markdown": Object {
+    "loadLanguages": Array [
+      "bash",
+      "elixir",
+    ],
+    "toc": Object {
+      "title": "目录",
+    },
+  },
+}
+`;

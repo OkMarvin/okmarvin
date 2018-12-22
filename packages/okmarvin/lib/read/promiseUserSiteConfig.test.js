@@ -12,6 +12,7 @@ test('returns site configuration object', () => {
       url: 'https://blog.zfanw.com',
       theme: './themes/hello'
     })
+    expect(data).toMatchSnapshot()
   })
 })
 test('throws', () => {

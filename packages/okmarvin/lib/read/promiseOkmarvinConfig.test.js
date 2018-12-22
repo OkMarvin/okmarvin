@@ -17,5 +17,6 @@ test('returns module content when configuration file do exist', () => {
         loadLanguages: ['bash', 'elixir']
       }
     })
+    expect(data).toMatchSnapshot()
   })
 })
