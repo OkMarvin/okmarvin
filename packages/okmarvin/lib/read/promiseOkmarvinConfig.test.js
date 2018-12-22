@@ -4,3 +4,7 @@ test('returns {} when configuration file does not exist', () => {
     expect(data).toEqual({})
   })
 })
+test('returns module content when configuration file do exist', () => {
+  // how to mock file system
+  // but why? why should I test it
+})
