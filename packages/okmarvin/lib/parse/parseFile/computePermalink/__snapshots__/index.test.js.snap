@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns permalink 1`] = `"/10/okmarvin/"`;
