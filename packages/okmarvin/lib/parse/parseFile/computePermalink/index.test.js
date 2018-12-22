@@ -2,10 +2,10 @@ const fn = require('./index')
 test('returns permalink', () => {
   expect(
     fn(
-      { permalink: '/:month/:title' },
-      { permalink: '/hello-:title', title: 'okmarvin' },
-      new Date(),
+      '/:month/:title',
+      { categories: [], title: 'okmarvin' },
+      new Date('2010-10-10'),
       'content/page/hello'
     )
-  ).toBe('/hello-okmarvin/')
+  ).toBe('/10/okmarvin/')
 })

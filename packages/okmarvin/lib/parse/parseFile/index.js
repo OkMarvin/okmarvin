@@ -2,7 +2,7 @@ const path = require('path')
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const md = require('./md')
 const computePermalink = require('./computePermalink')
-const computeTemplate = require('./computeTemplate')
+const getFallbackTemplate = require('./getFallbackTemplate')
 
 module.exports = function (conn, file, callback) {
   const {
@@ -47,13 +47,13 @@ module.exports = function (conn, file, callback) {
     new Date(datePublished),
     path.relative(path.join(root, from), filePath)
   )
+  const fallbackTemplate = getFallbackTemplate(root, from, filePath)
+  const template = userSetTemplate || fallbackTemplate
 
-  const template = computeTemplate(
-    themeManifest,
-    userSetTemplate,
-    from,
-    filePath
-  )
+  if (!themeManifest[template]) {
+    // we should warn user
+    callback(new Error(`${template} template does not exist`))
+  }
 
   callback(null, {
     ...file,
