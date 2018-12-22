@@ -1,9 +1,9 @@
-const fse = require('fs-extra')
+const fs = require('fs')
 const TOML = require('@iarna/toml')
 module.exports = file => {
   return new Promise((resolve, reject) => {
     // read from toml file
-    fse.readFile(file, 'utf8', (err, data) => {
+    fs.readFile(file, 'utf8', (err, data) => {
       if (err) return reject(err)
       try {
         resolve(TOML.parse(data))
