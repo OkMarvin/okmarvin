@@ -2,9 +2,8 @@ const async = require('async')
 const collectTags = require('../parse/collectTags')
 const slug = require('@okmarvin/slug')
 const composePaginator = require('./composePaginator')
-module.exports = function (conn, data, callback) {
-  const { files, siteConfig } = data
-  const { builtAt } = conn
+module.exports = function (conn, callback) {
+  const { files, siteConfig, builtAt } = conn
   const { paginate, themeManifest } = siteConfig
   // if no tag.js template, no need to compose tagList
   if (!themeManifest['tag.js']) return callback(null, [])

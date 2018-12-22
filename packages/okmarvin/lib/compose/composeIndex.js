@@ -1,8 +1,7 @@
 const isPost = require('../parse/isPost')
 const composePaginator = require('./composePaginator')
-module.exports = function (conn, data, callback) {
-  const { siteConfig, files } = data
-  const { builtAt } = conn
+module.exports = function (conn, callback) {
+  const { siteConfig, files, builtAt } = conn
   const { themeManifest } = siteConfig
   // if no index.js template, no need to compose indexList
   if (!themeManifest['index.js']) return callback(null, [])

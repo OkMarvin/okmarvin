@@ -1,16 +1,16 @@
 const async = require('neo-async')
-const composeIndexList = require('./composeIndexList')
-const composeTagList = require('./composeTagList')
+const composeIndex = require('./composeIndex')
+const composeTag = require('./composeTag')
 const composeFeed = require('./composeFeed')
 const composeSitemap = require('./composeSitemap')
 const compose404 = require('./compose404')
 module.exports = function (conn, callback) {
-  const { siteConfig, files } = conn
+  const { files } = conn
   async.parallel(
     [
       callback => compose404(conn, callback),
-      callback => composeIndexList(conn, conn, callback),
-      callback => composeTagList(conn, conn, callback),
+      callback => composeIndex(conn, callback),
+      callback => composeTag(conn, callback),
       callback => composeFeed(conn, callback),
       callback => composeSitemap(conn, callback)
     ],
@@ -18,7 +18,6 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       callback(null, {
         ...conn,
-        siteConfig,
         files: files.concat(
           results.reduce((acc, result) => acc.concat(result), [])
         )

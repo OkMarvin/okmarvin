@@ -2,7 +2,7 @@ const read = require('./read')
 const async = require('neo-async')
 const logger = require('@okmarvin/logger')
 const parse = require('./parse')
-const composeList = require('./composeList')
+const compose = require('./compose')
 const guard = require('./guard')
 const render = require('./render')
 const write = require('./write')
@@ -25,7 +25,7 @@ module.exports = function (source = 'content', destination = 'dist') {
     (callback) => callback(null, conn),
     read,
     parse,
-    composeList,
+    compose,
     guard,
     render,
     write,

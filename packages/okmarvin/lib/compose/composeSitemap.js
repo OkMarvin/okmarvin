@@ -1,7 +1,7 @@
 const generateSitemap = require('@okmarvin/generate-sitemap')
-module.exports = function (data, callback) {
+module.exports = function (conn, callback) {
   callback(null, [{
     permalink: '/sitemap.xml',
-    html: generateSitemap(data)
+    html: generateSitemap(conn)
   }])
 }
