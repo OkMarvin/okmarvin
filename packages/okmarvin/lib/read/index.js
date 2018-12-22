@@ -29,12 +29,12 @@ module.exports = async function (conn, callback) {
 
   async.parallel(
     {
-      config: async callback => {
-        const [err, config] = await promiseCatcher(promiseOkmarvinConfig(root))
-        if (!config) {
+      okmarvinConfig: async callback => {
+        const [err, okmarvinConfig] = await promiseCatcher(promiseOkmarvinConfig(root))
+        if (!okmarvinConfig) {
           return callback(err)
         }
-        callback(null, config)
+        callback(null, okmarvinConfig)
       },
       siteConfig: async callback => {
         const [err, userSiteConfig] = await promiseCatcher(

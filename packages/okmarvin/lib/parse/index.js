@@ -12,8 +12,8 @@ function getTime (dateStr) {
 }
 module.exports = function (conn, callback) {
   logger.profile('parse')
-  const { root, from, builtAt, config, siteConfig, files } = conn
-  const MD = md(config)
+  const { root, from, builtAt, okmarvinConfig, siteConfig, files } = conn
+  const MD = md(okmarvinConfig)
   async.waterfall(
     [
       callback => {
