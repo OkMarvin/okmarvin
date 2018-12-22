@@ -24,6 +24,10 @@ module.exports = function (files, callback) {
                 return relate.permalink !== file.permalink
               })
               .sort((a, b) => b.datePublished - a.datePublished)
+              .map(file => {
+                const { title, permalink } = file
+                return { title, permalink }
+              })
             callback(null, { ...file, related: uniqBy(related, 'permalink') })
           },
           callback
