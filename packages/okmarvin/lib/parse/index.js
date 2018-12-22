@@ -1,92 +1,27 @@
 const async = require('neo-async')
-const computePermalink = require('./computePermalink')
-const computeTemplate = require('./computeTemplate')
-const computeCss = require('./computeCss')
-const md = require('./md')
+const logger = require('@okmarvin/logger')
+
 const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
-const path = require('path')
-const logger = require('@okmarvin/logger')
-function getTime (dateStr) {
-  return new Date(dateStr).getTime()
-}
+
+const parseFile = require('./parseFile')
+
 module.exports = function (conn, callback) {
   logger.profile('parse')
-  const { root, from, builtAt, okmarvinConfig, siteConfig, files } = conn
-  const MD = md(okmarvinConfig)
+  const { files } = conn
+
   async.waterfall(
     [
       callback => {
         async.map(
           files,
-          function (file, callback) {
-            const [filePath, { data, content, excerpt }] = file
-
-            const {
-              title,
-              author,
-              description,
-              categories,
-              template: userSetTemplate,
-              date: dateStr,
-              dateModified: dateModifiedStr,
-              toc,
-              permalink: filePermalink
-            } = data
-
-            const datePublished = dateStr ? getTime(dateStr) : builtAt
-            const dateModified = dateModifiedStr
-              ? getTime(dateModifiedStr)
-              : datePublished
-
-            const { permalink: defaultPermalink, themeManifest } = siteConfig
-
-            let permalink = filePermalink || defaultPermalink
-
-            const res = {
-              ...data,
-              filePath,
-              author: author || siteConfig.author,
-              description:
-                description ||
-                excerpt ||
-                content
-                  .split(/(?!$)/u)
-                  .slice(0, 230)
-                  .join(''),
-              datePublished,
-              dateModified,
-              permalink: computePermalink(
-                permalink,
-                {
-                  title,
-                  categories
-                },
-                new Date(datePublished),
-                path.relative(path.join(root, from), filePath)
-              ),
-              template: computeTemplate(
-                themeManifest,
-                userSetTemplate,
-                from,
-                filePath
-              ),
-              css: computeCss(themeManifest, userSetTemplate, from, filePath), //  template's css file
-              content: (typeof toc !== 'undefined'
-                ? toc
-                : siteConfig.toc)
-                ? MD.render(`{:toc}\n${content}`)
-                : MD.render(content)
-            }
-            callback(null, res)
+          (file, callback) => {
+            const [filePath, { data, ...others }] = file
+            parseFile(conn, { filePath, ...data, ...others }, callback)
           },
-          function (err, files) {
-            if (err) return callback(err)
-            return callback(null, files)
-          }
+          callback
         )
       },
-
       findSiblings,
       findRelated
     ],
