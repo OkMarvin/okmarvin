@@ -1,18 +1,18 @@
 const isPost = require('../parse/isPost')
 const composePaginator = require('./composePaginator')
 module.exports = function (conn, callback) {
-  const { siteConfig, files, builtAt } = conn
-  const { themeManifest } = siteConfig
-  // if no index.js template, no need to compose indexList
-  if (!themeManifest['index.js']) return callback(null, [])
-  const { paginate } = siteConfig
+  const {
+    siteConfig: { title, description, author, paginate },
+    files,
+    builtAt
+  } = conn
   const list = files
     .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
   const fields = {
-    title: siteConfig.title,
-    description: siteConfig.description,
-    author: siteConfig.author,
+    title: title,
+    description: description,
+    author: author,
     template: 'index.js',
     css: 'index.css',
     datePublished: builtAt,
