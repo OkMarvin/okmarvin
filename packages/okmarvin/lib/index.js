@@ -19,7 +19,7 @@ module.exports = function (source = 'content', destination = 'dist') {
     root: process.cwd(),
     from: source,
     to: destination,
-    builtAt: new Date().getTime()
+    builtAt: Date.now()
   }
   async.waterfall([
     (callback) => callback(null, conn),
