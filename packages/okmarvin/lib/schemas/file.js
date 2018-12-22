@@ -35,6 +35,11 @@ module.exports = {
           items: {
             type: 'string'
           }
+        },
+        categories: {
+          items: {
+            type: 'string'
+          }
         }
       }
     }
