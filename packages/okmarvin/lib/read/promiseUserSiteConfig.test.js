@@ -9,7 +9,8 @@ test('returns site configuration object', () => {
       lang: 'zh',
       description: '记录人、事与代码',
       author: '陈三',
-      url: 'https://blog.zfanw.com'
+      url: 'https://blog.zfanw.com',
+      theme: './themes/hello'
     })
   })
 })

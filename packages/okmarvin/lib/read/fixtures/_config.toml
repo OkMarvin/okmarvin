@@ -3,3 +3,4 @@ lang = "zh"
 description = "记录人、事与代码"
 author = "陈三"
 url = "https://blog.zfanw.com"
+theme = './themes/hello'
