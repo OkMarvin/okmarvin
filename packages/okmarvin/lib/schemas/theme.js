@@ -1,3 +1,3 @@
 module.exports = {
-  required: []
+  required: ['post.js', 'page.js']
 }
