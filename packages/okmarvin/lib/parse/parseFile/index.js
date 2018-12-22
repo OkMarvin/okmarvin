@@ -3,7 +3,6 @@ const getTimeFromDateStr = require('../getTimeFromDateStr')
 const md = require('./md')
 const computePermalink = require('./computePermalink')
 const computeTemplate = require('./computeTemplate')
-const computeCss = require('./computeCss')
 
 module.exports = function (conn, file, callback) {
   const {
@@ -39,9 +38,24 @@ module.exports = function (conn, file, callback) {
     ? getTimeFromDateStr(dateModifiedStr)
     : datePublished
 
-  const permalink = filePermalink || defaultPermalink
+  const permalink = computePermalink(
+    filePermalink || defaultPermalink,
+    {
+      title,
+      categories
+    },
+    new Date(datePublished),
+    path.relative(path.join(root, from), filePath)
+  )
 
-  const res = {
+  const template = computeTemplate(
+    themeManifest,
+    userSetTemplate,
+    from,
+    filePath
+  )
+
+  callback(null, {
     ...file,
     author: fileAuthor || siteAuthor,
     description:
@@ -53,22 +67,13 @@ module.exports = function (conn, file, callback) {
         .join(''),
     datePublished,
     dateModified,
-    permalink: computePermalink(
-      permalink,
-      {
-        title,
-        categories
-      },
-      new Date(datePublished),
-      path.relative(path.join(root, from), filePath)
-    ),
-    template: computeTemplate(themeManifest, userSetTemplate, from, filePath),
-    css: computeCss(themeManifest, userSetTemplate, from, filePath), //  template's css file
+    permalink,
+    template,
+    css: template.replace('.js', '.css'), //  template's css file
     content: (typeof fileToc !== 'undefined'
       ? fileToc
       : siteToc)
       ? MD.render(`{:toc}\n${content}`)
       : MD.render(content)
-  }
-  callback(null, res)
+  })
 }

@@ -28,6 +28,9 @@ module.exports = {
         permalink: {
           pattern: '^/(?!static/)' // do not begin with preserved `/static/`
         },
+        template: {
+          pattern: '.js$'
+        },
         toc: {
           type: 'boolean'
         },
