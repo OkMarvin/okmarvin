@@ -1,8 +1,8 @@
 const path = require('path')
-const fse = require('fs-extra')
+const fs = require('fs')
 const async = require('neo-async')
-const promiseFileData = require('./promiseFileData')
 
+const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
@@ -19,9 +19,11 @@ module.exports = async function (conn, callback) {
   const { root, from } = conn
   const absoluteContentPath = path.join(root, from)
 
-  if (!fse.pathExistsSync(absoluteContentPath)) {
-    return console.log(
-      `Oops, nothing I can do because "${from}" folder does not exist :(`
+  if (!fs.existsSync(absoluteContentPath)) {
+    return callback(
+      new Error(
+        `Oops, nothing I can do because "${from}" folder does not exist :(`
+      )
     )
   }
 
