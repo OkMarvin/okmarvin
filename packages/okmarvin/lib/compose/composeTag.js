@@ -16,7 +16,7 @@ module.exports = function (conn, callback) {
           (topic, callback) => {
             const fields = {
               title: topic,
-              desciption: '',
+              description: '',
               author: siteConfig.auhor,
               template: 'tag.js',
               css: 'tag.css',
