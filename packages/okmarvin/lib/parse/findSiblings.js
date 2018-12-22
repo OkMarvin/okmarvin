@@ -11,12 +11,12 @@ module.exports = function (files, callback) {
       if (idx === -1) return callback(null, file)
       const siblings = {}
       if (listOfPosts[idx - 1]) {
-        const { title, permalink } = listOfPosts[idx - 1]
-        siblings['newerSibling'] = { title, permalink }
+        const { content, description, ...others } = listOfPosts[idx - 1]
+        siblings['newerSibling'] = { ...others }
       }
       if (listOfPosts[idx + 1]) {
-        const { title, permalink } = listOfPosts[idx + 1]
-        siblings['olderSibling'] = { title, permalink }
+        const { content, description, ...others } = listOfPosts[idx + 1]
+        siblings['olderSibling'] = { ...others }
       }
       callback(null, { ...file, ...siblings })
     },

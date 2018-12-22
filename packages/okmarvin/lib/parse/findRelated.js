@@ -25,8 +25,8 @@ module.exports = function (files, callback) {
               })
               .sort((a, b) => b.datePublished - a.datePublished)
               .map(file => {
-                const { title, permalink } = file
-                return { title, permalink }
+                const { content, description, ...others } = file
+                return { ...others }
               })
             callback(null, { ...file, related: uniqBy(related, 'permalink') })
           },
