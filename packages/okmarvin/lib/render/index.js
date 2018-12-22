@@ -22,6 +22,7 @@ module.exports = function (conn, callback) {
         )
         fs.pathExists(clientManifestPath, (err, exists) => {
           if (err) return callback(null, '')
+          if (!exists) return callback(null, '')
           const clientManifest = require(clientManifestPath)
           return callback(
             null,
