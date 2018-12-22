@@ -1,6 +1,9 @@
 module.exports = {
   required: ['title', 'description', 'author', 'url'],
   properties: {
+    lang: {
+      type: 'string'
+    },
     title: {
       type: 'string'
     },
