@@ -3,6 +3,7 @@ const getTimeFromDateStr = require('../getTimeFromDateStr')
 const md = require('./md')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
+const escapeTextForBrowser = require('./escapeTextForBrowser')
 
 module.exports = function (conn, file, callback) {
   const {
@@ -57,14 +58,16 @@ module.exports = function (conn, file, callback) {
 
   callback(null, {
     ...file,
-    author: fileAuthor || siteAuthor,
-    description:
+    title: escapeTextForBrowser(title),
+    author: escapeTextForBrowser(fileAuthor || siteAuthor),
+    description: escapeTextForBrowser(
       description ||
-      excerpt ||
-      content
-        .split(/(?!$)/u)
-        .slice(0, 230)
-        .join(''),
+        excerpt ||
+        content
+          .split(/(?!$)/u)
+          .slice(0, 230)
+          .join('')
+    ),
     datePublished,
     dateModified,
     permalink,
