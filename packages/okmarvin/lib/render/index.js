@@ -3,7 +3,6 @@ const React = require('react')
 const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
-const { HelmetProvider } = require('react-helmet-async')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@okmarvin/logger')
 const layoutHierarchy = require('./layoutHierarchy')
@@ -19,9 +18,11 @@ module.exports = function (conn, callback) {
       callback => {
         fs.readdir(path.join(__dirname, 'layout'), (err, files) => {
           if (err) return callback(err)
-          files.filter(file => file.endsWith('.js')).forEach(file => {
-            layouts[file] = require(path.join(__dirname, 'layout', file))
-          })
+          files
+            .filter(file => file.endsWith('.js'))
+            .forEach(file => {
+              layouts[file] = require(path.join(__dirname, 'layout', file))
+            })
           callback(null)
         })
       },
@@ -68,15 +69,11 @@ module.exports = function (conn, callback) {
                     themeRoot,
                     themeManifest[file.template]
                   )).default
-                  const helmetContext = {}
                   const rendered = ReactDOMServer.renderToStaticMarkup(
-                    React.createElement(
-                      HelmetProvider,
-                      { context: helmetContext },
-                      React.createElement(Component, { ...file, siteConfig })
-                    )
+                    React.createElement(Component, { ...file, siteConfig })
                   )
-                  const candidateLayouts = layoutHierarchy[file.layout || file.template]
+                  const candidateLayouts =
+                    layoutHierarchy[file.layout || file.template]
                   let useLayout
                   for (let i in candidateLayouts) {
                     if (

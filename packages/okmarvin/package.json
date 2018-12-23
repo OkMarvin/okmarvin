@@ -33,7 +33,6 @@
     "neo-async": "^2.5.2",
     "prismjs": "^1.14.0",
     "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-helmet-async": "0.1.0"
+    "react-dom": "^16.5.0"
   }
 }
