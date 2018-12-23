@@ -6,7 +6,7 @@ const loadCommon = require('./common/loadCommon')
 const loadGoogleAnalytics = require('./common/loadGoogleAnalytics')
 module.exports = function (
   { title, description, permalink, datePublished, dateModified, author },
-  { lang, url, google_analytics: googleAnalytics, favicon },
+  { lang, url, logo, google_analytics: googleAnalytics, favicon },
   styles,
   rendered,
   clientJS
@@ -17,7 +17,7 @@ module.exports = function (
       <title>${title}</title>
       ${favicon && loadFavicon(favicon)}
       ${loadStaticMeta()}
-      ${loadCommon({ description, title, permalink }, { url })}
+      ${loadCommon({ description, title, permalink }, { url, logo })}
       <meta property="og:type" content="website" />
       <style type="text/css">${styles}</style>
       ${clientJS && preloadScript(clientJS)}
