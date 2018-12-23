@@ -1,3 +1,3 @@
 module.exports = function (href) {
-  return `<script src='${href}'></script>`
+  return `<script src="${href}"></script>`
 }
