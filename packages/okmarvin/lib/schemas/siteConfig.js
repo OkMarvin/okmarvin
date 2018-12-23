@@ -52,7 +52,7 @@ module.exports = {
             type: 'string'
           },
           permalink: {
-            pattern: '^/[^./]*(.html.|htm)??$'
+            pattern: '^/[^./]*(.html|.htm|/)??$'
             /**
              * /hello-world
              * /hello-world/
