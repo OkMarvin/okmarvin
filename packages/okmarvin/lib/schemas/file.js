@@ -31,6 +31,9 @@ module.exports = {
         template: {
           pattern: '.js$'
         },
+        layout: {
+          type: 'string'
+        },
         toc: {
           type: 'boolean'
         },

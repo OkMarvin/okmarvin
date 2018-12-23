@@ -3,10 +3,11 @@ const React = require('react')
 const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
-const generateHtml = require('./generateHtml')
 const { HelmetProvider } = require('react-helmet-async')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@okmarvin/logger')
+const layoutHierarchy = require('./layoutHierarchy')
+const layouts = {}
 module.exports = function (conn, callback) {
   logger.profile('render')
   const { files, siteConfig } = conn
@@ -15,6 +16,15 @@ module.exports = function (conn, callback) {
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
     [
+      callback => {
+        fs.readdir(path.join(__dirname, 'layout'), (err, files) => {
+          if (err) return callback(err)
+          files.filter(file => file.endsWith('.js')).forEach(file => {
+            layouts[file] = require(path.join(__dirname, 'layout', file))
+          })
+          callback(null)
+        })
+      },
       callback => {
         const clientManifestPath = path.join(
           themeRoot,
@@ -66,8 +76,23 @@ module.exports = function (conn, callback) {
                       React.createElement(Component, { ...file, siteConfig })
                     )
                   )
-                  const { helmet } = helmetContext
-                  const html = generateHtml(helmet, styles, rendered, clientJS)
+                  const candidateLayouts = layoutHierarchy[file.layout || file.template]
+                  let useLayout
+                  for (let i in candidateLayouts) {
+                    if (
+                      Object.keys(layouts).indexOf(candidateLayouts[i]) !== -1
+                    ) {
+                      useLayout = layouts[candidateLayouts[i]]
+                      break
+                    }
+                  }
+                  const html = useLayout(
+                    file,
+                    siteConfig,
+                    styles,
+                    rendered,
+                    clientJS
+                  )
                   callback(null, { ...file, html })
                 }
               ],
