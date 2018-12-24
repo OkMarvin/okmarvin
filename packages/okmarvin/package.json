@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/okmarvin",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Static site generator with better theme developer experience",
   "main": "lib/index.js",
   "keywords": [
