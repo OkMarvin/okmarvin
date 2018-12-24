@@ -8,6 +8,6 @@
     "build": "okmarvin build --clean"
   },
   "dependencies": {
-    "@okmarvin/january": "^1.1.105"
+    "@okmarvin/january": "^1.8.0"
   }
 }

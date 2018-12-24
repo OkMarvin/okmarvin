@@ -19,4 +19,4 @@ permalink = "/"
 
 [[menu]]
 text = "About"
-permalink = "/about"
+permalink = "/about/"
