@@ -22,6 +22,7 @@ module.exports = function ({
     to: destination,
     builtAt: Date.now()
   }
+  // TODO make it as fast as u can
   let tasks = [callback => callback(null, conn), read, parse, compose, guard]
   if (devHook === false) {
     tasks = tasks.concat([render, write, copy])
