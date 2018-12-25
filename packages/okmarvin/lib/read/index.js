@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')
+const logger = require('@parcel/logger')
 
 const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
@@ -20,17 +21,18 @@ module.exports = async function (conn, callback) {
   const absoluteContentPath = path.join(root, from)
 
   if (!fs.existsSync(absoluteContentPath)) {
-    return callback(
-      new Error(
-        `Oops, nothing I can do because "${from}" folder does not exist :(`
-      )
+    // user should fix it, no need to log error stack
+    return logger.warn(
+      `Oops, nothing to do because "${from}" directory does not exist.`
     )
   }
 
   async.parallel(
     {
       okmarvinConfig: async callback => {
-        const [err, okmarvinConfig] = await promiseCatcher(promiseOkmarvinConfig(root))
+        const [err, okmarvinConfig] = await promiseCatcher(
+          promiseOkmarvinConfig(root)
+        )
         if (!okmarvinConfig) {
           return callback(err)
         }
