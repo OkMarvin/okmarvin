@@ -1,12 +1,13 @@
 const read = require('./read')
 const async = require('neo-async')
-const logger = require('@okmarvin/logger')
+const logger = require('@parcel/logger')
 const parse = require('./parse')
 const compose = require('./compose')
 const guard = require('./guard')
 const render = require('./render')
 const write = require('./write')
 const copy = require('./copy')
+const prettyTime = require('./helpers/prettyTime')
 /**
  * Marvin, the static site generator
  */
@@ -15,7 +16,7 @@ module.exports = function ({
   destination = 'dist',
   devHook = false // we can hook into waterfall with devHook
 } = {}) {
-  logger.profile('SSG')
+  logger.log('SSG')
   const conn = {
     root: process.cwd(),
     from: source,
@@ -30,8 +31,9 @@ module.exports = function ({
     // const devHook = (conn, callback) => {}
     tasks = tasks.concat([devHook])
   }
-  async.waterfall(tasks, (err, results) => {
-    logger.profile('SSG')
+  async.waterfall(tasks, (err, conn) => {
+    logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
+    logger.success(`Your site is ready under ${destination} folder.`)
     if (err) throw err
   })
 }
