@@ -34,6 +34,6 @@ module.exports = function ({
   async.waterfall(tasks, (err, conn) => {
     if (err) return logger.error(err)
     logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
-    logger.success(`Your site is ready under ${destination} folder.`)
+    logger.success(`Your site is ready under '${destination}' directory.`)
   })
 }
