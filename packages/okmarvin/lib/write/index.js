@@ -1,7 +1,7 @@
 const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
-const logger = require('@okmarvin/logger')
+const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const { files } = conn
   const { root, to } = conn
@@ -26,7 +26,7 @@ module.exports = function (conn, callback) {
     ],
     err => {
       if (err) return callback(err)
-      logger.info(`${files.length} files generated.`)
+      logger.success(`${files.length} files generated.`)
       return callback(null, conn)
     }
   )

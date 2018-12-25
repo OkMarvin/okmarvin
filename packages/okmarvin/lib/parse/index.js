@@ -1,5 +1,6 @@
 const async = require('neo-async')
-const logger = require('@okmarvin/logger')
+const logger = require('@parcel/logger')
+const prettyTime = require('../helpers/prettyTime')
 
 const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
@@ -7,7 +8,7 @@ const findRelated = require('./findRelated')
 const parseFile = require('./parseFile')
 
 module.exports = function (conn, callback) {
-  logger.profile('parse')
+  const begin = Date.now()
   const { files } = conn
 
   async.waterfall(
@@ -26,8 +27,8 @@ module.exports = function (conn, callback) {
       findRelated
     ],
     (err, files) => {
-      logger.profile('parse')
       if (err) return callback(err)
+      logger.success(`Parsed in ${prettyTime(Date.now() - begin)}`)
       callback(null, {
         ...conn,
         files

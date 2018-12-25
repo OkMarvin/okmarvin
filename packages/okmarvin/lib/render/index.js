@@ -4,11 +4,12 @@ const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
 const requireResolve = require('../helpers/requireResolve')
-const logger = require('@okmarvin/logger')
+const logger = require('@parcel/logger')
+const prettyTime = require('../helpers/prettyTime')
 const layoutHierarchy = require('./layoutHierarchy')
 const layouts = {}
 module.exports = function (conn, callback) {
-  logger.profile('render')
+  const begin = Date.now()
   const { files, siteConfig } = conn
   const { theme, themeManifest } = siteConfig
   const { root } = conn
@@ -69,6 +70,10 @@ module.exports = function (conn, callback) {
                     themeRoot,
                     themeManifest[file.template]
                   )).default
+                  /**
+                   * right now we only support React ssr
+                   * but vue, preact, etc. can be supported too
+                   */
                   const rendered = ReactDOMServer.renderToStaticMarkup(
                     React.createElement(Component, { ...file, siteConfig })
                   )
@@ -101,8 +106,8 @@ module.exports = function (conn, callback) {
       }
     ],
     function (err, files) {
-      logger.profile('render')
       if (err) return callback(err)
+      logger.success(`Rendered in ${prettyTime(Date.now() - begin)}`)
       callback(null, {
         ...conn,
         files

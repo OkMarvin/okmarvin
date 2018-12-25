@@ -18,7 +18,6 @@
     "@iarna/toml": "^2.1.1",
     "@okmarvin/generate-feed": "^0.1.9",
     "@okmarvin/generate-sitemap": "^0.1.6",
-    "@okmarvin/logger": "^0.0.6",
     "@okmarvin/markdown-it-toc": "^0.0.18",
     "@okmarvin/slug": "^0.0.8",
     "@parcel/logger": "^1.11.0",

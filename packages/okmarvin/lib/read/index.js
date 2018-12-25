@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')
 const logger = require('@parcel/logger')
+const prettyTime = require('../helpers/prettyTime')
 
 const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
@@ -19,6 +20,7 @@ const siteConfigSchema = require('../schemas/siteConfig')
 module.exports = async function (conn, callback) {
   const { root, from } = conn
   const absoluteContentPath = path.join(root, from)
+  const begin = Date.now()
 
   if (!fs.existsSync(absoluteContentPath)) {
     // user should fix it, no need to log error stack
@@ -82,6 +84,7 @@ module.exports = async function (conn, callback) {
     },
     (err, results) => {
       if (err) return callback(err)
+      logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
       callback(null, { ...conn, ...results })
     }
   )
