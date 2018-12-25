@@ -16,7 +16,7 @@ module.exports = function ({
   destination = 'dist',
   devHook = false // we can hook into waterfall with devHook
 } = {}) {
-  logger.log('SSG')
+  logger.log('Ok Marvin, lets do it.')
   const conn = {
     root: process.cwd(),
     from: source,
@@ -32,8 +32,8 @@ module.exports = function ({
     tasks = tasks.concat([devHook])
   }
   async.waterfall(tasks, (err, conn) => {
+    if (err) return logger.error(err)
     logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
     logger.success(`Your site is ready under ${destination} folder.`)
-    if (err) throw err
   })
 }
