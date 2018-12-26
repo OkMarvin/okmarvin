@@ -2,7 +2,6 @@ const meow = require('meow')
 const chalk = require('chalk')
 const createSite = require('./createSite')
 const createArticle = require('./createArticle')
-const okmarvin = require('@okmarvin/okmarvin')
 const buildSite = require('./buildSite')
 const checkUpdate = require('./checkUpdate')
 module.exports = async function (args) {
@@ -46,6 +45,6 @@ module.exports = async function (args) {
     }
   }
   if (cmd === 'build') {
-    buildSite(cli, okmarvin)
+    buildSite(cli)
   }
 }
