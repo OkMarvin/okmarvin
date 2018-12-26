@@ -1,5 +1,5 @@
 const genScript = require('../genScript')
-const preloadScript = require('../preloadScript')
+const preload = require('./common/preload')
 const loadFavicon = require('./common/loadFavicon')
 const loadStaticMeta = require('./common/loadStaticMeta')
 const loadCommon = require('./common/loadCommon')
@@ -20,7 +20,8 @@ module.exports = function (
       ${loadCommon({ description, title, permalink }, { url, logo })}
       <meta property="og:type" content="website" />
       <style type="text/css">${styles}</style>
-      ${clientJS && preloadScript(clientJS)}
+      ${clientJS && preload('script', clientJS)}
+      ${logo && preload('image', logo)}
     </head>
     <body>
       <div id="___OkMarvin___">${rendered}</div>
