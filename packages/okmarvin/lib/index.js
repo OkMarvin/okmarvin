@@ -14,8 +14,10 @@ const prettyTime = require('./helpers/prettyTime')
 module.exports = function ({
   source = 'content',
   destination = 'dist',
-  devHook = false // we can hook into waterfall with devHook
+  devHook = false, // we can hook into waterfall with devHook
+  logLevel = 3
 } = {}) {
+  logger.setOptions({ logLevel })
   logger.log('Ok Marvin, lets do it.')
   const conn = {
     root: process.cwd(),
@@ -33,6 +35,12 @@ module.exports = function ({
   }
   async.waterfall(tasks, (err, conn) => {
     if (err) return logger.error(err)
+    const memoryUsage = process.memoryUsage()
+    logger.verbose(
+      `\nMemory usage:\n${Object.keys(memoryUsage)
+        .map(key => `${key}: ${memoryUsage[key] / 1024 / 1024}M`)
+        .join('\n')}`
+    )
     logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
     logger.success(`Your site is ready under '${destination}' directory.`)
   })
