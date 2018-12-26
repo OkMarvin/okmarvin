@@ -6,35 +6,14 @@ const fs = require('fs-extra')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
-const layoutHierarchy = require('./layoutHierarchy')
-const layouts = {}
 module.exports = function (conn, callback) {
   const begin = Date.now()
-  const { files, siteConfig } = conn
-  const { theme, themeManifest } = siteConfig
+  const { files, siteConfig, layouts } = conn
+  const { theme, themeManifest, layoutHierarchy } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
     [
-      callback => {
-        fs.readdir(path.join(__dirname, 'layout'), (err, files) => {
-          if (err) return callback(err)
-          files
-            .filter(file => file.endsWith('.js'))
-            .forEach(file => {
-              // first resolve root/layout
-              // then resolve __dirname/layout
-              const layout = requireResolve(file, {
-                paths: [
-                  path.join(root, 'layout'),
-                  path.join(__dirname, 'layout')
-                ]
-              })
-              layouts[file] = require(layout)
-            })
-          callback(null)
-        })
-      },
       callback => {
         const clientManifestPath = path.join(
           themeRoot,
@@ -85,6 +64,7 @@ module.exports = function (conn, callback) {
                   const rendered = ReactDOMServer.renderToStaticMarkup(
                     React.createElement(Component, { ...file, siteConfig })
                   )
+                  // find the first could be use
                   const candidateLayouts =
                     layoutHierarchy[file.layout || file.template]
                   let useLayout

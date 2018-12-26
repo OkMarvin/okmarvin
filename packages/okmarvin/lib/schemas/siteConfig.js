@@ -44,6 +44,35 @@ module.exports = {
     google_analytics: {
       type: 'string'
     },
+    layoutHierarchy: {
+      properties: {
+        'index.js': {
+          items: {
+            type: 'string'
+          },
+          'post.js': {
+            items: {
+              type: 'string'
+            }
+          },
+          'page.js': {
+            items: {
+              type: 'string'
+            }
+          },
+          'tag.js': {
+            items: {
+              type: 'string'
+            }
+          },
+          '404.js': {
+            items: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    },
     menu: {
       items: {
         required: ['text', 'permalink'],

@@ -3,6 +3,7 @@ const fs = require('fs')
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
+const requireResolve = require('../helpers/requireResolve')
 
 const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
@@ -28,7 +29,6 @@ module.exports = async function (conn, callback) {
       `Oops, nothing to do because "${from}" directory does not exist.`
     )
   }
-
   async.parallel(
     {
       okmarvinConfig: async callback => {
@@ -80,6 +80,24 @@ module.exports = async function (conn, callback) {
           return callback(readMarkdownErr)
         }
         callback(null, files)
+      },
+      layouts: callback => {
+        const layouts = {}
+        const layoutPath = path.join(__dirname, '..', 'layout')
+        fs.readdir(layoutPath, (err, files) => {
+          if (err) return callback(err)
+          files
+            .filter(file => file.endsWith('.js'))
+            .forEach(file => {
+              // first resolve root/layout
+              // then resolve __dirname/layout
+              const layout = requireResolve(file, {
+                paths: [path.join(root, 'layout'), layoutPath]
+              })
+              layouts[file] = require(layout)
+            })
+          callback(null, layouts)
+        })
       }
     },
     (err, results) => {
