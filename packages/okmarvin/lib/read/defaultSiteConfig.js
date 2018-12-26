@@ -6,6 +6,7 @@ module.exports = {
   author: 'Sam Chen',
   lang: 'en',
   theme: '@okmarvin/january',
+  themeColor: '',
   toc: true,
   permalink: '/:dir/:filename',
   rss: true,

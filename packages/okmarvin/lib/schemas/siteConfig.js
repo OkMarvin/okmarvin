@@ -23,6 +23,9 @@ module.exports = {
     theme: {
       type: 'string'
     },
+    themeColor: {
+      type: 'string'
+    },
     rss: {
       type: 'boolean'
     },
