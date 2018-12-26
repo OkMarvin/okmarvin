@@ -1,32 +1,25 @@
-const chalk = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const { format } = require('date-fns')
-const invariant = require('invariant')
-module.exports = function (type = 'post', title) {
-  invariant(title, chalk.red(`Please specify ${type} title`))
+const logger = require('@parcel/logger')
+module.exports = function (cli) {
+  const type = cli.input[1]
+  const title = cli.input[2]
+  const { source } = cli.flags
+  if (!title) {
+    return logger.error(`Please specify title for your ${type}`)
+  }
   const cwd = process.cwd()
-  const target = path.join(cwd, 'content', type, title, 'index.md')
-  invariant(
-    !fs.pathExistsSync(target),
-    chalk.red(
-      `File ${target} existed`
-    )
-  )
+  const target = path.join(cwd, source, type, title, 'index.md')
+  if (fs.pathExistsSync(target)) {
+    return logger.error(`${target} already exists`)
+  }
   const data = `---
 title: ${title}
 date: ${format(new Date(), 'YYYY-MM-DD')}
 ---`
-  fs.outputFile(
-    target,
-    data,
-    err => {
-      if (err) return console.error(err)
-      console.log(
-        chalk.green(
-          `${target} created`
-        )
-      )
-    }
-  )
+  fs.outputFile(target, data, err => {
+    if (err) return logger.error(err)
+    logger.success(`${target} created`)
+  })
 }

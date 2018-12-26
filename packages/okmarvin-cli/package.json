@@ -3,10 +3,11 @@
   "version": "0.0.10",
   "description": "Command line tool for static site generator okmarvin",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "scripts": {},
+  "keywords": [
+    "static site generator",
+    "okmarvin"
+  ],
   "repository": "okmarvin/okmarvin-cli",
   "author": "Sam Chen",
   "license": "MIT",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@okmarvin/okmarvin": "^0.0.10",
+    "@parcel/logger": "^1.11.0",
     "chalk": "^2.4.1",
     "date-fns": "^1.29.0",
     "fs-extra": "^7.0.0",

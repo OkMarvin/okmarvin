@@ -1,48 +1,63 @@
 const meow = require('meow')
-const chalk = require('chalk')
+const logger = require('@parcel/logger')
 const createSite = require('./createSite')
 const createArticle = require('./createArticle')
 const buildSite = require('./buildSite')
-const checkUpdate = require('./checkUpdate')
 module.exports = async function (args) {
   const cli = meow(
     `
   Usage
-    $ okmarvin <cmd> <type> [<path>|<title>]
+    $ okmarvin <cmd> <type> [<path>|<title>] [--option]
 
   Options
-    --clean Clean dist directory before building
+    --clean, Clean destination directory before building
+    --source, Where okmarvin should find your files
+    --destination, Where to put built site
+    --log-level, Set log level
   
   Examples
     $ okmarvin new site <path>
     $ okmarvin new post <title>
     $ okmarvin new page <title>
     $ okmarvin new draft <title>
-    $ okmarvin new theme <path>
   `,
     {
       flags: {
         clean: {
-          type: 'boolean'
+          type: 'boolean',
+          default: false
+        },
+        source: {
+          type: 'string',
+          default: 'content'
+        },
+        destination: {
+          type: 'string',
+          default: 'dist'
+        },
+        logLevel: {
+          type: 'string',
+          default: 3
         }
       }
     }
   )
-  const [cmd, type, dir] = cli.input
+  const cmd = cli.input[0]
+  const type = cli.input[1]
   if (!cmd) {
     cli.showHelp()
   }
   if (cmd !== 'new' && cmd !== 'build') {
-    console.error(chalk.red(`'${cmd}' command not supported`))
-    process.exit()
+    logger.error(`Command '${cmd}' is not supported`)
   }
   if (cmd === 'new') {
     if (type === 'site') {
-      return createSite(dir, checkUpdate)
+      return createSite(cli)
     }
     if (type === 'post' || type === 'page' || type === 'draft') {
-      return createArticle(type, dir)
+      return createArticle(cli)
     }
+    logger.error(`Type '${type}' is not supported`)
   }
   if (cmd === 'build') {
     buildSite(cli)

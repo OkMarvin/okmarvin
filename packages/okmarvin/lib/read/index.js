@@ -53,7 +53,7 @@ module.exports = async function (conn, callback) {
               }
               // here we want to make sure _config.toml has correct data
               if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
-                return console.log(
+                return logger.warn(
                   'You have invalid configuration in _config.toml:\n',
                   ajv.errors
                 )

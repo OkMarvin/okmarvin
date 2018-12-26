@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const okmarvin = require('@okmarvin/okmarvin')
+const logger = require('@parcel/logger')
 module.exports = function (cli) {
   process.env.NODE_ENV = 'production'
   const {
@@ -13,7 +14,7 @@ module.exports = function (cli) {
   if (clean === true) {
     // clean destination first
     fs.remove(path.join(cwd, destination), err => {
-      if (err) console.error(err)
+      if (err) return logger.error(err)
       okmarvin({ logLevel, source, destination })
     })
   } else {

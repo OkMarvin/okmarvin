@@ -1,16 +1,18 @@
 'use strict'
 const fs = require('fs-extra')
 const path = require('path')
-const chalk = require('chalk')
-const invariant = require('invariant')
-module.exports = async function (dir = undefined, copyStarter, checkUpdate = function () {}) {
-  invariant(dir, chalk.red('Please provide a path'))
-
+const logger = require('@parcel/logger')
+const copyStarter = require('./copyStarter')
+module.exports = async function (cli) {
+  const dir = cli.input[2]
+  if (!dir) {
+    return logger.error(`Please provide a path for your new site`)
+  }
   const cwd = process.cwd()
   const target = path.join(cwd, dir)
 
-  invariant(!fs.pathExistsSync(target), chalk.red(`${target} already exists`))
-  await checkUpdate()
-
-  copyStarter && copyStarter(target)
+  if (fs.pathExistsSync(target)) {
+    return logger.error(`${target} already exists`)
+  }
+  copyStarter(target)
 }
