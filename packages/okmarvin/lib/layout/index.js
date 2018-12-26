@@ -1,4 +1,3 @@
-const genScript = require('./common/genScript')
 const preload = require('./common/preload')
 const loadFavicon = require('./common/loadFavicon')
 const loadStaticMeta = require('./common/loadStaticMeta')
@@ -25,7 +24,7 @@ module.exports = function (
     </head>
     <body>
       <div id="___OkMarvin___">${rendered}</div>
-      ${clientJS && genScript(clientJS)}
+      ${clientJS && `<script src="${clientJS}"></script>`}
       ${googleAnalytics && loadGoogleAnalytics(googleAnalytics)}
         <script type='application/ld+json'>
         {
