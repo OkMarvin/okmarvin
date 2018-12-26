@@ -6,7 +6,7 @@ module.exports = function (target) {
     if (err) return logger.error(err)
     logger.success(`Site created at ${target}`)
     logger.log(
-      `We are almost there! Make sure you finish the following steps:\n\n\t$ cd ${target}\n\t$ npm install`
+      `\tWe are almost there! Make sure you finish the following steps:\n\n\t$ cd ${target}\n\t$ npm install`
     )
   })
 }
