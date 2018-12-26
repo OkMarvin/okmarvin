@@ -22,7 +22,15 @@ module.exports = function (conn, callback) {
           files
             .filter(file => file.endsWith('.js'))
             .forEach(file => {
-              layouts[file] = require(path.join(__dirname, 'layout', file))
+              // first resolve root/layout
+              // then resolve __dirname/layout
+              const layout = requireResolve(file, {
+                paths: [
+                  path.join(root, 'layout'),
+                  path.join(__dirname, 'layout')
+                ]
+              })
+              layouts[file] = require(layout)
             })
           callback(null)
         })
