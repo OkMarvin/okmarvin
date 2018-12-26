@@ -37,8 +37,8 @@ module.exports = function ({
     if (err) return logger.error(err)
     const memoryUsage = process.memoryUsage()
     logger.verbose(
-      `\nMemory usage:\n${Object.keys(memoryUsage)
-        .map(key => `${key}: ${memoryUsage[key] / 1024 / 1024}M`)
+      `Memory usage:\n${Object.keys(memoryUsage)
+        .map(key => `\t\t${key}: ${memoryUsage[key] / 1024 / 1024}MB`)
         .join('\n')}`
     )
     logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
