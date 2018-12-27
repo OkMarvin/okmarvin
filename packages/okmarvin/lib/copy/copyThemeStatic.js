@@ -1,9 +1,8 @@
 const fs = require('fs-extra')
 const path = require('path')
 const requireResolve = require('../helpers/requireResolve')
-module.exports = function (conn, data, callback) {
-  const { siteConfig } = data
-  const { root, to } = conn
+module.exports = function (conn, callback) {
+  const { root, to, siteConfig } = conn
   const { theme } = siteConfig
   const themeRoot = path.join(
     requireResolve(theme, { paths: [process.cwd()] }),
@@ -14,8 +13,8 @@ module.exports = function (conn, data, callback) {
     path.join(root, to, 'static'),
     err => {
       // maybe static doesn't exist?
-      if (err) return callback(null, data)
-      return callback(null, conn, data)
+      if (err) return callback(null, conn)
+      return callback(null, conn)
     }
   )
 }

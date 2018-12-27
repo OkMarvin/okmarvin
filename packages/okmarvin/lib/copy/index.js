@@ -4,7 +4,7 @@ const copyPublic = require('./copyPublic')
 const async = require('neo-async')
 module.exports = function (conn, callback) {
   async.waterfall([
-    callback => copyFileAssets(conn, conn, callback),
+    callback => copyFileAssets(conn, callback),
     copyThemeStatic,
     copyPublic
   ], (err, results) => {

@@ -2,9 +2,8 @@ const async = require('neo-async')
 const path = require('path')
 const glob = require('glob')
 const fs = require('fs-extra')
-module.exports = function (conn, data, callback) {
-  const { files } = data
-  const { root, to } = conn
+module.exports = function (conn, callback) {
+  const { root, to, files } = conn
   async.each(
     files,
     function (file, callback) {
@@ -45,7 +44,7 @@ module.exports = function (conn, data, callback) {
     },
     err => {
       if (err) return callback(err)
-      return callback(null, conn, data)
+      return callback(null, conn)
     }
   )
 }
