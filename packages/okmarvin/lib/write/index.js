@@ -15,8 +15,9 @@ module.exports = function (conn, callback) {
               path.extname(file.permalink) !== ''
                 ? file.permalink
                 : path.join(file.permalink, 'index.html')
+            const filePath = path.join(root, to, decodeURIComponent(target))
             fs.outputFile(
-              path.join(root, to, decodeURIComponent(target)),
+              filePath,
               file.html,
               callback
             )
