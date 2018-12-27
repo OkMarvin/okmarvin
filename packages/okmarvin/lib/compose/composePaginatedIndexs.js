@@ -17,30 +17,38 @@ module.exports = function (conn, callback) {
     dateModified: builtAt,
     permalink: '/'
   }
-  let result = []
+  const permalinkFormat = '/page:num/'
   const list = files
     .filter(isPost)
     .map(shrink)
     .sort((a, b) => b.datePublished - a.datePublished)
-  const indexArray = chunk(list, paginate)
-  const permalinkFormat = '/page:num/'
-  for (let i = 0; i < indexArray.length; i++) {
+  if (!paginate || (paginate && list.length < paginate + 1)) {
+    return callback(null, [
+      {
+        ...fields,
+        list
+      }
+    ])
+  }
+  const arr = chunk(list, paginate)
+  let result = []
+  for (let i = 0; i < arr.length; i++) {
     let paginator = {
       current: i + 1,
-      total: indexArray.length,
+      total: arr.length,
       permalinkFormat
     }
     if (i === 0) {
       result = result.concat({
         ...fields,
-        list: indexArray[i],
+        list: arr[i],
         paginator
       })
     } else {
       result = result.concat({
         ...fields,
         title: `${fields.title} - Page ${i + 1}`,
-        list: indexArray[i],
+        list: arr[i],
         paginator,
         permalink: permalinkFormat.replace(/:num/, i + 1)
       })
