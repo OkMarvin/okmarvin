@@ -30,12 +30,12 @@ module.exports = function (conn, callback) {
             const permalinkFormat = `/topics/${encodeURIComponent(
               slug(topic)
             )}/page:num/`
-            const list = topics[topic]
+            const data = topics[topic]
               .filter(isPost)
               .map(shrink)
               .sort((a, b) => b.datePublished - a.datePublished)
 
-            callback(null, paginateFactory(list, paginate, fields, permalinkFormat))
+            callback(null, paginateFactory(data, paginate, fields, permalinkFormat))
           },
           function (err, files) {
             if (err) return callback(err)

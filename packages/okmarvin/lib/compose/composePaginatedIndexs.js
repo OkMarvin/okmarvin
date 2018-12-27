@@ -18,10 +18,10 @@ module.exports = function (conn, callback) {
     permalink: '/'
   }
   const permalinkFormat = '/page:num/'
-  const list = files
+  const data = files
     .filter(isPost)
     .map(shrink)
     .sort((a, b) => b.datePublished - a.datePublished)
 
-  callback(null, paginateFactory(list, paginate, fields, permalinkFormat))
+  callback(null, paginateFactory(data, paginate, fields, permalinkFormat))
 }
