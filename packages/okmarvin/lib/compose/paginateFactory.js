@@ -1,12 +1,10 @@
 const chunk = require('lodash/chunk')
 module.exports = function (data, paginate, fields, permalinkFormat) {
   if (!paginate || (paginate && data.length < paginate + 1)) {
-    return [
-      {
-        ...fields,
-        data
-      }
-    ]
+    return {
+      ...fields,
+      data
+    }
   }
   const arr = chunk(data, paginate)
   let result = []
