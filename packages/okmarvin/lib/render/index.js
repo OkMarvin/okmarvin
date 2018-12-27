@@ -1,11 +1,10 @@
-const ReactDOMServer = require('react-dom/server')
-const React = require('react')
 const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
 const requireResolve = require('../helpers/requireResolve')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
+const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()
   const { files, siteConfig, layouts } = conn
@@ -61,9 +60,7 @@ module.exports = function (conn, callback) {
                    * right now we only support React ssr
                    * but vue, preact, etc. can be supported too
                    */
-                  const rendered = ReactDOMServer.renderToStaticMarkup(
-                    React.createElement(Component, { ...file, siteConfig })
-                  )
+                  const rendered = react(Component, { file, siteConfig })
                   // find the first could be use
                   const candidateLayouts =
                     layoutHierarchy[file.layout || file.template]
