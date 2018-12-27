@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/OkMarvin/okmarvin.svg?branch=master)](https://travis-ci.org/OkMarvin/okmarvin)
 
-okmarvin is an opinionated static site generator with **Component** as template. You build **Component** in React.js, vue.js, Preact.js, etc., and okmarvin will render it with data pulled from markdown files.
+okmarvin is an opinionated static site generator with **Component** built in React/vue/Preact/* as template.
 
 ## Developing
 
