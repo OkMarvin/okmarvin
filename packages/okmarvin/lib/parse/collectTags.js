@@ -13,7 +13,9 @@ module.exports = function (files, callback) {
             // init
             topics[tagLowerCase] = []
           }
-          topics[tagLowerCase] = topics[tagLowerCase].concat(file)
+          // exclude `content` to reduce memory usage
+          const { content, ...others } = file
+          topics[tagLowerCase] = topics[tagLowerCase].concat(others)
         })
       callback()
     },
