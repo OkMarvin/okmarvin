@@ -15,7 +15,7 @@ module.exports = function (conn, callback) {
             if (groupsByPermalink[key].length > 1) {
               return callback(
                 new Error(
-                  `Permalink duplicated: ${print(groupsByPermalink[key])}`
+                  `Please fix the duplicated permalinks: ${print(groupsByPermalink[key])}`
                 )
               )
             }
