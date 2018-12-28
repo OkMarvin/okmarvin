@@ -1,6 +1,7 @@
 const async = require('neo-async')
 const composePaginatedIndexs = require('./composePaginatedIndexs')
 const composePaginatedTags = require('./composePaginatedTags')
+const composePaginatedCategories = require('./composePaginatedCategories')
 const composeFeed = require('./composeFeed')
 const composeSitemap = require('./composeSitemap')
 const compose404 = require('./compose404')
@@ -15,6 +16,9 @@ module.exports = function (conn, callback) {
   ]
   if (themeManifest['index.js']) {
     composes = composes.concat([callback => composePaginatedIndexs(conn, callback)])
+  }
+  if (themeManifest['category.js']) {
+    composes = composes.concat([callback => composePaginatedCategories(conn, callback)])
   }
   if (themeManifest['tag.js']) {
     composes = composes.concat([callback => composePaginatedTags(conn, callback)])
