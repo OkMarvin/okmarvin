@@ -27,7 +27,7 @@ module.exports = {
     siteConfig: {
       properties: {}
     },
-    files: {
+    files: { // should we seperate files here??? what about post, page
       items: {
         properties: {}
       }
