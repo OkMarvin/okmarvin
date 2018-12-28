@@ -16,6 +16,7 @@ module.exports = {
     'page.js': ['page.js', 'singular.js', 'index.js'],
     'index.js': ['index.js'],
     'tag.js': ['tag.js', 'archive.js', 'index.js'],
+    'category.js': ['category.js', 'archive.js', 'index.js'],
     '404.js': ['404.js', 'index.js']
   }
 }

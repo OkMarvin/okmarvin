@@ -21,7 +21,7 @@ module.exports = function (conn, callback) {
         css: 'category.css',
         datePublished: builtAt,
         dateModified: builtAt,
-        permalink: `/topics/${encodeURIComponent(slug(category))}/`
+        permalink: `/categories/${encodeURIComponent(slug(category))}/`
       }
       const permalinkFormat = `/categories/${encodeURIComponent(
         slug(category)
@@ -35,6 +35,7 @@ module.exports = function (conn, callback) {
     },
     function (err, files) {
       if (err) return callback(err)
+      console.log(files)
       callback(null, files.reduce((acc, file) => acc.concat(file), []))
     }
   )

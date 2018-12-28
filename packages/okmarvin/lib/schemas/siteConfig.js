@@ -68,6 +68,11 @@ module.exports = {
               type: 'string'
             }
           },
+          'category.js': {
+            items: {
+              type: 'string'
+            }
+          },
           '404.js': {
             items: {
               type: 'string'
