@@ -38,7 +38,7 @@ module.exports = async function (conn, callback) {
               fs.readJson(
                 path.join(root, '_cache.json'),
                 (err, data) => {
-                  if (err) return callback(null, null)
+                  if (err) return callback(null, undefined)
                   const { lastBuiltAt } = data
                   return callback(null, lastBuiltAt)
                 }
