@@ -5,34 +5,26 @@ const prettyTime = require('../helpers/prettyTime')
 const findSiblings = require('./findSiblings')
 const findRelated = require('./findRelated')
 
-const parseFile = require('./parseFile')
+const parseFiles = require('./parseFiles')
+
+const collectTags = require('./collectTags')
 
 module.exports = function (conn, callback) {
   const begin = Date.now()
-  const { files } = conn
 
   async.waterfall(
     [
       callback => {
-        async.map(
-          files,
-          (file, callback) => {
-            const [filePath, { data, ...others }] = file
-            parseFile(conn, { filePath, ...data, ...others }, callback)
-          },
-          callback
-        )
+        parseFiles(conn, callback)
       },
       findSiblings,
+      collectTags,
       findRelated
     ],
-    (err, files) => {
+    (err, conn) => {
       if (err) return callback(err)
       logger.success(`Parsed in ${prettyTime(Date.now() - begin)}`)
-      callback(null, {
-        ...conn,
-        files
-      })
+      callback(null, conn)
     }
   )
 }

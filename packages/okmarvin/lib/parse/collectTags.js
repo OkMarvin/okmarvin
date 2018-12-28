@@ -1,6 +1,7 @@
 const async = require('async')
 const isPost = require('./isPost')
-module.exports = function (files, callback) {
+module.exports = function (conn, callback) {
+  const { files } = conn
   const topics = Object.create(null)
   const posts = files.filter(isPost)
   async.each(
@@ -21,7 +22,7 @@ module.exports = function (files, callback) {
     },
     err => {
       if (err) return callback(err)
-      return callback(null, topics)
+      return callback(null, { ...conn, topics })
     }
   )
 }

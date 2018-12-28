@@ -1,14 +1,17 @@
 const async = require('neo-async')
 const isPost = require('./isPost')
-module.exports = function (files, callback) {
+const isNotPost = require('./isNotPost')
+module.exports = function (conn, callback) {
+  const { files } = conn
   const listOfPosts = files
     .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
+  const others = files.filter(isNotPost)
   async.map(
-    files,
-    (file, callback) => {
-      const idx = listOfPosts.findIndex(el => el.permalink === file.permalink)
-      if (idx === -1) return callback(null, file)
+    listOfPosts,
+    (post, callback) => {
+      const idx = listOfPosts.findIndex(el => el.permalink === post.permalink)
+      if (idx === -1) return callback(null, post)
       const siblings = {}
       if (listOfPosts[idx - 1]) {
         const { content, description, ...others } = listOfPosts[idx - 1]
@@ -18,8 +21,11 @@ module.exports = function (files, callback) {
         const { content, description, ...others } = listOfPosts[idx + 1]
         siblings['olderSibling'] = { ...others }
       }
-      callback(null, { ...file, ...siblings })
+      callback(null, { ...post, ...siblings })
     },
-    callback
+    (err, posts) => {
+      if (err) return callback(err)
+      callback(null, { ...conn, files: [...posts, ...others] })
+    }
   )
 }
