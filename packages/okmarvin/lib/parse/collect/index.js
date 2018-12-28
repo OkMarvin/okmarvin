@@ -4,12 +4,12 @@ module.exports = function (conn, callback) {
   const { files } = conn
   async.parallel(
     {
-      tags: callback => collector(files, 'tags', callback)
+      tags: callback => collector(files, 'tags', callback),
+      categories: callback => collector(files, 'categories', callback)
     },
     (err, results) => {
       if (err) return callback(err)
-      const { tags } = results
-      callback(null, { ...conn, tags })
+      callback(null, { ...conn, ...results })
     }
   )
 }
