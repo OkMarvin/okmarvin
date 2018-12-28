@@ -35,7 +35,6 @@ module.exports = function (conn, callback) {
     },
     function (err, files) {
       if (err) return callback(err)
-      console.log(files)
       callback(null, files.reduce((acc, file) => acc.concat(file), []))
     }
   )
