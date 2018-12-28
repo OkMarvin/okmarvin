@@ -7,15 +7,16 @@ module.exports = function (conn, callback) {
   async.each(
     files,
     function (file, callback) {
+      // if file is right under post/page directory, assume no file assets
+      // needed to be copied, they should be put inside own directory
       if (!file.filePath) {
-        // composed page
+        // composed list page
         // no need to copy
         return callback(null)
       }
       if (
         ['post', 'page'].includes(path.basename(path.join(file.filePath, '..')))
       ) {
-        // right under post|page folder
         return callback(null)
       } else {
         glob(
