@@ -17,6 +17,7 @@ const defaultSiteConfig = require('./defaultSiteConfig')
 const ajv = require('../helpers/ajv')
 
 const siteConfigSchema = require('../schemas/siteConfig')
+const siteSchema = require('../schemas/site')
 
 module.exports = async function (conn, callback) {
   const { root, from } = conn
@@ -122,6 +123,9 @@ module.exports = async function (conn, callback) {
     (err, results) => {
       if (err) return callback(err)
       logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
+      if (!ajv.validate(siteSchema, results)) {
+        return callback(ajv.errors)
+      }
       callback(null, { ...conn, ...results })
     }
   )
