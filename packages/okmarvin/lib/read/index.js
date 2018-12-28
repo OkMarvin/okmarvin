@@ -1,5 +1,5 @@
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
@@ -34,6 +34,16 @@ module.exports = async function (conn, callback) {
       callback =>
         async.parallel(
           {
+            lastBuiltAt: callback => {
+              fs.readJson(
+                path.join(root, '_cache.json'),
+                (err, data) => {
+                  if (err) return callback(null, null)
+                  const { lastBuiltAt } = data
+                  return callback(null, lastBuiltAt)
+                }
+              )
+            },
             okmarvinConfig: async callback => {
               const [err, okmarvinConfig] = await promiseCatcher(
                 promiseOkmarvinConfig(root)

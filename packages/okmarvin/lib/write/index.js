@@ -4,9 +4,21 @@ const path = require('path')
 const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const { files } = conn
-  const { root, to } = conn
+  const { root, to, builtAt } = conn
   async.parallel(
     [
+      callback => {
+        fs.outputJson(
+          path.join(root, '_cache.json'),
+          {
+            lastBuiltAt: builtAt
+          },
+          err => {
+            if (err) return callback(err)
+            callback(null)
+          }
+        )
+      },
       callback =>
         async.each(
           files,
@@ -16,11 +28,7 @@ module.exports = function (conn, callback) {
                 ? file.permalink
                 : path.join(file.permalink, 'index.html')
             const filePath = path.join(root, to, decodeURIComponent(target))
-            fs.outputFile(
-              filePath,
-              file.html,
-              callback
-            )
+            fs.outputFile(filePath, file.html, callback)
           },
           callback
         )
