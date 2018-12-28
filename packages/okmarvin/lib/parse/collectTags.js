@@ -2,7 +2,7 @@ const async = require('async')
 const isPost = require('./isPost')
 module.exports = function (conn, callback) {
   const { files } = conn
-  const topics = Object.create(null)
+  const tags = Object.create(null)
   const posts = files.filter(isPost)
   async.each(
     posts,
@@ -10,19 +10,19 @@ module.exports = function (conn, callback) {
       file.tags &&
         file.tags.map(tag => {
           const tagLowerCase = tag.toLowerCase()
-          if (!topics[tagLowerCase]) {
+          if (!tags[tagLowerCase]) {
             // init
-            topics[tagLowerCase] = []
+            tags[tagLowerCase] = []
           }
           // exclude `content` to reduce memory usage
           const { content, ...others } = file
-          topics[tagLowerCase] = topics[tagLowerCase].concat(others)
+          tags[tagLowerCase] = tags[tagLowerCase].concat(others)
         })
       callback()
     },
     err => {
       if (err) return callback(err)
-      return callback(null, { ...conn, topics })
+      return callback(null, { ...conn, tags })
     }
   )
 }

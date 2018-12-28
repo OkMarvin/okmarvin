@@ -7,11 +7,11 @@ module.exports = function (conn, callback) {
   const {
     siteConfig: { author, paginate },
     builtAt,
-    topics
+    tags
   } = conn
 
   async.map(
-    Object.keys(topics),
+    Object.keys(tags),
     (topic, callback) => {
       const fields = {
         title: topic,
@@ -26,7 +26,7 @@ module.exports = function (conn, callback) {
       const permalinkFormat = `/topics/${encodeURIComponent(
         slug(topic)
       )}/page:num/`
-      const data = topics[topic]
+      const data = tags[topic]
         .filter(isPost)
         .map(shrink)
         .sort((a, b) => b.datePublished - a.datePublished)

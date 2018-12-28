@@ -3,17 +3,17 @@ const uniqBy = require('lodash/uniqBy')
 const isPost = require('./isPost')
 const isNotPost = require('./isNotPost')
 module.exports = function (conn, callback) {
-  const { files, topics } = conn
+  const { files, tags } = conn
   const posts = files.filter(isPost)
   const others = files.filter(isNotPost)
   async.map(
     posts,
     (post, callback) => {
-      const related = Object.keys(topics)
+      const related = Object.keys(tags)
         .filter(key => {
           return (post.tags || []).map(tag => tag.toLowerCase()).indexOf(key) !== -1
         })
-        .map(k => topics[k])
+        .map(k => tags[k])
         .reduce((acc, topic) => {
           return acc.concat(topic)
         }, [])
