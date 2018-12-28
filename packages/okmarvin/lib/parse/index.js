@@ -9,6 +9,10 @@ const parseFiles = require('./parseFiles')
 
 const collectTags = require('./collectTags')
 
+const connSchema = require('../schemas/conn')
+
+const ajv = require('../helpers/ajv')
+
 module.exports = function (conn, callback) {
   const begin = Date.now()
 
@@ -24,6 +28,10 @@ module.exports = function (conn, callback) {
     (err, conn) => {
       if (err) return callback(err)
       logger.success(`Parsed in ${prettyTime(Date.now() - begin)}`)
+      // will move it to later step
+      if (!ajv.validate(connSchema, conn)) {
+        return callback(ajv.errors)
+      }
       callback(null, conn)
     }
   )
