@@ -1,9 +1,10 @@
+const path = require('path')
 const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseFileData = require('./promiseFileData')
 const promiseFilesPath = require('./promiseFilesPath')
 
-module.exports = async (root, callback) => {
-  const result = await promiseCatcher(promiseFilesPath(root))
+module.exports = async ({ root, from }, callback) => {
+  const result = await promiseCatcher(promiseFilesPath(path.join(root, from)))
   if (result.length === 1) {
     return callback(result[0])
   }

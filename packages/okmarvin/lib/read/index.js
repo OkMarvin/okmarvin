@@ -3,12 +3,12 @@ const fs = require('fs-extra')
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
-const requireResolve = require('../helpers/requireResolve')
 
 const readOkmarvinConfig = require('./readOkmarvinConfig')
 const readSiteConfig = require('./readSiteConfig')
 const readFiles = require('./readFiles')
 const readCache = require('./readCache')
+const readLayouts = require('./readLayouts')
 
 /**
  * Prepare data here for okmarvin
@@ -29,44 +29,22 @@ module.exports = async function (conn, callback) {
       callback =>
         async.parallel(
           {
-            cache: callback => readCache(root, callback),
-            okmarvinConfig: callback => readOkmarvinConfig(root, callback),
-            siteConfig: callback => readSiteConfig(root, callback),
-            files: callback => readFiles(fromPath, callback)
+            cache: callback => readCache(conn, callback),
+            okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
+            siteConfig: callback => readSiteConfig(conn, callback),
+            files: callback => readFiles(conn, callback)
           },
-          callback
-        ),
-      (results, callback) => {
-        const {
-          siteConfig: { layoutHierarchy }
-        } = results
-        const findMe = [
-          ...new Set(
-            Object.values(layoutHierarchy).reduce(function (flat, toFlatten) {
-              return flat.concat(toFlatten)
-            }, [])
-          )
-        ]
-        const layouts = {}
-        const layoutPath = path.join(__dirname, '..', 'layout')
-        findMe.forEach(file => {
-          // first resolve root/layout
-          try {
-            const layout = requireResolve(file, {
-              paths: [path.join(root, 'layout'), layoutPath]
-            })
-            layouts[file] = require(layout)
-          } catch (_err) {
-            // do nothing
+          (err, results) => {
+            if (err) return callback(err)
+            callback(null, { ...conn, ...results })
           }
-        })
-        callback(null, { ...results, layouts })
-      }
+        ),
+      readLayouts
     ],
-    (err, results) => {
+    (err, conn) => {
       if (err) return callback(err)
       logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
-      callback(null, { ...conn, ...results })
+      callback(null, conn)
     }
   )
 }

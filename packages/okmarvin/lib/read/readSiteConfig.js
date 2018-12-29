@@ -7,7 +7,7 @@ const ajv = require('../helpers/ajv')
 const siteConfigSchema = require('../schemas/siteConfig')
 const logger = require('@parcel/logger')
 
-module.exports = async (root, callback) => {
+module.exports = async ({ root }, callback) => {
   const result = await promiseCatcher(
     promiseUserSiteConfig(path.join(root, '_config.toml'))
   )
