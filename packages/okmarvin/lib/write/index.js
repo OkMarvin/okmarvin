@@ -14,7 +14,7 @@ module.exports = function (conn, callback) {
           {
             lastBuiltAt: builtAt,
             lastThemeManifest: themeManifest,
-            files: files.filter(file => file.filePath).map(file => file.filePath)
+            files: files.map(file => file.permalink)
           },
           err => {
             if (err) return callback(err)
