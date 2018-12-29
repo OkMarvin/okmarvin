@@ -16,7 +16,10 @@ test('returns array', () => {
           date: new Date('2019-10-10')
         },
         excerpt: '',
-        isEmpty: false
+        isEmpty: false,
+        stats: {
+          ctimeMs: 1545747809161.04
+        }
       }
     ])
   })
