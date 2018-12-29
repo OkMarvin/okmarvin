@@ -3,6 +3,7 @@ const async = require('neo-async')
 const logger = require('@parcel/logger')
 const parse = require('./parse')
 const compose = require('./compose')
+const calculate = require('./calculate')
 const guard = require('./guard')
 const render = require('./render')
 const write = require('./write')
@@ -28,7 +29,7 @@ module.exports = function ({
     clean
   }
   // TODO make it as fast as u can
-  let tasks = [callback => callback(null, conn), read, parse, compose, guard]
+  let tasks = [callback => callback(null, conn), read, parse, compose, calculate, guard]
   if (devHook === false) {
     tasks = tasks.concat([render, write, copy])
   } else {

@@ -8,7 +8,7 @@ const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()
   const { files, siteConfig, layouts } = conn
-  const { theme, themeManifest, layoutHierarchy } = siteConfig
+  const { theme, themeManifest } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
@@ -62,17 +62,7 @@ module.exports = function (conn, callback) {
                    */
                   const rendered = react(Component, { file, siteConfig })
                   // find the first could be use
-                  const candidateLayouts =
-                    layoutHierarchy[file.layout || file.template]
-                  let useLayout
-                  for (let i in candidateLayouts) {
-                    if (
-                      Object.keys(layouts).indexOf(candidateLayouts[i]) !== -1
-                    ) {
-                      useLayout = layouts[candidateLayouts[i]]
-                      break
-                    }
-                  }
+                  const useLayout = layouts[file.layout]
                   const html = useLayout(
                     file,
                     siteConfig,
