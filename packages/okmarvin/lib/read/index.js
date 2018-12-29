@@ -5,12 +5,10 @@ const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
 const requireResolve = require('../helpers/requireResolve')
 
-const promiseFileData = require('./promiseFileData')
-const promiseCatcher = require('../helpers/promiseCatcher')
-const promiseFilesPath = require('./promiseFilesPath')
-
 const readOkmarvinConfig = require('./readOkmarvinConfig')
 const readSiteConfig = require('./readSiteConfig')
+const readFiles = require('./readFiles')
+const readCache = require('./readCache')
 
 /**
  * Prepare data here for okmarvin
@@ -31,31 +29,10 @@ module.exports = async function (conn, callback) {
       callback =>
         async.parallel(
           {
-            cache: callback => {
-              // cache for better build performance when `clean` option set to false
-              // will be removed if not work
-              fs.readJson(path.join(root, '_cache.json'), (err, data) => {
-                if (err) return callback(null, { lastThemeManifest: {} }) // return a default one
-                return callback(null, data)
-              })
-            },
+            cache: callback => readCache(root, callback),
             okmarvinConfig: callback => readOkmarvinConfig(root, callback),
             siteConfig: callback => readSiteConfig(root, callback),
-            files: async callback => {
-              const result = await promiseCatcher(promiseFilesPath(fromPath))
-              if (result.length === 1) {
-                return callback(result[0])
-              }
-              const filesResult = await promiseCatcher(
-                Promise.all(
-                  result[1].map(filePath => promiseFileData(filePath))
-                )
-              )
-              if (filesResult.length === 1) {
-                return callback(filesResult[0])
-              }
-              callback(null, filesResult[1])
-            }
+            files: callback => readFiles(fromPath, callback)
           },
           callback
         ),
