@@ -60,10 +60,10 @@ module.exports = async function (conn, callback) {
               }
               // here we want to make sure _config.toml has correct data
               if (!ajv.validate(siteConfigSchema, result[1])) {
-                return logger.warn(
-                  'You have invalid configuration in _config.toml:\n',
-                  ajv.errors
+                logger.warn(
+                  'You have invalid configuration in _config.toml'
                 )
+                return console.log(ajv.errors)
               }
               const siteConfig = { ...defaultSiteConfig, ...result[1] }
               const themeManifestResult = await promiseCatcher(
