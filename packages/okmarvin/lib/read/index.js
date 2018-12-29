@@ -34,13 +34,12 @@ module.exports = async function (conn, callback) {
       callback =>
         async.parallel(
           {
-            lastBuiltAt: callback => {
+            cache: callback => {
               fs.readJson(
                 path.join(root, '_cache.json'),
                 (err, data) => {
-                  if (err) return callback(null, undefined)
-                  const { lastBuiltAt } = data
-                  return callback(null, lastBuiltAt)
+                  if (err) return callback(null, {})
+                  return callback(null, data)
                 }
               )
             },
