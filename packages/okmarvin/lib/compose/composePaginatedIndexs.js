@@ -15,7 +15,8 @@ module.exports = function (conn, callback) {
     css: 'index.css',
     datePublished: builtAt,
     dateModified: builtAt,
-    permalink: '/'
+    permalink: '/',
+    dirty: true
   }
   const permalinkFormat = '/page:num/'
   const data = files

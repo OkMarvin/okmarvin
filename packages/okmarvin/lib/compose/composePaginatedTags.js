@@ -21,7 +21,8 @@ module.exports = function (conn, callback) {
         css: 'tag.css',
         datePublished: builtAt,
         dateModified: builtAt,
-        permalink: `/topics/${encodeURIComponent(slug(topic))}/`
+        permalink: `/topics/${encodeURIComponent(slug(topic))}/`,
+        dirty: true
       }
       const permalinkFormat = `/topics/${encodeURIComponent(
         slug(topic)

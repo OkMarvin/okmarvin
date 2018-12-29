@@ -21,7 +21,8 @@ module.exports = function (conn, callback) {
         css: 'category.css',
         datePublished: builtAt,
         dateModified: builtAt,
-        permalink: `/categories/${encodeURIComponent(slug(category))}/`
+        permalink: `/categories/${encodeURIComponent(slug(category))}/`,
+        dirty: true
       }
       const permalinkFormat = `/categories/${encodeURIComponent(
         slug(category)
