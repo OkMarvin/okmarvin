@@ -21,9 +21,9 @@ const siteConfigSchema = require('../schemas/siteConfig')
  * we prepare data here for okmarvin
  */
 module.exports = async function (conn, callback) {
+  const begin = Date.now()
   const { root, from } = conn
   const fromPath = path.join(root, from)
-  const begin = Date.now()
 
   if (!fs.existsSync(fromPath)) {
     // user should fix it, no need to log error stack
