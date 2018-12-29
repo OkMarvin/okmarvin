@@ -8,9 +8,10 @@ const requireResolve = require('../helpers/requireResolve')
 const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
-const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 const promiseFilesPath = require('./promiseFilesPath')
 const promiseThemeManifest = require('./promiseThemeManifest')
+
+const readOkmarvinConfig = require('./readOkmarvinConfig')
 
 const defaultSiteConfig = require('./defaultSiteConfig')
 
@@ -44,13 +45,7 @@ module.exports = async function (conn, callback) {
                 return callback(null, data)
               })
             },
-            okmarvinConfig: async callback => {
-              const result = await promiseCatcher(promiseOkmarvinConfig(root))
-              if (result.length === 1) {
-                return callback(result[0])
-              }
-              callback(null, result[1])
-            },
+            okmarvinConfig: callback => readOkmarvinConfig(root, callback),
             siteConfig: async callback => {
               const result = await promiseCatcher(
                 promiseUserSiteConfig(path.join(root, '_config.toml'))
