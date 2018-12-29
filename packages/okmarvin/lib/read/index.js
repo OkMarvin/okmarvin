@@ -17,13 +17,15 @@ const defaultSiteConfig = require('./defaultSiteConfig')
 const ajv = require('../helpers/ajv')
 
 const siteConfigSchema = require('../schemas/siteConfig')
-
+/**
+ * we prepare data here for okmarvin
+ */
 module.exports = async function (conn, callback) {
   const { root, from } = conn
-  const absoluteContentPath = path.join(root, from)
+  const fromPath = path.join(root, from)
   const begin = Date.now()
 
-  if (!fs.existsSync(absoluteContentPath)) {
+  if (!fs.existsSync(fromPath)) {
     // user should fix it, no need to log error stack
     return logger.warn(
       `Oops, nothing to do because "${from}" directory does not exist.`
@@ -35,6 +37,8 @@ module.exports = async function (conn, callback) {
         async.parallel(
           {
             cache: callback => {
+              // cache is for improving build performance when `clean` option is false
+              // it might be removed if not work
               fs.readJson(
                 path.join(root, '_cache.json'),
                 (err, data) => {
@@ -83,7 +87,7 @@ module.exports = async function (conn, callback) {
               // we might need pattern matching to catch error here
               // https://github.com/tc39/proposal-pattern-matching
               const [readFilesPathErr, filesPath] = await promiseCatcher(
-                promiseFilesPath(absoluteContentPath)
+                promiseFilesPath(fromPath)
               )
               if (!filesPath) {
                 return callback(readFilesPathErr)
