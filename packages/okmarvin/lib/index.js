@@ -8,6 +8,7 @@ const guard = require('./guard')
 const render = require('./render')
 const write = require('./write')
 const copy = require('./copy')
+const cleanup = require('./cleanup')
 const prettyTime = require('./helpers/prettyTime')
 /**
  * Marvin, the static site generator
@@ -32,6 +33,9 @@ module.exports = function ({
   let tasks = [callback => callback(null, conn), read, parse, compose, calculate, guard]
   if (devHook === false) {
     tasks = tasks.concat([render, write, copy])
+    if (clean === false) {
+      tasks = tasks.concat(cleanup)
+    }
   } else {
     // const devHook = (conn, callback) => {}
     tasks = tasks.concat([devHook])
