@@ -18,7 +18,7 @@ const ajv = require('../helpers/ajv')
 
 const siteConfigSchema = require('../schemas/siteConfig')
 /**
- * we prepare data here for okmarvin
+ * Prepare data here for okmarvin
  */
 module.exports = async function (conn, callback) {
   const begin = Date.now()
@@ -26,7 +26,7 @@ module.exports = async function (conn, callback) {
   const fromPath = path.join(root, from)
 
   if (!fs.existsSync(fromPath)) {
-    // user should fix it, no need to log error stack
+    // user should fix it
     return logger.warn(
       `Oops, nothing to do because "${from}" directory does not exist.`
     )
@@ -37,70 +37,60 @@ module.exports = async function (conn, callback) {
         async.parallel(
           {
             cache: callback => {
-              // cache is for improving build performance when `clean` option is false
-              // it might be removed if not work
-              fs.readJson(
-                path.join(root, '_cache.json'),
-                (err, data) => {
-                  if (err) return callback(null, { lastThemeManifest: {} })
-                  return callback(null, data)
-                }
-              )
+              // cache for better build performance when `clean` option set to false
+              // will be removed if not work
+              fs.readJson(path.join(root, '_cache.json'), (err, data) => {
+                if (err) return callback(null, { lastThemeManifest: {} }) // return a default one
+                return callback(null, data)
+              })
             },
             okmarvinConfig: async callback => {
-              const [err, okmarvinConfig] = await promiseCatcher(
-                promiseOkmarvinConfig(root)
-              )
-              if (!okmarvinConfig) {
-                return callback(err)
+              const result = await promiseCatcher(promiseOkmarvinConfig(root))
+              if (result.length === 1) {
+                return callback(result[0])
               }
-              callback(null, okmarvinConfig)
+              callback(null, result[1])
             },
             siteConfig: async callback => {
-              const [err, userSiteConfig] = await promiseCatcher(
+              const result = await promiseCatcher(
                 promiseUserSiteConfig(path.join(root, '_config.toml'))
               )
-              if (!userSiteConfig) {
-                // oops something wrong with _config.toml
-                return callback(err)
+              if (result.length === 1) {
+                return callback(result[0])
               }
               // here we want to make sure _config.toml has correct data
-              if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
+              if (!ajv.validate(siteConfigSchema, result[1])) {
                 return logger.warn(
                   'You have invalid configuration in _config.toml:\n',
                   ajv.errors
                 )
               }
-              const siteConfig = { ...defaultSiteConfig, ...userSiteConfig }
-              const [
-                readThemeManifestErr,
-                themeManifest
-              ] = await promiseCatcher(
+              const siteConfig = { ...defaultSiteConfig, ...result[1] }
+              const themeManifestResult = await promiseCatcher(
                 promiseThemeManifest(root, siteConfig.theme)
               )
-              if (!themeManifest) {
-                return callback(readThemeManifestErr)
+              if (themeManifestResult.length === 1) {
+                return callback(themeManifestResult[0])
               }
-              callback(null, { ...siteConfig, themeManifest: themeManifest })
+              callback(null, {
+                ...siteConfig,
+                themeManifest: themeManifestResult[1]
+              })
             },
             files: async callback => {
-              // we might need pattern matching to catch error here
-              // https://github.com/tc39/proposal-pattern-matching
-              const [readFilesPathErr, filesPath] = await promiseCatcher(
-                promiseFilesPath(fromPath)
-              )
-              if (!filesPath) {
-                return callback(readFilesPathErr)
+              const result = await promiseCatcher(promiseFilesPath(fromPath))
+              if (result.length === 1) {
+                return callback(result[0])
               }
-              const [readMarkdownErr, files] = await promiseCatcher(
+              const filesResult = await promiseCatcher(
                 Promise.all(
-                  filesPath.map(filePath => promiseFileData(filePath))
+                  result[1].map(filePath => promiseFileData(filePath))
                 )
               )
-              if (!files) {
-                return callback(readMarkdownErr)
+              if (filesResult.length === 1) {
+                return callback(filesResult[0])
               }
-              callback(null, files)
+              callback(null, filesResult[1])
             }
           },
           callback
