@@ -18,7 +18,7 @@ test('returns array', () => {
         excerpt: '',
         isEmpty: false,
         stats: {
-          ctimeMs: 1545747809161.04
+          ctimeMs: expect.any(Number)
         }
       }
     ])
