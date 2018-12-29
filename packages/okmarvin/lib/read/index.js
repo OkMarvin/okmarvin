@@ -38,7 +38,7 @@ module.exports = async function (conn, callback) {
               fs.readJson(
                 path.join(root, '_cache.json'),
                 (err, data) => {
-                  if (err) return callback(null, {})
+                  if (err) return callback(null, { lastThemeManifest: {} })
                   return callback(null, data)
                 }
               )
