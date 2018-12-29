@@ -13,7 +13,7 @@ module.exports = function (conn, callback) {
           path.join(root, '_cache.json'),
           {
             lastBuiltAt: builtAt,
-            themeManifest
+            lastThemeManifest: themeManifest
           },
           err => {
             if (err) return callback(err)
