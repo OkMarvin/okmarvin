@@ -15,9 +15,9 @@ module.exports = function (cli) {
     // clean destination first
     fs.remove(path.join(cwd, destination), err => {
       if (err) return logger.error(err)
-      okmarvin({ logLevel, source, destination })
+      okmarvin({ logLevel, source, destination, clean })
     })
   } else {
-    okmarvin({ logLevel, source, destination })
+    okmarvin({ logLevel, source, destination, clean })
   }
 }

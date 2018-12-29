@@ -15,7 +15,8 @@ module.exports = function ({
   source = 'content',
   destination = 'dist',
   devHook = false, // we can hook into waterfall with devHook
-  logLevel = 3
+  logLevel = 3,
+  clean = true
 } = {}) {
   logger.setOptions({ logLevel })
   logger.log('Ok Marvin, lets do it.')
@@ -23,7 +24,8 @@ module.exports = function ({
     root: process.cwd(),
     from: source,
     to: destination,
-    builtAt: Date.now()
+    builtAt: Date.now(),
+    clean
   }
   // TODO make it as fast as u can
   let tasks = [callback => callback(null, conn), read, parse, compose, guard]
