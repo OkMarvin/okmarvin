@@ -13,7 +13,8 @@ module.exports = function (conn, callback) {
           path.join(root, '_cache.json'),
           {
             lastBuiltAt: builtAt,
-            lastThemeManifest: themeManifest
+            lastThemeManifest: themeManifest,
+            files: files.filter(file => file.filePath).map(file => file.filePath)
           },
           err => {
             if (err) return callback(err)
