@@ -11,17 +11,18 @@ const copy = require('./copy')
 const cleanup = require('./cleanup')
 const prettyTime = require('./helpers/prettyTime')
 /**
- * Marvin, the static site generator
+ * Ok Marvin, an opinionated static site generator
  */
 module.exports = function ({
-  source = 'content',
-  destination = 'dist',
+  source = 'content', // where to read markdown files
+  destination = 'dist', // where to output
   devHook = false, // we can hook into waterfall with devHook
   logLevel = 3,
-  clean = true
+  clean = true // default to true, it might have bugs when set to false
 } = {}) {
   logger.setOptions({ logLevel })
   logger.log('Ok Marvin, lets do it.')
+
   const conn = {
     root: process.cwd(),
     from: source,
@@ -29,24 +30,32 @@ module.exports = function ({
     builtAt: Date.now(),
     clean
   }
-  // TODO make it as fast as u can
-  let tasks = [callback => callback(null, conn), read, parse, compose, calculate, guard]
+
+  let tasks = [
+    callback => callback(null, conn),
+    read,
+    parse,
+    compose,
+    calculate,
+    guard
+  ]
   if (devHook === false) {
     tasks = tasks.concat([render, write, copy])
     if (clean === false) {
       tasks = tasks.concat(cleanup)
     }
   } else {
-    // const devHook = (conn, callback) => {}
+    // use okmarvin in dev environment for developing theme
+    // devHook should be function
+    // function devHook (conn, callback) {}
     tasks = tasks.concat([devHook])
   }
   async.waterfall(tasks, (err, conn) => {
     if (err) return logger.error(err)
-    const memoryUsage = process.memoryUsage()
     logger.verbose(
-      `Memory usage:\n${Object.keys(memoryUsage)
-        .map(key => `\t\t${key}: ${memoryUsage[key] / 1024 / 1024}MB`)
-        .join('\n')}`
+      `Total memory used: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(
+        2
+      )}MB`
     )
     logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
     logger.success(`Your site is ready under '${destination}' directory.`)
