@@ -25,7 +25,7 @@ module.exports = async function (args) {
       flags: {
         clean: {
           type: 'boolean',
-          default: false
+          default: true
         },
         source: {
           type: 'string',
