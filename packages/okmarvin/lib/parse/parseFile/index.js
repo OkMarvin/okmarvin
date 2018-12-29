@@ -60,6 +60,11 @@ module.exports = function (conn, file, callback) {
   }
   const templateChanged =
     themeManifest[template] !== lastThemeManifest[template]
+  const cssChanged =
+    themeManifest[template.replace('.js', '.css')] !==
+    lastThemeManifest[template.replace('.js', '.css')]
+  const fileChanged =
+    typeof lastBuiltAt === 'undefined' ? true : ctimeMs > lastBuiltAt
   callback(null, {
     ...file,
     title: escapeTextForBrowser(title),
@@ -76,11 +81,7 @@ module.exports = function (conn, file, callback) {
     dateModified,
     permalink,
     template,
-    dirty:
-      clean === true
-        ? true
-        : (typeof lastBuiltAt === 'undefined' ? true : ctimeMs > lastBuiltAt) ||
-          templateChanged,
+    dirty: clean === true ? true : fileChanged || cssChanged || templateChanged,
     css: template.replace('.js', '.css'), //  template's css file
     content: (typeof fileToc !== 'undefined'
       ? fileToc
