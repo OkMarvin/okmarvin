@@ -31,7 +31,7 @@ module.exports = function (filePath) {
         fs.stat(filePath, (err, stats) => {
           if (err) return callback(err)
           const { ctimeMs } = stats // may need other fields
-          callback(null, { stats: { ctimeMs } })
+          callback(null, { ctimeMs })
         })
       }
     },
