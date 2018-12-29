@@ -10,6 +10,7 @@ module.exports = function (conn, file, callback) {
     root,
     from,
     builtAt,
+    lastBuiltAt,
     okmarvinConfig,
     siteConfig: {
       permalink: defaultPermalink,
@@ -31,7 +32,8 @@ module.exports = function (conn, file, callback) {
     date: dateStr,
     dateModified: dateModifiedStr,
     toc: fileToc,
-    permalink: filePermalink
+    permalink: filePermalink,
+    stats: { ctimeMs }
   } = file
 
   const datePublished = dateStr ? getTimeFromDateStr(dateStr) : builtAt
@@ -55,7 +57,6 @@ module.exports = function (conn, file, callback) {
     // we should warn user
     callback(new Error(`${template} template does not exist`))
   }
-
   callback(null, {
     ...file,
     title: escapeTextForBrowser(title),
@@ -72,6 +73,7 @@ module.exports = function (conn, file, callback) {
     dateModified,
     permalink,
     template,
+    dirty: typeof lastBuiltAt === 'undefined' ? true : ctimeMs > lastBuiltAt,
     css: template.replace('.js', '.css'), //  template's css file
     content: (typeof fileToc !== 'undefined'
       ? fileToc
