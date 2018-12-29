@@ -7,17 +7,11 @@ const requireResolve = require('../helpers/requireResolve')
 
 const promiseFileData = require('./promiseFileData')
 const promiseCatcher = require('../helpers/promiseCatcher')
-const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseFilesPath = require('./promiseFilesPath')
-const promiseThemeManifest = require('./promiseThemeManifest')
 
 const readOkmarvinConfig = require('./readOkmarvinConfig')
+const readSiteConfig = require('./readSiteConfig')
 
-const defaultSiteConfig = require('./defaultSiteConfig')
-
-const ajv = require('../helpers/ajv')
-
-const siteConfigSchema = require('../schemas/siteConfig')
 /**
  * Prepare data here for okmarvin
  */
@@ -46,32 +40,7 @@ module.exports = async function (conn, callback) {
               })
             },
             okmarvinConfig: callback => readOkmarvinConfig(root, callback),
-            siteConfig: async callback => {
-              const result = await promiseCatcher(
-                promiseUserSiteConfig(path.join(root, '_config.toml'))
-              )
-              if (result.length === 1) {
-                return callback(result[0])
-              }
-              // here we want to make sure _config.toml has correct data
-              if (!ajv.validate(siteConfigSchema, result[1])) {
-                logger.warn(
-                  'You have invalid configuration in _config.toml'
-                )
-                return console.log(ajv.errors)
-              }
-              const siteConfig = { ...defaultSiteConfig, ...result[1] }
-              const themeManifestResult = await promiseCatcher(
-                promiseThemeManifest(root, siteConfig.theme)
-              )
-              if (themeManifestResult.length === 1) {
-                return callback(themeManifestResult[0])
-              }
-              callback(null, {
-                ...siteConfig,
-                themeManifest: themeManifestResult[1]
-              })
-            },
+            siteConfig: callback => readSiteConfig(root, callback),
             files: async callback => {
               const result = await promiseCatcher(promiseFilesPath(fromPath))
               if (result.length === 1) {
