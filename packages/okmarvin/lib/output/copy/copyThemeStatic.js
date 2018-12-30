@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const requireResolve = require('../helpers/requireResolve')
+const requireResolve = require('../../helpers/requireResolve')
 module.exports = function (conn, callback) {
   const { root, to, siteConfig } = conn
   const { theme } = siteConfig

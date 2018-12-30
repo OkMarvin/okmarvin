@@ -1,9 +1,9 @@
 const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
-const requireResolve = require('../helpers/requireResolve')
+const requireResolve = require('../../helpers/requireResolve')
 const logger = require('@parcel/logger')
-const prettyTime = require('../helpers/prettyTime')
+const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()

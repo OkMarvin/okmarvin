@@ -5,10 +5,11 @@ const parse = require('./parse')
 const compose = require('./compose')
 const calculate = require('./calculate')
 const guard = require('./guard')
-const render = require('./render')
-const write = require('./write')
-const copy = require('./copy')
+
 const cleanup = require('./cleanup')
+
+const output = require('./output')
+
 const prettyTime = require('./helpers/prettyTime')
 /**
  * Ok Marvin, an opinionated static site generator
@@ -43,7 +44,7 @@ module.exports = function ({
     guard
   ]
   if (devHook === false) {
-    tasks = tasks.concat([render, write, copy])
+    tasks = tasks.concat([output])
     if (clean === false) {
       tasks = tasks.concat(cleanup)
     }
