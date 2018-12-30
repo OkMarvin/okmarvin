@@ -37,18 +37,27 @@ module.exports = (conn, callback) => {
       },
       layoutHash: callback => {
         let layoutHash = []
-        findMe.forEach(file => {
-          try {
-            const layout = requireResolve(file, {
-              paths: layoutPaths
-            })
-            fs.readFile(layout, (err, data) => {
-              if (err) return callback(err)
-              layoutHash = layoutHash.concat([getHashDigest(data)])
-            })
-          } catch (err) {}
-        })
-        callback(null, layoutHash.sort())
+        async.each(
+          findMe,
+          (file, callback) => {
+            try {
+              const layout = requireResolve(file, {
+                paths: layoutPaths
+              })
+              fs.readFile(layout, (err, data) => {
+                if (err) return callback(err)
+                layoutHash = layoutHash.concat([getHashDigest(data)])
+                callback()
+              })
+            } catch (err) {
+              callback()
+            }
+          },
+          err => {
+            if (err) return callback(err)
+            callback(null, layoutHash.sort())
+          }
+        )
       }
     },
     (err, results) => {
