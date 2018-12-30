@@ -4,10 +4,7 @@ const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../helpers/prettyTime')
 
-const readOkmarvinConfig = require('./readOkmarvinConfig')
-const readSiteConfig = require('./readSiteConfig')
-const readFiles = require('./readFiles')
-const readCache = require('./readCache')
+const prepare = require('./prepare')
 const readLayouts = require('./readLayouts')
 const diffLayout = require('./diffLayout')
 
@@ -27,29 +24,7 @@ module.exports = async function (conn, callback) {
   }
 
   async.waterfall(
-    [
-      callback =>
-        async.parallel(
-          {
-            cache: callback => readCache(conn, callback),
-            okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
-            siteConfig: callback => readSiteConfig(conn, callback),
-            files: callback => readFiles(conn, callback)
-          },
-          (err, { cache, okmarvinConfig, siteConfig, files }) => {
-            if (err) return callback(err)
-            callback(null, {
-              ...conn,
-              cache,
-              okmarvinConfig,
-              siteConfig,
-              files
-            })
-          }
-        ),
-      readLayouts,
-      diffLayout
-    ],
+    [callback => callback(null, conn), prepare, readLayouts, diffLayout],
     (err, conn) => {
       if (err) return callback(err)
       logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
