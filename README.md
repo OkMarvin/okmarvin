@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/OkMarvin/okmarvin.svg?branch=master)](https://travis-ci.org/OkMarvin/okmarvin)
 
-okmarvin is an opinionated static site generator with **Component** built in React/vue/Preact/* as template.
+okmarvin is an opinionated static site generator with **Component** built in React as template.
 
 ## Developing
 
@@ -22,14 +22,14 @@ On iMac (Retina 5K, 27-inch, 2017) with 40 GB 2400 MHz DDR4:
 
 ```
 $ okmarvin build --log-level 4 --clean true
-[20:23:57]: Ok Marvin, lets do it.
-[20:23:57]: Collected 62 markdown files
-[20:23:57]: layouts kept the same
-[20:23:57]: ✨  Read in 97ms
-[20:23:57]: ✨  Parsed in 319ms
-[20:23:57]: ✨  Rendered in 212ms
-[20:23:57]: ✨  116 files generated.
-[20:23:57]: Total memory used: 99.49MB
-[20:23:57]: ✨  Built in 728ms
-[20:23:57]: ✨  Your site is ready under 'dist' directory.
+[23:51:16]: Ok Marvin, lets do it.
+[23:51:16]: Collected 62 markdown files
+[23:51:16]: layouts kept the same
+[23:51:16]: ✨  Read in 89ms
+[23:51:16]: ✨  Parsed 62 files in 303ms
+[23:51:17]: ✨  Rendered 116 files in 207ms
+[23:51:17]: ✨  116 files generated.
+[23:51:17]: Total memory used: 97.32MB
+[23:51:17]: ✨  Built in 690ms
+[23:51:17]: ✨  Your site is ready under 'dist' directory.
 ````
