@@ -27,7 +27,7 @@ module.exports = function (conn, callback) {
     ],
     (err, conn) => {
       if (err) return callback(err)
-      logger.success(`Parsed in ${prettyTime(Date.now() - begin)}`)
+      logger.success(`Parsed ${conn.files.length} files in ${prettyTime(Date.now() - begin)}`)
       // will move it to later step
       if (!ajv.validate(connSchema, conn)) {
         return callback(ajv.errors)
