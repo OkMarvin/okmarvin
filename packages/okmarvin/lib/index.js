@@ -1,8 +1,5 @@
-
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-
-const cleanup = require('./cleanup')
 
 const input = require('./input')
 const output = require('./output')
@@ -32,15 +29,9 @@ module.exports = function ({
     clean
   }
 
-  let tasks = [
-    callback => callback(null, conn),
-    input
-  ]
+  let tasks = [callback => callback(null, conn), input]
   if (devHook === false) {
     tasks = tasks.concat([output])
-    if (clean === false) {
-      tasks = tasks.concat(cleanup)
-    }
   } else {
     // use okmarvin in dev environment for developing theme
     // devHook should be function
