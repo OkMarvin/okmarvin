@@ -1,3 +1,4 @@
+const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const {
     cache: { layoutHash: lastLayoutHash },
@@ -11,9 +12,10 @@ module.exports = function (conn, callback) {
     })
   ) {
     // nothing changed
+    logger.verbose('layouts kept the same')
   } else {
     // some layouts changed, regenerate all
-    console.log('layouts changed')
+    logger.verbose('layouts changed')
     conn = { ...conn, clean: true }
   }
   callback(null, conn)
