@@ -24,6 +24,7 @@ module.exports = async function (conn, callback) {
       `Oops, nothing to do because "${from}" directory does not exist.`
     )
   }
+
   async.waterfall(
     [
       callback =>
@@ -34,9 +35,15 @@ module.exports = async function (conn, callback) {
             siteConfig: callback => readSiteConfig(conn, callback),
             files: callback => readFiles(conn, callback)
           },
-          (err, results) => {
+          (err, { cache, okmarvinConfig, siteConfig, files }) => {
             if (err) return callback(err)
-            callback(null, { ...conn, ...results })
+            callback(null, {
+              ...conn,
+              cache,
+              okmarvinConfig,
+              siteConfig,
+              files
+            })
           }
         ),
       readLayouts
