@@ -1,4 +1,4 @@
-const promiseCatcher = require('../helpers/promiseCatcher')
+const promiseCatcher = require('../../helpers/promiseCatcher')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 module.exports = async ({ root }, callback) => {
   const result = await promiseCatcher(promiseOkmarvinConfig(root))

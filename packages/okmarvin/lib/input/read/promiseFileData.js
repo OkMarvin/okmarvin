@@ -1,8 +1,8 @@
 const fs = require('fs')
 const matter = require('gray-matter')
-const ajv = require('../helpers/ajv')
+const ajv = require('../../helpers/ajv')
 const TOML = require('@iarna/toml')
-const fileSchema = require('../schemas/file')
+const fileSchema = require('../../schemas/file')
 const logger = require('@parcel/logger')
 const async = require('neo-async')
 module.exports = function (filePath) {

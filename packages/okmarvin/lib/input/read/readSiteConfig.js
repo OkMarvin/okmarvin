@@ -1,10 +1,10 @@
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
-const promiseCatcher = require('../helpers/promiseCatcher')
+const promiseCatcher = require('../../helpers/promiseCatcher')
 const promiseThemeManifest = require('./promiseThemeManifest')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
-const ajv = require('../helpers/ajv')
-const siteConfigSchema = require('../schemas/siteConfig')
+const ajv = require('../../helpers/ajv')
+const siteConfigSchema = require('../../schemas/siteConfig')
 const logger = require('@parcel/logger')
 
 module.exports = async ({ root }, callback) => {

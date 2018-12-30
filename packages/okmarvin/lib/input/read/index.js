@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-const prettyTime = require('../helpers/prettyTime')
+const prettyTime = require('../../helpers/prettyTime')
 
 const prepare = require('./prepare')
 const readLayouts = require('./readLayouts')

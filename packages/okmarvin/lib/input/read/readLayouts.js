@@ -1,4 +1,4 @@
-const requireResolve = require('../helpers/requireResolve')
+const requireResolve = require('../../helpers/requireResolve')
 const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')
@@ -16,7 +16,7 @@ module.exports = (conn, callback) => {
       }, [])
     )
   ]
-  const defaultLayoutPath = path.join(__dirname, '..', 'layout')
+  const defaultLayoutPath = path.join(__dirname, '..', '..', 'layout')
   const customizedLayoutPath = path.join(root, 'layout')
   const layoutPaths = [customizedLayoutPath, defaultLayoutPath]
   async.parallel(

@@ -1,13 +1,10 @@
-const read = require('./read')
+
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-const parse = require('./parse')
-const compose = require('./compose')
-const calculate = require('./calculate')
-const guard = require('./guard')
 
 const cleanup = require('./cleanup')
 
+const input = require('./input')
 const output = require('./output')
 
 const prettyTime = require('./helpers/prettyTime')
@@ -37,11 +34,7 @@ module.exports = function ({
 
   let tasks = [
     callback => callback(null, conn),
-    read,
-    parse,
-    compose,
-    calculate,
-    guard
+    input
   ]
   if (devHook === false) {
     tasks = tasks.concat([output])
