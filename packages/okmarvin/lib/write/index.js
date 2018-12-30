@@ -4,7 +4,7 @@ const path = require('path')
 const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const { files } = conn
-  const { root, to, builtAt, siteConfig } = conn
+  const { root, to, builtAt, siteConfig, layoutHash } = conn
   const { themeManifest } = siteConfig
   async.parallel(
     [
@@ -14,7 +14,8 @@ module.exports = function (conn, callback) {
           {
             lastBuiltAt: builtAt,
             lastThemeManifest: themeManifest,
-            files: files.map(file => file.permalink)
+            files: files.map(file => file.permalink),
+            layoutHash
           },
           err => {
             if (err) return callback(err)
