@@ -21,6 +21,9 @@ module.exports = function ({
   clean = true // default to true, it might have bugs when set to false
 } = {}) {
   logger.setOptions({ logLevel })
+  if (clean === false) {
+    logger.warn('Might have bug when clean set to `false`!!')
+  }
   logger.log('Ok Marvin, lets do it.')
 
   const conn = {
