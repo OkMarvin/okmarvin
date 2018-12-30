@@ -42,8 +42,7 @@ module.exports = async function (args) {
       }
     }
   )
-  const cmd = cli.input[0]
-  const type = cli.input[1]
+  const [cmd, type] = cli.input
   if (!cmd) {
     cli.showHelp()
   }
