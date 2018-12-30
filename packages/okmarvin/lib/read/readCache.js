@@ -4,7 +4,7 @@ module.exports = ({ root }, callback) => {
   // cache for better build performance when `clean` option set to false
   // will be removed if not work
   fs.readJson(path.join(root, '_cache.json'), (err, data) => {
-    if (err) return callback(null, { lastThemeManifest: {} }) // return a default one
+    if (err) return callback(null, { lastThemeManifest: {}, layouthash: undefined }) // return a default one
     return callback(null, data)
   })
 }

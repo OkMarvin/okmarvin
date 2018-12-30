@@ -9,6 +9,7 @@ const readSiteConfig = require('./readSiteConfig')
 const readFiles = require('./readFiles')
 const readCache = require('./readCache')
 const readLayouts = require('./readLayouts')
+const diffLayout = require('./diffLayout')
 
 /**
  * Prepare data here for okmarvin
@@ -46,7 +47,8 @@ module.exports = async function (conn, callback) {
             })
           }
         ),
-      readLayouts
+      readLayouts,
+      diffLayout
     ],
     (err, conn) => {
       if (err) return callback(err)
