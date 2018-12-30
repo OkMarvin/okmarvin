@@ -82,7 +82,7 @@ module.exports = function (conn, callback) {
     ],
     function (err, files) {
       if (err) return callback(err)
-      logger.success(`Rendered in ${prettyTime(Date.now() - begin)}`)
+      logger.success(`Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`)
       callback(null, {
         ...conn,
         files
