@@ -4,8 +4,8 @@ const fs = require('fs')
 const async = require('neo-async')
 const { getHashDigest } = require('loader-utils')
 module.exports = (conn, callback) => {
-  const { root } = conn
   const {
+    root,
     siteConfig: { layoutHierarchy }
   } = conn
   // all available layouts
@@ -16,55 +16,39 @@ module.exports = (conn, callback) => {
       }, [])
     )
   ]
-  const layoutPath = path.join(__dirname, '..', 'layout')
+  const defaultLayoutPath = path.join(__dirname, '..', 'layout')
+  const customizedLayoutPath = path.join(root, 'layout')
+  const layoutPaths = [customizedLayoutPath, defaultLayoutPath]
   async.parallel(
     {
       layouts: callback => {
         const layouts = {}
-        async.each(
-          findMe,
-          (file, callback) => {
-            // first resolve root/layout
-            try {
-              const layout = requireResolve(file, {
-                paths: [path.join(root, 'layout'), layoutPath] // user could customize their layout
-              })
-              layouts[file] = require(layout)
-              callback()
-            } catch (_err) {
-              // do nothing
-              callback()
-            }
-          },
-          err => {
-            if (err) return callback(err)
-            callback(null, layouts)
+        findMe.forEach(file => {
+          try {
+            const layout = requireResolve(file, {
+              paths: layoutPaths
+            })
+            layouts[file] = require(layout)
+          } catch (_err) {
+            // do nothing
           }
-        )
+        })
+        callback(null, layouts)
       },
       layoutHash: callback => {
         let layoutHash = []
-        async.each(
-          findMe,
-          (file, callback) => {
-            try {
-              const layout = requireResolve(file, {
-                paths: [path.join(root, 'layout'), layoutPath]
-              })
-              fs.readFile(layout, (err, data) => {
-                if (err) return callback(err)
-                layoutHash = layoutHash.concat([getHashDigest(data)])
-                callback()
-              })
-            } catch (err) {
-              callback()
-            }
-          },
-          err => {
-            if (err) return callback(err)
-            callback(null, layoutHash.sort())
-          }
-        )
+        findMe.forEach(file => {
+          try {
+            const layout = requireResolve(file, {
+              paths: layoutPaths
+            })
+            fs.readFile(layout, (err, data) => {
+              if (err) return callback(err)
+              layoutHash = layoutHash.concat([getHashDigest(data)])
+            })
+          } catch (err) {}
+        })
+        callback(null, layoutHash.sort())
       }
     },
     (err, results) => {

@@ -4,11 +4,10 @@ module.exports = function (conn, callback) {
     cache: { layoutHash: lastLayoutHash },
     layoutHash
   } = conn
-  let layoutHashSorted = layoutHash.sort()
   if (
     lastLayoutHash.length === layoutHash.length &&
     lastLayoutHash.every(function (element, index) {
-      return element === layoutHashSorted[index]
+      return element === layoutHash[index]
     })
   ) {
     // nothing changed
