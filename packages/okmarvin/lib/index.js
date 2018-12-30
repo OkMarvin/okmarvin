@@ -17,6 +17,7 @@ module.exports = function ({
 } = {}) {
   logger.setOptions({ logLevel })
   if (clean === false) {
+    // warn user the possible bugs `false` clean might bring
     logger.warn('Might have bug when clean set to `false`!!')
   }
   logger.log('Ok Marvin, lets do it.')
