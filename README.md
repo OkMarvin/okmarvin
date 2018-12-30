@@ -12,10 +12,6 @@ okmarvin is a monorepo managed with [lerna](https://github.com/lerna/lerna).
 2. Clone this repo
 3. Run `yarn lerna bootstrap` to bootstrap
 
-## Demo
-
-Please check [my blog](https://blog.zfanw.com).
-
 ## Performance
 
 Bulid [my blog](https://blog.zfanw.com) on iMac (Retina 5K, 27-inch, 2017) with 40 GB 2400 MHz DDR4:
@@ -32,4 +28,4 @@ $ okmarvin build --log-level 4 --clean true
 [23:51:17]: Total memory used: 97.32MB
 [23:51:17]: ✨  Built in 690ms
 [23:51:17]: ✨  Your site is ready under 'dist' directory.
-````
+```
