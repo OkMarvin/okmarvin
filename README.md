@@ -18,7 +18,7 @@ Please check [my blog](https://blog.zfanw.com).
 
 ## Performance
 
-On iMac (Retina 5K, 27-inch, 2017) with 40 GB 2400 MHz DDR4:
+Bulid [my blog](https://blog.zfanw.com) on iMac (Retina 5K, 27-inch, 2017) with 40 GB 2400 MHz DDR4:
 
 ```
 $ okmarvin build --log-level 4 --clean true
