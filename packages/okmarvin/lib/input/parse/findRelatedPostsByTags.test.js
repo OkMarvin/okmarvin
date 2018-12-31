@@ -1,7 +1,7 @@
-const findRelated = require('./findRelated')
+const findRelatedPostsByTags = require('./findRelatedPostsByTags')
 it('should call callback', () => {
   const cb = jest.fn()
-  findRelated({ files: [], tags: {} }, cb)
+  findRelatedPostsByTags({ files: [], tags: {} }, cb)
   expect(cb).toBeCalled()
   expect(cb).toBeCalledWith(null, { files: [], tags: {} })
 })

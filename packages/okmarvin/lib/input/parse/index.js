@@ -2,8 +2,8 @@ const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../../helpers/prettyTime')
 
-const findSiblings = require('./findSiblings')
-const findRelated = require('./findRelated')
+const findPostSiblings = require('./findPostSiblings')
+const findRelatedPostsByTags = require('./findRelatedPostsByTags')
 
 const parseFiles = require('./parseFiles')
 
@@ -21,9 +21,9 @@ module.exports = function (conn, callback) {
       callback => {
         parseFiles(conn, callback)
       },
-      findSiblings,
+      findPostSiblings,
       collectTaxonomy,
-      findRelated
+      findRelatedPostsByTags
     ],
     (err, conn) => {
       if (err) return callback(err)

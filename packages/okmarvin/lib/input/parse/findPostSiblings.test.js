@@ -1,8 +1,8 @@
-const findSiblings = require('./findSiblings')
-describe('findSiblings', () => {
+const findPostSiblings = require('./findPostSiblings')
+describe('findPostSiblings', () => {
   it('returns original', () => {
     const cb = jest.fn()
-    findSiblings({ files: [] }, cb)
+    findPostSiblings({ files: [] }, cb)
     expect(cb).toBeCalled()
     expect(cb).toBeCalledWith(null, { files: [] })
   })
