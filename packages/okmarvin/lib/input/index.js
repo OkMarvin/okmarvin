@@ -1,6 +1,6 @@
 const async = require('neo-async')
 const read = require('./read')
-const diffLayout = require('./diffLayout')
+const isAnyLayoutChanged = require('./isAnyLayoutChanged')
 const parse = require('./parse')
 const compose = require('./compose')
 const compute = require('./compute')
@@ -10,7 +10,7 @@ module.exports = (conn, callback) => {
     [
       callback => callback(null, conn),
       read,
-      diffLayout,
+      isAnyLayoutChanged,
       parse,
       compose,
       compute,
