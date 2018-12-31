@@ -27,7 +27,7 @@ module.exports = (conn, callback) =>
           }
         )
       },
-      diffLayout
+      diffLayout // force clean or not
     ],
     callback
   )
