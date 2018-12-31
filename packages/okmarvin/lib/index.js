@@ -6,7 +6,7 @@ const output = require('./output')
 
 const prettyTime = require('./helpers/prettyTime')
 /**
- * Ok Marvin, an opinionated static site generator
+ * An opinionated static site generator with Component as template.
  */
 module.exports = function ({
   source = 'content', // where to read markdown files
