@@ -7,6 +7,6 @@ module.exports = ({ root }, callback) => {
     const data = fs.readJsonSync(path.join(root, '_cache.json'))
     callback(null, data)
   } catch (err) {
-    return callback(err)
+    return callback(null, { lastThemeManifest: {}, files: [], layoutHash: [] })
   }
 }
