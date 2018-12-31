@@ -5,8 +5,7 @@ const logger = require('@parcel/logger')
 const prettyTime = require('../../helpers/prettyTime')
 module.exports = function (conn, callback) {
   const begin = Date.now()
-  const { files, clean } = conn
-  const dirtyFiles = files.filter(file => file.dirty)
+  const { files } = conn
   const { root, to, builtAt, siteConfig } = conn
   const { themeManifest, layoutHash } = siteConfig
   async.parallel(
@@ -28,7 +27,7 @@ module.exports = function (conn, callback) {
       },
       callback =>
         async.each(
-          clean === false ? dirtyFiles : files,
+          files,
           function (file, callback) {
             const target =
               path.extname(file.permalink) !== ''
@@ -44,7 +43,7 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       logger.success(
         `Wrote ${
-          (clean === false ? dirtyFiles : files).length
+          files.length
         } files in ${prettyTime(Date.now() - begin)}.`
       )
       return callback(null, conn)
