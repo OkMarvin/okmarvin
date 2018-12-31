@@ -6,8 +6,6 @@ test('returns data', done => {
     expect(data).toHaveProperty('okmarvinConfig')
     expect(data).toHaveProperty('siteConfig')
     expect(data).toHaveProperty('cache')
-    expect(data).toHaveProperty('layouts')
-    expect(data).toHaveProperty('layoutHash')
     expect(data).toHaveProperty('files')
     expect(data.files).toHaveLength(2)
     expect(data).toHaveProperty('from', 'content')
