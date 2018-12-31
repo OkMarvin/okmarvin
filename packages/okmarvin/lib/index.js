@@ -13,7 +13,8 @@ module.exports = function ({
   destination = 'dist', // where to output
   devHook = false, // we can hook into waterfall with devHook
   logLevel = 3,
-  clean = true // default to true, it might have bugs when set to false
+  clean = true, // default to true, it might have bugs when set to false
+  benchmark = false
 } = {}) {
   logger.setOptions({ logLevel })
 

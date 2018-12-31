@@ -38,6 +38,10 @@ module.exports = async function (args) {
         logLevel: {
           type: 'string',
           default: 3
+        },
+        benchmark: {
+          type: 'string',
+          default: false
         }
       }
     }
