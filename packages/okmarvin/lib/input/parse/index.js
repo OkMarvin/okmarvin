@@ -7,7 +7,7 @@ const findRelated = require('./findRelated')
 
 const parseFiles = require('./parseFiles')
 
-const collect = require('./collect')
+const collectTaxonomy = require('./collectTaxonomy')
 
 const connSchema = require('../../schemas/conn')
 
@@ -22,7 +22,7 @@ module.exports = function (conn, callback) {
         parseFiles(conn, callback)
       },
       findSiblings,
-      collect,
+      collectTaxonomy,
       findRelated
     ],
     (err, conn) => {

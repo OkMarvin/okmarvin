@@ -1,5 +1,6 @@
 const async = require('async')
 const isPost = require('../isPost')
+const shrink = require('../../../helpers/shrink')
 module.exports = function (files, target, callback) {
   const results = Object.create(null)
   const posts = files.filter(isPost)
@@ -13,9 +14,7 @@ module.exports = function (files, target, callback) {
             // init
             results[lowerCaseVersion] = []
           }
-          // exclude `content` to reduce memory usage
-          const { content, ...others } = file
-          results[lowerCaseVersion] = results[lowerCaseVersion].concat(others)
+          results[lowerCaseVersion] = results[lowerCaseVersion].concat(shrink(file))
         })
       callback()
     },
