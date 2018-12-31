@@ -11,11 +11,11 @@ module.exports = function (conn, callback) {
     })
   ) {
     // nothing changed
-    logger.verbose('layouts kept the same')
+    logger.verbose('Layouts kept the same')
     callback(null, conn)
   } else {
     // some layouts changed, regenerate all
-    logger.verbose('layouts changed')
+    logger.verbose('Layouts changed')
     callback(null, { ...conn, clean: true })
   }
 }
