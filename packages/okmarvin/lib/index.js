@@ -5,6 +5,7 @@ const input = require('./input')
 const output = require('./output')
 
 const prettyTime = require('./helpers/prettyTime')
+
 /**
  * An opinionated static site generator with Component as template.
  */
@@ -33,15 +34,15 @@ module.exports = function ({
     clean
   }
 
-  let tasks = [callback => callback(null, conn), input]
+  let tasks
 
-  // use okmarvin in dev environment for developing theme
-  // devHook should be function
-  // function devHook (conn, callback) {}
-  devHook ? (tasks = tasks.concat(devHook)) : (tasks = tasks.concat(output))
+  devHook
+    ? (tasks = [callback => callback(null, conn), input, devHook])
+    : (tasks = [callback => callback(null, conn), input, output])
 
   async.waterfall(tasks, (err, conn) => {
     if (err) return logger.error(err)
+
     logger.verbose(
       `Total memory used: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(
         2

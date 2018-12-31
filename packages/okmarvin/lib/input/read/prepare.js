@@ -15,14 +15,11 @@ module.exports = (conn, callback) =>
             siteConfig: callback => readSiteConfig(conn, callback),
             files: callback => readFiles(conn, callback)
           },
-          (err, { cache, okmarvinConfig, siteConfig, files }) => {
+          (err, results) => {
             if (err) return callback(err)
             callback(null, {
               ...conn,
-              cache,
-              okmarvinConfig,
-              siteConfig,
-              files
+              ...results
             })
           }
         )

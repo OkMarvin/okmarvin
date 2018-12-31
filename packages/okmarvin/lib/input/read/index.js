@@ -11,9 +11,9 @@ const prepare = require('./prepare')
  */
 module.exports = async function (conn, callback) {
   const begin = Date.now()
+
   const { root, from } = conn
   const fromPath = path.join(root, from)
-
   if (!fs.existsSync(fromPath)) {
     // user should fix it
     return logger.warn(
@@ -21,8 +21,11 @@ module.exports = async function (conn, callback) {
     )
   }
 
-  async.waterfall([callback => callback(null, conn), prepare], (err, conn) => {
+  const tasks = [callback => callback(null, conn), prepare]
+
+  async.waterfall(tasks, (err, conn) => {
     if (err) return callback(err)
+
     logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
     callback(null, conn)
   })
