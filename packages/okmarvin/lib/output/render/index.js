@@ -7,8 +7,8 @@ const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()
-  const { files, siteConfig, layouts } = conn
-  const { theme, themeManifest } = siteConfig
+  const { files, siteConfig } = conn
+  const { theme, themeManifest, layouts } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(

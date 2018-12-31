@@ -1,11 +1,13 @@
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
-const promiseCatcher = require('../../helpers/promiseCatcher')
+const promiseCatcher = require('../../../helpers/promiseCatcher')
 const promiseThemeManifest = require('./promiseThemeManifest')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
-const ajv = require('../../helpers/ajv')
-const siteConfigSchema = require('../../schemas/siteConfig')
+const ajv = require('../../../helpers/ajv')
+const siteConfigSchema = require('../../../schemas/siteConfig')
 const logger = require('@parcel/logger')
+
+const readLayouts = require('./readLayouts')
 
 module.exports = async ({ root }, callback) => {
   const result = await promiseCatcher(
@@ -20,14 +22,18 @@ module.exports = async ({ root }, callback) => {
     return console.log(ajv.errors)
   }
   const siteConfig = { ...defaultSiteConfig, ...result[1] }
-  const themeManifestResult = await promiseCatcher(
-    promiseThemeManifest(root, siteConfig.theme)
-  )
-  if (themeManifestResult.length === 1) {
-    return callback(themeManifestResult[0])
+  const data = await Promise.all([
+    promiseThemeManifest(root, siteConfig.theme),
+    readLayouts(root, siteConfig.layoutHierarchy)
+  ])
+  if (data.length === 1) {
+    return callback(data[0])
   }
+  const [themeManifest, { layouts, layoutHash }] = data
   callback(null, {
     ...siteConfig,
-    themeManifest: themeManifestResult[1]
+    themeManifest,
+    layouts,
+    layoutHash
   })
 }

@@ -2,7 +2,7 @@ const path = require('path')
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 test('returns site configuration object', () => {
   return promiseUserSiteConfig(
-    path.join(__dirname, 'fixtures', '_config.toml')
+    path.join(__dirname, '..', 'fixtures', '_config.toml')
   ).then(data => {
     expect(data).toEqual({
       title: '陈三',
@@ -18,7 +18,7 @@ test('returns site configuration object', () => {
 test('throws', () => {
   const catcher = jest.fn()
   return promiseUserSiteConfig(
-    path.join(__dirname, 'fixtures', '_config.toml.x')
+    path.join(__dirname, '..', 'fixtures', '_config.toml.x')
   )
     .catch(catcher)
     .then(() => expect(catcher).toBeCalled())

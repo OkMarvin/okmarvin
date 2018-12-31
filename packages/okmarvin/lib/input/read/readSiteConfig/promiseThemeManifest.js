@@ -1,8 +1,8 @@
 // read theme manifest json file
 // then merge with siteConfig object
 const fs = require('fs')
-const ajv = require('../../helpers/ajv')
-const themeSchema = require('../../schemas/theme')
+const ajv = require('../../../helpers/ajv')
+const themeSchema = require('../../../schemas/theme')
 module.exports = function (root, theme) {
   return new Promise((resolve, reject) => {
     const themeRoot = require.resolve(theme, { paths: [root] })

@@ -5,8 +5,6 @@ const logger = require('@parcel/logger')
 const prettyTime = require('../../helpers/prettyTime')
 
 const prepare = require('./prepare')
-const readLayouts = require('./readLayouts')
-const diffLayout = require('./diffLayout')
 
 /**
  * Prepare data here for okmarvin
@@ -23,12 +21,9 @@ module.exports = async function (conn, callback) {
     )
   }
 
-  async.waterfall(
-    [callback => callback(null, conn), prepare, readLayouts, diffLayout],
-    (err, conn) => {
-      if (err) return callback(err)
-      logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
-      callback(null, conn)
-    }
-  )
+  async.waterfall([callback => callback(null, conn), prepare], (err, conn) => {
+    if (err) return callback(err)
+    logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
+    callback(null, conn)
+  })
 }
