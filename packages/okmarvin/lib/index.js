@@ -16,10 +16,12 @@ module.exports = function ({
   clean = true // default to true, it might have bugs when set to false
 } = {}) {
   logger.setOptions({ logLevel })
+
   if (clean === false) {
     // warn user the possible bugs `false` clean might bring
     logger.warn('Might have bug when clean set to `false`!!')
   }
+
   logger.log('Ok Marvin, lets do it.')
 
   const conn = {
@@ -31,14 +33,12 @@ module.exports = function ({
   }
 
   let tasks = [callback => callback(null, conn), input]
-  if (devHook === false) {
-    tasks = tasks.concat([output])
-  } else {
-    // use okmarvin in dev environment for developing theme
-    // devHook should be function
-    // function devHook (conn, callback) {}
-    tasks = tasks.concat([devHook])
-  }
+
+  // use okmarvin in dev environment for developing theme
+  // devHook should be function
+  // function devHook (conn, callback) {}
+  devHook ? (tasks = tasks.concat(devHook)) : (tasks = tasks.concat(output))
+
   async.waterfall(tasks, (err, conn) => {
     if (err) return logger.error(err)
     logger.verbose(
