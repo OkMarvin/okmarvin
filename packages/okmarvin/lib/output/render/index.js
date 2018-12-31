@@ -7,10 +7,12 @@ const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()
-  const { files, siteConfig } = conn
+  const { files, siteConfig, clean } = conn
   const { theme, themeManifest, layouts } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
+  const dirtyFiles = files.filter(file => file.dirty)
+  const cleanFiles = files.filter(file => !file.dirty)
   async.waterfall(
     [
       callback => {
@@ -32,7 +34,7 @@ module.exports = function (conn, callback) {
       },
       (clientJS, callback) => {
         async.map(
-          files,
+          clean === false ? dirtyFiles : files,
           function (file, callback) {
             if (path.extname(file.permalink) === '.xml') {
               // no need to compiled
@@ -82,10 +84,12 @@ module.exports = function (conn, callback) {
     ],
     function (err, files) {
       if (err) return callback(err)
-      logger.success(`Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`)
+      logger.success(
+        `Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`
+      )
       callback(null, {
         ...conn,
-        files
+        files: clean === true ? files : [...files, ...cleanFiles]
       })
     }
   )
