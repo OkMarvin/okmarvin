@@ -8,5 +8,5 @@ test('diffLayout', () => {
   const callback = jest.fn()
   diffLayout(conn, callback)
   expect(callback).toBeCalled()
-  expect(callback).toBeCalledWith(null, true)
+  expect(callback).toBeCalledWith(null, { ...conn, clean: true })
 })

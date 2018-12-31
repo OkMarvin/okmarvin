@@ -2,8 +2,7 @@ const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const {
     cache: { layoutHash: lastLayoutHash },
-    siteConfig: { layoutHash },
-    clean
+    siteConfig: { layoutHash }
   } = conn
   if (
     lastLayoutHash.length === layoutHash.length &&
@@ -13,10 +12,10 @@ module.exports = function (conn, callback) {
   ) {
     // nothing changed
     logger.verbose('layouts kept the same')
-    callback(null, clean)
+    callback(null, conn)
   } else {
     // some layouts changed, regenerate all
     logger.verbose('layouts changed')
-    callback(null, true)
+    callback(null, { ...conn, clean: true })
   }
 }

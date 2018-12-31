@@ -1,5 +1,4 @@
 const async = require('neo-async')
-const diffLayout = require('./diffLayout')
 const computeFilesLayout = require('./computeFilesLayout')
 /**
  * Compute layout for all files
@@ -7,8 +6,7 @@ const computeFilesLayout = require('./computeFilesLayout')
 module.exports = function (conn, callback) {
   async.parallel(
     {
-      files: callback => computeFilesLayout(conn, callback),
-      clean: callback => diffLayout(conn, callback)
+      files: callback => computeFilesLayout(conn, callback)
     },
     (err, results) => {
       if (err) return callback(err)
