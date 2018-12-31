@@ -2,7 +2,7 @@ const async = require('neo-async')
 const read = require('./read')
 const parse = require('./parse')
 const compose = require('./compose')
-const calculate = require('./calculate')
+const compute = require('./compute')
 const guard = require('./guard')
 module.exports = (conn, callback) => {
   async.waterfall(
@@ -11,7 +11,7 @@ module.exports = (conn, callback) => {
       read,
       parse,
       compose,
-      calculate,
+      compute,
       guard
     ], callback
   )

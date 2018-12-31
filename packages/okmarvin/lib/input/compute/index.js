@@ -1,6 +1,6 @@
 const async = require('neo-async')
 /**
- * Calculate layout for all files
+ * Compute layout for all files
  */
 module.exports = function (conn, callback) {
   const {
