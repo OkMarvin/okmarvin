@@ -36,7 +36,7 @@ _%>
       <pubDate><%= format(item['datePublished'], 'ddd, DD MMM YYYY hh:mm:ss ZZ') %></pubDate>
       <dc:creator><![CDATA[<%= item['author'] %>]]></dc:creator>
       <guid isPermaLink="false"><%= item['permalink'] %></guid>
-      <content:encoded><![CDATA[<%- item['html'] %>]]></content:encoded>
+      <content:encoded><![CDATA[<%- item['content'] %>]]></content:encoded>
     </item>
     <%_ } _%>
   </channel>
