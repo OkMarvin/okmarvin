@@ -7,7 +7,7 @@ module.exports = function (root, theme) {
   return new Promise((resolve, reject) => {
     const themeRoot = require.resolve(theme, { paths: [root] })
     fs.readFile(themeRoot, 'utf8', (err, manifestStr) => {
-      if (err) return reject(err)
+      if (err) return resolve({})
       const theme = JSON.parse(manifestStr)
       if (!ajv.validate(themeSchema, theme)) {
         return reject(ajv.errors)
