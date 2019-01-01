@@ -24,8 +24,6 @@ module.exports = function ({
     logger.warn('Might have bug when clean set to `false`!!')
   }
 
-  logger.log('Ok Marvin, lets do it.')
-
   const conn = {
     root: process.cwd(),
     from: source,
