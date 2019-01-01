@@ -7,7 +7,7 @@ module.exports = function (conn, callback) {
   const begin = Date.now()
   const { files } = conn
   const { root, to, builtAt, siteConfig } = conn
-  const { themeManifest, layoutHash } = siteConfig
+  const { themeManifest, layoutHash, clientJsManifest } = siteConfig
   async.parallel(
     [
       callback => {
@@ -16,6 +16,7 @@ module.exports = function (conn, callback) {
           {
             lastBuiltAt: builtAt,
             lastThemeManifest: themeManifest,
+            lastClientJsManifest: clientJsManifest,
             files: files.map(file => file.permalink),
             layoutHash
           },
