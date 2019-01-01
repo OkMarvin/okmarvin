@@ -57,9 +57,37 @@ module.exports = async function (args) {
   }
   if (cmd === 'new') {
     if (type === 'site') {
+      const [, , dir] = cli.input
+      if (!dir) {
+        return inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'dir',
+              message: 'Please input your site name:'
+            }
+          ])
+          .then(({ dir }) => {
+            return createSite({ ...cli, input: [cmd, type, dir] })
+          })
+      }
       return createSite(cli)
     }
     if (type === 'post' || type === 'page' || type === 'draft') {
+      const [, , title] = cli.input
+      if (!title) {
+        return inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'title',
+              message: `Please input your ${type} title:`
+            }
+          ])
+          .then(({ title }) => {
+            return createArticle({ ...cli, input: [cmd, type, title] })
+          })
+      }
       return createArticle(cli)
     }
     if (type === 'theme') {

@@ -6,9 +6,7 @@ module.exports = function (cli) {
   const type = cli.input[1]
   const title = cli.input[2]
   const { source } = cli.flags
-  if (!title) {
-    return logger.error(`Please specify title for your ${type}`)
-  }
+
   const cwd = process.cwd()
   const target = path.join(cwd, source, type, title, 'index.md')
   if (fs.pathExistsSync(target)) {

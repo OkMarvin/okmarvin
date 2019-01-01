@@ -6,7 +6,9 @@ module.exports = async function () {
   let update = null
   logger.progress('Checking update for okmarvin...')
   try {
-    update = await checkForUpdate(pkg)
+    update = await checkForUpdate(pkg, {
+      interval: 3600000
+    })
   } catch (err) {
     return logger.error(`Failed to check for updates: ${err}`)
   }
