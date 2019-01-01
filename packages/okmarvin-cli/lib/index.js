@@ -2,7 +2,9 @@ const meow = require('meow')
 const logger = require('@parcel/logger')
 const createSite = require('./createSite')
 const createArticle = require('./createArticle')
+const createTheme = require('./createTheme')
 const buildSite = require('./buildSite')
+const inquirer = require('inquirer')
 module.exports = async function (args) {
   const cli = meow(
     `
@@ -59,6 +61,23 @@ module.exports = async function (args) {
     }
     if (type === 'post' || type === 'page' || type === 'draft') {
       return createArticle(cli)
+    }
+    if (type === 'theme') {
+      const [, , name] = cli.input
+      if (!name) {
+        return inquirer
+          .prompt([
+            {
+              type: 'input',
+              name: 'name',
+              message: 'Please input your theme name:'
+            }
+          ])
+          .then(answers => {
+            return createTheme(answers['name'])
+          })
+      }
+      return createTheme(name)
     }
     logger.error(`Type '${type}' is not supported`)
   }
