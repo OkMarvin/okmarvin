@@ -22,6 +22,7 @@
     "@parcel/logger": "^1.11.0",
     "date-fns": "^1.29.0",
     "fs-extra": "^7.0.0",
+    "inquirer": "^6.2.1",
     "meow": "^5.0.0",
     "update-check": "^1.5.2"
   }
