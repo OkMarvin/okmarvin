@@ -2,8 +2,10 @@ const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const {
     cache: { layoutHash: lastLayoutHash },
-    siteConfig: { layoutHash }
+    siteConfig: { layoutHash },
+    clean
   } = conn
+  if (clean) return callback(null, conn)
   if (
     lastLayoutHash.length === layoutHash.length &&
     lastLayoutHash.every(function (element, index) {
