@@ -74,21 +74,19 @@ module.exports = async function (args) {
       return createSite(cli)
     }
     if (type === 'post' || type === 'page' || type === 'draft') {
-      const [, , title] = cli.input
+      let [, , title] = cli.input
       if (!title) {
-        return inquirer
-          .prompt([
-            {
-              type: 'input',
-              name: 'title',
-              message: `Please input your ${type} title:`
-            }
-          ])
-          .then(({ title }) => {
-            return createArticle({ ...cli, input: [cmd, type, title] })
-          })
+        const { title: _title } = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'title',
+            message: `Please input your ${type} title:`,
+            default: `this is default ${type} title`
+          }
+        ])
+        title = _title
       }
-      return createArticle(cli)
+      return createArticle({ ...cli, input: [cmd, type, title] })
     }
     if (type === 'theme') {
       const [, , name] = cli.input
