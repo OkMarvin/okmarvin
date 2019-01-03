@@ -52,62 +52,86 @@ module.exports = async function (args) {
   if (!cmd) {
     cli.showHelp()
   }
-  if (cmd !== 'new' && cmd !== 'build') {
-    logger.error(`Command '${cmd}' is not supported`)
-  }
-  if (cmd === 'new') {
-    if (type === 'site') {
-      const [, , dir] = cli.input
-      if (!dir) {
-        return inquirer
-          .prompt([
-            {
-              type: 'input',
-              name: 'dir',
-              message: 'Please input your site name:'
-            }
-          ])
-          .then(({ dir }) => {
-            return createSite({ ...cli, input: [cmd, type, dir] })
-          })
-      }
-      return createSite(cli)
-    }
-    if (type === 'post' || type === 'page' || type === 'draft') {
-      let [, , title] = cli.input
-      if (!title) {
-        const { title: _title } = await inquirer.prompt([
-          {
-            type: 'input',
-            name: 'title',
-            message: `Please input your ${type} title:`,
-            default: `this is default ${type} title`
+  switch (cmd) {
+    case 'new':
+      switch (type) {
+        case 'site':
+          let [, , dir] = cli.input
+          if (!dir) {
+            const { dir: _dir } = await inquirer.prompt([
+              {
+                type: 'input',
+                name: 'dir',
+                message: 'Please input your site name:'
+              }
+            ])
+            dir = _dir
           }
-        ])
-        title = _title
+          createSite({ ...cli, input: [cmd, type, dir] })
+          break
+        case 'post':
+        case 'page':
+        case 'draft':
+          let [, , title] = cli.input
+          if (!title) {
+            const { title: _title } = await inquirer.prompt([
+              {
+                type: 'input',
+                name: 'title',
+                message: `Please input your ${type} title:`,
+                default: `this is default ${type} title`
+              }
+            ])
+            title = _title
+          }
+          createArticle({ ...cli, input: [cmd, type, title] })
+          break
+        case 'theme':
+          let [, , name, framework] = cli.input
+          if (!name) {
+            const { name: _name } = await inquirer.prompt([
+              {
+                type: 'input',
+                name: 'name',
+                message: 'Please input your theme name:'
+              }
+            ])
+            name = _name
+          }
+          if (!framework) {
+            const { framework: _framework } = await inquirer.prompt([
+              {
+                type: 'list',
+                name: 'framework',
+                message: 'Which framework do you wan to use?',
+                choices: [
+                  {
+                    name: 'React.js',
+                    value: 'react'
+                  },
+                  {
+                    name: 'Vue.js',
+                    value: 'vue'
+                  }
+                ]
+              }
+            ])
+            framework = _framework
+          }
+          return createTheme(name, framework)
+
+        default:
+          logger.error(`Type '${type}' is not supported`)
+          break
       }
-      return createArticle({ ...cli, input: [cmd, type, title] })
-    }
-    if (type === 'theme') {
-      const [, , name] = cli.input
-      if (!name) {
-        return inquirer
-          .prompt([
-            {
-              type: 'input',
-              name: 'name',
-              message: 'Please input your theme name:'
-            }
-          ])
-          .then(answers => {
-            return createTheme(answers['name'])
-          })
-      }
-      return createTheme(name)
-    }
-    logger.error(`Type '${type}' is not supported`)
-  }
-  if (cmd === 'build') {
-    buildSite(cli)
+      break
+
+    case 'build':
+      buildSite(cli)
+      break
+
+    default:
+      logger.error(`Command '${cmd}' is not supported`)
+      break
   }
 }
