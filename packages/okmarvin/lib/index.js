@@ -10,6 +10,7 @@ const prettyTime = require('./helpers/prettyTime')
  * An opinionated static site generator with Component as template.
  */
 module.exports = function ({
+  root = process.cwd(),
   source = 'content', // where to read markdown files
   destination = 'dist', // where to output
   devHook = false, // we can hook into waterfall with devHook
@@ -25,7 +26,7 @@ module.exports = function ({
   }
 
   const conn = {
-    root: process.cwd(),
+    root,
     from: source,
     to: destination,
     builtAt: Date.now(),
