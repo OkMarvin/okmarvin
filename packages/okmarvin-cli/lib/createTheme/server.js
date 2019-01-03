@@ -1,4 +1,5 @@
-const okmarvin = require('@okmarvin/okmarvin')
+module.exports = function (root) {
+  return `const okmarvin = require('@okmarvin/okmarvin')
 const chokidar = require('chokidar')
 const fs = require('fs')
 const path = require('path')
@@ -6,7 +7,7 @@ const Bundler = require('parcel-bundler')
 const bundler = new Bundler(path.join(__dirname, 'index.html'), {
   outDir: 'public'
 })
-const root = path.join(__dirname, '..', '..')
+const root = '${root}'
 bundler.on('buildEnd', () => {
   if (!watcher) {
     watcher = chokidar.watch(
@@ -18,7 +19,7 @@ bundler.on('buildEnd', () => {
       {
         useFsEvents:
           process.platform === 'darwin' && process.env.NODE_ENV !== 'test',
-        ignored: /(^|[/\\])\../,
+        ignored: /(^|[/\\\\])\\../,
         ignoreInitial: true
       }
     )
@@ -44,3 +45,5 @@ const devHook = function (conn, callback) {
   )
 }
 okmarvin({ devHook, root })
+`
+}

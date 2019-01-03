@@ -4,6 +4,7 @@ const logger = require('@parcel/logger')
 const inquirer = require('inquirer')
 const react = require('./react')
 const html = require('./html')
+const server = require('./server')
 module.exports = async function (name, framework) {
   const target = path.join(process.cwd(), 'themes', name)
 
@@ -41,6 +42,12 @@ module.exports = async function (name, framework) {
 
   // write index.html
   fs.outputFileSync(path.join(target, 'index.html'), html(name))
+
+  // write server.js
+  fs.outputFileSync(
+    path.join(target, 'server.js'),
+    server(path.relative(target, process.cwd()))
+  )
 
   logger.success(`'themes/${name}' created successfully!`)
 }
