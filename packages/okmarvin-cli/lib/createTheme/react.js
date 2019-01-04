@@ -27,7 +27,10 @@ module.exports = function (name) {
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "babel-loader": "^8.0.2",
-    "chokidar": "^2.0.3"
+    "chokidar": "^2.0.3",
+    "connect-history-api-fallback": "^1.5.0",
+    "express": "^4.16.4",
+    "get-port": "^4.1.0"
   },
   "scripts": {
     "start": "node server.js",
