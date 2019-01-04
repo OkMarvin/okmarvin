@@ -48,12 +48,45 @@ module.exports = async function (args) {
       }
     }
   )
-  const [cmd, type] = cli.input
+  let [cmd, type] = cli.input
   if (!cmd) {
     cli.showHelp()
   }
+
   switch (cmd) {
     case 'new':
+      if (!type) {
+        const { type: _type } = await inquirer.prompt([
+          {
+            type: 'list',
+            name: 'type',
+            message: 'Which one do you want to new?',
+            choices: [
+              {
+                name: 'Site',
+                value: 'site'
+              },
+              {
+                name: 'Post',
+                value: 'post'
+              },
+              {
+                name: 'Page',
+                value: 'page'
+              },
+              {
+                name: 'Draft',
+                value: 'draft'
+              },
+              {
+                name: 'Theme',
+                value: 'theme'
+              }
+            ]
+          }
+        ])
+        type = _type
+      }
       switch (type) {
         case 'site':
           let [, , dir] = cli.input
