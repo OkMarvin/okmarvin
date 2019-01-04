@@ -15,19 +15,19 @@ module.exports = function (
   <html lang="${lang}">
     <head>
       <title>${title}</title>
-      ${favicon && loadFavicon(favicon)}
+      ${favicon ? loadFavicon(favicon) : ''}
       ${loadStaticMeta()}
       ${loadCommon({ description, title, permalink }, { url, logo })}
-      ${themeColor && `<meta name="theme-color" content="${themeColor}" />`}
+      ${themeColor ? `<meta name="theme-color" content="${themeColor}" />` : ''}
       <meta property="og:type" content="article" />
       <style type="text/css">${styles}</style>
-      ${clientJS && preload('script', clientJS)}
-      ${logo && preload('image', logo)}
+      ${clientJS ? preload('script', clientJS) : ''}
+      ${logo ? preload('image', logo) : ''}
     </head>
     <body>
       <div id="___OkMarvin___">${rendered}</div>
-      ${clientJS && `<script src="${clientJS}"></script>`}
-      ${googleAnalytics && loadGoogleAnalytics(googleAnalytics)}
+      ${clientJS ? `<script src="${clientJS}"></script>` : ''}
+      ${googleAnalytics ? loadGoogleAnalytics(googleAnalytics) : ''}
         <script type="application/ld+json">
           {
             "@context": "http://schema.org",
