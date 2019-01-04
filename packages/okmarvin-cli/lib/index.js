@@ -53,6 +53,7 @@ module.exports = async function (args) {
   let [cmd, type] = cli.input
   if (!cmd) {
     cli.showHelp()
+    process.exit(0)
   }
 
   switch (cmd) {
@@ -157,7 +158,7 @@ module.exports = async function (args) {
 
         default:
           logger.error(`Type '${type}' is not supported`)
-          break
+          process.exit(0)
       }
       break
 
@@ -171,6 +172,6 @@ module.exports = async function (args) {
 
     default:
       logger.error(`Command '${cmd}' is not supported`)
-      break
+      process.exit(0)
   }
 }
