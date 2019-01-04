@@ -18,6 +18,6 @@ date: ${format(new Date(), 'YYYY-MM-DD')}
 ---`
   fs.outputFile(target, data, err => {
     if (err) return logger.error(err)
-    logger.success(`${target} created`)
+    logger.success(`${path.join(source, type, title, 'index.md')} created`)
   })
 }
