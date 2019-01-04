@@ -10,8 +10,8 @@ theme = "@okmarvin/january"
 
 rss = false
 paginate = 20
-favicon = "/static/img/favicon.png"
-logo = "/static/img/logo.svg"
+# favicon = "/static/img/favicon.png"
+# logo = "/static/img/logo.svg"
 
 [[menu]]
 text = "Home"
