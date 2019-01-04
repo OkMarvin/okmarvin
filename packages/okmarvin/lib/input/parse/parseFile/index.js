@@ -67,8 +67,8 @@ module.exports = function (conn, file, callback) {
     typeof lastBuiltAt === 'undefined' ? true : ctimeMs > lastBuiltAt
   callback(null, {
     ...file,
-    title: escapeTextForBrowser(title),
-    author: escapeTextForBrowser(fileAuthor || siteAuthor),
+    title: title,
+    author: fileAuthor || siteAuthor,
     description: escapeTextForBrowser(
       description ||
         excerpt ||
