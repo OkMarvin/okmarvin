@@ -25,15 +25,15 @@ const historyOptions = {
       from: /\\.(jpg|jpeg|png|gif|webp)$/i,
       to: function(context) {
         const pathname = context.parsedUrl.pathname
-        const { files, source } = app.locals.conn
+        const { files, from } = app.locals.conn
         const findParent = files.find(
           file =>
             file.permalink === pathname.replace(path.basename(pathname), '')
         )
         return (
           '/' +
-          source +
-          path.dirname(findParent.filePath.split(source)[1]) +
+          from +
+          path.dirname(findParent.filePath.split(from)[1]) +
           '/' +
           path.basename(context.parsedUrl.pathname)
         )
