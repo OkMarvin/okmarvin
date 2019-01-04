@@ -1,5 +1,5 @@
 title = "okmarvin"
-description = "Static site generator with better theme developer experience."
+description = "Static site generator with component as template."
 author = "Sam Chen"
 # base url
 url = "https://okmarvin.com"
