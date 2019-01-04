@@ -5,6 +5,7 @@ const createArticle = require('./createArticle')
 const createTheme = require('./createTheme')
 const buildSite = require('./buildSite')
 const inquirer = require('inquirer')
+const serveSite = require('./serveSite')
 module.exports = async function (args) {
   const cli = meow(
     `
@@ -22,6 +23,7 @@ module.exports = async function (args) {
     $ okmarvin new post <title>
     $ okmarvin new page <title>
     $ okmarvin new draft <title>
+    $ okmarvin serve
   `,
     {
       flags: {
@@ -161,6 +163,10 @@ module.exports = async function (args) {
 
     case 'build':
       buildSite(cli)
+      break
+
+    case 'serve':
+      serveSite(cli)
       break
 
     default:
