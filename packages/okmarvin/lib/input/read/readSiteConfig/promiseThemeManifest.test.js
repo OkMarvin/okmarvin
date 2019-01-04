@@ -12,12 +12,3 @@ test('returns theme manifest', () => {
     })
   })
 })
-test('throws', () => {
-  const catcher = jest.fn()
-  return promiseThemeManifest(
-    path.join(__dirname, 'fixtures'),
-    './themes/broken'
-  )
-    .catch(catcher)
-    .then(() => expect(catcher).toBeCalled())
-})
