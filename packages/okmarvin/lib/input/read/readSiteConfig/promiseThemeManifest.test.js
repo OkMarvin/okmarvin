@@ -8,7 +8,8 @@ test('returns theme manifest', () => {
     expect(data).toEqual({
       'index.js': 'index.js',
       'post.js': 'post.js',
-      'page.js': 'page.js'
+      'page.js': 'page.js',
+      'client.js': 'client.abc.js'
     })
   })
 })

@@ -1,7 +1,6 @@
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseCatcher = require('../../../helpers/promiseCatcher')
 const promiseThemeManifest = require('./promiseThemeManifest')
-const promiseClientJsManifest = require('./promiseClientJsManifest')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
 const ajv = require('../../../helpers/ajv')
@@ -26,18 +25,22 @@ module.exports = async ({ root }, callback) => {
   const [err, data] = await promiseCatcher(
     Promise.all([
       promiseThemeManifest(root, siteConfig.theme),
-      readLayouts(root, siteConfig.layoutHierarchy),
-      promiseClientJsManifest(root, siteConfig.theme)
+      readLayouts(root, siteConfig.layoutHierarchy)
     ])
   )
   if (err) {
     return callback(err)
   }
-  const [themeManifest, { layouts, layoutHash }, clientJsManifest] = data
+  const [themeManifest, { layouts, layoutHash }] = data
+  const { 'client.js': clientJs, ...others } = themeManifest
   callback(null, {
     ...siteConfig,
-    themeManifest,
-    clientJsManifest,
+    themeManifest: {
+      ...others
+    },
+    clientJsManifest: {
+      'client.js': clientJs
+    },
     layouts,
     layoutHash
   })
