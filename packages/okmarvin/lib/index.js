@@ -30,7 +30,8 @@ module.exports = function ({
     from: source,
     to: destination,
     builtAt: Date.now(),
-    clean
+    clean,
+    devHook
   }
 
   let tasks
