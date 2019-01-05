@@ -4,6 +4,7 @@ const md = require('./md')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
 const escapeTextForBrowser = require('./escapeTextForBrowser')
+const logger = require('@parcel/logger')
 
 module.exports = function (conn, file, callback) {
   const {
@@ -56,7 +57,9 @@ module.exports = function (conn, file, callback) {
 
   if (!themeManifest[template]) {
     // we should warn user
-    callback(new Error(`${template} template does not exist`))
+    if (!conn.devHook) {
+      logger.warn(`${template} template does not exist`)
+    }
   }
   const templateChanged =
     themeManifest[template] !== lastThemeManifest[template]
