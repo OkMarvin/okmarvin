@@ -68,6 +68,10 @@ module.exports = function (conn, file, callback) {
     lastThemeManifest[template.replace('.js', '.css')]
   const markdownFileChanged =
     typeof lastBuiltAt === 'undefined' ? true : ctimeMs > lastBuiltAt
+
+  const isFileDirtyNow = clean === true ? true : markdownFileChanged || cssChanged || templateChanged
+
+  // TODO just pass raw file down if it's dirty
   callback(null, {
     ...file,
     title: title,
@@ -84,7 +88,7 @@ module.exports = function (conn, file, callback) {
     dateModified,
     permalink,
     template,
-    dirty: clean === true ? true : markdownFileChanged || cssChanged || templateChanged,
+    dirty: isFileDirtyNow,
     css: template.replace('.js', '.css'), //  template's css file
     content: (typeof fileToc !== 'undefined'
       ? fileToc
