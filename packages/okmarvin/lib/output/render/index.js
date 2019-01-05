@@ -8,27 +8,17 @@ const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = Date.now()
   const { files, siteConfig } = conn
-  const { theme, themeManifest, layouts } = siteConfig
+  const { theme, themeManifest, clientJsManifest, layouts } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
     [
       callback => {
-        const clientManifestPath = path.join(
-          themeRoot,
-          '/static/js/manifest.json'
-        )
-        fs.pathExists(clientManifestPath, (err, exists) => {
-          if (err) return callback(null, '')
-          if (!exists) return callback(null, '')
-          const clientManifest = require(clientManifestPath)
-          return callback(
-            null,
-            clientManifest['client.js']
-              ? `/static/js/${clientManifest['client.js']}`
-              : ''
-          )
-        })
+        if (clientJsManifest['client.js']) {
+          callback(null, `/static/js/${clientJsManifest['client.js']}`)
+        } else {
+          callback(null, '')
+        }
       },
       (clientJS, callback) => {
         async.map(
