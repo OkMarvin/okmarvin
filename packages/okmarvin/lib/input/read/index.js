@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs-extra')
-const async = require('neo-async')
 const logger = require('@parcel/logger')
 const prettyTime = require('../../helpers/prettyTime')
 
@@ -21,11 +20,8 @@ module.exports = async function (conn, callback) {
     )
   }
 
-  const tasks = [callback => callback(null, conn), prepare]
-
-  async.waterfall(tasks, (err, conn) => {
+  prepare(conn, (err, conn) => {
     if (err) return callback(err)
-
     logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
     callback(null, conn)
   })
