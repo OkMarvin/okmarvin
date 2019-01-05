@@ -16,6 +16,7 @@ module.exports = function (root, theme) {
         resolve(theme)
       })
     } catch (err) {
+      // theme might not exist
       resolve({})
     }
   })
