@@ -17,7 +17,6 @@ module.exports = async ({ root, from, devHook }, callback) => {
       )
     )
   )
-  console.log(filesResult[1].length)
   if (filesResult.length === 1) {
     return callback(filesResult[0])
   }
