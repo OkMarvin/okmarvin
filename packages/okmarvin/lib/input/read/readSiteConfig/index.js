@@ -11,25 +11,27 @@ const logger = require('@parcel/logger')
 const readLayouts = require('./readLayouts')
 
 module.exports = async ({ root }, callback) => {
-  const result = await promiseCatcher(
+  const [errFromReadingUserSiteConfig, userSiteConfig] = await promiseCatcher(
     promiseUserSiteConfig(path.join(root, '_config.toml'))
   )
-  if (result.length === 1) {
-    return callback(result[0])
+  if (errFromReadingUserSiteConfig) {
+    return callback(errFromReadingUserSiteConfig)
   }
   // here we want to make sure _config.toml has correct data
-  if (!ajv.validate(siteConfigSchema, result[1])) {
+  if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
     logger.warn('You have invalid configuration in _config.toml')
     return console.log(ajv.errors)
   }
-  const siteConfig = { ...defaultSiteConfig, ...result[1] }
-  const data = await Promise.all([
-    promiseThemeManifest(root, siteConfig.theme),
-    readLayouts(root, siteConfig.layoutHierarchy),
-    promiseClientJsManifest(root, siteConfig.theme)
-  ])
-  if (data.length === 1) {
-    return callback(data[0])
+  const siteConfig = { ...defaultSiteConfig, ...userSiteConfig }
+  const [err, data] = await promiseCatcher(
+    Promise.all([
+      promiseThemeManifest(root, siteConfig.theme),
+      readLayouts(root, siteConfig.layoutHierarchy),
+      promiseClientJsManifest(root, siteConfig.theme)
+    ])
+  )
+  if (err) {
+    return callback(err)
   }
   const [themeManifest, { layouts, layoutHash }, clientJsManifest] = data
   callback(null, {

@@ -1,9 +1,11 @@
 const promiseCatcher = require('../../helpers/promiseCatcher')
 const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
 module.exports = async ({ root }, callback) => {
-  const result = await promiseCatcher(promiseOkmarvinConfig(root))
-  if (result.length === 1) {
-    return callback(result[0])
+  const [err, okmarvinConfig] = await promiseCatcher(
+    promiseOkmarvinConfig(root)
+  )
+  if (err) {
+    return callback(err)
   }
-  callback(null, result[1])
+  callback(null, okmarvinConfig)
 }
