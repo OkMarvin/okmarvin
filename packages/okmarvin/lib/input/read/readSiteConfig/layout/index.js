@@ -34,6 +34,7 @@ module.exports = function (
           "name": "${title}",
           "description": "${description}"
         }
+        </script>
     </body>
   </html>`
 }
