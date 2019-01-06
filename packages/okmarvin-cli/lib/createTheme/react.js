@@ -42,10 +42,6 @@ module.exports = function (name) {
   ],
   "files": [
     "build"
-  ],
-  "dependencies": {
-    "prismjs": "^1.14.0",
-    "sanitize.css": "^8.0.0"
-  }
+  ]
 }`
 }
