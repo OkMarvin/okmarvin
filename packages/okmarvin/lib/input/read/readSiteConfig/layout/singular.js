@@ -1,4 +1,3 @@
-const { format } = require('date-fns')
 const preload = require('./common/preload')
 const loadFavicon = require('./common/loadFavicon')
 const loadStaticMeta = require('./common/loadStaticMeta')
@@ -28,22 +27,6 @@ module.exports = function (
       <div id="___OkMarvin___">${rendered}</div>
       ${clientJS ? `<script src="${clientJS}"></script>` : ''}
       ${googleAnalytics ? loadGoogleAnalytics(googleAnalytics) : ''}
-        <script type="application/ld+json">
-          {
-            "@context": "http://schema.org",
-            "@type": "BlogPosting",
-            "mainEntityOfPage": "${url + permalink}",
-            "url": "${url + permalink}",
-            "headline": "${title}",
-            "description": "${description}",
-            "datePublished": "${format(datePublished, 'YYYY-MM-DD')}",
-            "dateModified": "${format(dateModified, 'YYYY-MM-DD')}",
-            "author": {
-              "@type": "Person",
-              "name": "${author}"
-            }
-          }
-        </script>
     </body>
   </html>`
 }

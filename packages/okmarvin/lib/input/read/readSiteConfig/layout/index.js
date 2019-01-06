@@ -27,14 +27,6 @@ module.exports = function (
       <div id="___OkMarvin___">${rendered}</div>
       ${clientJS ? `<script src="${clientJS}"></script>` : ''}
       ${googleAnalytics ? loadGoogleAnalytics(googleAnalytics) : ''}
-        <script type='application/ld+json'>
-        {
-          "@context": "http://schema.org",
-          "@type": "Blog",
-          "name": "${title}",
-          "description": "${description}"
-        }
-        </script>
     </body>
   </html>`
 }
