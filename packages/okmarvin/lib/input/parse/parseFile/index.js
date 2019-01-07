@@ -9,7 +9,7 @@ const logger = require('@parcel/logger')
 module.exports = function (conn, file, callback) {
   const {
     root,
-    from,
+    source,
     builtAt,
     cache: { lastBuiltAt, lastThemeManifest },
     clean,
@@ -50,9 +50,9 @@ module.exports = function (conn, file, callback) {
       categories
     },
     new Date(datePublished),
-    path.relative(path.join(root, from), filePath)
+    path.relative(path.join(root, source), filePath)
   )
-  const fallbackTemplate = getFallbackTemplate(root, from, filePath)
+  const fallbackTemplate = getFallbackTemplate(root, source, filePath)
   const template = userSetTemplate || fallbackTemplate
 
   if (!themeManifest[template]) {

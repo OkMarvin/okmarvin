@@ -4,9 +4,9 @@ const promiseFileData = require('./promiseFileData')
 const promiseFilesPath = require('./promiseFilesPath')
 const logger = require('@parcel/logger')
 
-module.exports = async ({ root, from, devHook }, callback) => {
+module.exports = async ({ root, source, devHook }, callback) => {
   const [errFromReadingFilesPath, filesPath] = await promiseCatcher(
-    promiseFilesPath(path.join(root, from))
+    promiseFilesPath(path.join(root, source))
   )
   if (errFromReadingFilesPath) {
     return callback(errFromReadingFilesPath)

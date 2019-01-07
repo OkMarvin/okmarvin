@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const { join } = require('path')
 const requireResolve = require('../../helpers/requireResolve')
 module.exports = function (conn, callback) {
-  const { root, to, siteConfig } = conn
+  const { root, dest, siteConfig } = conn
   const { clientJsManifest, theme } = siteConfig
   const themeRoot = join(
     requireResolve(theme, { paths: [process.cwd()] }),
@@ -12,7 +12,7 @@ module.exports = function (conn, callback) {
     // client.js exist, copy to /static/js/
     fs.copy(
       join(themeRoot, clientJsManifest['client.js']),
-      join(root, to, 'static', 'js', clientJsManifest['client.js']),
+      join(root, dest, 'static', 'js', clientJsManifest['client.js']),
       err => {
         if (err) return callback(null, conn)
         return callback(null, conn)

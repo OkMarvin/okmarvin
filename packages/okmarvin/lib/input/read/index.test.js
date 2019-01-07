@@ -8,15 +8,15 @@ test('returns data', done => {
     expect(data).toHaveProperty('cache')
     expect(data).toHaveProperty('files')
     expect(data.files).toHaveLength(2)
-    expect(data).toHaveProperty('from', 'content')
-    expect(data).toHaveProperty('to', 'dist')
+    expect(data).toHaveProperty('source', 'content')
+    expect(data).toHaveProperty('dest', 'dist')
     done()
   }
   read(
     {
       root: path.join(__dirname, 'fixtures'),
-      from: 'content',
-      to: 'dist',
+      source: 'content',
+      dest: 'dist',
       builtAt: new Date().getTime()
     },
     callback

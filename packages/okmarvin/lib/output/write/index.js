@@ -9,7 +9,7 @@ const prettyTime = require('../../helpers/prettyTime')
 module.exports = function (conn, callback) {
   const begin = performance.now()
   const { files } = conn
-  const { root, to, builtAt, siteConfig } = conn
+  const { root, dest, builtAt, siteConfig } = conn
   const { themeManifest, layoutHash, clientJsManifest } = siteConfig
   async.parallel(
     [
@@ -37,7 +37,7 @@ module.exports = function (conn, callback) {
               path.extname(file.permalink) !== ''
                 ? file.permalink
                 : path.join(file.permalink, 'index.html')
-            const filePath = path.join(root, to, decodeURIComponent(target))
+            const filePath = path.join(root, dest, decodeURIComponent(target))
             fs.outputFile(filePath, file.html, callback)
           },
           callback

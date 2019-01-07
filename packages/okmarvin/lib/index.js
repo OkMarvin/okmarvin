@@ -32,11 +32,11 @@ module.exports = function ({
 
   const conn = {
     root,
-    from: source,
-    to: dest,
-    builtAt: Date.now(),
+    source,
+    dest,
     clean,
-    devHook
+    devHook,
+    builtAt: Date.now()
   }
 
   let tasks

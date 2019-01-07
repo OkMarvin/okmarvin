@@ -13,12 +13,12 @@ const prepare = require('./prepare')
 module.exports = async function (conn, callback) {
   const begin = performance.now()
 
-  const { root, from } = conn
-  const fromPath = path.join(root, from)
+  const { root, source } = conn
+  const fromPath = path.join(root, source)
   if (!fs.existsSync(fromPath)) {
     // user should fix it
     return logger.warn(
-      `Oops, nothing to do because "${from}" directory does not exist.`
+      `Oops, nothing to do because "${source}" directory does not exist.`
     )
   }
 
