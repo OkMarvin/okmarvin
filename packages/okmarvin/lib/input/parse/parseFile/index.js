@@ -5,7 +5,7 @@ const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
 const escapeTextForBrowser = require('./escapeTextForBrowser')
 const logger = require('@parcel/logger')
-
+// TODO some can be lazy parsed for better performance??
 module.exports = function (conn, file, callback) {
   const {
     root,
