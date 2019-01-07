@@ -32,6 +32,7 @@ module.exports = (conn, callback) =>
         if (err) {
           return callback(err)
         }
+
         const [themeManifest, { layouts, layoutHash }] = results
         const { 'client.js': clientJs, ...others } = themeManifest
         callback(null, {
