@@ -1,0 +1,9 @@
+{
+  "name": "@okmarvin/promise-catcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Sam Chen",
+  "license": "MIT"
+}

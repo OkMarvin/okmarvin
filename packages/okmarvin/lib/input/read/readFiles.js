@@ -1,5 +1,5 @@
 const path = require('path')
-const promiseCatcher = require('../../helpers/promiseCatcher')
+const promiseCatcher = require('@okmarvin/promise-catcher')
 const promiseFileData = require('./promiseFileData')
 const promiseFilesPath = require('./promiseFilesPath')
 const logger = require('@parcel/logger')

@@ -1,5 +1,5 @@
 const promiseUserSiteConfig = require('./promiseUserSiteConfig')
-const promiseCatcher = require('../../../helpers/promiseCatcher')
+const promiseCatcher = require('@okmarvin/promise-catcher')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
 const ajv = require('../../../helpers/ajv')

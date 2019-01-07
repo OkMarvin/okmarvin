@@ -19,6 +19,7 @@
     "@okmarvin/generate-feed": "^0.1.10",
     "@okmarvin/generate-sitemap": "^0.1.6",
     "@okmarvin/markdown-it-toc": "^0.0.18",
+    "@okmarvin/promise-catcher": "^1.0.0",
     "@okmarvin/slug": "^0.0.8",
     "@parcel/logger": "^1.11.0",
     "ajv": "^6.6.2",
