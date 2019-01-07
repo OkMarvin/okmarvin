@@ -7,20 +7,17 @@ const siteConfigSchema = require('../../../schemas/siteConfig')
 const logger = require('@parcel/logger')
 
 module.exports = async ({ root }, callback) => {
-  const [errFromReadingUserSiteConfig, userSiteConfig] = await promiseCatcher(
+  const [err, userSiteConfig] = await promiseCatcher(
     promiseUserSiteConfig(path.join(root, '_config.toml'))
   )
-  if (errFromReadingUserSiteConfig) {
-    return callback(errFromReadingUserSiteConfig)
+  if (err) {
+    return callback(err)
   }
   // here we want to make sure _config.toml has correct data
   if (!ajv.validate(siteConfigSchema, userSiteConfig)) {
     logger.warn('You have invalid configuration in _config.toml')
     return console.log(ajv.errors)
   }
-  const siteConfig = { ...defaultSiteConfig, ...userSiteConfig }
 
-  callback(null, {
-    ...siteConfig
-  })
+  callback(null, { ...defaultSiteConfig, ...userSiteConfig })
 }
