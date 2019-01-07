@@ -28,5 +28,6 @@
     "meow": "^5.0.0",
     "serve-static": "^1.13.2",
     "update-check": "^1.5.2"
-  }
+  },
+  "gitHead": "11882f4b843eb5f45ec848945af0a26498084065"
 }

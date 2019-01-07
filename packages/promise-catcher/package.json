@@ -5,5 +5,9 @@
   "main": "index.js",
   "keywords": [],
   "author": "Sam Chen",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "gitHead": "11882f4b843eb5f45ec848945af0a26498084065"
 }
