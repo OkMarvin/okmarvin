@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const fs = require('fs-extra')
 const logger = require('@parcel/logger')
@@ -14,8 +16,8 @@ module.exports = async function (conn, callback) {
   const begin = performance.now()
 
   const { root, source } = conn
-  const fromPath = path.join(root, source)
-  if (!fs.existsSync(fromPath)) {
+  const sourcePath = path.join(root, source)
+  if (!fs.existsSync(sourcePath)) {
     // user should fix it
     return logger.warn(
       `Oops, nothing to do because "${source}" directory does not exist.`
@@ -24,6 +26,7 @@ module.exports = async function (conn, callback) {
 
   prepare(conn, (err, conn) => {
     if (err) return callback(err)
+
     logger.success(`Read in ${prettyTime(performance.now() - begin)}`)
     callback(null, conn)
   })

@@ -1,7 +1,7 @@
 const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const {
-    cache: { lastClientJsManifest },
+    cache: { clientJsManifest: lastClientJsManifest },
     siteConfig: { clientJsManifest },
     clean
   } = conn

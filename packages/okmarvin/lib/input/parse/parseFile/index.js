@@ -11,7 +11,7 @@ module.exports = function (conn, file, callback) {
     root,
     source,
     builtAt,
-    cache: { lastBuiltAt, lastThemeManifest },
+    cache: { builtAt: lastBuiltAt, themeManifest: lastThemeManifest },
     clean,
     okmarvinConfig,
     siteConfig: {
