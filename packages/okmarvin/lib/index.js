@@ -1,3 +1,4 @@
+'use strict'
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 
