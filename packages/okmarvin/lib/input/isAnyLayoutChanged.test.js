@@ -8,5 +8,5 @@ test('isAnyLayoutChanged', () => {
   const callback = jest.fn()
   isAnyLayoutChanged(conn, callback)
   expect(callback).toBeCalled()
-  expect(callback).toBeCalledWith(null, { ...conn, clean: true })
+  expect(callback).toBeCalledWith(null, true)
 })

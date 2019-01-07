@@ -5,7 +5,7 @@ module.exports = function (conn, callback) {
     layoutHash,
     clean
   } = conn
-  if (clean) return callback(null, conn)
+  if (clean) return callback(null, true)
   if (
     lastLayoutHash.length === layoutHash.length &&
     lastLayoutHash.every(function (element, index) {
@@ -14,10 +14,10 @@ module.exports = function (conn, callback) {
   ) {
     // nothing changed
     logger.verbose('Layouts kept the same')
-    callback(null, conn)
+    callback(null, false)
   } else {
     // some layouts changed, regenerate all
     logger.verbose('Layouts changed')
-    callback(null, { ...conn, clean: true })
+    callback(null, true)
   }
 }

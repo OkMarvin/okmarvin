@@ -6,12 +6,12 @@ module.exports = function (conn, callback) {
     okmarvinConfig,
     clean
   } = conn
-  if (clean) return callback(null, conn)
+  if (clean) return callback(null, true)
   if (!isEqual(okmarvinConfig, lastOkmarvinConfig)) {
     logger.verbose(`okmarvinConfig changed`)
-    callback(null, { ...conn, clean: true })
+    callback(null, true)
   } else {
     logger.verbose(`okmarvinConfig kept the same`)
-    callback(null, conn)
+    callback(null, false)
   }
 }
