@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/OkMarvin/okmarvin.svg?branch=master)](https://travis-ci.org/OkMarvin/okmarvin)
 
-okmarvin is an opinionated static site generator with **Component** built in React as template.
+okmarvin is an opinionated static site generator with **Component** as template.
 
 ## Developing
 
