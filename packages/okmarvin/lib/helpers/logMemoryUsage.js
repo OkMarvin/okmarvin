@@ -1,7 +1,7 @@
 const logger = require('@parcel/logger')
-module.exports = () => {
+module.exports = (type = 'rss') => {
   logger.verbose(
-    `Total memory used: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(
+    `${type} memory used: ${(process.memoryUsage()[type] / 1024 / 1024).toFixed(
       2
     )}MB`
   )
