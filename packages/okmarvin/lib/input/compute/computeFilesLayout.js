@@ -2,7 +2,8 @@ const async = require('neo-async')
 module.exports = (conn, callback) => {
   const {
     files,
-    siteConfig: { layoutHierarchy, layouts }
+    layouts,
+    siteConfig: { layoutHierarchy }
   } = conn
   async.map(
     files,
@@ -11,7 +12,7 @@ module.exports = (conn, callback) => {
       const candidateLayouts = layoutHierarchy[layout || template]
       let useLayout
       for (let i in candidateLayouts) {
-        if (layouts.has(candidateLayouts[i])) {
+        if (layouts[candidateLayouts[i]]) {
           useLayout = candidateLayouts[i]
           break
         }

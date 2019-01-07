@@ -1,4 +1,4 @@
-const requireResolve = require('../../../helpers/requireResolve')
+const requireResolve = require('../../helpers/requireResolve')
 const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')
@@ -19,13 +19,13 @@ module.exports = (root, layoutHierarchy) => {
     async.parallel(
       {
         layouts: callback => {
-          const layouts = new Map()
+          const layouts = {}
           findMe.forEach(file => {
             try {
               const layout = requireResolve(file, {
                 paths: layoutPaths
               })
-              layouts.set(file, require(layout))
+              layouts[file] = require(layout)
             } catch (_err) {
             // do nothing
             }

@@ -11,8 +11,15 @@ const prettyTime = require('../../helpers/prettyTime')
 module.exports = function (conn, callback) {
   const begin = performance.now()
   const { files, okmarvinConfig } = conn
-  const { root, dest, builtAt, siteConfig } = conn
-  const { themeManifest, layoutHash, clientJsManifest } = siteConfig
+  const {
+    root,
+    dest,
+    builtAt,
+    siteConfig,
+    themeManifest,
+    layoutHash,
+    clientJsManifest
+  } = conn
   async.parallel(
     [
       callback => {

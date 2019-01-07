@@ -6,8 +6,6 @@ module.exports = function (conn, callback) {
     siteConfig,
     clean
   } = conn
-  console.log('siteConfig', siteConfig)
-  console.log('lastSiteConfig', lastSiteConfig)
   if (clean) return callback(null, conn)
   if (!isEqual(siteConfig, lastSiteConfig)) {
     logger.verbose(`siteConfig changed`)

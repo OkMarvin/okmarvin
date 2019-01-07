@@ -2,7 +2,7 @@ const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const {
     cache: { layoutHash: lastLayoutHash },
-    siteConfig: { layoutHash },
+    layoutHash,
     clean
   } = conn
   if (clean) return callback(null, conn)

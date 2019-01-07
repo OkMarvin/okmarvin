@@ -8,7 +8,7 @@ const compose404 = require('./compose404')
 module.exports = function (conn, callback) {
   const {
     files,
-    siteConfig: { themeManifest }
+    themeManifest
   } = conn
   let composes = [
     callback => composeFeed(conn, callback),

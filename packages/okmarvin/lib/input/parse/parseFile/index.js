@@ -14,9 +14,9 @@ module.exports = function (conn, file, callback) {
     cache: { builtAt: lastBuiltAt, themeManifest: lastThemeManifest },
     clean,
     okmarvinConfig,
+    themeManifest,
     siteConfig: {
       permalink: defaultPermalink,
-      themeManifest,
       author: siteAuthor,
       toc: siteToc
     }

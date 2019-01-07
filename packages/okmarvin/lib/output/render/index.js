@@ -10,8 +10,8 @@ const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
 module.exports = function (conn, callback) {
   const begin = performance.now()
-  const { files, siteConfig } = conn
-  const { theme, themeManifest, clientJsManifest, layouts } = siteConfig
+  const { files, siteConfig, themeManifest, clientJsManifest, layouts } = conn
+  const { theme } = siteConfig
   const { root } = conn
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
@@ -55,7 +55,7 @@ module.exports = function (conn, callback) {
                    */
                   const rendered = react(Component, { file, siteConfig })
                   // find the first could be use
-                  const useLayout = layouts.get(file.layout)
+                  const useLayout = layouts[file.layout]
                   const html = useLayout(
                     file,
                     siteConfig,
