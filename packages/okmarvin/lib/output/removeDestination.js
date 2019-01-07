@@ -2,9 +2,9 @@ const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
-  fs.remove(path.join(conn.root, conn.to), err => {
+  fs.remove(path.join(conn.root, conn.dest), err => {
     if (err) return callback(err)
-    logger.verbose(`Cleaned '${conn.to}' directory`)
+    logger.verbose(`Cleaned '${conn.dest}' directory`)
     callback(null, conn)
   })
 }
