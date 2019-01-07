@@ -77,8 +77,8 @@ const devHook = function(conn, callback) {
       app.locals.conn = conn
       if (!server) {
         getPort({ port: 3000 }).then(port => {
-          server = app.listen(port).on('listening', () => {
-            console.log('Server listening on http://localhost:' + port)
+          server = app.listen(port, '0.0.0.0').on('listening', () => {
+            console.log('Server listening on http://0.0.0.0:' + port)
           })
         })
       }
