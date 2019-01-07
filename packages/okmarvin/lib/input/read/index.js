@@ -1,6 +1,8 @@
 const path = require('path')
 const fs = require('fs-extra')
 const logger = require('@parcel/logger')
+const { performance } = require('perf_hooks')
+
 const prettyTime = require('../../helpers/prettyTime')
 
 const prepare = require('./prepare')
@@ -9,7 +11,7 @@ const prepare = require('./prepare')
  * Prepare data here for okmarvin
  */
 module.exports = async function (conn, callback) {
-  const begin = Date.now()
+  const begin = performance.now()
 
   const { root, from } = conn
   const fromPath = path.join(root, from)
@@ -22,7 +24,7 @@ module.exports = async function (conn, callback) {
 
   prepare(conn, (err, conn) => {
     if (err) return callback(err)
-    logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
+    logger.success(`Read in ${prettyTime(performance.now() - begin)}`)
     callback(null, conn)
   })
 }

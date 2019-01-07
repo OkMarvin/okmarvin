@@ -1,6 +1,7 @@
 'use strict'
 const async = require('neo-async')
 const logger = require('@parcel/logger')
+const { performance } = require('perf_hooks')
 
 const input = require('./input')
 const output = require('./output')
@@ -19,6 +20,7 @@ module.exports = function ({
   clean = true, // default to true, it might have bugs when set to false
   benchmark = false
 } = {}) {
+  const begin = performance.now()
   logger.setOptions({ logLevel })
 
   if (clean === false) {
@@ -49,7 +51,7 @@ module.exports = function ({
         2
       )}MB`
     )
-    logger.success(`Built in ${prettyTime(Date.now() - conn.builtAt)}`)
+    logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
     logger.success(`Your site is ready under '${destination}' directory.`)
   })
 }

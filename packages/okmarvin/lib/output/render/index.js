@@ -1,12 +1,15 @@
+'use strict'
 const async = require('neo-async')
 const path = require('path')
 const fs = require('fs-extra')
-const requireResolve = require('../../helpers/requireResolve')
+const { performance } = require('perf_hooks')
 const logger = require('@parcel/logger')
+
+const requireResolve = require('../../helpers/requireResolve')
 const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
 module.exports = function (conn, callback) {
-  const begin = Date.now()
+  const begin = performance.now()
   const { files, siteConfig } = conn
   const { theme, themeManifest, clientJsManifest, layouts } = siteConfig
   const { root } = conn
@@ -73,7 +76,7 @@ module.exports = function (conn, callback) {
     function (err, files) {
       if (err) return callback(err)
       logger.success(
-        `Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`
+        `Rendered ${files.length} files in ${prettyTime(performance.now() - begin)}`
       )
       callback(null, {
         ...conn,

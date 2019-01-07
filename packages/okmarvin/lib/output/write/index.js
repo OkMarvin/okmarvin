@@ -1,10 +1,13 @@
+'use strict'
 const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@parcel/logger')
+const { performance } = require('perf_hooks')
+
 const prettyTime = require('../../helpers/prettyTime')
 module.exports = function (conn, callback) {
-  const begin = Date.now()
+  const begin = performance.now()
   const { files } = conn
   const { root, to, builtAt, siteConfig } = conn
   const { themeManifest, layoutHash, clientJsManifest } = siteConfig
@@ -45,7 +48,7 @@ module.exports = function (conn, callback) {
       logger.success(
         `Wrote ${
           files.length
-        } files in ${prettyTime(Date.now() - begin)}.`
+        } files in ${prettyTime(performance.now() - begin)}.`
       )
       return callback(null, conn)
     }
