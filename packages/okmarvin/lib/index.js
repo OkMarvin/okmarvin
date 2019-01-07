@@ -20,12 +20,13 @@ module.exports = function ({
   clean = true, // default to true, it might have bugs when set to false
   benchmark = false
 } = {}) {
+  performance.mark('Start')
   const begin = performance.now()
   logger.setOptions({ logLevel })
 
   if (clean === false) {
     // warn user the possible bugs `false` clean might bring
-    logger.warn('Might have bug when clean set to `false`!!')
+    logger.warn('Incremental rebuild is not stable yet!!')
   }
 
   const conn = {
@@ -52,6 +53,8 @@ module.exports = function ({
       )}MB`
     )
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
+    performance.mark('End')
+    performance.measure('Start to End', 'Start', 'End')
     logger.success(`Your site is ready under '${destination}' directory.`)
   })
 }
