@@ -19,13 +19,13 @@ module.exports = (root, layoutHierarchy) => {
     async.parallel(
       {
         layouts: callback => {
-          const layouts = {}
+          const layouts = new Map()
           findMe.forEach(file => {
             try {
               const layout = requireResolve(file, {
                 paths: layoutPaths
               })
-              layouts[file] = require(layout)
+              layouts.set(file, require(layout))
             } catch (_err) {
             // do nothing
             }

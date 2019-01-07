@@ -52,7 +52,7 @@ module.exports = function (conn, callback) {
                    */
                   const rendered = react(Component, { file, siteConfig })
                   // find the first could be use
-                  const useLayout = layouts[file.layout]
+                  const useLayout = layouts.get(file.layout)
                   const html = useLayout(
                     file,
                     siteConfig,

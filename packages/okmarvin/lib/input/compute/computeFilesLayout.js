@@ -11,7 +11,7 @@ module.exports = (conn, callback) => {
       const candidateLayouts = layoutHierarchy[layout || template]
       let useLayout
       for (let i in candidateLayouts) {
-        if (Object.keys(layouts).indexOf(candidateLayouts[i]) !== -1) {
+        if (layouts.has(candidateLayouts[i])) {
           useLayout = candidateLayouts[i]
           break
         }
