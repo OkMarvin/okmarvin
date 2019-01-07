@@ -11,12 +11,12 @@ const path = require('path')
  */
 
 const defaultCache = {
-  themeManifest: {}, // medium change frequency
-  clientJsManifest: {}, // medium change frequency
+  themeManifest: Object.create(null), // medium change frequency
+  clientJsManifest: Object.create(null), // medium change frequency
   files: [], // high change frequency
   layoutHash: [], // low change frequency
-  okmarvinConfig: {}, // low change frequency
-  siteConfig: {} // low change frequency
+  okmarvinConfig: Object.create(null), // low change frequency
+  siteConfig: Object.create(null) // low change frequency
 }
 
 module.exports = ({ root }, callback) => {

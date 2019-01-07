@@ -8,7 +8,7 @@ module.exports = function (root, theme) {
     try {
       const themeRoot = require.resolve(theme, { paths: [root] })
       fs.readFile(themeRoot, 'utf8', (err, manifestStr) => {
-        if (err) return resolve({})
+        if (err) return resolve(Object.create(null))
         const theme = JSON.parse(manifestStr)
         if (!ajv.validate(themeSchema, theme)) {
           return reject(ajv.errors)
@@ -17,7 +17,7 @@ module.exports = function (root, theme) {
       })
     } catch (err) {
       // theme might not exist
-      resolve({})
+      resolve(Object.create(null))
     }
   })
 }

@@ -34,7 +34,7 @@ module.exports = function ({ markdown = {} } = {}) {
           hMax: 3,
           headingAnchorPrefix: ''
         },
-        markdown.toc || {}
+        markdown.toc || Object.create(null)
       )
     )
     .use(require('markdown-it-linkify-images'))

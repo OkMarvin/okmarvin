@@ -19,7 +19,7 @@ module.exports = (root, layoutHierarchy) => {
     async.parallel(
       {
         layouts: callback => {
-          const layouts = {}
+          const layouts = Object.create(null)
           findMe.forEach(file => {
             try {
               const layout = requireResolve(file, {

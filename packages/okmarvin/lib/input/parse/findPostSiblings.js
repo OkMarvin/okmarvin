@@ -12,7 +12,7 @@ module.exports = function (conn, callback) {
     (post, callback) => {
       const idx = listOfPosts.findIndex(el => el.permalink === post.permalink)
       if (idx === -1) return callback(null, post)
-      const siblings = {}
+      const siblings = Object.create(null)
       if (listOfPosts[idx - 1]) {
         const { content, description, ...others } = listOfPosts[idx - 1]
         siblings['newerSibling'] = { ...others }

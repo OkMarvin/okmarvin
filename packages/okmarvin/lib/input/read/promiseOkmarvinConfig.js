@@ -4,7 +4,7 @@ module.exports = function (root) {
     try {
       resolve(require(path.join(root, '.okmarvin.js')))
     } catch (_e) {
-      resolve({})
+      resolve(Object.create(null))
     }
   })
 }
