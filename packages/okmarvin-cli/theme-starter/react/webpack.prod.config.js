@@ -121,13 +121,13 @@ if (fs.existsSync(path.resolve(__dirname, 'src/client/index.js'))) {
         client: './src/client'
       },
       output: {
-        path: path.resolve(__dirname, 'build/static/js'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].[contenthash].js' // do not remove contenthash here!! Or cache will be broken.
       },
       module: {
         rules: [jsRule]
       },
-      plugins: [new ManifestPlugin()]
+      plugins: [new ManifestPlugin({ seed })]
     }
   ]
 }
