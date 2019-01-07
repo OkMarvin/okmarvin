@@ -1,11 +1,14 @@
+'use strict'
+
 const finalhandler = require('finalhandler')
 const http = require('http')
 const serveStatic = require('serve-static')
 const getPort = require('get-port')
 const path = require('path')
+
 module.exports = function (cli) {
-  const { destination } = cli.flags
-  var serve = serveStatic(path.join(process.cwd(), destination), {
+  const { dest } = cli.flags
+  var serve = serveStatic(path.join(process.cwd(), dest), {
     index: ['index.html', 'index.htm']
   })
 

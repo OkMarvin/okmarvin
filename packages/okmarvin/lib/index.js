@@ -1,4 +1,5 @@
 'use strict'
+
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
@@ -14,7 +15,7 @@ const prettyTime = require('./helpers/prettyTime')
 module.exports = function ({
   root = process.cwd(),
   source = 'content', // where to read markdown files
-  destination = 'dist', // where to output
+  dest = 'dist', // where to output
   devHook = false, // we can hook into waterfall with devHook
   logLevel = 3,
   clean = true, // default to true, it might have bugs when set to false
@@ -32,7 +33,7 @@ module.exports = function ({
   const conn = {
     root,
     from: source,
-    to: destination,
+    to: dest,
     builtAt: Date.now(),
     clean,
     devHook
@@ -55,6 +56,6 @@ module.exports = function ({
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
     performance.mark('End')
     performance.measure('Start to End', 'Start', 'End')
-    logger.success(`Your site is ready under '${destination}' directory.`)
+    logger.success(`Your site is ready under '${dest}' directory.`)
   })
 }

@@ -1,11 +1,15 @@
+'use strict'
+
 const meow = require('meow')
 const logger = require('@parcel/logger')
+const inquirer = require('inquirer')
+
 const createSite = require('./createSite')
 const createArticle = require('./createArticle')
 const createTheme = require('./createTheme')
 const buildSite = require('./buildSite')
-const inquirer = require('inquirer')
 const serveSite = require('./serveSite')
+
 module.exports = async function (args) {
   const cli = meow(
     `
@@ -15,7 +19,7 @@ module.exports = async function (args) {
   Options
     --clean, Clean destination directory before building
     --source, Where okmarvin should find your files
-    --destination, Where to put built site
+    --dest, Where to put built site
     --log-level, Set log level
   
   Examples
@@ -35,7 +39,7 @@ module.exports = async function (args) {
           type: 'string',
           default: 'content'
         },
-        destination: {
+        dest: {
           type: 'string',
           default: 'dist'
         },
