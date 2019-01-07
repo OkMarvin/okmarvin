@@ -11,22 +11,32 @@ const prettyTime = require('./helpers/prettyTime')
 
 /**
  * An opinionated static site generator with Component as template.
+ * @function okmarvin
+ * @property {object} opts  - Options for okmarvin
+ * @property {string} root  - Root path
+ * @property {string} source  - Source directory
+ * @property {string} dest  - Destination directory
+ * @property {function|boolean} devHook - Hook for dev env
+ * @property {number} logLevel  - Log level
+ * @property {boolean} clean  - Enable incremental rebuild
  */
-module.exports = function ({
+module.exports = function okmarvin ({
   root = process.cwd(),
-  source = 'content', // where to read markdown files
-  dest = 'dist', // where to output
-  devHook = false, // we can hook into waterfall with devHook
+  source = 'content',
+  dest = 'dist',
+  devHook = false,
   logLevel = 3,
-  clean = true, // default to true, it might have bugs when set to false
+  clean = true,
   benchmark = false
 } = {}) {
   performance.mark('Start')
+
   const begin = performance.now()
+
   logger.setOptions({ logLevel })
 
   if (clean === false) {
-    // warn user the possible bugs `false` clean might bring
+    // warn user the possible bugs `false` incremental rebuild might bring
     logger.warn('Incremental rebuild is not stable yet!!')
   }
 
@@ -45,7 +55,7 @@ module.exports = function ({
     ? (tasks = [callback => callback(null, conn), input, devHook])
     : (tasks = [callback => callback(null, conn), input, output])
 
-  async.waterfall(tasks, (err, conn) => {
+  async.waterfall(tasks, (err, _conn) => {
     if (err) return logger.error(err)
 
     logger.verbose(
@@ -54,8 +64,8 @@ module.exports = function ({
       )}MB`
     )
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
+    logger.success(`Your site is ready under '${dest}' directory.`)
     performance.mark('End')
     performance.measure('Start to End', 'Start', 'End')
-    logger.success(`Your site is ready under '${dest}' directory.`)
   })
 }
