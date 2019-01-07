@@ -4,6 +4,19 @@
 
 okmarvin is an opinionated static site generator with **Component** as template.
 
+## Usage
+
+First install `okmarvin` with `npm` or `yarn`:
+
+```
+$ npm install -g okmarvin-cli
+```
+Then create a new site with:
+
+```
+$ okmarvin new site
+```
+
 ## Developing
 
 okmarvin is a monorepo managed with [lerna](https://github.com/lerna/lerna).
