@@ -40,6 +40,7 @@ module.exports = function okmarvin ({
     logger.warn('Incremental rebuild is not stable yet!!')
   }
 
+  // connection
   const conn = {
     root,
     source,
