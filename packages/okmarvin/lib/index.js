@@ -8,6 +8,7 @@ const input = require('./input')
 const output = require('./output')
 
 const prettyTime = require('./helpers/prettyTime')
+const logMemoryUsage = require('./helpers/logMemoryUsage')
 
 /**
  * An opinionated static site generator with Component as template.
@@ -59,11 +60,7 @@ module.exports = function okmarvin ({
   async.waterfall(tasks, (err, _conn) => {
     if (err) return logger.error(err)
 
-    logger.verbose(
-      `Total memory used: ${(process.memoryUsage().rss / 1024 / 1024).toFixed(
-        2
-      )}MB`
-    )
+    logMemoryUsage()
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
     logger.success(`Your site is ready under '${dest}' directory.`)
     performance.mark('End')
