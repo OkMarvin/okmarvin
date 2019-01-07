@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/okmarvin",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Static site generator with better theme developer experience",
   "main": "lib/index.js",
   "keywords": [
@@ -19,7 +19,7 @@
     "@okmarvin/generate-feed": "^0.1.10",
     "@okmarvin/generate-sitemap": "^0.1.6",
     "@okmarvin/markdown-it-toc": "^0.0.18",
-    "@okmarvin/promise-catcher": "^1.0.0",
+    "@okmarvin/promise-catcher": "^1.0.1",
     "@okmarvin/slug": "^0.0.8",
     "@parcel/logger": "^1.11.0",
     "ajv": "^6.6.2",
