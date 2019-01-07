@@ -2,7 +2,7 @@ const isAnyLayoutChanged = require('./isAnyLayoutChanged')
 test('isAnyLayoutChanged', () => {
   const conn = {
     cache: { layoutHash: [] },
-    siteConfig: { layoutHash: ['abc'] },
+    layoutHash: ['abc'],
     clean: false
   }
   const callback = jest.fn()
