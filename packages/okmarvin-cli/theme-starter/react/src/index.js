@@ -1,8 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router } from '@reach/router'
-import { files, siteConfig } from '../_data.json'
+import data from '../_data'
+import md from '@okmarvin/markdown'
 import Components from './templates/*.js'
+const { files, siteConfig, okmarvinConfig } = data
+const Md = md(okmarvinConfig)
 const root = document.getElementById('app')
 
 class ErrorBoundary extends React.Component {
@@ -29,6 +32,9 @@ render(
       {files
         .filter(file => file.template) // exclude xml files
         .map(file => {
+          file = Object.assign({}, file, {
+            content: file.content ? Md.render(file.content) : ''
+          })
           try {
             const Component =
               Components[file.template.replace('.js', '')].default

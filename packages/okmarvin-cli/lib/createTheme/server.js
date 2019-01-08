@@ -68,8 +68,8 @@ bundler.on('buildEnd', () => {
 let watcher
 const devHook = function(conn, callback) {
   fs.writeFile(
-    path.join(__dirname, '_data.json'),
-    JSON.stringify(conn),
+    path.join(__dirname, '_data.js'),
+    'export default' + JSON.stringify(conn),
     err => {
       if (err) {
         return callback(err)
@@ -86,6 +86,6 @@ const devHook = function(conn, callback) {
     }
   )
 }
-okmarvin({ devHook, root }) // write conn data to _data.json  
+okmarvin({ devHook, root }) // write conn data to _data.js  
 `
 }

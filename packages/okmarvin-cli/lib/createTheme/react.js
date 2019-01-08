@@ -11,6 +11,7 @@ module.exports = function (name) {
     "@babel/preset-react": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@okmarvin/markdown": "^0.0.2",
     "@okmarvin/okmarvin": "^0.0.10",
     "style-loader": "^0.23.0",
     "terser-webpack-plugin": "^1.2.0",
