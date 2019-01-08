@@ -1,6 +1,7 @@
 const async = require('neo-async')
 const isPost = require('./isPost')
 const isNotPost = require('./isNotPost')
+const shrink = require('../../helpers/shrink')
 module.exports = function (conn, callback) {
   const { files } = conn
   const listOfPosts = files
@@ -14,12 +15,10 @@ module.exports = function (conn, callback) {
       if (idx === -1) return callback(null, post)
       const siblings = Object.create(null)
       if (listOfPosts[idx - 1]) {
-        const { content, description, ...others } = listOfPosts[idx - 1]
-        siblings['newerSibling'] = { ...others }
+        siblings['newerSibling'] = shrink(listOfPosts[idx - 1])
       }
       if (listOfPosts[idx + 1]) {
-        const { content, description, ...others } = listOfPosts[idx + 1]
-        siblings['olderSibling'] = { ...others }
+        siblings['olderSibling'] = shrink(listOfPosts[idx + 1])
       }
       callback(null, { ...post, ...siblings })
     },

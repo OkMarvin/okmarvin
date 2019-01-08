@@ -2,6 +2,7 @@ const async = require('neo-async')
 const uniqBy = require('lodash/uniqBy')
 const isPost = require('./isPost')
 const isNotPost = require('./isNotPost')
+const shrink = require('../../helpers/shrink')
 module.exports = function (conn, callback) {
   const { files, tags } = conn
   const posts = files.filter(isPost)
@@ -22,8 +23,7 @@ module.exports = function (conn, callback) {
         })
         .sort((a, b) => b.datePublished - a.datePublished)
         .map(post => {
-          const { content, description, ...others } = post
-          return { ...others }
+          return shrink(post)
         })
       callback(null, { ...post, related: uniqBy(related, 'permalink') })
     },
