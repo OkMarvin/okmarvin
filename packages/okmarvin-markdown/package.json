@@ -1,0 +1,18 @@
+{
+  "name": "@okmarvin/markdown",
+  "version": "0.0.1",
+  "description": "Markdown renderer for okmarvin",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Sam Chen",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@okmarvin/markdown-it-toc": "^0.0.18",
+    "markdown-it": "^8.4.2",
+    "markdown-it-linkify-images": "^1.1.0",
+    "prismjs": "^1.15.0"
+  }
+}

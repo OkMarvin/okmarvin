@@ -1,6 +1,5 @@
 const path = require('path')
 const getTimeFromDateStr = require('../getTimeFromDateStr')
-const md = require('./md')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
 const logger = require('@parcel/logger')
@@ -12,7 +11,6 @@ module.exports = function (conn, file, callback) {
     builtAt,
     cache: { builtAt: lastBuiltAt, themeManifest: lastThemeManifest },
     clean,
-    okmarvinConfig,
     themeManifest,
     siteConfig: {
       permalink: defaultPermalink,
@@ -20,7 +18,6 @@ module.exports = function (conn, file, callback) {
       toc: siteToc
     }
   } = conn
-  const MD = md(okmarvinConfig)
   const {
     filePath,
     excerpt,
@@ -92,7 +89,7 @@ module.exports = function (conn, file, callback) {
     content: (typeof fileToc !== 'undefined'
       ? fileToc
       : siteToc)
-      ? MD.render(`{:toc}\n${content}`)
-      : MD.render(content)
+      ? `{:toc}\n${content}`
+      : content
   })
 }

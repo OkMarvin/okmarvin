@@ -8,11 +8,23 @@ const logger = require('@parcel/logger')
 const requireResolve = require('../../helpers/requireResolve')
 const prettyTime = require('../../helpers/prettyTime')
 const react = require('./ssr/react')
+
+const md = require('@okmarvin/markdown')
+
 module.exports = function (conn, callback) {
   const begin = performance.now()
-  const { files, siteConfig, themeManifest, clientJsManifest, layouts } = conn
+  const {
+    files,
+    siteConfig,
+    themeManifest,
+    clientJsManifest,
+    layouts,
+    okmarvinConfig
+  } = conn
   const { theme } = siteConfig
   const { root } = conn
+  const MD = md(okmarvinConfig)
+
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.waterfall(
     [
@@ -53,7 +65,15 @@ module.exports = function (conn, callback) {
                    * right now we only support React ssr
                    * but vue, preact, etc. can be supported too
                    */
-                  const rendered = react(Component, { file, siteConfig })
+                  const rendered = react(Component, {
+                    file: {
+                      ...file,
+                      content: file.content
+                        ? MD.render(file.content)
+                        : undefined
+                    },
+                    siteConfig
+                  })
                   // find the first could be use
                   const useLayout = layouts[file.layout]
                   const html = useLayout(
@@ -76,7 +96,9 @@ module.exports = function (conn, callback) {
     function (err, files) {
       if (err) return callback(err)
       logger.success(
-        `Rendered ${files.length} files in ${prettyTime(performance.now() - begin)}`
+        `Rendered ${files.length} files in ${prettyTime(
+          performance.now() - begin
+        )}`
       )
       callback(null, {
         ...conn,
