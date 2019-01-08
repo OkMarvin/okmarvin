@@ -73,13 +73,7 @@ module.exports = function (conn, file, callback) {
     ...file,
     title: title,
     author: fileAuthor || siteAuthor,
-    description:
-      description ||
-      excerpt ||
-      content
-        .split(/(?!$)/u)
-        .slice(0, 230)
-        .join(''),
+    description: description || excerpt,
     datePublished,
     dateModified,
     permalink,
