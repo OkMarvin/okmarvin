@@ -72,7 +72,9 @@ module.exports = function okmarvin ({
 
   const npc = async.constant(conn)
 
-  devHook ? (tasks = [npc, read, dispose, devHook]) : (tasks = [npc, read, dispose, output])
+  devHook
+    ? (tasks = [npc, read, dispose, devHook])
+    : (tasks = [npc, read, dispose, output])
 
   async.waterfall(tasks, (err, _conn) => {
     if (err) return logger.error(err)
