@@ -12,7 +12,7 @@ const collectTaxonomy = require('./collectTaxonomy')
 const connSchema = require('../../schemas/conn')
 
 const ajv = require('../../helpers/ajv')
-const prettyTime = require('../../helpers/prettyTime')
+const { prettyTime } = require('@okmarvin/helpers')
 
 module.exports = function (conn, callback) {
   const begin = performance.now()

@@ -1,0 +1,12 @@
+{
+  "name": "@okmarvin/helpers",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Sam Chen",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

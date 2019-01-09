@@ -6,7 +6,7 @@ const { performance } = require('perf_hooks')
 const logger = require('@parcel/logger')
 
 const requireResolve = require('../../helpers/requireResolve')
-const prettyTime = require('../../helpers/prettyTime')
+const { prettyTime } = require('@okmarvin/helpers')
 const react = require('./ssr/react')
 
 const md = require('@okmarvin/markdown')

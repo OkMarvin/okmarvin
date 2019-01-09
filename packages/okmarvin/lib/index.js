@@ -7,7 +7,7 @@ const { performance } = require('perf_hooks')
 const input = require('./input')
 const output = require('./output')
 
-const prettyTime = require('./helpers/prettyTime')
+const { prettyTime } = require('@okmarvin/helpers')
 const logMemoryUsage = require('./helpers/logMemoryUsage')
 
 /**

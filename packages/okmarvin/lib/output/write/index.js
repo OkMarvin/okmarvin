@@ -6,7 +6,7 @@ const path = require('path')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
 
-const prettyTime = require('../../helpers/prettyTime')
+const { prettyTime } = require('@okmarvin/helpers')
 
 module.exports = function (conn, callback) {
   const begin = performance.now()

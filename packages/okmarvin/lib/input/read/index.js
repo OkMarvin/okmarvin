@@ -5,7 +5,7 @@ const fs = require('fs-extra')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
 
-const prettyTime = require('../../helpers/prettyTime')
+const { prettyTime } = require('@okmarvin/helpers')
 
 const prepare = require('./prepare')
 
