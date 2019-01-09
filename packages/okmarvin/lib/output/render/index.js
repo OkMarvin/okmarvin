@@ -69,7 +69,9 @@ module.exports = function (conn, callback) {
                     file: {
                       ...file,
                       content: file.content
-                        ? MD.render(file.content)
+                        ? MD.render(
+                          file.toc ? `{:toc}\n${file.content}` : file.content
+                        )
                         : undefined
                     },
                     siteConfig

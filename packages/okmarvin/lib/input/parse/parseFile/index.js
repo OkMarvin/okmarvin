@@ -24,7 +24,6 @@ module.exports = function (conn, file, callback) {
     title,
     author: fileAuthor,
     description,
-    content,
     categories,
     template: userSetTemplate,
     date: dateStr,
@@ -80,10 +79,6 @@ module.exports = function (conn, file, callback) {
     template,
     dirty: isFileDirtyNow,
     css: template.replace('.js', '.css'), //  template's css file
-    content: (typeof fileToc !== 'undefined'
-      ? fileToc
-      : siteToc)
-      ? `{:toc}\n${content}`
-      : content
+    toc: typeof fileToc !== 'undefined' ? fileToc : siteToc
   })
 }
