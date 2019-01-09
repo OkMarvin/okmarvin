@@ -1,3 +1,3 @@
-module.exports = ({ title, date, permalink }) => {
-  return { title, date, permalink }
+module.exports = ({ title, date, datePublished, permalink }) => {
+  return { title, date, datePublished, permalink }
 }
