@@ -2,8 +2,6 @@
 
 const async = require('neo-async')
 
-const read = require('./read')
-
 const isAnyLayoutChanged = require('./isAnyLayoutChanged')
 const isClientJsChanged = require('./isClientJsChanged')
 const isOkmarvinConfigChanged = require('./isOkmarvinConfigChanged')
@@ -20,12 +18,11 @@ module.exports = (conn, callback) => {
   let tasks
   if (clean) {
     // incremental rebuild disabled
-    tasks = [npc, read, parse, compose, compute, guard]
+    tasks = [npc, parse, compose, compute, guard]
   } else {
     // incremental rebuild enabled
     tasks = [
       npc,
-      read,
       (conn, callback) => {
         async.parallel(
           {

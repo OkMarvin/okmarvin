@@ -3,8 +3,10 @@
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
-const { resolve } = require('path')
+const { resolve, join } = require('path')
+const fs = require('fs-extra')
 
+const read = require('./read')
 const input = require('./input')
 const output = require('./output')
 
@@ -46,6 +48,16 @@ module.exports = function okmarvin ({
     return logger.error(`'dest' cannot be set to current working directory`)
   }
 
+  if (!fs.existsSync(join(root, source))) {
+    // user should fix it
+    return logger.warn(
+      `Oops, nothing to do because "${join(
+        root,
+        source
+      )}" directory does not exist.`
+    )
+  }
+
   // connection
   const conn = {
     root,
@@ -60,7 +72,7 @@ module.exports = function okmarvin ({
 
   const npc = async.constant(conn)
 
-  devHook ? (tasks = [npc, input, devHook]) : (tasks = [npc, input, output])
+  devHook ? (tasks = [npc, read, input, devHook]) : (tasks = [npc, read, input, output])
 
   async.waterfall(tasks, (err, _conn) => {
     if (err) return logger.error(err)

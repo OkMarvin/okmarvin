@@ -1,4 +1,4 @@
-const readOkmarvinConfig = require('./readOkmarvinConfig')
+const readOkmarvinConfig = require('.')
 const { join } = require('path')
 test('returns default when no .okmarvin.js exist', async () => {
   const cb = jest.fn()
@@ -7,7 +7,7 @@ test('returns default when no .okmarvin.js exist', async () => {
 })
 test('returns content from .okmarvin.js', async () => {
   const cb = jest.fn()
-  await readOkmarvinConfig({ root: join(__dirname, 'fixtures') }, cb)
+  await readOkmarvinConfig({ root: join(__dirname, '..', 'fixtures') }, cb)
   expect(cb).toBeCalledWith(null, {
     markdown: {
       toc: {

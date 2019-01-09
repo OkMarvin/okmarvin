@@ -1,14 +1,24 @@
+'use strict'
+
+const logger = require('@parcel/logger')
+const { performance } = require('perf_hooks')
 const async = require('neo-async')
+const promiseCatcher = require('@okmarvin/promise-catcher')
+const { prettyTime } = require('@okmarvin/helpers')
 
 const readSiteConfig = require('./readSiteConfig')
 const readFiles = require('./readFiles')
 const readOkmarvinConfig = require('./readOkmarvinConfig')
-const promiseCatcher = require('@okmarvin/promise-catcher')
 const promiseThemeManifest = require('./promiseThemeManifest')
 const readLayouts = require('./readLayouts')
 const readCache = require('./readCache')
 
-module.exports = (conn, callback) =>
+/**
+ * Prepare data here for okmarvin
+ */
+module.exports = async function (conn, callback) {
+  const begin = performance.now()
+
   async.waterfall(
     [
       callback =>
@@ -21,12 +31,13 @@ module.exports = (conn, callback) =>
           },
           callback
         ),
-      async (data, callback) => {
-        const { siteConfig } = data
+      async ({ cache, okmarvinConfig, siteConfig, files }, callback) => {
+        const { root } = conn
+        const { theme, layoutHierarchy } = siteConfig
         const [err, results] = await promiseCatcher(
           Promise.all([
-            promiseThemeManifest(conn.root, siteConfig.theme),
-            readLayouts(conn.root, siteConfig.layoutHierarchy)
+            promiseThemeManifest(root, theme),
+            readLayouts(root, layoutHierarchy)
           ])
         )
         if (err) {
@@ -36,16 +47,22 @@ module.exports = (conn, callback) =>
         const [themeManifest, { layouts, layoutHash }] = results
         const { 'client.js': clientJs, ...others } = themeManifest
         callback(null, {
-          ...data,
+          cache,
+          okmarvinConfig,
+          siteConfig,
+          files,
           clientJsManifest: { 'client.js': clientJs },
+          themeManifest: { ...others },
           layoutHash,
-          layouts,
-          themeManifest: { ...others }
+          layouts
         })
       }
     ],
     (err, results) => {
       if (err) return callback(err)
+
+      logger.success(`Read in ${prettyTime(performance.now() - begin)}`)
       callback(null, { ...conn, ...results })
     }
   )
+}

@@ -1,4 +1,4 @@
-const requireResolve = require('../../helpers/requireResolve')
+const requireResolve = require('../helpers/requireResolve')
 const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')

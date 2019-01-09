@@ -3,6 +3,7 @@ const promiseFileData = require('./promiseFileData')
 test('returns array', () => {
   const filePath = path.join(
     __dirname,
+    '..',
     'fixtures',
     'content/page/about-okmarvin.md'
   )

@@ -2,7 +2,7 @@
 // then merge with siteConfig object
 const fs = require('fs')
 const { ajv } = require('@okmarvin/helpers')
-const themeSchema = require('../../schemas/theme')
+const themeSchema = require('../schemas/theme')
 module.exports = function (root, theme) {
   return new Promise((resolve, reject) => {
     try {
