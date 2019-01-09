@@ -7,7 +7,7 @@ const { resolve, join } = require('path')
 const fs = require('fs-extra')
 
 const read = require('./read')
-const input = require('./input')
+const dispose = require('./dispose')
 const output = require('./output')
 
 const { prettyTime } = require('@okmarvin/helpers')
@@ -72,7 +72,7 @@ module.exports = function okmarvin ({
 
   const npc = async.constant(conn)
 
-  devHook ? (tasks = [npc, read, input, devHook]) : (tasks = [npc, read, input, output])
+  devHook ? (tasks = [npc, read, dispose, devHook]) : (tasks = [npc, read, dispose, output])
 
   async.waterfall(tasks, (err, _conn) => {
     if (err) return logger.error(err)
