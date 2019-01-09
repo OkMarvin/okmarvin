@@ -3,6 +3,7 @@
 const async = require('neo-async')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
+const { resolve } = require('path')
 
 const input = require('./input')
 const output = require('./output')
@@ -39,6 +40,10 @@ module.exports = function okmarvin ({
   if (clean === false) {
     // warn user the possible bugs `false` incremental rebuild might bring
     logger.warn('Incremental rebuild is not stable yet!!')
+  }
+
+  if (resolve(root, dest) === root) {
+    return logger.error(`'dest' cannot be set to current working directory`)
   }
 
   // connection
