@@ -1,5 +1,5 @@
 const siteConfig = require('./siteConfig')
-const ajv = require('../helpers/ajv')
+const { ajv } = require('@okmarvin/helpers')
 describe('permalink', () => {
   test('ok', () => {
     expect(

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const matter = require('gray-matter')
-const ajv = require('../../helpers/ajv')
+const { ajv } = require('@okmarvin/helpers')
 const TOML = require('@iarna/toml')
 const fileSchema = require('../../schemas/file')
 const logger = require('@parcel/logger')

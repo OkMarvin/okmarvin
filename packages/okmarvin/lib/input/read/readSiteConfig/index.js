@@ -2,7 +2,7 @@ const promiseUserSiteConfig = require('./promiseUserSiteConfig')
 const promiseCatcher = require('@okmarvin/promise-catcher')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
-const ajv = require('../../../helpers/ajv')
+const { ajv } = require('@okmarvin/helpers')
 const siteConfigSchema = require('../../../schemas/siteConfig')
 const logger = require('@parcel/logger')
 
