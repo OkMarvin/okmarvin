@@ -1,5 +1,5 @@
 const async = require('neo-async')
-const uniqBy = require('lodash/uniqBy')
+const uniqBy = require('lodash/fp/uniqBy')
 const isPost = require('./isPost')
 const isNotPost = require('./isNotPost')
 const shrink = require('../../helpers/shrink')
@@ -25,7 +25,7 @@ module.exports = function (conn, callback) {
         .map(post => {
           return shrink(post)
         })
-      callback(null, { ...post, related: uniqBy(related, 'permalink') })
+      callback(null, { ...post, related: uniqBy('permalink', related) })
     },
     function (err, posts) {
       if (err) return callback(err)

@@ -1,11 +1,11 @@
-const groupBy = require('lodash/groupby')
+const groupBy = require('lodash/fp/groupby')
 const async = require('async')
 function print (arr) {
   return arr.map(i => `\n` + i.filePath || i.title)
 }
 module.exports = function (conn, callback) {
   const { files } = conn
-  const groupsByPermalink = groupBy(files, file => file.permalink)
+  const groupsByPermalink = groupBy(file => file.permalink, files)
   async.parallel(
     [
       callback => {

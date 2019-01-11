@@ -1,4 +1,4 @@
-const chunk = require('lodash/chunk')
+const chunk = require('lodash/fp/chunk')
 module.exports = function (data, paginate, fields, permalinkFormat) {
   if (!paginate || (paginate && data.length < paginate + 1)) {
     return {
@@ -6,7 +6,7 @@ module.exports = function (data, paginate, fields, permalinkFormat) {
       data
     }
   }
-  const arr = chunk(data, paginate)
+  const arr = chunk(paginate, data)
   let result = []
   for (let i = 0; i < arr.length; i++) {
     let paginator = {

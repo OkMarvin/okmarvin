@@ -1,5 +1,5 @@
 const logger = require('@parcel/logger')
-const isEqual = require('lodash/isEqual')
+const isEqual = require('lodash/fp/isEqual')
 module.exports = function (conn, callback) {
   const {
     cache: { okmarvinConfig: lastOkmarvinConfig },
