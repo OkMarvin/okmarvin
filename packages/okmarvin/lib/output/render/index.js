@@ -73,8 +73,8 @@ module.exports = function (conn, callback) {
                     },
                     siteConfig
                   })
-                  // find the first could be use
                   const useLayout = layouts[file.layout]
+                  // TODO consider moving html generating to write
                   const html = useLayout(
                     file,
                     siteConfig,
