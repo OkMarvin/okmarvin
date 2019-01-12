@@ -39,10 +39,6 @@ module.exports = function (conn, callback) {
         async.map(
           files,
           function (file, callback) {
-            if (path.extname(file.permalink) === '.xml') {
-              // no need to compiled
-              return callback(null, file)
-            }
             async.waterfall(
               [
                 callback => {

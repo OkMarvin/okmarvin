@@ -5,6 +5,8 @@ const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@parcel/logger')
 const { performance } = require('perf_hooks')
+const generateFeed = require('@okmarvin/generate-feed')
+const generateSitemap = require('@okmarvin/generate-sitemap')
 
 const { prettyTime } = require('@okmarvin/helpers')
 
@@ -52,7 +54,21 @@ module.exports = function (conn, callback) {
             fs.outputFile(filePath, file.html, callback)
           },
           callback
+        ),
+      callback => {
+        fs.outputFile(
+          path.join(root, dest, 'feed.xml'),
+          generateFeed(conn),
+          callback
         )
+      },
+      callback => {
+        fs.outputFile(
+          path.join(root, dest, 'sitemap.xml'),
+          generateSitemap(conn),
+          callback
+        )
+      }
     ],
     err => {
       if (err) return callback(err)
