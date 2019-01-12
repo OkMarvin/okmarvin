@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/markdown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Markdown renderer for okmarvin",
   "main": "index.js",
   "keywords": [],
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@okmarvin/markdown-it-toc": "^0.0.18",
+    "@okmarvin/markdown-it-toc": "^0.0.19",
     "markdown-it": "^8.4.2",
     "markdown-it-linkify-images": "^1.1.0",
     "prismjs": "^1.15.0"
