@@ -11,19 +11,25 @@ module.exports = function (md, options) {
   let md2 = clone(md)
   // let's begin with a default options
   // users should override most of the options to avoid conflict
-  options = Object.assign({}, {
-    class: 'toc', // default class name for the table of contents block
-    hMin: 1, // min heading number, i.e. h1
-    hMax: 6, // max heading number, i.e. h6
-    enableHeadingIcon: false, // render icon inside heading links
-    headingAnchorClass: 'anchor', // anchor will have a class for styling
-    // https://github.com/jch/html-pipeline/issues/135#issuecomment-54322489
-    // check the link above, it's a complicated case since we would use ids here.
-    headingAnchorPrefix: '', // ids could conflict with other elements
-    title: 'Table of Contents'
-  }, options)
+  options = Object.assign(
+    {},
+    {
+      class: 'toc', // default class name for the table of contents block
+      hMin: 1, // min heading number, i.e. h1
+      hMax: 6, // max heading number, i.e. h6
+      enableHeadingIcon: false, // render icon inside heading links
+      headingAnchorClass: 'anchor', // anchor will have a class for styling
+      // https://github.com/jch/html-pipeline/issues/135#issuecomment-54322489
+      // check the link above, it's a complicated case since we would use ids here.
+      headingAnchorPrefix: '', // ids could conflict with other elements
+      title: 'Table of Contents'
+    },
+    options
+  )
   // svg icon
-  var icon = '<svg' + ' height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>'
+  var icon =
+    '<svg' +
+    ' height="16" version="1.1" viewbox="0 0 16 16" width="16"><path d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>'
   // we'll need the state object later, let's grab one
   var gstate
   // grab the state
@@ -81,7 +87,9 @@ module.exports = function (md, options) {
       const linkClose = new gstate.Token('link_close', 'a', -1)
       const spanOpen = new gstate.Token('span_open', 'span', 1)
       const spanClose = new gstate.Token('span_close', 'span', -1)
-      token.children = [linkOpen, linkText, linkClose, spanOpen].concat(token.children).concat([spanClose])
+      token.children = [linkOpen, linkText, linkClose, spanOpen]
+        .concat(token.children)
+        .concat([spanClose])
     }
     // we make use of what md already has
     return md2.renderer.renderToken(tokens, idx, options, env, renderer)
@@ -104,10 +112,12 @@ module.exports = function (md, options) {
 
     // line should be at least 5 chars - {:toc}
     if (start + 5 > mark) return false
-    if (state.src.charCodeAt(start) !== 0x7B/* { */) return false
-    if (state.src.charCodeAt(start + 1) !== 0x3A/* : */) return false
+    if (state.src.charCodeAt(start) !== 0x7b /* { */) return false
+    if (state.src.charCodeAt(start + 1) !== 0x3a /* : */) return false
     // if it's indented more than 3 spaces, it should be a code block
-    if (state.sCount[startLine] - state.blkIndent >= 4) { return false }
+    if (state.sCount[startLine] - state.blkIndent >= 4) {
+      return false
+    }
     state.line = startLine + 1
 
     // we'll wrap the toc list inside a div.toc
@@ -115,10 +125,10 @@ module.exports = function (md, options) {
     token.markup = ''
     token.attrSet('class', 'toc')
     token.attrSet('role', 'directory')
-    token.map = [ startLine, state.line ]
+    token.map = [startLine, state.line]
     token = state.push('toc_body', '', 0)
     token.markup = '{:toc}'
-    token.map = [ startLine, state.line ]
+    token.map = [startLine, state.line]
     token = state.push('toc_close', 'nav', -1)
     token.markup = ''
 
@@ -146,7 +156,7 @@ module.exports = function (md, options) {
         // #
         // ##
         // but is it right?
-        headings = headings.concat({
+        headings.push({
           href: postfix,
           content: gstate.tokens[i + 1].content,
           level: gstate.tokens[i].tag.substr(1, 1)
@@ -165,18 +175,31 @@ module.exports = function (md, options) {
       return heading.level * 1
     })
     var topLevel = Math.min.apply(null, levels)
-    headings.forEach(function (heading) {
-      if (heading.level < options.hMin || heading.level > options.hMax) {
-        return
+    for (let x = 0, y = headings.length; x < y; x++) {
+      if (
+        headings[x].level < options.hMin ||
+        headings[x].level > options.hMax
+      ) {
+        continue
       }
       // level decide the indent
-      nodes.push(' '.repeat((heading.level - topLevel) * 4) + `1. [` + heading.content + '](#' + options.headingAnchorPrefix + heading.href + ')')
-    })
+      nodes.push(
+        ' '.repeat((headings[x].level - topLevel) * 4) +
+          `1. [` +
+          headings[x].content +
+          '](#' +
+          options.headingAnchorPrefix +
+          headings[x].href +
+          ')'
+      )
+    }
     var tocTokens = md2.parse(nodes.join('\n'), {})
     var tocHTML = md.renderer.render(tocTokens)
     if (headings.length) {
       if (options.title) {
-        tocHTML = `<h2 class="${options.class}__heading">${options.title}</h2>` + tocHTML
+        tocHTML =
+          `<h2 class="${options.class}__heading">${options.title}</h2>` +
+          tocHTML
       }
     }
     return tocHTML
