@@ -18,7 +18,7 @@ module.exports = (root, layoutHierarchy) => {
     const layoutPaths = [customizedLayoutPath, defaultLayoutPath]
     async.parallel(
       {
-        layouts: callback => {
+        layouts: callback => { // for render
           const layouts = Object.create(null)
           findMe.forEach(file => {
             try {
@@ -32,7 +32,7 @@ module.exports = (root, layoutHierarchy) => {
           })
           callback(null, layouts)
         },
-        layoutHash: callback => {
+        layoutHash: callback => { // for incremental rebuild
           let layoutHash = []
           async.each(
             findMe,
