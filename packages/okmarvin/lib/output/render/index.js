@@ -61,14 +61,15 @@ module.exports = function (conn, callback) {
                    * right now we only support React ssr
                    * but vue, preact, etc. can be supported too
                    */
+                  const content = file.content
+                    ? MD.render(
+                      file.toc ? `{:toc}\n${file.content}` : file.content
+                    )
+                    : undefined
                   const rendered = react(Component, {
                     file: {
                       ...file,
-                      content: file.content
-                        ? MD.render(
-                          file.toc ? `{:toc}\n${file.content}` : file.content
-                        )
-                        : undefined
+                      content
                     },
                     siteConfig
                   })
@@ -81,7 +82,7 @@ module.exports = function (conn, callback) {
                     rendered,
                     clientJS
                   )
-                  callback(null, { ...file, html })
+                  callback(null, { ...file, html, content }) // we should keep rendered content or feed will have raw markdown
                 }
               ],
               callback
