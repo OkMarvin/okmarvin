@@ -6,7 +6,7 @@ const { getHashDigest } = require('loader-utils')
 module.exports = (root, layoutHierarchy) => {
   return new Promise((resolve, reject) => {
     // all available layouts
-    const findMe = [
+    const defaultLayoutList = [
       ...new Set(
         Object.values(layoutHierarchy).reduce(function (flat, toFlatten) {
           return flat.concat(toFlatten)
@@ -16,50 +16,49 @@ module.exports = (root, layoutHierarchy) => {
     const defaultLayoutPath = path.join(__dirname, 'layout')
     const customizedLayoutPath = path.join(root, 'layout')
     const layoutPaths = [customizedLayoutPath, defaultLayoutPath]
+    // collect all available layouts
+    let availableLayoutList = []
+    for (let i = 0, len = defaultLayoutList.length; i < len; i++) {
+      const layoutName = defaultLayoutList[i]
+      try {
+        const layoutPath = requireResolve(layoutName, {
+          paths: layoutPaths
+        })
+        availableLayoutList = availableLayoutList.concat([
+          [layoutName, layoutPath]
+        ])
+      } catch (_err) {
+        // layout does not exist
+      }
+    }
     async.parallel(
       {
-        layouts: callback => { // for render
+        layouts: callback => {
+          // for render
           const layouts = Object.create(null)
-          findMe.forEach(file => {
-            try {
-              const layout = requireResolve(file, {
-                paths: layoutPaths
-              })
-              layouts[file] = require(layout)
-            } catch (_err) {
-            // do nothing
-            }
-          })
+          for (let i = 0, len = availableLayoutList.length; i < len; i++) {
+            const [layoutName, layoutPath] = availableLayoutList[i]
+            layouts[layoutName] = require(layoutPath)
+          }
           callback(null, layouts)
         },
-        layoutHash: callback => { // for incremental rebuild
-          let layoutHash = []
-          async.each(
-            findMe,
-            (file, callback) => {
-              try {
-                const layout = requireResolve(file, {
-                  paths: layoutPaths
-                })
-                fs.readFile(layout, (err, data) => {
-                  if (err) return callback(err)
-                  layoutHash = layoutHash.concat([getHashDigest(data)])
-                  callback()
-                })
-              } catch (err) {
-                callback()
-              }
+        layoutHash: callback => {
+          // for incremental rebuild
+          async.map(
+            availableLayoutList,
+            ([_, layoutPath], callback) => {
+              fs.readFile(layoutPath, (err, data) => {
+                if (err) return callback(err)
+                callback(null, getHashDigest(data))
+              })
             },
-            err => {
-              if (err) return callback(err)
-              callback(null, layoutHash.sort())
-            }
+            callback
           )
         }
       },
-      (err, results) => {
+      (err, { layouts, layoutHash }) => {
         if (err) return reject(err)
-        resolve(results)
+        resolve({ layouts, layoutHash: layoutHash.sort() })
       }
     )
   })
