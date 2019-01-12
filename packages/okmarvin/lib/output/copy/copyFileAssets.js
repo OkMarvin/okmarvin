@@ -42,9 +42,10 @@ module.exports = function (conn, callback) {
       })
     })
   let container = []
-  assets.forEach(asset => {
+  for (let i = 0, len = assets.length; i < len; i++) {
+    const asset = assets[i]
     container.push([asset, dirObj[path.join(asset, '..')]])
-  })
+  }
   async.parallel(
     container.map(([asset, target]) => callback => {
       fs.copy(
