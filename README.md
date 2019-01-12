@@ -11,11 +11,14 @@ First install `okmarvin` with `npm` or `yarn`:
 ```
 $ npm install -g okmarvin-cli
 ```
+
 Then create a new site with:
 
 ```
 $ okmarvin new site
 ```
+
+You can find more commands with `okmarvin` command.
 
 ## Developing
 
