@@ -9,7 +9,6 @@ module.exports = function (conn, callback) {
     builtAt,
     tags
   } = conn
-
   async.map(
     Object.keys(tags),
     (topic, callback) => {
@@ -31,7 +30,6 @@ module.exports = function (conn, callback) {
         .filter(isPost)
         .map(shrink)
         .sort((a, b) => b.datePublished - a.datePublished)
-
       callback(null, paginateFactory(data, paginate, fields, permalinkFormat))
     },
     function (err, files) {

@@ -20,6 +20,6 @@ module.exports = function (conn, callback) {
   }
   async.parallel(loadCss, (err, css) => {
     if (err) return callback(err)
-    callback(null, { ...conn, css })
+    callback(null, css)
   })
 }

@@ -3,8 +3,6 @@ test('returns default value', () => {
   const cb = jest.fn()
   loadLayouts({ root: __dirname, siteConfig: { layoutHierarchy: {} } }, cb)
   expect(cb).toBeCalledWith(null, {
-    root: __dirname,
-    siteConfig: { layoutHierarchy: {} },
     layoutHash: [],
     layouts: Object.create(null)
   })

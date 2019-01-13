@@ -1,4 +1,4 @@
-const requireResolve = require('../helpers/requireResolve')
+const requireResolve = require('../../helpers/requireResolve')
 const path = require('path')
 const fs = require('fs')
 const async = require('neo-async')
@@ -59,7 +59,7 @@ module.exports = (conn, callback) => {
     },
     (err, { layouts, layoutHash }) => {
       if (err) return callback(err)
-      callback(null, { ...conn, layouts, layoutHash: layoutHash.sort() })
+      callback(null, { layouts, layoutHash: layoutHash.sort() })
     }
   )
 }

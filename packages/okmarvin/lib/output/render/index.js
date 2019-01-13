@@ -16,7 +16,7 @@ module.exports = function (conn, callback) {
     files,
     siteConfig,
     themeManifest,
-    clientJsManifest,
+    clientJsPath,
     layouts,
     okmarvinConfig,
     css = {}
@@ -26,52 +26,38 @@ module.exports = function (conn, callback) {
   const MD = md(okmarvinConfig)
 
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
-  async.waterfall(
-    [
-      callback => {
-        if (clientJsManifest['client.js']) {
-          callback(null, `/static/js/${clientJsManifest['client.js']}`)
-        } else {
-          callback(null, '')
-        }
-      },
-      (clientJS, callback) => {
-        async.map(
-          files,
-          function (file, callback) {
-            const Component = require(path.join(
-              themeRoot,
-              themeManifest[file.template]
-            )).default
-            /**
-             * right now we only support React ssr
-             * but vue, preact, etc. can be supported too
-             */
-            const content = file.content
-              ? MD.render(file.toc ? `{:toc}\n${file.content}` : file.content)
-              : undefined
-            const rendered = react(Component, {
-              file: {
-                ...file,
-                content
-              },
-              siteConfig
-            })
-            const useLayout = layouts[file.layout]
-            // TODO consider moving html generating to write
-            const html = useLayout(
-              file,
-              siteConfig,
-              css[file.css] || '',
-              rendered,
-              clientJS
-            )
-            callback(null, { ...file, html, content }) // we should keep rendered content or feed will have raw markdown
-          },
-          callback
-        )
-      }
-    ],
+  async.map(
+    files,
+    function (file, callback) {
+      const Component = require(path.join(
+        themeRoot,
+        themeManifest[file.template]
+      )).default
+      /**
+       * right now we only support React ssr
+       * but vue, preact, etc. can be supported too
+       */
+      const content = file.content
+        ? MD.render(file.toc ? `{:toc}\n${file.content}` : file.content)
+        : undefined
+      const rendered = react(Component, {
+        file: {
+          ...file,
+          content
+        },
+        siteConfig
+      })
+      const useLayout = layouts[file.layout]
+      // TODO consider moving html generating to write
+      const html = useLayout(
+        file,
+        siteConfig,
+        css[file.css] || '',
+        rendered,
+        clientJsPath
+      )
+      callback(null, { ...file, html, content }) // we should keep rendered content or feed will have raw markdown
+    },
     function (err, files) {
       if (err) return callback(err)
       logger.success(

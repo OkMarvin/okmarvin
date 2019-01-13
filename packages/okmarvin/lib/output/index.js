@@ -1,6 +1,5 @@
 const async = require('neo-async')
-const loadCss = require('./loadCss')
-const loadLayouts = require('./loadLayouts')
+const prepare = require('./prepare')
 const compute = require('./compute')
 const render = require('./render')
 const write = require('./write')
@@ -13,8 +12,7 @@ module.exports = (conn, callback) => {
   if (conn.clean === false) {
     tasks = [
       async.constant(conn),
-      loadCss,
-      loadLayouts,
+      prepare,
       compute,
       render,
       write,
@@ -24,8 +22,7 @@ module.exports = (conn, callback) => {
   } else {
     tasks = [
       async.constant(conn),
-      loadCss,
-      loadLayouts,
+      prepare,
       compute,
       (conn, callback) => {
         async.parallel(

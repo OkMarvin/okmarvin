@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns layouts from fixture 1`] = `
+Object {
+  "layoutHash": Array [
+    "9aafea75672395bb40244cba73163e58",
+  ],
+  "layouts": Object {
+    "index.js": [Function],
+  },
+}
+`;
