@@ -13,6 +13,7 @@ module.exports = (conn, callback) => {
   } else {
     tasks = [
       async.constant(conn),
+      loadCss,
       (conn, callback) => {
         async.parallel(
           {
