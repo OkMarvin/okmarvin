@@ -11,7 +11,7 @@ module.exports = (conn, callback) => {
       const { layout, template } = file
       const candidateLayouts = layoutHierarchy[layout || template]
       let useLayout
-      for (let i in candidateLayouts) {
+      for (let i = 0, len = candidateLayouts.length; i < len; i++) {
         if (layouts[candidateLayouts[i]]) {
           useLayout = candidateLayouts[i]
           break
@@ -21,7 +21,7 @@ module.exports = (conn, callback) => {
     },
     (err, files) => {
       if (err) return callback(err)
-      callback(null, files)
+      callback(null, { ...conn, files })
     }
   )
 }

@@ -2,14 +2,13 @@
 
 const async = require('neo-async')
 
-const isAnyLayoutChanged = require('./isAnyLayoutChanged')
-const isClientJsChanged = require('./isClientJsChanged')
-const isOkmarvinConfigChanged = require('./isOkmarvinConfigChanged')
-const isSiteConfigChanged = require('./isSiteConfigChanged')
+// const isAnyLayoutChanged = require('./isAnyLayoutChanged')
+// const isClientJsChanged = require('./isClientJsChanged')
+// const isOkmarvinConfigChanged = require('./isOkmarvinConfigChanged')
+// const isSiteConfigChanged = require('./isSiteConfigChanged')
 
 const parse = require('./parse')
 const compose = require('./compose')
-const compute = require('./compute')
 const guard = require('./guard')
 
 module.exports = (conn, callback) => {
@@ -18,44 +17,43 @@ module.exports = (conn, callback) => {
   let tasks
   if (clean) {
     // incremental rebuild disabled
-    tasks = [npc, parse, compose, compute, guard]
+    tasks = [npc, parse, compose, guard]
   } else {
     // incremental rebuild enabled
     tasks = [
       npc,
-      (conn, callback) => {
-        async.parallel(
-          {
-            layoutStatus: callback => isAnyLayoutChanged(conn, callback),
-            clientJsStatus: callback => isClientJsChanged(conn, callback),
-            okmarvinConfigStatus: callback =>
-              isOkmarvinConfigChanged(conn, callback),
-            siteConfigStatus: callback => isSiteConfigChanged(conn, callback)
-          },
-          (
-            err,
-            {
-              layoutStatus,
-              clientJsStatus,
-              okmarvinConfigStatus,
-              siteConfigStatus
-            }
-          ) => {
-            if (err) return callback(err)
-            callback(null, {
-              ...conn,
-              clean:
-                layoutStatus ||
-                clientJsStatus ||
-                okmarvinConfigStatus ||
-                siteConfigStatus
-            })
-          }
-        )
-      },
+      // (conn, callback) => {
+      //   async.parallel(
+      //     {
+      //       layoutStatus: callback => isAnyLayoutChanged(conn, callback),
+      //       clientJsStatus: callback => isClientJsChanged(conn, callback),
+      //       okmarvinConfigStatus: callback =>
+      //         isOkmarvinConfigChanged(conn, callback),
+      //       siteConfigStatus: callback => isSiteConfigChanged(conn, callback)
+      //     },
+      //     (
+      //       err,
+      //       {
+      //         layoutStatus,
+      //         clientJsStatus,
+      //         okmarvinConfigStatus,
+      //         siteConfigStatus
+      //       }
+      //     ) => {
+      //       if (err) return callback(err)
+      //       callback(null, {
+      //         ...conn,
+      //         clean:
+      //           layoutStatus ||
+      //           clientJsStatus ||
+      //           okmarvinConfigStatus ||
+      //           siteConfigStatus
+      //       })
+      //     }
+      //   )
+      // },
       parse,
       compose,
-      compute,
       guard
     ]
   }

@@ -10,7 +10,6 @@ const readSiteConfig = require('./readSiteConfig')
 const readFiles = require('./readFiles')
 const readOkmarvinConfig = require('./readOkmarvinConfig')
 const promiseThemeManifest = require('./promiseThemeManifest')
-const readLayouts = require('./readLayouts')
 const readCache = require('./readCache')
 
 /**
@@ -33,18 +32,14 @@ module.exports = async function (conn, callback) {
         ),
       async ({ cache, okmarvinConfig, siteConfig, files }, callback) => {
         const { root } = conn
-        const { theme, layoutHierarchy } = siteConfig
-        const [err, results] = await promiseCatcher(
-          Promise.all([
-            promiseThemeManifest(root, theme),
-            readLayouts(root, layoutHierarchy)
-          ])
+        const { theme } = siteConfig
+        const [err, themeManifest] = await promiseCatcher(
+          promiseThemeManifest(root, theme)
         )
         if (err) {
           return callback(err)
         }
 
-        const [themeManifest, { layouts, layoutHash }] = results
         const { 'client.js': clientJs, ...others } = themeManifest
         callback(null, {
           cache,
@@ -52,9 +47,7 @@ module.exports = async function (conn, callback) {
           siteConfig,
           files,
           clientJsManifest: { 'client.js': clientJs },
-          themeManifest: { ...others },
-          layoutHash,
-          layouts
+          themeManifest: { ...others }
         })
       }
     ],

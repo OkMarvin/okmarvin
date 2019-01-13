@@ -39,46 +39,34 @@ module.exports = function (conn, callback) {
         async.map(
           files,
           function (file, callback) {
-            async.waterfall(
-              [
-                callback => {
-                  callback(null, css[file.css] || '')
-                },
-                (styles, callback) => {
-                  const Component = require(path.join(
-                    themeRoot,
-                    themeManifest[file.template]
-                  )).default
-                  /**
-                   * right now we only support React ssr
-                   * but vue, preact, etc. can be supported too
-                   */
-                  const content = file.content
-                    ? MD.render(
-                      file.toc ? `{:toc}\n${file.content}` : file.content
-                    )
-                    : undefined
-                  const rendered = react(Component, {
-                    file: {
-                      ...file,
-                      content
-                    },
-                    siteConfig
-                  })
-                  const useLayout = layouts[file.layout]
-                  // TODO consider moving html generating to write
-                  const html = useLayout(
-                    file,
-                    siteConfig,
-                    styles,
-                    rendered,
-                    clientJS
-                  )
-                  callback(null, { ...file, html, content }) // we should keep rendered content or feed will have raw markdown
-                }
-              ],
-              callback
+            const Component = require(path.join(
+              themeRoot,
+              themeManifest[file.template]
+            )).default
+            /**
+             * right now we only support React ssr
+             * but vue, preact, etc. can be supported too
+             */
+            const content = file.content
+              ? MD.render(file.toc ? `{:toc}\n${file.content}` : file.content)
+              : undefined
+            const rendered = react(Component, {
+              file: {
+                ...file,
+                content
+              },
+              siteConfig
+            })
+            const useLayout = layouts[file.layout]
+            // TODO consider moving html generating to write
+            const html = useLayout(
+              file,
+              siteConfig,
+              css[file.css] || '',
+              rendered,
+              clientJS
             )
+            callback(null, { ...file, html, content }) // we should keep rendered content or feed will have raw markdown
           },
           callback
         )
