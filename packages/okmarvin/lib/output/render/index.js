@@ -1,7 +1,6 @@
 'use strict'
 const async = require('neo-async')
 const path = require('path')
-const fs = require('fs-extra')
 const { performance } = require('perf_hooks')
 const logger = require('@parcel/logger')
 
@@ -19,7 +18,8 @@ module.exports = function (conn, callback) {
     themeManifest,
     clientJsManifest,
     layouts,
-    okmarvinConfig
+    okmarvinConfig,
+    css = {}
   } = conn
   const { theme } = siteConfig
   const { root } = conn
@@ -42,15 +42,7 @@ module.exports = function (conn, callback) {
             async.waterfall(
               [
                 callback => {
-                  if (file.css) {
-                    fs.readFile(
-                      path.join(themeRoot, themeManifest[file.css]),
-                      'utf8',
-                      callback
-                    )
-                  } else {
-                    callback(null, '')
-                  }
+                  callback(null, css[file.css] || '')
                 },
                 (styles, callback) => {
                   const Component = require(path.join(

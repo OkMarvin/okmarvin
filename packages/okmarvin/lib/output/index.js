@@ -1,4 +1,5 @@
 const async = require('neo-async')
+const loadCss = require('./loadCss')
 const render = require('./render')
 const write = require('./write')
 const copy = require('./copy')
@@ -8,10 +9,10 @@ const removeDestination = require('./removeDestination')
 module.exports = (conn, callback) => {
   let tasks
   if (conn.clean === false) {
-    tasks = [callback => callback(null, conn), render, write, copy, cleanup]
+    tasks = [async.constant(conn), loadCss, render, write, copy, cleanup]
   } else {
     tasks = [
-      callback => callback(null, conn),
+      async.constant(conn),
       (conn, callback) => {
         async.parallel(
           {
