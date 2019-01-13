@@ -14,9 +14,10 @@ module.exports = async ({ root, source, devHook }, callback) => {
   // we just sample some files here for better dev performance
   const [errFromReadingFiles, files] = await promiseCatcher(
     Promise.all(
-      (devHook ? filesPath.slice(0, 20) : filesPath).map(filePath =>
-        promiseFileData(filePath)
-      )
+      (devHook
+        ? Object.keys(filesPath).slice(0, 20)
+        : Object.keys(filesPath)
+      ).map(filePath => promiseFileData(path.join(root, source, filePath)))
     )
   )
   if (errFromReadingFiles) {
