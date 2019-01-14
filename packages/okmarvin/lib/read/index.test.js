@@ -10,6 +10,14 @@ test('returns data', done => {
     expect(data.files).toHaveLength(2)
     expect(data).toHaveProperty('source', 'content')
     expect(data).toHaveProperty('dest', 'dist')
+    expect(data).toHaveProperty('clientJsManifest', {
+      'client.js': 'client.abc.js'
+    })
+    expect(data).toHaveProperty('themeManifest', {
+      'index.js': 'index.js',
+      'post.js': 'post.js',
+      'page.js': 'page.js'
+    })
     done()
   }
   read(
