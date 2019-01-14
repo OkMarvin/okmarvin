@@ -5,19 +5,17 @@ const promiseFilesPath = require('./promiseFilesPath')
 const logger = require('@parcel/logger')
 
 module.exports = async ({ root, source, devHook }, callback) => {
-  const [err, filesPath] = await promiseCatcher(
-    promiseFilesPath(path.join(root, source))
-  )
+  const pathToSource = path.join(root, source)
+  const [err, filesPath] = await promiseCatcher(promiseFilesPath(pathToSource))
   if (err) {
     return callback(err)
   }
   // we just sample some files here for better dev performance
   const [errFromReadingFiles, files] = await promiseCatcher(
     Promise.all(
-      (devHook
-        ? Object.keys(filesPath).slice(0, 20)
-        : Object.keys(filesPath)
-      ).map(filePath => promiseFileData(path.join(root, source, filePath)))
+      (devHook ? filesPath.slice(0, 20) : filesPath).map(filePath =>
+        promiseFileData(pathToSource, filePath)
+      )
     )
   )
   if (errFromReadingFiles) {

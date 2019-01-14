@@ -1,4 +1,3 @@
-const path = require('path')
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
@@ -6,8 +5,6 @@ const logger = require('@parcel/logger')
 // TODO some can be lazy parsed for better performance??
 module.exports = function (conn, file, callback) {
   const {
-    root,
-    source,
     builtAt,
     cache: { builtAt: lastBuiltAt, themeManifest: lastThemeManifest },
     clean,
@@ -45,9 +42,9 @@ module.exports = function (conn, file, callback) {
       categories
     },
     new Date(datePublished),
-    path.relative(path.join(root, source), filePath)
+    filePath
   )
-  const fallbackTemplate = getFallbackTemplate(root, source, filePath)
+  const fallbackTemplate = getFallbackTemplate(filePath)
   const template = userSetTemplate || fallbackTemplate
 
   if (!themeManifest[template]) {

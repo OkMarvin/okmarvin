@@ -13,10 +13,10 @@ module.exports = function (conn, callback) {
   const dirObj = {}
   const dirs = files
     .filter(file => file.filePath)
-    .map(file => [path.join(file.filePath, '..'), file.permalink])
+    .map(file => [path.join(root, source, file.filePath, '..'), file.permalink])
     .filter(([dir, _]) => {
-      if (dir === path.join(conn.root, source, 'post')) return false
-      if (dir === path.join(conn.root, source, 'page')) return false
+      if (dir === path.join(root, source, 'post')) return false
+      if (dir === path.join(root, source, 'page')) return false
       return true
     })
     .map(([dir, permalink]) => {

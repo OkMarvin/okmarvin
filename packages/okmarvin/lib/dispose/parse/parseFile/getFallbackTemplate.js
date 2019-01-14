@@ -1,11 +1,10 @@
 /**
- * Say file exists under content/post/hello.md
- * and hello.md do not have `template` field
+ * Say file exists under post/hello.md
  * then we should set template to `post.js`
  */
 const path = require('path')
-module.exports = function (root, source, filePath) {
+module.exports = function (filePath) {
   return (
-    path.relative(path.join(root, source), filePath).split(path.sep)[0] + '.js'
+    filePath.split(path.sep)[0] + '.js'
   )
 }
