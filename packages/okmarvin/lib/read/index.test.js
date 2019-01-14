@@ -18,6 +18,8 @@ test('returns data', done => {
       'post.js': 'post.js',
       'page.js': 'page.js'
     })
+    const { builtAt, root, files, ...others } = data
+    expect(others).toMatchSnapshot()
     done()
   }
   read(

@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns data 1`] = `
+Object {
+  "cache": Object {
+    "clientJsManifest": Object {},
+    "files": Array [],
+    "layoutHash": Array [],
+    "okmarvinConfig": Object {},
+    "siteConfig": Object {},
+    "themeManifest": Object {},
+  },
+  "clientJsManifest": Object {
+    "client.js": "client.abc.js",
+  },
+  "dest": "dist",
+  "okmarvinConfig": Object {
+    "markdown": Object {
+      "loadLanguages": Array [
+        "bash",
+        "elixir",
+      ],
+      "toc": Object {
+        "title": "目录",
+      },
+    },
+  },
+  "siteConfig": Object {
+    "author": "陈三",
+    "description": "记录人、事与代码",
+    "favicon": "",
+    "lang": "zh",
+    "layoutHierarchy": Object {
+      "404.js": Array [
+        "404.js",
+        "index.js",
+      ],
+      "category.js": Array [
+        "category.js",
+        "archive.js",
+        "index.js",
+      ],
+      "index.js": Array [
+        "index.js",
+      ],
+      "page.js": Array [
+        "page.js",
+        "singular.js",
+        "index.js",
+      ],
+      "post.js": Array [
+        "post.js",
+        "single.js",
+        "singular.js",
+        "index.js",
+      ],
+      "tag.js": Array [
+        "tag.js",
+        "archive.js",
+        "index.js",
+      ],
+    },
+    "permalink": "/:dir/:filename",
+    "rss": true,
+    "theme": "./themes/hello",
+    "themeColor": "",
+    "title": "陈三",
+    "toc": true,
+    "url": "https://blog.zfanw.com",
+  },
+  "source": "content",
+  "themeManifest": Object {
+    "index.js": "index.js",
+    "page.js": "page.js",
+    "post.js": "post.js",
+  },
+}
+`;
