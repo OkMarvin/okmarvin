@@ -34,8 +34,6 @@ module.exports = function okmarvin ({
   builtAt = Date.now(),
   benchmark = false
 } = {}) {
-  performance.mark('Start')
-
   const begin = performance.now()
 
   logger.setOptions({ logLevel })
@@ -81,7 +79,5 @@ module.exports = function okmarvin ({
     logMemoryUsage()
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
     logger.success(`Your site is ready under '${dest}' directory.`)
-    performance.mark('End')
-    performance.measure('Start to End', 'Start', 'End')
   })
 }
