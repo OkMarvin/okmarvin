@@ -31,6 +31,7 @@ module.exports = function okmarvin ({
   devHook = false,
   logLevel = 3,
   clean = true,
+  builtAt = Date.now(),
   benchmark = false
 } = {}) {
   performance.mark('Start')
@@ -65,7 +66,7 @@ module.exports = function okmarvin ({
     dest,
     clean,
     devHook,
-    builtAt: Date.now()
+    builtAt
   }
 
   let tasks

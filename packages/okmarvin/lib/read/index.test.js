@@ -18,7 +18,7 @@ test('returns data', done => {
       'post.js': 'post.js',
       'page.js': 'page.js'
     })
-    const { builtAt, root, files, ...others } = data
+    const { root, files, ...others } = data
     expect(others).toMatchSnapshot()
     done()
   }
@@ -27,7 +27,7 @@ test('returns data', done => {
       root: path.join(__dirname, 'fixtures'),
       source: 'content',
       dest: 'dist',
-      builtAt: new Date().getTime()
+      builtAt: new Date('2018-10-10').getTime()
     },
     callback
   )

@@ -2,6 +2,7 @@
 
 exports[`returns data 1`] = `
 Object {
+  "builtAt": 1539129600000,
   "cache": Object {
     "clientJsManifest": Object {},
     "files": Array [],
