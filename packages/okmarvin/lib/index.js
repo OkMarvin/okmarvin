@@ -17,23 +17,27 @@ const logMemoryUsage = require('./helpers/logMemoryUsage')
  * An opinionated static site generator with Component as template.
  * @function okmarvin
  * @property {object} opts  - Options for okmarvin
- * @property {string} root  - Root path
- * @property {string} source  - Source directory
- * @property {string} dest  - Destination directory
- * @property {function|boolean} devHook - Hook for dev env
- * @property {number} logLevel  - Log level
- * @property {boolean} clean  - Enable incremental rebuild
+ * @property {string} opts.root  - Root path
+ * @property {string} opts.source  - Source directory
+ * @property {string} opts.dest  - Destination directory
+ * @property {function|boolean} opts.devHook - Hook for dev env
+ * @property {number} opts.logLevel  - Log level
+ * @property {boolean} opts.clean  - Enable incremental rebuild
+ * @property {function} callbackFn - callback function
  */
-module.exports = function okmarvin ({
-  root = process.cwd(),
-  source = 'content',
-  dest = 'dist',
-  devHook = false,
-  logLevel = 3,
-  clean = true,
-  builtAt = Date.now(),
-  benchmark = false
-} = {}) {
+module.exports = function okmarvin (
+  {
+    root = process.cwd(),
+    source = 'content',
+    dest = 'dist',
+    devHook = false,
+    logLevel = 3,
+    clean = true,
+    builtAt = Date.now(),
+    benchmark = false
+  } = {},
+  callbackFn
+) {
   const begin = performance.now()
 
   logger.setOptions({ logLevel })
@@ -73,11 +77,14 @@ module.exports = function okmarvin ({
     ? (tasks = [async.constant(conn), read, dispose, devHook])
     : (tasks = [async.constant(conn), read, dispose, output])
 
-  async.waterfall(tasks, (err, _conn) => {
+  // default callback for async waterfall
+  function callback (err, _conn) {
     if (err) return logger.error(err)
 
     logMemoryUsage()
     logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
     logger.success(`Your site is ready under '${dest}' directory.`)
-  })
+  }
+
+  async.waterfall(tasks, callbackFn || callback)
 }
