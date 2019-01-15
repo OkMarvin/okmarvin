@@ -1,7 +1,7 @@
 const async = require('neo-async')
 const parseFile = require('./parseFile')
 module.exports = function (conn, callback) {
-  const { files } = conn
+  const { files, ...others } = conn
   async.map(
     files,
     (file, callback) => {
@@ -9,7 +9,7 @@ module.exports = function (conn, callback) {
     },
     (err, files) => {
       if (err) return callback(err)
-      callback(null, { ...conn, files })
+      callback(null, { ...others, files })
     }
   )
 }
