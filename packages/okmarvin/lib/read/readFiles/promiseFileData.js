@@ -24,7 +24,7 @@ module.exports = function (pathToSource, relativeFilePath) {
             if (!ajv.validate(fileSchema, file)) {
               return logger.warn(
                 'Oops! Something is wrong, ',
-                filePath,
+                relativeFilePath,
                 ajv.errors
               )
             }
@@ -41,7 +41,8 @@ module.exports = function (pathToSource, relativeFilePath) {
       (err, results) => {
         if (err) return reject(err)
         const { file, stats } = results
-        resolve([relativeFilePath, { ...file, stats }])
+        const { data, ...others } = file
+        resolve({ filePath: relativeFilePath, ...data, ...others, stats })
       }
     )
   })

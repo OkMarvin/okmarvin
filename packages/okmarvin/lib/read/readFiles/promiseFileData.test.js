@@ -4,20 +4,16 @@ test('returns array', () => {
   const source = path.join(__dirname, '..', 'fixtures', 'content')
   const filePath = 'page/about-okmarvin.md'
   return promiseFileData(source, filePath).then(data => {
-    expect(data).toEqual([
+    expect(data).toEqual({
       filePath,
-      {
-        content: 'this is content',
-        data: {
-          title: 'about okmarvin',
-          date: new Date('2019-10-10')
-        },
-        excerpt: '',
-        isEmpty: false,
-        stats: {
-          ctimeMs: expect.any(Number)
-        }
+      content: 'this is content',
+      title: 'about okmarvin',
+      date: new Date('2019-10-10'),
+      excerpt: '',
+      isEmpty: false,
+      stats: {
+        ctimeMs: expect.any(Number)
       }
-    ])
+    })
   })
 })

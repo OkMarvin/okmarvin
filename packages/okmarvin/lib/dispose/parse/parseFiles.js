@@ -5,8 +5,7 @@ module.exports = function (conn, callback) {
   async.map(
     files,
     (file, callback) => {
-      const [filePath, { data, ...others }] = file
-      parseFile(conn, { filePath, ...data, ...others }, callback)
+      parseFile(conn, file, callback)
     },
     (err, files) => {
       if (err) return callback(err)
