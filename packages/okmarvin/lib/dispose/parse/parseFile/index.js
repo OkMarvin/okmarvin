@@ -11,15 +11,15 @@ module.exports = function (conn, file, callback) {
     themeManifest,
     siteConfig: {
       permalink: defaultPermalink,
-      author: siteAuthor,
-      toc: siteToc
+      author: defaultAuthor,
+      toc: defaultToc
     }
   } = conn
   const {
     filePath,
     excerpt,
     title,
-    author: fileAuthor,
+    author,
     description,
     categories,
     template: userSetTemplate,
@@ -68,7 +68,7 @@ module.exports = function (conn, file, callback) {
   callback(null, {
     ...file,
     title: title,
-    author: fileAuthor || siteAuthor,
+    author: author || defaultAuthor,
     description: description || excerpt,
     datePublished,
     dateModified,
@@ -76,6 +76,6 @@ module.exports = function (conn, file, callback) {
     template,
     dirty: isFileDirtyNow,
     css: template.replace('.js', '.css'), //  template's css file
-    toc: typeof fileToc !== 'undefined' ? fileToc : siteToc
+    toc: typeof fileToc !== 'undefined' ? fileToc : defaultToc
   })
 }
