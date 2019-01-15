@@ -17,9 +17,8 @@ module.exports = function (conn, callback) {
 
   async.waterfall(
     [
-      callback => {
-        parseFiles(conn, callback)
-      },
+      async.constant(conn),
+      parseFiles,
       findPostSiblings,
       collectTaxonomy,
       findRelatedPostsByTags
