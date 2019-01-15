@@ -32,13 +32,12 @@ module.exports = function (conn, callback) {
         themeRoot,
         themeManifest[file.template]
       )).default
+      // composed page do not have `content`
+      const content = file.content ? MD.render(file.content) : ''
       /**
        * right now we only support React ssr
        * but vue, preact, etc. can be supported too
        */
-      const content = file.content
-        ? MD.render(file.toc ? `{:toc}\n${file.content}` : file.content)
-        : undefined
       const rendered = react(Component, {
         file: {
           ...file,
@@ -51,7 +50,7 @@ module.exports = function (conn, callback) {
       const html = useLayout(
         file,
         siteConfig,
-        css[file.css] || '',
+        css[file.template.replace(/\.js$/, '.css')] || '',
         rendered,
         clientJsPath
       )
@@ -60,9 +59,7 @@ module.exports = function (conn, callback) {
     function (err, files) {
       if (err) return callback(err)
       logger.success(
-        `Rendered ${files.length} files in ${prettyTime(
-          Date.now() - begin
-        )}`
+        `Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`
       )
       callback(null, {
         ...conn,

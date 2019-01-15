@@ -21,11 +21,11 @@ module.exports = function (conn, file, callback) {
     title,
     author,
     description,
+    toc,
     categories,
     template: userSetTemplate,
     date: dateStr,
     dateModified: dateModifiedStr,
-    toc: fileToc,
     permalink: filePermalink,
     stats: { ctimeMs }
   } = file
@@ -67,7 +67,6 @@ module.exports = function (conn, file, callback) {
   // TODO just pass raw file down if it's dirty
   callback(null, {
     ...file,
-    title: title,
     author: author || defaultAuthor,
     description: description || excerpt,
     datePublished,
@@ -75,7 +74,10 @@ module.exports = function (conn, file, callback) {
     permalink,
     template,
     dirty: isFileDirtyNow,
-    css: template.replace('.js', '.css'), //  template's css file
-    toc: typeof fileToc !== 'undefined' ? fileToc : defaultToc
+    content: (typeof toc !== 'undefined'
+      ? toc
+      : defaultToc)
+      ? `{:toc}\n${file.content}`
+      : file.content
   })
 }
