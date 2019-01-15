@@ -1,7 +1,7 @@
 const async = require('neo-async')
 const prepare = require('./prepare')
 const compute = require('./compute')
-const render = require('./render')
+const renderMarkdown = require('./renderMarkdown')
 const write = require('./write')
 const copy = require('./copy')
 const cleanup = require('./cleanup')
@@ -14,7 +14,7 @@ module.exports = (conn, callback) => {
       async.constant(conn),
       prepare,
       compute,
-      render,
+      renderMarkdown,
       write,
       copy,
       cleanup
@@ -27,7 +27,7 @@ module.exports = (conn, callback) => {
       (conn, callback) => {
         async.parallel(
           {
-            conn: callback => render(conn, callback),
+            conn: callback => renderMarkdown(conn, callback),
             _conn: callback => removeDestination(conn, callback)
           },
           (err, result) => {

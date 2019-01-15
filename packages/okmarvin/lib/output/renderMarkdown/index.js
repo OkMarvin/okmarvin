@@ -23,7 +23,7 @@ module.exports = function (conn, callback) {
     function (err, files) {
       if (err) return callback(err)
       logger.success(
-        `Rendered ${files.length} files in ${prettyTime(Date.now() - begin)}`
+        `Rendered ${files.length} markdown files in ${prettyTime(Date.now() - begin)}`
       )
       callback(null, {
         ...others,
