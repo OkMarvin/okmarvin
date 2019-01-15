@@ -4,14 +4,13 @@ const async = require('neo-async')
 const fs = require('fs-extra')
 const path = require('path')
 const logger = require('@parcel/logger')
-const { performance } = require('perf_hooks')
 const generateFeed = require('@okmarvin/generate-feed')
 const generateSitemap = require('@okmarvin/generate-sitemap')
 
 const { prettyTime } = require('@okmarvin/helpers')
 
 module.exports = function (conn, callback) {
-  const begin = performance.now()
+  const begin = Date.now()
   const { files, okmarvinConfig } = conn
   const {
     root,
@@ -74,7 +73,7 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       logger.success(
         `Wrote ${files.length} files in ${prettyTime(
-          performance.now() - begin
+          Date.now() - begin
         )}.`
       )
       return callback(null, conn)

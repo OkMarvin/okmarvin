@@ -1,7 +1,6 @@
 'use strict'
 
 const logger = require('@parcel/logger')
-const { performance } = require('perf_hooks')
 const async = require('neo-async')
 const promiseCatcher = require('@okmarvin/promise-catcher')
 const { prettyTime } = require('@okmarvin/helpers')
@@ -16,7 +15,7 @@ const readCache = require('./readCache')
  * Prepare data here for okmarvin
  */
 module.exports = async function (conn, callback) {
-  const begin = performance.now()
+  const begin = Date.now()
 
   async.waterfall(
     [
@@ -54,7 +53,7 @@ module.exports = async function (conn, callback) {
     (err, results) => {
       if (err) return callback(err)
 
-      logger.success(`Read in ${prettyTime(performance.now() - begin)}`)
+      logger.success(`Read in ${prettyTime(Date.now() - begin)}`)
       callback(null, { ...conn, ...results })
     }
   )

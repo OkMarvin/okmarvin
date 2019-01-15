@@ -2,7 +2,6 @@
 
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-const { performance } = require('perf_hooks')
 const { resolve, join } = require('path')
 const fs = require('fs-extra')
 
@@ -38,7 +37,7 @@ module.exports = function okmarvin (
   } = {},
   callbackFn
 ) {
-  const begin = performance.now()
+  const begin = Date.now()
 
   logger.setOptions({ logLevel })
 
@@ -82,7 +81,7 @@ module.exports = function okmarvin (
     if (err) return logger.error(err)
 
     logMemoryUsage()
-    logger.success(`Built in ${prettyTime(performance.now() - begin)}`)
+    logger.success(`Built in ${prettyTime(Date.now() - begin)}`)
     logger.success(`Your site is ready under '${dest}' directory.`)
   }
 

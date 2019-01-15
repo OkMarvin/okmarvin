@@ -1,6 +1,5 @@
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-const { performance } = require('perf_hooks')
 
 const findPostSiblings = require('./findPostSiblings')
 const findRelatedPostsByTags = require('./findRelatedPostsByTags')
@@ -14,7 +13,7 @@ const connSchema = require('../../schemas/conn')
 const { prettyTime, ajv } = require('@okmarvin/helpers')
 
 module.exports = function (conn, callback) {
-  const begin = performance.now()
+  const begin = Date.now()
 
   async.waterfall(
     [
@@ -29,7 +28,7 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       logger.success(
         `Parsed ${conn.files.length} files in ${prettyTime(
-          performance.now() - begin
+          Date.now() - begin
         )}`
       )
       // will move it to later step

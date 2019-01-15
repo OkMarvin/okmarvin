@@ -1,7 +1,6 @@
 'use strict'
 const async = require('neo-async')
 const path = require('path')
-const { performance } = require('perf_hooks')
 const logger = require('@parcel/logger')
 
 const requireResolve = require('../../helpers/requireResolve')
@@ -11,7 +10,7 @@ const react = require('./ssr/react')
 const md = require('@okmarvin/markdown')
 
 module.exports = function (conn, callback) {
-  const begin = performance.now()
+  const begin = Date.now()
   const {
     files,
     siteConfig,
@@ -62,7 +61,7 @@ module.exports = function (conn, callback) {
       if (err) return callback(err)
       logger.success(
         `Rendered ${files.length} files in ${prettyTime(
-          performance.now() - begin
+          Date.now() - begin
         )}`
       )
       callback(null, {

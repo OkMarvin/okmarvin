@@ -1,4 +1,3 @@
-const { performance } = require('perf_hooks')
 const path = require('path')
 const glob = require('glob')
 const fs = require('fs-extra')
@@ -7,7 +6,7 @@ const { prettyTime } = require('@okmarvin/helpers')
 const async = require('neo-async')
 
 module.exports = function (conn, callback) {
-  const begin = performance.now()
+  const begin = Date.now()
   const { root, dest, files, source } = conn
   // find all dirs where assets are allowed
   const dirObj = {}
@@ -57,7 +56,7 @@ module.exports = function (conn, callback) {
     (err, _results) => {
       if (err) return callback(err)
       logger.verbose(
-        `File assets copied in ${prettyTime(performance.now() - begin)}`
+        `File assets copied in ${prettyTime(Date.now() - begin)}`
       )
       return callback(null, conn)
     }
