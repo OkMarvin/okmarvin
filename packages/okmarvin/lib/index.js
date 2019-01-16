@@ -28,7 +28,7 @@ module.exports = function okmarvin (
   {
     root = process.cwd(),
     source = 'content',
-    dest = 'dist',
+    dest = '_site',
     devHook = false,
     logLevel = 3,
     clean = true,

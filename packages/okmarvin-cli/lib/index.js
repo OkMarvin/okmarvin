@@ -41,7 +41,7 @@ module.exports = async function (args) {
         },
         dest: {
           type: 'string',
-          default: 'dist'
+          default: '_site'
         },
         logLevel: {
           type: 'string',
