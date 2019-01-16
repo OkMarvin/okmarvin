@@ -1,4 +1,3 @@
-const escapeHtml = require('escape-html')
 const preload = require('./common/preload')
 const loadFavicon = require('./common/loadFavicon')
 const loadStaticMeta = require('./common/loadStaticMeta')
@@ -9,7 +8,8 @@ module.exports = function (
   { lang, url, logo, google_analytics: googleAnalytics, favicon, themeColor },
   styles,
   rendered,
-  clientJS
+  clientJS,
+  escapeHtml
 ) {
   return `<!doctype html>
   <html lang="${lang}">

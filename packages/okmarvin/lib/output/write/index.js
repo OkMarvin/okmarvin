@@ -6,6 +6,7 @@ const path = require('path')
 const logger = require('@parcel/logger')
 const generateFeed = require('@okmarvin/generate-feed')
 const generateSitemap = require('@okmarvin/generate-sitemap')
+const escapeHtml = require('escape-html')
 
 const { prettyTime } = require('@okmarvin/helpers')
 
@@ -72,7 +73,8 @@ module.exports = function (conn, callback) {
               siteConfig,
               css[file.template.replace(/\.js$/, '.css')] || '',
               rendered,
-              clientJsPath
+              clientJsPath,
+              escapeHtml
             )
             const target =
               path.extname(file.permalink) !== ''
