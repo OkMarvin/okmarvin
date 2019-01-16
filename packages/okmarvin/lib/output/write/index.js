@@ -7,6 +7,7 @@ const logger = require('@parcel/logger')
 const generateFeed = require('@okmarvin/generate-feed')
 const generateSitemap = require('@okmarvin/generate-sitemap')
 const escapeHtml = require('escape-html')
+const { format } = require('date-fns')
 
 const { prettyTime } = require('@okmarvin/helpers')
 
@@ -68,14 +69,14 @@ module.exports = function (conn, callback) {
             })
             const useLayout = layouts[file.layout]
             // TODO consider moving html generating to write
-            const html = useLayout(
+            const html = useLayout({
               file,
               siteConfig,
-              css[file.template.replace(/\.js$/, '.css')] || '',
-              rendered,
+              styles: css[file.template.replace(/\.js$/, '.css')] || '',
+              content: rendered,
               clientJsPath,
-              escapeHtml
-            )
+              helpers: { escapeHtml, format }
+            })
             const target =
               path.extname(file.permalink) !== ''
                 ? file.permalink
