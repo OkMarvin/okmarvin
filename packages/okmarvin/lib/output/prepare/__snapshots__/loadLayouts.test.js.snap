@@ -3,7 +3,7 @@
 exports[`returns layouts from fixture 1`] = `
 Object {
   "layoutHash": Array [
-    "9aafea75672395bb40244cba73163e58",
+    "4168921784fa383bc08152698b7eab8d",
   ],
   "layouts": Object {
     "index.js": [Function],
