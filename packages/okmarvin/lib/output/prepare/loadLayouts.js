@@ -14,8 +14,8 @@ module.exports = (conn, callback) => {
       }, [])
     )
   ]
-  const defaultLayoutPath = path.join(__dirname, 'layout')
-  const customizedLayoutPath = path.join(root, 'layout')
+  const defaultLayoutPath = path.join(__dirname, '_layouts')
+  const customizedLayoutPath = path.join(root, '_layouts')
   const layoutPaths = [customizedLayoutPath, defaultLayoutPath]
   // collect all available layouts
   let availableLayoutList = []
