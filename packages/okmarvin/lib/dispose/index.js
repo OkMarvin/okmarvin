@@ -7,11 +7,16 @@ const async = require('neo-async')
 // const isOkmarvinConfigChanged = require('./isOkmarvinConfigChanged')
 // const isSiteConfigChanged = require('./isSiteConfigChanged')
 
-const parse = require('./parse')
+// const parseFiles = require('./parse/parseFiles')
 const compose = require('./compose')
 const validation = require('./validation')
 
+const findPostSiblings = require('./findPostSiblings')
+const collectTaxonomy = require('./collectTaxonomy')
+const findRelatedPostsByTags = require('./findRelatedPostsByTags')
+
 module.exports = (conn, callback) => {
+  // console.log('dispose', conn.files)
   // const { clean } = conn
   // const tasks =
   // if (clean) {
@@ -56,5 +61,15 @@ module.exports = (conn, callback) => {
   //   validation
   // ]
   // }
-  async.waterfall([async.constant(conn), parse, compose, validation], callback)
+  async.waterfall(
+    [
+      async.constant(conn),
+      collectTaxonomy,
+      compose,
+      validation,
+      findPostSiblings,
+      findRelatedPostsByTags
+    ],
+    callback
+  )
 }

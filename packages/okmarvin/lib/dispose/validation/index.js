@@ -1,7 +1,8 @@
 const groupBy = require('lodash/fp/groupby')
-const logger = require('@parcel/logger')
 module.exports = function (conn, callback) {
   const { files } = conn
+  // console.log('groupsByPermalink', files)
+
   const groupsByPermalink = groupBy(file => file.permalink, files)
   const errors = Object.entries(groupsByPermalink)
     .filter(([_permalink, items]) => items.length > 1)
@@ -11,7 +12,7 @@ module.exports = function (conn, callback) {
     }, new Map())
 
   if (errors.size) {
-    logger.error(`Duplicate permalinks detected, please fix:`)
+    console.error(`Duplicate permalinks detected, please fix:`)
     errors.forEach((value, key) => {
       console.log(key, value)
     })

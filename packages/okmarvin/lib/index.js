@@ -12,6 +12,8 @@ const output = require('./output')
 const { prettyTime } = require('@okmarvin/helpers')
 const logMemoryUsage = require('./helpers/logMemoryUsage')
 
+const parseFiles = require('./parseFiles')
+
 /**
  * An opinionated static site generator with Component as template.
  * @function okmarvin
@@ -70,11 +72,11 @@ module.exports = function okmarvin (
     builtAt
   }
 
-  let tasks
+  let tasks = [async.constant(conn), read, parseFiles]
 
   devHook
-    ? (tasks = [async.constant(conn), read, dispose, devHook])
-    : (tasks = [async.constant(conn), read, dispose, output])
+    ? (tasks = [...tasks, devHook])
+    : (tasks = [...tasks, dispose, output])
 
   // default callback for async waterfall
   function callback (err, _conn) {

@@ -1,6 +1,5 @@
 const async = require('async')
-const isPost = require('../isPost')
-const shrink = require('../../../helpers/shrink')
+const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = function (files, target, callback) {
   const results = Object.create(null)
   const posts = files.filter(isPost)

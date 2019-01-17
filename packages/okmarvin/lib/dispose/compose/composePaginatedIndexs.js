@@ -1,5 +1,4 @@
-const isPost = require('../parse/isPost')
-const shrink = require('../../helpers/shrink')
+const { isPost, shrink } = require('@okmarvin/helpers')
 const paginateFactory = require('./paginateFactory')
 module.exports = function (conn, callback) {
   const {
