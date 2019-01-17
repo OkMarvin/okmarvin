@@ -1,7 +1,7 @@
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
-// TODO some can be lazy parsed for better performance??
+
 module.exports = function (
   {
     builtAt,
@@ -54,7 +54,6 @@ module.exports = function (
     }
   }
 
-  // TODO just pass raw file down if it's dirty
   callback(null, {
     ...file,
     author: author || defaultAuthor,
