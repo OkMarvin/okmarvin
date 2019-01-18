@@ -1,6 +1,8 @@
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const computePermalink = require('./computePermalink')
 const getFallbackTemplate = require('./getFallbackTemplate')
+const logger = require('@parcel/logger')
+const getToc = require('./getToc')
 
 module.exports = function (
   {
@@ -50,7 +52,7 @@ module.exports = function (
   if (!themeManifest[template]) {
     // we should warn user
     if (!devHook) {
-      console.warn(`${template} template does not exist`)
+      logger.warn(`${template} template defined in ${filePath} does not exist`)
     }
   }
 
@@ -62,10 +64,6 @@ module.exports = function (
     dateModified,
     permalink,
     template,
-    content: (typeof toc !== 'undefined'
-      ? toc
-      : defaultToc)
-      ? `{:toc}\n${file.content}`
-      : file.content
+    content: getToc(toc, defaultToc) ? `{:toc}\n${file.content}` : file.content
   })
 }
