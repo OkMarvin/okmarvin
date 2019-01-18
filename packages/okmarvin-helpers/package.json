@@ -10,6 +10,6 @@
     "access": "public"
   },
   "dependencies": {
-    "ajv": "^6.6.2"
+    "ajv": "^6.7.0"
   }
 }
