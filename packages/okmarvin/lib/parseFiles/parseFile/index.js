@@ -1,6 +1,6 @@
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const computePermalink = require('./computePermalink')
-const getFallbackTemplate = require('./getFallbackTemplate')
+const getInferredTemplate = require('./getInferredTemplate')
 const logger = require('@parcel/logger')
 const getToc = require('./getToc')
 
@@ -46,8 +46,8 @@ module.exports = function (
     new Date(datePublished),
     filePath
   )
-  const fallbackTemplate = getFallbackTemplate(filePath)
-  const template = userSetTemplate || fallbackTemplate
+  const inferredTemplate = getInferredTemplate(filePath)
+  const template = userSetTemplate || inferredTemplate
 
   if (!themeManifest[template]) {
     // we should warn user
