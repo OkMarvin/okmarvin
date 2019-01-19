@@ -55,6 +55,11 @@ module.exports = function (conn, callback) {
         async.each(
           files,
           function (file, callback) {
+            if (!themeManifest[file.template]) {
+              // no template for file
+              // continue to next
+              return callback(null)
+            }
             const Component = require(path.join(
               themeRoot,
               themeManifest[file.template]
