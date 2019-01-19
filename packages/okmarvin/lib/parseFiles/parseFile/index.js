@@ -51,9 +51,7 @@ module.exports = function (
 
   if (!themeManifest[template]) {
     // we should warn user
-    if (!devHook) {
-      logger.warn(`${template} template defined in ${filePath} does not exist`)
-    }
+    logger.warn(`${filePath} won't be rendered since '${template}' template does not exist`)
   }
 
   callback(null, {
