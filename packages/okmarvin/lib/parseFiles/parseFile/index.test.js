@@ -69,3 +69,10 @@ test('returns dateModified', () => {
   })
   parseFile(defaultConn, file, cb)
 })
+test('returns template', () => {
+  const cb = jest.fn((_err, file) => {
+    expect(file.template).toBe('something')
+  })
+  const file = { ...defaultFile, template: 'something' }
+  parseFile(defaultConn, file, cb)
+})
