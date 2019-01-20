@@ -6,8 +6,8 @@ const fileSchema = require('../../schemas/file')
 const logger = require('@parcel/logger')
 const async = require('neo-async')
 const path = require('path')
-module.exports = function (pathToSource, relativeFilePath) {
-  const filePath = path.join(pathToSource, relativeFilePath)
+module.exports = function (root, relativeFilePath) {
+  const filePath = path.join(root, relativeFilePath)
   return new Promise((resolve, reject) => {
     async.parallel(
       {

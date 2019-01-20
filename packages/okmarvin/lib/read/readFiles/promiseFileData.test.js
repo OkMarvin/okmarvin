@@ -1,9 +1,9 @@
 const path = require('path')
 const promiseFileData = require('./promiseFileData')
 test('returns array', () => {
-  const source = path.join(__dirname, '..', 'fixtures', 'content')
-  const filePath = 'page/about-okmarvin.md'
-  return promiseFileData(source, filePath).then(data => {
+  const root = path.join(__dirname, '..', 'fixtures')
+  const filePath = '_pages/about-okmarvin.md'
+  return promiseFileData(root, filePath).then(data => {
     expect(data).toEqual({
       filePath,
       content: 'this is content',

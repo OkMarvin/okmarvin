@@ -25,15 +25,17 @@ module.exports = async function (conn, callback) {
             cache: callback => readCache(conn, callback),
             okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
             siteConfig: callback => readSiteConfig(conn, callback),
-            files: callback => readFiles(conn, callback)
+            filesWithAssets: callback => readFiles(conn, callback)
           },
           callback
         ),
-      async ({ cache, okmarvinConfig, siteConfig, files }, callback) => {
-        const { root } = conn
-        const { theme } = siteConfig
+      async (
+        { cache, okmarvinConfig, siteConfig, filesWithAssets },
+        callback
+      ) => {
+        const { files, fileAssets } = filesWithAssets
         const [err, themeManifest] = await promiseCatcher(
-          promiseThemeManifest(root, theme)
+          promiseThemeManifest(conn.root, siteConfig.theme)
         )
         if (err) {
           return callback(err)
@@ -45,6 +47,7 @@ module.exports = async function (conn, callback) {
           okmarvinConfig,
           siteConfig,
           files,
+          fileAssets,
           clientJsManifest: { 'client.js': clientJs },
           themeManifest: { ...others }
         })

@@ -7,8 +7,9 @@ test('returns data', done => {
     expect(data).toHaveProperty('siteConfig')
     expect(data).toHaveProperty('cache')
     expect(data).toHaveProperty('files')
-    expect(data.files).toHaveLength(2)
-    expect(data).toHaveProperty('source', 'content')
+    expect(data).toHaveProperty('fileAssets')
+    expect(data.files).toHaveLength(3)
+    expect(data.fileAssets).toHaveLength(3)
     expect(data).toHaveProperty('dest', 'dist')
     expect(data).toHaveProperty('clientJsManifest', {
       'client.js': 'client.abc.js'
@@ -25,7 +26,6 @@ test('returns data', done => {
   read(
     {
       root: path.join(__dirname, 'fixtures'),
-      source: 'content',
       dest: 'dist',
       builtAt: new Date('2018-10-10').getTime()
     },
