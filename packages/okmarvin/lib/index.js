@@ -2,8 +2,7 @@
 
 const async = require('neo-async')
 const logger = require('@parcel/logger')
-const { resolve, join } = require('path')
-const fs = require('fs-extra')
+const { resolve } = require('path')
 
 const read = require('./read')
 const dispose = require('./dispose')
@@ -19,7 +18,6 @@ const parseFiles = require('./parseFiles')
  * @function okmarvin
  * @property {object} opts  - Options for okmarvin
  * @property {string} opts.root  - Root path
- * @property {string} opts.source  - Source directory
  * @property {string} opts.dest  - Destination directory
  * @property {function|boolean} opts.devHook - Hook for dev env
  * @property {number} opts.logLevel  - Log level
@@ -29,7 +27,6 @@ const parseFiles = require('./parseFiles')
 module.exports = function okmarvin (
   {
     root = process.cwd(),
-    source = 'content',
     dest = '_site',
     devHook = false,
     logLevel = 3,
@@ -52,20 +49,9 @@ module.exports = function okmarvin (
     return logger.error(`'dest' cannot be set to current working directory`)
   }
 
-  if (!fs.existsSync(join(root, source))) {
-    // user should fix it
-    return logger.warn(
-      `Oops, nothing to do because "${join(
-        root,
-        source
-      )}" directory does not exist.`
-    )
-  }
-
   // connection
   const conn = {
     root,
-    source,
     dest,
     clean,
     devHook,

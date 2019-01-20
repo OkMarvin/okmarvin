@@ -18,7 +18,6 @@ module.exports = async function (args) {
 
   Options
     --clean, Clean destination directory before building
-    --source, Where okmarvin should find your files
     --dest, Where to put built site
     --log-level, Set log level
   
@@ -34,10 +33,6 @@ module.exports = async function (args) {
         clean: {
           type: 'boolean',
           default: true
-        },
-        source: {
-          type: 'string',
-          default: 'content'
         },
         dest: {
           type: 'string',
@@ -124,7 +119,10 @@ module.exports = async function (args) {
             ])
             title = _title
           }
-          createArticle({ ...cli, input: [cmd, type, title] })
+          createArticle({
+            ...cli,
+            input: [cmd, ['_', ...type, 's'].join(''), title]
+          })
           break
         case 'theme':
           let [, , name, framework] = cli.input

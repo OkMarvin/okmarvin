@@ -1,7 +1,6 @@
 module.exports = {
   required: [
     'root',
-    'source',
     'dest',
     'builtAt',
     'okmarvinConfig',
@@ -10,9 +9,6 @@ module.exports = {
   ],
   properties: {
     root: {
-      type: 'string'
-    },
-    source: {
       type: 'string'
     },
     dest: {
