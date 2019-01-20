@@ -4,7 +4,5 @@
  */
 const path = require('path')
 module.exports = function (filePath) {
-  return (
-    filePath.split(path.sep)[0] + '.js'
-  )
+  return filePath.split(path.sep)[0].slice(1, -1) + '.js'
 }

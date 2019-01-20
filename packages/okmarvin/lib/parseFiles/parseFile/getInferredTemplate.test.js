@@ -1,8 +1,8 @@
 const getInferredTemplate = require('./getInferredTemplate')
-test('returns test.js', () => {
+test('returns post.js', () => {
   expect(
     getInferredTemplate(
-      'test/content/post/hello-okmarvin.md'
+      '_posts/hello-okmarvin.md'
     )
-  ).toBe('test.js')
+  ).toBe('post.js')
 })
