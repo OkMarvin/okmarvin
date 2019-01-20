@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 const logger = require('@parcel/logger')
 const { prettyTime } = require('@okmarvin/helpers')
 const async = require('neo-async')
-const findPotentialAssetRootPermalinkMap = require('../findPotentialAssetRootPermalinkMap')
+const findPotentialAssetRootPermalinkMap = require('./findPotentialAssetRootPermalinkMap')
 const connectAssetToFilePermalink = require('./connectAssetToFilePermalink')
 
 module.exports = function (conn, callback) {
