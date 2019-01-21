@@ -26,6 +26,7 @@ module.exports = async function (args) {
     $ okmarvin new post <title>
     $ okmarvin new page <title>
     $ okmarvin new draft <title>
+    $ okmarvin new theme <name>
     $ okmarvin serve
   `,
     {
