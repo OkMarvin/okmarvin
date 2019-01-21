@@ -15,7 +15,7 @@ module.exports = (conn, callback) => {
       async.constant(conn),
       collectTaxonomy,
       compose,
-      validation,
+      validation, // prevent duplicate permalinks
       findPostSiblings,
       findRelatedPostsByTags
     ],
