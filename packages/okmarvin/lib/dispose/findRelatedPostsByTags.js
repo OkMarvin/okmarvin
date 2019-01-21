@@ -29,7 +29,7 @@ module.exports = function (conn, callback) {
     },
     function (err, posts) {
       if (err) return callback(err)
-      return callback(null, { ...conn, files: [...others, ...posts] })
+      return callback(null, { ...conn, files: [...posts, ...others] })
     }
   )
 }

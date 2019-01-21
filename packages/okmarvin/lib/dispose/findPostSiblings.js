@@ -1,3 +1,5 @@
+'use strict'
+
 const async = require('neo-async')
 const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = function (conn, callback) {
@@ -5,7 +7,6 @@ module.exports = function (conn, callback) {
   const listOfPosts = files
     .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
-  const others = files.filter(file => !listOfPosts.includes(file))
   async.map(
     listOfPosts,
     (post, callback) => {
@@ -22,7 +23,10 @@ module.exports = function (conn, callback) {
     },
     (err, posts) => {
       if (err) return callback(err)
-      callback(null, { ...conn, files: [...posts, ...others] })
+      callback(null, {
+        ...conn,
+        files: [...posts, ...files.filter(file => !listOfPosts.includes(file))]
+      })
     }
   )
 }
