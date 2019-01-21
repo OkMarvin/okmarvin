@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const fs = require('fs-extra')
 const logger = require('@parcel/logger')
@@ -10,7 +12,6 @@ module.exports = function (conn, callback) {
   const begin = Date.now()
   const { root, dest, files, fileAssets } = conn
   const fileAssetRootPermalinkMap = findPotentialAssetRootPermalinkMap(files)
-  // So, how to connect asset to file permalink
   const maps = connectAssetToFilePermalink(fileAssets, fileAssetRootPermalinkMap)
   async.parallel(
     maps.map(([asset, target]) => callback => {
