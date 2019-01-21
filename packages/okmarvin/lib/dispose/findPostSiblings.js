@@ -1,11 +1,11 @@
 const async = require('neo-async')
-const { isPost, isNotPost, shrink } = require('@okmarvin/helpers')
+const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = function (conn, callback) {
   const { files } = conn
   const listOfPosts = files
     .filter(isPost)
     .sort((a, b) => b.datePublished - a.datePublished)
-  const others = files.filter(isNotPost)
+  const others = files.filter(file => !listOfPosts.includes(file))
   async.map(
     listOfPosts,
     (post, callback) => {

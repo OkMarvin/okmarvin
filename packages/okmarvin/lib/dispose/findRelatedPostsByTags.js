@@ -1,10 +1,10 @@
 const async = require('neo-async')
 const uniqBy = require('lodash/fp/uniqBy')
-const { isPost, isNotPost, shrink } = require('@okmarvin/helpers')
+const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = function (conn, callback) {
   const { files, tags } = conn
   const posts = files.filter(isPost)
-  const others = files.filter(isNotPost)
+  const others = files.filter(file => !posts.includes(file))
   async.map(
     posts,
     (post, callback) => {
