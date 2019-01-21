@@ -30,10 +30,14 @@ module.exports = async function (conn, callback) {
           callback
         ),
       async (
-        { cache, okmarvinConfig, siteConfig, filesWithAssets },
+        {
+          cache,
+          okmarvinConfig,
+          siteConfig,
+          filesWithAssets: { files, fileAssets }
+        },
         callback
       ) => {
-        const { files, fileAssets } = filesWithAssets
         const [err, themeManifest] = await promiseCatcher(
           promiseThemeManifest(conn.root, siteConfig.theme)
         )
