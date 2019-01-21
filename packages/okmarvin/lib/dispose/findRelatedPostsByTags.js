@@ -1,3 +1,5 @@
+'use strict'
+
 const async = require('neo-async')
 const uniqBy = require('lodash/fp/uniqBy')
 const { isPost, shrink } = require('@okmarvin/helpers')
@@ -10,7 +12,7 @@ module.exports = function (conn, callback) {
     (post, callback) => {
       const related = Object.keys(tags)
         .filter(key => {
-          return (post.tags || []).map(tag => tag.toLowerCase()).indexOf(key) !== -1
+          return !(post.tags || []).map(tag => tag.toLowerCase()).includes(key)
         })
         .map(k => tags[k])
         .reduce((acc, topic) => {
