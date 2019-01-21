@@ -1,8 +1,8 @@
-const groupBy = require('lodash/fp/groupby')
-module.exports = function (conn, callback) {
-  const { files } = conn
-  // console.log('groupsByPermalink', files)
+'use strict'
 
+const groupBy = require('lodash/fp/groupby')
+module.exports = (conn, callback) => {
+  const { files } = conn
   const groupsByPermalink = groupBy(file => file.permalink, files)
   const errors = Object.entries(groupsByPermalink)
     .filter(([_permalink, items]) => items.length > 1)
@@ -13,10 +13,9 @@ module.exports = function (conn, callback) {
 
   if (errors.size) {
     console.error(`Duplicate permalinks detected, please fix:`)
-    errors.forEach((value, key) => {
+    return errors.forEach((value, key) => {
       console.log(key, value)
     })
-    process.exit(1)
   }
   callback(null, conn)
 }
