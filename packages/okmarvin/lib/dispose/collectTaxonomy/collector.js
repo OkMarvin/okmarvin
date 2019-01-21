@@ -1,21 +1,27 @@
 const async = require('async')
 const { isPost, shrink } = require('@okmarvin/helpers')
-module.exports = function (files, target, callback) {
-  const results = Object.create(null)
+module.exports = (files, target, callback) => {
+  const results = {}
   const posts = files.filter(isPost)
   async.each(
     posts,
     (file, callback) => {
-      file[target] &&
-        file[target].map(i => {
+      if (file[target]) {
+        const _ = Array.isArray(file[target]) ? file[target] : [file[target]]
+        _.map(i => {
           const lowerCaseVersion = i.toLowerCase()
           if (!results[lowerCaseVersion]) {
             // init
             results[lowerCaseVersion] = []
           }
-          results[lowerCaseVersion] = results[lowerCaseVersion].concat(shrink(file))
+          results[lowerCaseVersion] = results[lowerCaseVersion].concat(
+            shrink(file)
+          )
         })
-      callback()
+        callback()
+      } else {
+        callback()
+      }
     },
     err => {
       if (err) return callback(err)
