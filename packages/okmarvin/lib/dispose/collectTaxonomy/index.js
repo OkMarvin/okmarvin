@@ -5,7 +5,8 @@ module.exports = function (conn, callback) {
   async.parallel(
     {
       tags: callback => collector(files, 'tags', callback),
-      categories: callback => collector(files, 'categories', callback)
+      categories: callback => collector(files, 'categories', callback),
+      authors: callback => collector(files, 'author', callback)
     },
     (err, results) => {
       if (err) return callback(err)
