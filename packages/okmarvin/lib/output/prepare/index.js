@@ -7,9 +7,9 @@ module.exports = function (conn, callback) {
     {
       css: callback => loadCss(conn, callback),
       clientJsPath: callback => loadClientJsPath(conn, callback),
-      result: callback => loadLayouts(conn, callback)
+      layoutsWithTheirHash: callback => loadLayouts(conn, callback)
     },
-    (err, { css, clientJsPath, result: { layouts, layoutHash } }) => {
+    (err, { css, clientJsPath, layoutsWithTheirHash: { layouts, layoutHash } }) => {
       if (err) return callback(err)
       callback(null, { ...conn, css, clientJsPath, layoutHash, layouts })
     }
