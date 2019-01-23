@@ -41,6 +41,11 @@ Object {
         "404.js",
         "index.js",
       ],
+      "author.js": Array [
+        "author.js",
+        "archive.js",
+        "index.js",
+      ],
       "category.js": Array [
         "category.js",
         "archive.js",
