@@ -1,10 +1,11 @@
+'use strict'
 const chunk = require('lodash/fp/chunk')
 module.exports = function (data, paginate, fields, permalinkFormat) {
   if (!paginate || (paginate && data.length < paginate + 1)) {
-    return {
+    return [{
       ...fields,
       data
-    }
+    }]
   }
   const arr = chunk(paginate, data)
   let result = []

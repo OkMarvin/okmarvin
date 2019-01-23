@@ -1,16 +1,9 @@
-const async = require('async')
+'use strict'
 const collector = require('./collector')
-module.exports = function (conn, callback) {
+module.exports = (conn) => {
   const { files } = conn
-  async.parallel(
-    {
-      tags: callback => collector(files, 'tags', callback),
-      categories: callback => collector(files, 'categories', callback),
-      authors: callback => collector(files, 'author', callback)
-    },
-    (err, results) => {
-      if (err) return callback(err)
-      callback(null, { ...conn, ...results })
-    }
-  )
+  const tags = collector(files, 'tags')
+  const categories = collector(files, 'categories')
+  const authors = collector(files, 'author')
+  return { ...conn, tags, categories, authors }
 }

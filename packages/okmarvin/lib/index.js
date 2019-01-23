@@ -25,7 +25,7 @@ const logMemoryUsage = require('./helpers/logMemoryUsage')
  *
  * @property {function} callbackFn - callback function
  */
-module.exports = function okmarvin (
+const okmarvin = (
   {
     root = process.cwd(),
     dest = '_site',
@@ -36,7 +36,7 @@ module.exports = function okmarvin (
     benchmark = false
   } = {},
   callbackFn
-) {
+) => {
   const begin = Date.now()
 
   logger.setOptions({ logLevel })
@@ -47,7 +47,9 @@ module.exports = function okmarvin (
   }
 
   if (resolve(root, dest) === root) {
-    return logger.error(`'dest' option cannot be set to current working directory`)
+    return logger.error(
+      `'dest' option cannot be set to current working directory`
+    )
   }
 
   // connection
@@ -62,11 +64,12 @@ module.exports = function okmarvin (
   let tasks = [async.constant(conn), read, parseFiles]
 
   devHook
-    ? (tasks = [...tasks, devHook]) // we'll let browser handle `dispose` in dev env
-    : (tasks = [...tasks, dispose, output])
+    ? (tasks = [...tasks, devHook])
+    : (tasks = [...tasks, (conn, callback) => callback(null, dispose(conn)), output])
 
   // default callback for async waterfall
-  function callback (err, _conn) { // we prefix conn with _ since we won't use it
+  const callback = (err, _conn) => {
+    // we prefix conn with _ since we won't use it
     if (err) return logger.error(err)
 
     logMemoryUsage()
@@ -76,3 +79,4 @@ module.exports = function okmarvin (
 
   async.waterfall(tasks, callbackFn || callback)
 }
+module.exports = okmarvin

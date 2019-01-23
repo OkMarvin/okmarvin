@@ -1,40 +1,26 @@
-const async = require('neo-async')
+'use strict'
 const composePaginatedIndexs = require('./composePaginatedIndexs')
 const composePaginatedTags = require('./composePaginatedTags')
 const composePaginatedCategories = require('./composePaginatedCategories')
 const composePaginatedAuthors = require('./composePaginatedAuthors')
 const compose404 = require('./compose404')
-module.exports = (conn, callback) => {
+module.exports = (conn) => {
   const { files, themeManifest } = conn
   let composes = []
   if (themeManifest['index.js']) {
-    composes = [...composes, callback => composePaginatedIndexs(conn, callback)]
+    composes = [...composes, ...composePaginatedIndexs(conn)]
   }
   if (themeManifest['category.js']) {
-    composes = [
-      ...composes,
-      callback => composePaginatedCategories(conn, callback)
-    ]
+    composes = [...composes, ...composePaginatedCategories(conn)]
   }
   if (themeManifest['tag.js']) {
-    composes = [...composes, callback => composePaginatedTags(conn, callback)]
+    composes = [...composes, ...composePaginatedTags(conn)]
   }
   if (themeManifest['author.js']) {
-    composes = [
-      ...composes,
-      callback => composePaginatedAuthors(conn, callback)
-    ]
+    composes = [...composes, ...composePaginatedAuthors(conn)]
   }
   if (themeManifest['404.js']) {
-    composes = [...composes, callback => compose404(conn, callback)]
+    composes = [...composes, ...compose404(conn)]
   }
-  async.parallel(composes, (err, results) => {
-    if (err) return callback(err)
-    callback(null, {
-      ...conn,
-      files: files.concat(
-        results.reduce((acc, result) => acc.concat(result), [])
-      )
-    })
-  })
+  return { ...conn, files: files.concat(composes) }
 }

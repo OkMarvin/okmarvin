@@ -1,6 +1,7 @@
+'use strict'
 const { isPost, shrink } = require('@okmarvin/helpers')
 const paginateFactory = require('./paginateFactory')
-module.exports = function (conn, callback) {
+module.exports = function (conn) {
   const {
     siteConfig: { title, description, author, paginate },
     files,
@@ -23,5 +24,5 @@ module.exports = function (conn, callback) {
     .map(shrink)
     .sort((a, b) => b.datePublished - a.datePublished)
 
-  callback(null, paginateFactory(data, paginate, fields, permalinkFormat))
+  return paginateFactory(data, paginate, fields, permalinkFormat)
 }

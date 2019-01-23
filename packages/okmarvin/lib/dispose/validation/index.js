@@ -1,7 +1,7 @@
 'use strict'
 
 const groupBy = require('lodash/fp/groupby')
-module.exports = (conn, callback) => {
+module.exports = (conn) => {
   const { files } = conn
   const groupsByPermalink = groupBy(file => file.permalink, files)
   const errors = Object.entries(groupsByPermalink)
@@ -17,5 +17,5 @@ module.exports = (conn, callback) => {
       console.log(key, value)
     })
   }
-  callback(null, conn)
+  return conn
 }
