@@ -28,7 +28,7 @@ module.exports = (conn, callback) => {
         async.parallel(
           {
             conn: callback => renderMarkdown(conn, callback),
-            _conn: callback => removeDestination(conn, callback)
+            _: callback => removeDestination(conn, callback)
           },
           (err, result) => {
             if (err) return callback(err)
