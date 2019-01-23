@@ -1,13 +1,12 @@
-const async = require('neo-async')
-module.exports = (conn, callback) => {
+module.exports = (conn) => {
   const {
     files,
     layouts,
     siteConfig: { layoutHierarchy }
   } = conn
-  async.map(
-    files,
-    (file, callback) => {
+  return {
+    ...conn,
+    files: files.reduce((acc, file) => {
       const { layout, template } = file
       const candidateLayouts = layoutHierarchy[layout || template] || []
       let useLayout
@@ -17,11 +16,7 @@ module.exports = (conn, callback) => {
           break
         }
       }
-      callback(null, { ...file, layout: useLayout })
-    },
-    (err, files) => {
-      if (err) return callback(err)
-      callback(null, { ...conn, files })
-    }
-  )
+      return [...acc, { ...file, layout: useLayout }]
+    }, [])
+  }
 }
