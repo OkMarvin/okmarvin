@@ -11,7 +11,7 @@ module.exports = (conn, callback) => {
     async.constant(conn),
     prepare,
     compute,
-    renderMarkdown,
+    (conn, callback) => callback(null, renderMarkdown(conn)),
     write,
     copy,
     cleanup
