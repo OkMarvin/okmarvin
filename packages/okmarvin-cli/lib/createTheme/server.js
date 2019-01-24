@@ -1,5 +1,6 @@
 module.exports = function (root) {
-  return `const express = require('express')
+  return `
+const express = require('express')
 const okmarvin = require('@okmarvin/okmarvin')
 const chokidar = require('chokidar')
 const fs = require('fs')
@@ -17,26 +18,21 @@ const historyOptions = {
   rewrites: [
     {
       from: /\\/static/i,
-      to: function(context) {
+      to: function (context) {
         return '/public' + context.parsedUrl.pathname
       }
     },
     {
-      from: /\\.(jpg|jpeg|png|gif|webp)$/i,
-      to: function(context) {
+      from: /\\.(jpg|jpeg|png|gif|webp|html)$/i,
+      to: function (context) {
         const pathname = context.parsedUrl.pathname
-        const { files, from } = app.locals.conn
+        const { files } = app.locals.conn
         const findParent = files.find(
-          file =>
-            file.permalink === pathname.replace(path.basename(pathname), '')
+          file => file.permalink === '/' + pathname.split(path.sep)[1] + '/'
         )
-        return (
-          '/' +
-          from +
-          path.dirname(findParent.filePath.split(from)[1]) +
-          '/' +
-          path.basename(context.parsedUrl.pathname)
-        )
+        const myRoot = path.dirname(findParent.filePath)
+        const relativePath = path.relative(findParent.permalink, pathname)
+        return path.join('/', myRoot, relativePath)
       }
     }
   ]
@@ -49,7 +45,8 @@ bundler.on('buildEnd', () => {
   if (!watcher) {
     watcher = chokidar.watch(
       [
-        path.resolve(root, 'content'),
+        path.resolve(root, '_posts'),
+        path.resolve(root, '_pages'),
         path.resolve(root, '_config.toml'),
         path.resolve(root, '.okmarvin.js')
       ],
@@ -66,7 +63,7 @@ bundler.on('buildEnd', () => {
   }
 })
 let watcher
-const devHook = function(conn, callback) {
+const devHook = function (conn, callback) {
   fs.writeFile(
     path.join(__dirname, '_data.js'),
     'export default' + JSON.stringify(conn),
@@ -86,6 +83,6 @@ const devHook = function(conn, callback) {
     }
   )
 }
-okmarvin({ devHook, root }) // write conn data to _data.js  
+okmarvin({ devHook, root }) // write conn data to _data.js
 `
 }

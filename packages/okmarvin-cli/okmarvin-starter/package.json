@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "okmarvin build --clean"
+    "build": "okmarvin build"
   },
   "dependencies": {
-    "@okmarvin/january": "^1.8.0"
+    "@okmarvin/january": "latest"
   }
 }

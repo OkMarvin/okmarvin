@@ -1,13 +1,15 @@
+/**
+ * You don't need to care this boilerplate
+ * Just focus on `src/templates` directory and client js index `src/client` directory
+ */
 import React from 'react'
 import { render } from 'react-dom'
 import { Router } from '@reach/router'
-import data from '../_data'
+import conn from '../_data'
 import md from '@okmarvin/markdown'
 import Components from './templates/*.js'
-const { files, siteConfig, okmarvinConfig } = data
-const Md = md(okmarvinConfig)
+const dispose = require('@okmarvin/okmarvin/lib/dispose')
 const root = document.getElementById('app')
-
 class ErrorBoundary extends React.Component {
   constructor (props) {
     super(props)
@@ -25,16 +27,14 @@ class ErrorBoundary extends React.Component {
     return this.props.children
   }
 }
-
+const { files, siteConfig, okmarvinConfig } = dispose(conn)
+const Md = md(okmarvinConfig)
 render(
   <ErrorBoundary>
     <Router id='___OkMarvin___'>
       {files
         .filter(file => file.template) // exclude xml files
         .map(file => {
-          file = Object.assign({}, file, {
-            content: file.content ? Md.render(file.content) : ''
-          })
           try {
             const Component =
               Components[file.template.replace('.js', '')].default
@@ -43,6 +43,7 @@ render(
                 key={file.permalink}
                 path={file.permalink}
                 {...file}
+                content={file.content ? Md.render(file.content) : ''}
                 siteConfig={siteConfig}
                 default={file.template === '404.js'}
               />
