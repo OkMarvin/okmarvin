@@ -26,7 +26,6 @@ module.exports = function (conn, callback) {
     layoutHash,
     clientJsManifest,
     clientJsPath,
-    layouts,
     css = {}
   } = conn
   const { theme } = siteConfig
@@ -72,9 +71,7 @@ module.exports = function (conn, callback) {
               file,
               siteConfig
             })
-            const useLayout = layouts[file.layout]
-            // TODO consider moving html generating to write
-            const html = useLayout({
+            const html = file.layout({
               file,
               siteConfig,
               styles: css[file.template.replace(/\.js$/, '.css')] || '',
