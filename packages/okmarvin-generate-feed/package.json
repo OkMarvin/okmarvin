@@ -1,6 +1,6 @@
 {
   "name": "@okmarvin/generate-feed",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "generate content for feed.xml",
   "main": "src/index.js",
   "keywords": [
