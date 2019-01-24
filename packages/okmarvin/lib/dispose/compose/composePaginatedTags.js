@@ -1,7 +1,7 @@
 'use strict'
 const slug = require('@okmarvin/slug')
 const { isPost, shrink } = require('@okmarvin/helpers')
-const paginateFactory = require('./paginateFactory')
+const paginateRobot = require('./paginateRobot')
 module.exports = function (conn) {
   const {
     siteConfig: { author, paginate },
@@ -27,6 +27,6 @@ module.exports = function (conn) {
       .filter(isPost)
       .map(shrink)
       .sort((a, b) => b.datePublished - a.datePublished)
-    return [...acc, ...paginateFactory(data, paginate, fields, permalinkFormat)]
+    return [...acc, ...paginateRobot(data, paginate, fields, permalinkFormat)]
   }, [])
 }

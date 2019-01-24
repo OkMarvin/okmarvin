@@ -1,6 +1,6 @@
 'use strict'
 const { isPost, shrink } = require('@okmarvin/helpers')
-const paginateFactory = require('./paginateFactory')
+const paginateRobot = require('./paginateRobot')
 module.exports = function (conn) {
   const {
     siteConfig: { title, description, author, paginate },
@@ -24,5 +24,5 @@ module.exports = function (conn) {
     .map(shrink)
     .sort((a, b) => b.datePublished - a.datePublished)
 
-  return paginateFactory(data, paginate, fields, permalinkFormat)
+  return paginateRobot(data, paginate, fields, permalinkFormat)
 }
