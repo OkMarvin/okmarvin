@@ -38,11 +38,14 @@ module.exports = function (name) {
     "build": "webpack --config webpack.prod.config.js"
   },
   "browserslist": [
-    "> 1%",
     "last 2 versions"
   ],
   "files": [
     "build"
-  ]
+  ],
+  "dependencies": {
+    "prismjs": "^1.15.0",
+    "sanitize.css": "^8.0.0"
+  }
 }`
 }
