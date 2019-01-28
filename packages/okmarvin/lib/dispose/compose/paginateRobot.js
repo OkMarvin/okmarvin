@@ -4,7 +4,7 @@ module.exports = function (data, paginate, fields, permalinkFormat) {
   if (!paginate || (paginate && data.length < paginate + 1)) {
     return [{
       ...fields,
-      data
+      posts: data
     }]
   }
   const arr = chunk(paginate, data)
@@ -18,14 +18,14 @@ module.exports = function (data, paginate, fields, permalinkFormat) {
     if (i === 0) {
       result = result.concat({
         ...fields,
-        data: arr[i],
+        posts: arr[i],
         paginator
       })
     } else {
       result = result.concat({
         ...fields,
         title: `${fields.title} - Page ${i + 1}`,
-        data: arr[i],
+        posts: arr[i],
         paginator,
         permalink: permalinkFormat.replace(/:num/, i + 1)
       })
