@@ -3,9 +3,6 @@
   "version": "0.0.19",
   "description": "markdown-it plugin for adding table of contents",
   "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
   "keywords": [
     "markdown-it",
     "markdown-it-plugin",
@@ -15,23 +12,10 @@
   "author": "Sam Chen",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "jest": "^23.3.0",
-    "markdown-it": "^8.4.1",
-    "standard": "^12.0.0"
+    "markdown-it": "^8.4.1"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "standard": {
-    "globals": [
-      "test",
-      "expect"
-    ],
-    "parser": "babel-eslint",
-    "env": [
-      "jest"
-    ]
   },
   "dependencies": {
     "clone": "^2.1.1",
