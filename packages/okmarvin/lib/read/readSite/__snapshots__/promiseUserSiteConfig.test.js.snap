@@ -8,7 +8,5 @@ Object {
   "theme": "./themes/hello",
   "title": "陈三",
   "url": "https://blog.zfanw.com",
-  Symbol(type): Symbol(table),
-  Symbol(declared): false,
 }
 `;
