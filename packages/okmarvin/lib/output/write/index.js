@@ -21,14 +21,14 @@ module.exports = function (conn, callback) {
     root,
     dest,
     builtAt,
-    siteConfig,
+    site,
     themeManifest,
     layoutHash,
     clientJsManifest,
     clientJsPath,
     css = {}
   } = conn
-  const { theme } = siteConfig
+  const { theme } = site
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.parallel(
     [
@@ -42,7 +42,7 @@ module.exports = function (conn, callback) {
             files: files.map(file => file.permalink),
             layoutHash,
             okmarvinConfig,
-            siteConfig
+            site
           },
           err => {
             if (err) return callback(err)
@@ -69,11 +69,11 @@ module.exports = function (conn, callback) {
              */
             const rendered = react(Component, {
               file,
-              siteConfig
+              site
             })
             const html = file.layout({
               file,
-              siteConfig,
+              site,
               styles: css[file.template.replace(/\.js$/, '.css')] || '',
               content: rendered,
               clientJsPath,

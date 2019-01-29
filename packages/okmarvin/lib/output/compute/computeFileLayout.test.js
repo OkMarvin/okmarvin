@@ -2,7 +2,7 @@
 
 const conn = {
   layouts: {},
-  siteConfig: {
+  site: {
     layoutHierarchy: {
       'hello.js': ['singular.js', 'index.js']
     }

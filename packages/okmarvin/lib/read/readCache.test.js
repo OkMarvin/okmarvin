@@ -10,6 +10,6 @@ test('returns default cache when _cache.json not exist', () => {
     files: [],
     layoutHash: [],
     okmarvinConfig: Object.create(null),
-    siteConfig: Object.create(null)
+    site: Object.create(null)
   })
 })

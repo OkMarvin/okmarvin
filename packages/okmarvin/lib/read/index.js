@@ -5,7 +5,7 @@ const async = require('neo-async')
 const promiseCatcher = require('@okmarvin/promise-catcher')
 const { prettyTime } = require('@okmarvin/helpers')
 
-const readSiteConfig = require('./readSiteConfig')
+const readSite = require('./readSite')
 const readFiles = require('./readFiles')
 const readOkmarvinConfig = require('./readOkmarvinConfig')
 const promiseThemeManifest = require('./promiseThemeManifest')
@@ -24,7 +24,7 @@ module.exports = async function (conn, callback) {
           {
             cache: callback => readCache(conn, callback),
             okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
-            siteConfig: callback => readSiteConfig(conn, callback),
+            site: callback => readSite(conn, callback),
             filesWithAssets: callback => readFiles(conn, callback)
           },
           callback
@@ -33,13 +33,13 @@ module.exports = async function (conn, callback) {
         {
           cache,
           okmarvinConfig,
-          siteConfig,
+          site,
           filesWithAssets: { files, fileAssets }
         },
         callback
       ) => {
         const [err, themeManifest] = await promiseCatcher(
-          promiseThemeManifest(conn.root, siteConfig.theme)
+          promiseThemeManifest(conn.root, site.theme)
         )
         if (err) {
           return callback(err)
@@ -49,7 +49,7 @@ module.exports = async function (conn, callback) {
         callback(null, {
           cache,
           okmarvinConfig,
-          siteConfig,
+          site,
           files,
           fileAssets,
           clientJsManifest: { 'client.js': clientJs },

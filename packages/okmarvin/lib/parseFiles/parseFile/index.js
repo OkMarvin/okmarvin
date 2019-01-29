@@ -8,7 +8,7 @@ module.exports = function (
   {
     builtAt,
     themeManifest,
-    siteConfig: {
+    site: {
       permalink: defaultPermalink,
       author: defaultAuthor,
       toc: defaultToc

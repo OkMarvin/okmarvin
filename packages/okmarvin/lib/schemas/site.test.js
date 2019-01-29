@@ -1,9 +1,9 @@
-const siteConfig = require('./siteConfig')
+const site = require('./site')
 const { ajv } = require('@okmarvin/helpers')
 describe('permalink', () => {
   test('ok', () => {
     expect(
-      ajv.validate(siteConfig, {
+      ajv.validate(site, {
         menu: [
           {
             text: 'hello world',
@@ -15,7 +15,7 @@ describe('permalink', () => {
   })
   test('ok', () => {
     expect(
-      ajv.validate(siteConfig, {
+      ajv.validate(site, {
         menu: [
           {
             text: 'about',

@@ -4,7 +4,7 @@ const { isPost, shrink } = require('@okmarvin/helpers')
 const paginateRobot = require('./paginateRobot')
 module.exports = function (conn) {
   const {
-    siteConfig: { author, paginate },
+    site: { author, paginate },
     builtAt,
     tags
   } = conn

@@ -16,7 +16,7 @@ const defaultCache = {
   files: [], // high change frequency
   layoutHash: [], // low change frequency
   okmarvinConfig: Object.create(null), // low change frequency
-  siteConfig: Object.create(null) // low change frequency
+  site: Object.create(null) // low change frequency
 }
 
 module.exports = ({ root }, callback) => {

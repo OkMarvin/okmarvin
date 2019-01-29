@@ -4,7 +4,7 @@ module.exports = {
     'dest',
     'builtAt',
     'okmarvinConfig',
-    'siteConfig',
+    'site',
     'files'
   ],
   properties: {
@@ -20,7 +20,7 @@ module.exports = {
     okmarvinConfig: {
       properties: {}
     },
-    siteConfig: {
+    site: {
       properties: {}
     },
     files: { // should we seperate files here??? what about post, page

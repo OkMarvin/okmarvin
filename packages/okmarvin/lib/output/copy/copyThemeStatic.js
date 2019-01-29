@@ -2,8 +2,8 @@ const fs = require('fs-extra')
 const path = require('path')
 const requireResolve = require('../../helpers/requireResolve')
 module.exports = function (conn, callback) {
-  const { root, dest, siteConfig } = conn
-  const { theme } = siteConfig
+  const { root, dest, site } = conn
+  const { theme } = site
   const themeRoot = path.join(
     requireResolve(theme, { paths: [process.cwd()] }),
     '..'

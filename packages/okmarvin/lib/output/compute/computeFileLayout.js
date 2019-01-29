@@ -4,7 +4,7 @@ module.exports = conn => {
   const {
     files,
     layouts,
-    siteConfig: { layoutHierarchy }
+    site: { layoutHierarchy }
   } = conn
   return {
     ...conn,

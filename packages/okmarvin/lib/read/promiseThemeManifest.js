@@ -1,5 +1,5 @@
 // read theme manifest json file
-// then merge with siteConfig object
+// then merge with site object
 const fs = require('fs')
 const { ajv } = require('@okmarvin/helpers')
 const themeSchema = require('../schemas/theme')

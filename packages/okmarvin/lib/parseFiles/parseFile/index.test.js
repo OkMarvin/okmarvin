@@ -3,7 +3,7 @@ const defaultConn = {
   themeManifest: {
     'post.js': ''
   },
-  siteConfig: {
+  site: {
     toc: false
   }
 }
@@ -23,7 +23,7 @@ test('do not return toc because we will not need it', () => {
 test('returns author from site config', () => {
   const conn = {
     ...defaultConn,
-    siteConfig: {
+    site: {
       toc: false,
       author: 'Sam Chen'
     }

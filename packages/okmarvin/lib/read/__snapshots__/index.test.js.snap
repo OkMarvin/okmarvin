@@ -8,7 +8,7 @@ Object {
     "files": Array [],
     "layoutHash": Array [],
     "okmarvinConfig": Object {},
-    "siteConfig": Object {},
+    "site": Object {},
     "themeManifest": Object {},
   },
   "clientJsManifest": Object {
@@ -31,7 +31,7 @@ Object {
       },
     },
   },
-  "siteConfig": Object {
+  "site": Object {
     "author": "陈三",
     "description": "记录人、事与代码",
     "favicon": "",

@@ -23,7 +23,7 @@ function loadGoogleAnalytics (id) {
 
 module.exports = function ({
   file: { title, description, permalink, datePublished, dateModified, author },
-  siteConfig: {
+  site: {
     lang,
     url,
     logo,

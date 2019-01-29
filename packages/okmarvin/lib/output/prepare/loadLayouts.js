@@ -4,8 +4,8 @@ const fs = require('fs')
 const async = require('neo-async')
 const { getHashDigest } = require('loader-utils')
 module.exports = (conn, callback) => {
-  const { root, siteConfig } = conn
-  const { layoutHierarchy = {} } = siteConfig
+  const { root, site } = conn
+  const { layoutHierarchy = {} } = site
   // all available layouts
   const defaultLayoutList = [
     ...new Set(

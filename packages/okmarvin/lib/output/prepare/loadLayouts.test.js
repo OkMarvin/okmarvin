@@ -1,7 +1,7 @@
 const loadLayouts = require('./loadLayouts')
 test('returns default value', () => {
   const cb = jest.fn()
-  loadLayouts({ root: __dirname, siteConfig: { layoutHierarchy: {} } }, cb)
+  loadLayouts({ root: __dirname, site: { layoutHierarchy: {} } }, cb)
   expect(cb).toBeCalledWith(null, {
     layoutHash: [],
     layouts: Object.create(null)
@@ -15,7 +15,7 @@ test('returns layouts from fixture', done => {
   loadLayouts(
     {
       root: __dirname,
-      siteConfig: { layoutHierarchy: { 'index.js': ['index.js'] } }
+      site: { layoutHierarchy: { 'index.js': ['index.js'] } }
     },
     cb
   )

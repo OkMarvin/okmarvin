@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component {
     return this.props.children
   }
 }
-const { files, siteConfig, okmarvinConfig } = dispose(conn)
+const { files, site, okmarvinConfig } = dispose(conn)
 const Md = md(okmarvinConfig)
 render(
   <ErrorBoundary>
@@ -44,7 +44,7 @@ render(
                 path={file.permalink}
                 {...file}
                 content={file.content ? Md.render(file.content) : ''}
-                siteConfig={siteConfig}
+                site={site}
                 default={file.template === '404.js'}
               />
             )

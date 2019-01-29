@@ -4,7 +4,7 @@ test('returns data', done => {
   const callback = (err, data) => {
     expect(err).toBeNull()
     expect(data).toHaveProperty('okmarvinConfig')
-    expect(data).toHaveProperty('siteConfig')
+    expect(data).toHaveProperty('site')
     expect(data).toHaveProperty('cache')
     expect(data).toHaveProperty('files')
     expect(data).toHaveProperty('fileAssets')

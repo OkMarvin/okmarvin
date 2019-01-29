@@ -3,7 +3,7 @@ const promiseCatcher = require('@okmarvin/promise-catcher')
 const defaultSiteConfig = require('./defaultSiteConfig')
 const path = require('path')
 const { ajv } = require('@okmarvin/helpers')
-const siteConfigSchema = require('../../schemas/siteConfig')
+const siteConfigSchema = require('../../schemas/site')
 const logger = require('@parcel/logger')
 
 module.exports = async ({ root }, callback) => {
