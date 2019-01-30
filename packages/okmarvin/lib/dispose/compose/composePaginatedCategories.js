@@ -6,7 +6,7 @@ module.exports = (conn) => {
   const {
     site: { author, paginate },
     builtAt,
-    categories
+    categories = []
   } = conn
   return Object.keys(categories).reduce((acc, category) => {
     const fields = {
