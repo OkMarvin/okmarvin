@@ -20,7 +20,7 @@ test('', async () => {
         },
         {
           filePath: '_posts/hello-okmarvin.md',
-          content: '\nthis is content',
+          content: 'this is content',
           date: expect.any(Date),
           title: 'hello okmarvin',
           excerpt: '',
@@ -31,7 +31,7 @@ test('', async () => {
         },
         {
           filePath: '_posts/why-okmarvin/index.md',
-          content: '\nthis is content',
+          content: 'this is content',
           date: expect.any(Date),
           title: 'why okmarvin',
           excerpt: '',
