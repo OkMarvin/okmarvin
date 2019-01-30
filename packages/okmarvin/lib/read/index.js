@@ -14,7 +14,7 @@ const readCache = require('./readCache')
 /**
  * Prepare data here for okmarvin
  */
-module.exports = async function (conn, callback) {
+module.exports = async function(conn, callback) {
   const begin = Date.now()
 
   async.waterfall(
@@ -30,15 +30,29 @@ module.exports = async function (conn, callback) {
           callback
         ),
       async (
-        {
-          cache,
-          okmarvinConfig,
-          site,
-          filesWithAssets: { files, fileAssets }
-        },
+        { cache, okmarvinConfig, site, filesWithAssets: { files, fileAssets } },
         callback
       ) => {
-        const [err, themeManifest] = await promiseCatcher(
+        if (conn.devHook) {
+          return callback(null, {
+            cache,
+            okmarvinConfig,
+            site,
+            files,
+            fileAssets,
+            clientJsManifest: { 'client.js': '' },
+            themeManifest: {
+              'index.js': 'index.js',
+              'post.js': 'post.js',
+              'page.js': 'page.js',
+              'category.js': 'category.js',
+              'tag.js': 'tag.js',
+              'author.js': 'author.js',
+              '404.js': '404.js'
+            }
+          })
+        }
+        let [err, themeManifest] = await promiseCatcher(
           promiseThemeManifest(conn.root, site.theme)
         )
         if (err) {
