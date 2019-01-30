@@ -20,5 +20,5 @@ module.exports = function (
   permalink = replaceCategory(permalink, categories)
   permalink = replaceDir(permalink, path.dirname(relativePath))
   permalink = replaceFilename(permalink, path.parse(relativePath).name)
-  return normalizePermalink(path.normalize(permalink))
+  return normalizePermalink(permalink)
 }

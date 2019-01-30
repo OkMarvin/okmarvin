@@ -7,6 +7,6 @@ module.exports = function (permalink, dir = '') {
       .split(path.sep)
       .slice(1)
       .map(d => encodeURIComponent(slug(d)))
-      .join(path.sep)
+      .join('/')
   )
 }
