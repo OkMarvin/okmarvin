@@ -7,16 +7,3 @@ test('returns default value', () => {
     layouts: Object.create(null)
   })
 })
-test('returns layouts from fixture', done => {
-  const cb = jest.fn((_err, data) => {
-    expect(data).toMatchSnapshot()
-    done()
-  })
-  loadLayouts(
-    {
-      root: __dirname,
-      site: { layoutHierarchy: { 'index.js': ['index.js'] } }
-    },
-    cb
-  )
-})
