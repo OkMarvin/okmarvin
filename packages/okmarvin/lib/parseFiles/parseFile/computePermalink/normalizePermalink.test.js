@@ -5,3 +5,6 @@ it('should append /', () => {
 it('should not append /', () => {
   expect(fn('/hi/')).toBe('/hi/')
 })
+it('should replace // with /', () => {
+  expect(fn('//blog/')).toBe('/blog/')
+})

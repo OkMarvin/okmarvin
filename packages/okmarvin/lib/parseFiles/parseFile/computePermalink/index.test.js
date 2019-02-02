@@ -4,8 +4,17 @@ test('returns permalink', () => {
     '/:month/:title',
     { categories: [], title: 'okmarvin' },
     new Date('2010-10-10'),
-    'content/page/hello'
+    '_pages/hello'
   )
   expect(data).toBe('/10/okmarvin/')
   expect(data).toMatchSnapshot()
+})
+test('', () => {
+  const data = fn(
+    '/:dir/:filename',
+    {},
+    new Date('2010-10-10'),
+    '_pages/blog.md'
+  )
+  expect(data).toBe('/blog/')
 })
