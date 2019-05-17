@@ -6,11 +6,11 @@ module.exports = function (name) {
   "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.11.0",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@okmarvin/markdown": "latest",
     "@okmarvin/okmarvin": "latest",
     "style-loader": "^0.23.0",
@@ -31,7 +31,7 @@ module.exports = function (name) {
     "chokidar": "^2.0.3",
     "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.4",
-    "get-port": "^4.1.0"
+    "get-port": "^5.0.0"
   },
   "scripts": {
     "start": "node server.js",
@@ -44,7 +44,7 @@ module.exports = function (name) {
     "build"
   ],
   "dependencies": {
-    "prismjs": "^1.15.0",
+    "prismjs": "^1.16.0",
     "sanitize.css": "^8.0.0"
   }
 }`

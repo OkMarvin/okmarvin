@@ -25,14 +25,14 @@
     "@parcel/logger": "^1.11.0",
     "date-fns": "^1.30.1",
     "escape-html": "^1.0.3",
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^8.0.0",
     "glob": "^7.1.3",
     "gray-matter": "^4.0.1",
     "loader-utils": "^1.2.3",
     "lodash": "^4.17.11",
     "neo-async": "^2.5.2",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "gitHead": "11882f4b843eb5f45ec848945af0a26498084065"
 }
