@@ -8,7 +8,7 @@ module.exports = function (conn, callback) {
   async.each(
     diff,
     (file, callback) => {
-      fs.remove(path.join(conn.to, file), err => {
+      fs.remove(path.join(conn.to, file.permalink), err => {
         if (err) return callback(err)
         callback()
       })
