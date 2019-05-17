@@ -14,46 +14,18 @@ const { prettyTime } = require('@okmarvin/helpers')
 const requireResolve = require('../../helpers/requireResolve')
 const react = require('./ssr/react')
 
-module.exports = function (conn, callback) {
+module.exports = function(conn, callback) {
   const begin = Date.now()
-  const { files, okmarvinConfig } = conn
-  const {
-    root,
-    dest,
-    builtAt,
-    site,
-    themeManifest,
-    layoutHash,
-    clientJsManifest,
-    clientJsPath,
-    css = {}
-  } = conn
+  const { files } = conn
+  const { root, dest, site, themeManifest, clientJsPath, css = {} } = conn
   const { theme } = site
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
   async.parallel(
     [
-      callback => {
-        fs.outputJson(
-          path.join(root, '_cache.json'),
-          {
-            builtAt,
-            themeManifest,
-            clientJsManifest,
-            files: files.map(file => file.permalink),
-            layoutHash,
-            okmarvinConfig,
-            site
-          },
-          err => {
-            if (err) return callback(err)
-            callback(null)
-          }
-        )
-      },
       callback =>
         async.each(
           files,
-          function (file, callback) {
+          function(file, callback) {
             if (!themeManifest[file.template]) {
               // no template for file
               // continue to next

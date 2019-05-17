@@ -20,7 +20,6 @@ const logMemoryUsage = require('./helpers/logMemoryUsage')
  * @property {string} opts.dest  - Destination directory
  * @property {function|boolean} opts.devHook - Hook for dev env
  * @property {number} opts.logLevel  - Log level
- * @property {boolean} opts.clean  - Enable incremental rebuild
  * @property {boolean} opts.builtAt
  *
  * @property {function} callbackFn - callback function
@@ -31,7 +30,6 @@ const okmarvin = (
     dest = '_site',
     devHook = false,
     logLevel = 3,
-    clean = true,
     builtAt = Date.now(),
     benchmark = false
   } = {},
@@ -41,22 +39,16 @@ const okmarvin = (
 
   logger.setOptions({ logLevel })
 
-  if (clean === false) {
-    // warn user the possible bugs incremental rebuild might bring
-    logger.warn('Incremental rebuild is not stable yet!!')
-  }
-
   if (resolve(root, dest) === root) {
     return logger.error(
       `'dest' option cannot be set to current working directory`
     )
   }
 
-  // connection
+  // connection (get this name from PhoenixFramework)
   const conn = {
     root,
     dest,
-    clean,
     devHook,
     builtAt
   }
@@ -69,7 +61,7 @@ const okmarvin = (
 
   // default callback for async waterfall
   const callback = (err, _conn) => {
-    // we prefix conn with _ since we won't use it
+    // we prefix conn with _ since we won't use it, idea from elixir
     if (err) return logger.error(err)
 
     logMemoryUsage()

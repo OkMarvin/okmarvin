@@ -9,7 +9,6 @@ const readSite = require('./readSite')
 const readFiles = require('./readFiles')
 const readOkmarvinConfig = require('./readOkmarvinConfig')
 const promiseThemeManifest = require('./promiseThemeManifest')
-const readCache = require('./readCache')
 
 /**
  * Prepare data here for okmarvin
@@ -22,7 +21,6 @@ module.exports = async function(conn, callback) {
       callback =>
         async.parallel(
           {
-            cache: callback => readCache(conn, callback),
             okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
             site: callback => readSite(conn, callback),
             filesWithAssets: callback => readFiles(conn, callback)
@@ -30,12 +28,11 @@ module.exports = async function(conn, callback) {
           callback
         ),
       async (
-        { cache, okmarvinConfig, site, filesWithAssets: { files, fileAssets } },
+        { okmarvinConfig, site, filesWithAssets: { files, fileAssets } },
         callback
       ) => {
         if (conn.devHook) {
           return callback(null, {
-            cache,
             okmarvinConfig,
             site,
             files,
@@ -61,7 +58,6 @@ module.exports = async function(conn, callback) {
 
         const { 'client.js': clientJs, ...others } = themeManifest
         callback(null, {
-          cache,
           okmarvinConfig,
           site,
           files,

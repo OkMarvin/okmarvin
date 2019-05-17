@@ -5,7 +5,6 @@ test('returns data', done => {
     expect(err).toBeNull()
     expect(data).toHaveProperty('okmarvinConfig')
     expect(data).toHaveProperty('site')
-    expect(data).toHaveProperty('cache')
     expect(data).toHaveProperty('files')
     expect(data).toHaveProperty('fileAssets')
     expect(data.files).toHaveLength(3)

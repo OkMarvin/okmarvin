@@ -17,7 +17,6 @@ module.exports = async function (args) {
     $ okmarvin <cmd> <type> [<path>|<title>] [--option]
 
   Options
-    --clean, Clean destination directory before building
     --dest, Where to put built site
     --log-level, Set log level
   
@@ -31,10 +30,6 @@ module.exports = async function (args) {
   `,
     {
       flags: {
-        clean: {
-          type: 'boolean',
-          default: true
-        },
         dest: {
           type: 'string',
           default: '_site'

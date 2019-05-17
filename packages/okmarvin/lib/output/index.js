@@ -4,7 +4,6 @@ const compute = require('./compute')
 const renderMarkdown = require('./renderMarkdown')
 const write = require('./write')
 const copy = require('./copy')
-const cleanup = require('./cleanup')
 
 module.exports = (conn, callback) => {
   const tasks = [
@@ -13,8 +12,7 @@ module.exports = (conn, callback) => {
     compute,
     (conn, callback) => callback(null, renderMarkdown(conn)),
     write,
-    copy,
-    cleanup
+    copy
   ]
   async.waterfall(tasks, callback)
 }

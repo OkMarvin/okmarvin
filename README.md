@@ -33,7 +33,7 @@ okmarvin is a monorepo managed with [lerna](https://github.com/lerna/lerna).
 Bulid [my blog](https://blog.zfanw.com) on iMac (Retina 5K, 27-inch, 2017) with 40 GB 2400 MHz DDR4:
 
 ```
-$ okmarvin build --log-level 4 --clean true
+$ okmarvin build --log-level 4
 [23:51:16]: Ok Marvin, lets do it.
 [23:51:16]: Collected 62 markdown files
 [23:51:16]: layouts kept the same
