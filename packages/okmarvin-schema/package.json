@@ -1,0 +1,9 @@
+{
+  "name": "@okmarvin/schema",
+  "version": "0.0.1",
+  "description": "Data schema for okmarvin",
+  "main": "index.js",
+  "keywords": ["okmarvin"],
+  "author": "Sam Chen",
+  "license": "MIT"
+}
