@@ -31,24 +31,6 @@ module.exports = async function(conn, callback) {
         { okmarvinConfig, site, filesWithAssets: { files, fileAssets } },
         callback
       ) => {
-        if (conn.devHook) {
-          return callback(null, {
-            okmarvinConfig,
-            site,
-            files,
-            fileAssets,
-            clientJsManifest: { 'client.js': '' },
-            themeManifest: {
-              'index.js': 'index.js',
-              'post.js': 'post.js',
-              'page.js': 'page.js',
-              'category.js': 'category.js',
-              'tag.js': 'tag.js',
-              'author.js': 'author.js',
-              '404.js': '404.js'
-            }
-          })
-        }
         let [err, themeManifest] = await promiseCatcher(
           promiseThemeManifest(conn.root, site.theme)
         )

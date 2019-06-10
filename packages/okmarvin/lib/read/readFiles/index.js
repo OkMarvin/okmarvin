@@ -3,7 +3,7 @@ const promiseFileData = require('./promiseFileData')
 const promiseFilesPath = require('./promiseFilesPath')
 const logger = require('@parcel/logger')
 
-module.exports = async ({ root, devHook }, callback) => {
+module.exports = async ({ root }, callback) => {
   // we read all kinds of files
   const [err, filesPath] = await promiseCatcher(
     promiseFilesPath(root, '{_posts,_pages}/**/*')
@@ -20,9 +20,7 @@ module.exports = async ({ root, devHook }, callback) => {
   // we just sample some files here for better dev performance
   const [errFromReadingFiles, files] = await promiseCatcher(
     Promise.all(
-      (devHook ? pathsOfMarkdownFile.slice(0, 20) : pathsOfMarkdownFile).map(
-        filePath => promiseFileData(root, filePath)
-      )
+      pathsOfMarkdownFile.map(filePath => promiseFileData(root, filePath))
     )
   )
   if (errFromReadingFiles) {

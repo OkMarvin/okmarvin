@@ -4,7 +4,7 @@ const getInferredTemplate = require('./getInferredTemplate')
 const logger = require('@parcel/logger')
 const getToc = require('./getToc')
 
-module.exports = function (
+module.exports = function(
   {
     builtAt,
     themeManifest,
@@ -12,8 +12,7 @@ module.exports = function (
       permalink: defaultPermalink,
       author: defaultAuthor,
       toc: defaultToc
-    },
-    devHook
+    }
   },
   file,
   callback
@@ -51,7 +50,9 @@ module.exports = function (
 
   if (!themeManifest[template]) {
     // we should warn user
-    logger.warn(`${filePath} won't be rendered since '${template}' template does not exist`)
+    logger.warn(
+      `${filePath} won't be rendered since '${template}' template does not exist`
+    )
   }
 
   callback(null, {
