@@ -7,11 +7,6 @@ Object {
     "client.js": "client.abc.js",
   },
   "dest": "dist",
-  "fileAssets": Array [
-    "_posts/why-okmarvin/a.txt",
-    "_posts/why-okmarvin/dir/b.txt",
-    "_posts/why-okmarvin/dir/c/e.txt",
-  ],
   "okmarvinConfig": Object {
     "markdown": Object {
       "loadLanguages": Array [

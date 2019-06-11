@@ -23,14 +23,11 @@ module.exports = async function(conn, callback) {
           {
             okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
             site: callback => readSite(conn, callback),
-            filesWithAssets: callback => readFiles(conn, callback)
+            files: callback => readFiles(conn, callback)
           },
           callback
         ),
-      async (
-        { okmarvinConfig, site, filesWithAssets: { files, fileAssets } },
-        callback
-      ) => {
+      async ({ okmarvinConfig, site, files }, callback) => {
         let [err, themeManifest] = await promiseCatcher(
           promiseThemeManifest(conn.root, site.theme)
         )
@@ -43,7 +40,6 @@ module.exports = async function(conn, callback) {
           okmarvinConfig,
           site,
           files,
-          fileAssets,
           clientJsManifest: { 'client.js': clientJs },
           themeManifest: { ...others }
         })

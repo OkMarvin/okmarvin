@@ -6,9 +6,7 @@ test('returns data', done => {
     expect(data).toHaveProperty('okmarvinConfig')
     expect(data).toHaveProperty('site')
     expect(data).toHaveProperty('files')
-    expect(data).toHaveProperty('fileAssets')
     expect(data.files).toHaveLength(3)
-    expect(data.fileAssets).toHaveLength(3)
     expect(data).toHaveProperty('dest', 'dist')
     expect(data).toHaveProperty('clientJsManifest', {
       'client.js': 'client.abc.js'
