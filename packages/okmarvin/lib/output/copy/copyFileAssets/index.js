@@ -12,6 +12,7 @@ module.exports = function(conn, callback) {
   const filesCouldHaveAssets = files
     .filter(file => file.filePath)
     .filter(file => {
+      // file assets shouldn't be placed under _posts or _pages
       if (path.join(file.filePath, '..') === '_posts') {
         return false
       }
