@@ -22,8 +22,8 @@ module.exports = async function(conn, callback) {
         async.parallel(
           {
             okmarvinConfig: callback => readOkmarvinConfig(conn, callback),
-            site: callback => readSite(conn, callback),
-            files: callback => readFiles(conn, callback)
+            site: callback => readSite(conn, callback), // site wide variables
+            files: callback => readFiles(conn, callback) // markdown files
           },
           callback
         ),

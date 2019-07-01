@@ -1,11 +1,15 @@
-const promiseCatcher = require('@okmarvin/promise-catcher')
-const promiseOkmarvinConfig = require('./promiseOkmarvinConfig')
-module.exports = async ({ root }, callback) => {
-  const [err, okmarvinConfig] = await promiseCatcher(
-    promiseOkmarvinConfig(root)
-  )
-  if (err) {
-    return callback(err)
+'use strict'
+const path = require('path')
+module.exports = function readOkmarvinConfig({ root }, callback) {
+  try {
+    callback(null, require(path.join(root, '.okmarvin.js')))
+  } catch (_e) {
+    // default value for okmarvin config
+    return callback(null, {
+      markdown: {
+        toc: {},
+        loadLanguages: []
+      }
+    })
   }
-  callback(null, okmarvinConfig)
 }
