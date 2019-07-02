@@ -23,15 +23,12 @@ const logMemoryUsage = require('./helpers/logMemoryUsage')
  *
  * @property {function} callbackFn - Function to run at the end
  */
-const okmarvin = (
-  {
-    root = process.cwd(),
-    dest = '_site',
-    logLevel = 3,
-    builtAt = Date.now()
-  } = {},
-  callbackFn
-) => {
+const okmarvin = ({
+  root = process.cwd(),
+  dest = '_site',
+  logLevel = 3,
+  builtAt = Date.now()
+}) => {
   const begin = Date.now()
 
   logger.setOptions({ logLevel })
@@ -65,6 +62,6 @@ const okmarvin = (
     logger.success(`Your site is ready under '${dest}' directory.`)
   }
 
-  async.waterfall(tasks, callbackFn || callback)
+  async.waterfall(tasks, callback)
 }
 module.exports = okmarvin
