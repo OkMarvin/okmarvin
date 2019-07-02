@@ -4,19 +4,7 @@ const getInferredTemplate = require('./getInferredTemplate')
 const logger = require('@parcel/logger')
 const getToc = require('./getToc')
 
-module.exports = function(
-  {
-    builtAt,
-    themeManifest,
-    site: {
-      permalink: defaultPermalink,
-      author: defaultAuthor,
-      toc: defaultToc
-    }
-  },
-  file,
-  callback
-) {
+module.exports = function({ builtAt, themeManifest, site }, file, callback) {
   const {
     filePath,
     excerpt,
@@ -37,7 +25,7 @@ module.exports = function(
     : datePublished
 
   const permalink = computePermalink(
-    filePermalink || defaultPermalink,
+    filePermalink || site.permalink,
     {
       title,
       categories
@@ -57,12 +45,12 @@ module.exports = function(
 
   callback(null, {
     ...file,
-    author: author || defaultAuthor,
+    author: author || site.author, // defaults to site.author if non author presented in markdown file
     description: description || excerpt,
     datePublished,
     dateModified,
     permalink,
     template,
-    content: getToc(toc, defaultToc) ? `{:toc}\n${file.content}` : file.content
+    content: getToc(toc, site.toc) ? `{:toc}\n${file.content}` : file.content
   })
 }
