@@ -1,8 +1,10 @@
+'use strict'
+
 const async = require('neo-async')
 const parseSourceFile = require('./parseSourceFile')
 const logger = require('@parcel/logger')
 const { prettyTime } = require('@okmarvin/helpers')
-module.exports = function (conn, callback) {
+module.exports = function(conn, callback) {
   const begin = Date.now()
 
   const { files, ...others } = conn
