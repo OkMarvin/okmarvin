@@ -1,5 +1,5 @@
 const async = require('neo-async')
-const parseFile = require('./parseFile')
+const parseSourceFile = require('./parseSourceFile')
 const logger = require('@parcel/logger')
 const { prettyTime } = require('@okmarvin/helpers')
 module.exports = function (conn, callback) {
@@ -10,7 +10,7 @@ module.exports = function (conn, callback) {
   async.map(
     files,
     (file, callback) => {
-      parseFile(conn, file, callback)
+      parseSourceFile(conn, file, callback)
     },
     (err, files) => {
       if (err) return callback(err)

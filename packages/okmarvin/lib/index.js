@@ -6,7 +6,7 @@ const { resolve } = require('path')
 const { prettyTime } = require('@okmarvin/helpers')
 
 const read = require('./read')
-const parseFiles = require('./parseFiles')
+const parseSourceFiles = require('./parseSourceFiles')
 const dispose = require('./dispose')
 const output = require('./output')
 
@@ -50,7 +50,7 @@ const okmarvin = (
   const tasks = [
     async.constant(conn),
     read,
-    parseFiles,
+    parseSourceFiles,
     (conn, callback) => callback(null, dispose(conn)),
     output
   ]
