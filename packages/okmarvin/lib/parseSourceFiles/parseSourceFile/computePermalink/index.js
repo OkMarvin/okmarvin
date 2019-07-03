@@ -7,11 +7,9 @@ const replaceDir = require('./replaceDir')
 const replaceFilename = require('./replaceFilename')
 const path = require('path')
 const normalizePermalink = require('./normalizePermalink')
-module.exports = function (
+module.exports = function(
   permalink,
-  { title, categories },
-  datePublished,
-  relativeFilePath
+  { title, categories, datePublished, filePath: relativeFilePath }
 ) {
   permalink = replaceTitle(permalink, title)
   permalink = replaceYear(permalink, datePublished.getFullYear())

@@ -24,15 +24,12 @@ module.exports = function({ builtAt, themeManifest, site }, file, callback) {
     ? getTimeFromDateStr(dateModifiedStr)
     : datePublished
 
-  const permalink = computePermalink(
-    filePermalink || site.permalink,
-    {
-      title,
-      categories
-    },
-    new Date(datePublished),
+  const permalink = computePermalink(filePermalink || site.permalink, {
+    title,
+    categories,
+    datePublished: new Date(datePublished),
     filePath
-  )
+  })
   const inferredTemplate = getInferredTemplate(filePath)
   const template = userSetTemplate || inferredTemplate
 
