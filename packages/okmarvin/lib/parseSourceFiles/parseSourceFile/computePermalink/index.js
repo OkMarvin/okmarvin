@@ -11,14 +11,14 @@ module.exports = function (
   permalink,
   { title, categories },
   datePublished,
-  relativePath
+  relativeFilePath
 ) {
   permalink = replaceTitle(permalink, title)
   permalink = replaceYear(permalink, datePublished.getFullYear())
   permalink = replaceMonth(permalink, datePublished.getMonth() + 1)
   permalink = replaceDay(permalink, datePublished.getDate())
   permalink = replaceCategory(permalink, categories)
-  permalink = replaceDir(permalink, path.dirname(relativePath))
-  permalink = replaceFilename(permalink, path.parse(relativePath).name)
+  permalink = replaceDir(permalink, path.dirname(relativeFilePath))
+  permalink = replaceFilename(permalink, path.parse(relativeFilePath).name)
   return normalizePermalink(permalink)
 }
