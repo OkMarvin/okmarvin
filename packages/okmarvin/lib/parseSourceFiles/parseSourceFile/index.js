@@ -1,7 +1,7 @@
 const getTimeFromDateStr = require('../getTimeFromDateStr')
 const computePermalink = require('./computePermalink')
 const getInferredTemplate = require('./getInferredTemplate')
-// const logger = require('@parcel/logger')
+const logger = require('@parcel/logger')
 const getToc = require('./getToc')
 
 module.exports = function({ builtAt, themeManifest, site }, file, callback) {
@@ -33,13 +33,12 @@ module.exports = function({ builtAt, themeManifest, site }, file, callback) {
   const inferredTemplate = getInferredTemplate(filePath)
   const template = userSetTemplate || inferredTemplate
 
-  // TODO warn later, after we compose all those index pages
-  // if (!themeManifest[template]) {
-  //   // we should warn user
-  //   logger.warn(
-  //     `${filePath} won't be rendered since '${template}' template does not exist`
-  //   )
-  // }
+  if (!themeManifest[template]) {
+    // we should warn user
+    logger.warn(
+      `${filePath} won't be rendered since '${template}' template does not exist`
+    )
+  }
 
   callback(null, {
     ...file,
