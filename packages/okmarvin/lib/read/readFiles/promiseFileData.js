@@ -2,11 +2,11 @@ const fs = require('fs')
 const matter = require('gray-matter')
 const { ajv } = require('@okmarvin/helpers')
 const TOML = require('@iarna/toml')
-const fileSchema = require('../../schemas/file')
+const schemas = require('@okmarvin/schema')
 const logger = require('@parcel/logger')
 const async = require('neo-async')
 const path = require('path')
-module.exports = function (root, relativeFilePath) {
+module.exports = function(root, relativeFilePath) {
   const filePath = path.join(root, relativeFilePath)
   return new Promise((resolve, reject) => {
     async.parallel(
@@ -21,7 +21,7 @@ module.exports = function (root, relativeFilePath) {
                 toml: TOML.parse.bind(TOML) // allow user to user TOML in front matter with ---toml
               }
             })
-            if (!ajv.validate(fileSchema, file)) {
+            if (!ajv.validate(schemas.definitions.file, file)) {
               return logger.warn(
                 'Oops! Something is wrong, ',
                 relativeFilePath,
