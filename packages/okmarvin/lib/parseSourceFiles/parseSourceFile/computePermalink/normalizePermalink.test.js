@@ -8,3 +8,6 @@ it('should not append /', () => {
 it('should replace // with /', () => {
   expect(fn('//blog/')).toBe('/blog/')
 })
+it('should replace // with /', () => {
+  expect(fn('//')).toBe('/')
+})
