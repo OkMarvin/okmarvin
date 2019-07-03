@@ -1,14 +1,14 @@
 const fn = require('./replaceCategory')
 test('replaces category', () => {
-  expect(fn('/:categories', ['foo', 'bar'])).toBe('/foo/bar')
+  expect(fn('/:categories', ['foo', 'bar'])).toBe('/bar/foo')
 })
 test(':categories with chinese', () => {
   expect(fn('/:categories', ['教程', 'react'])).toBe(
-    `/${encodeURIComponent('教程')}/react`
+    `/react/${encodeURIComponent('教程')}`
   )
 })
 test(':categories with chinese and whitespace', () => {
   expect(fn('/:categories', ['教 程', 'react'])).toBe(
-    `/${encodeURIComponent('教-程')}/react`
+    `/react/${encodeURIComponent('教-程')}`
   )
 })
