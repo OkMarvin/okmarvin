@@ -14,9 +14,10 @@ const findRelatedPostsByTags = require('./findRelatedPostsByTags')
 
 module.exports = conn => {
   conn = { ...collectTaxonomy(conn) }
-  conn = { ...compose(conn) }
-  conn = { ...validation(conn) }
   conn = { ...findPostSiblings(conn) }
   conn = { ...findRelatedPostsByTags(conn) }
+  conn = { ...compose(conn) }
+  conn = { ...validation(conn) }
+
   return conn
 }
