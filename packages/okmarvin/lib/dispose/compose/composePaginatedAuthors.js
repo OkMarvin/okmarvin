@@ -18,8 +18,7 @@ module.exports = (conn) => {
       css: 'author.css',
       datePublished: builtAt,
       dateModified: builtAt,
-      permalink: `/authors/${encodeURIComponent(slug(author))}/`,
-      dirty: true
+      permalink: `/authors/${encodeURIComponent(slug(author))}/`
     }
     const permalinkFormat = `/authors/${encodeURIComponent(
       slug(author)

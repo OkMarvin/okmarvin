@@ -7,7 +7,6 @@ module.exports = function (conn) {
     css: '404.css',
     title: 'Page Not Found',
     description: 'The page does not exist',
-    dirty: true,
     dateModified: conn.builtAt
   }]
 }
