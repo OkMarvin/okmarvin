@@ -12,5 +12,5 @@ test('replaces all :title', () => {
   expect(fn('/:title/:title')).toBe('//')
 })
 test('replaces :title with Chinese text', () => {
-  expect(fn('/:title/', '你好')).toBe('/%E4%BD%A0%E5%A5%BD')
+  expect(fn('/:title/', '你好')).toBe('/%E4%BD%A0%E5%A5%BD/')
 })
