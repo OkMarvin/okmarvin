@@ -15,7 +15,7 @@ module.exports = function(conn) {
     return [...acc, { ...others, content: content ? MD.render(content) : '' }]
   }, [])
   logger.success(
-    `Rendered ${files.length} markdown files in ${prettyTime(
+    `Parsed ${files.length} markdown contents in ${prettyTime(
       Date.now() - begin
     )}`
   )
