@@ -1,8 +1,3 @@
-/**
- * We'll use dispose in client side too
- * make sure it don't include any async/promise function
- * or it will break client/index.js
- */
 'use strict'
 
 const compose = require('./compose')
