@@ -1,5 +1,7 @@
 'use strict'
-
+/**
+ * tag related posts
+ */
 const uniqBy = require('lodash/fp/uniqBy')
 const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = conn => {
@@ -27,7 +29,7 @@ module.exports = conn => {
           .map(post => {
             return shrink(post)
           })
-        return { ...post, related: uniqBy('permalink', related) }
+        return { ...post, related: uniqBy('permalink', related).slice(0, 10) }
       }),
       ...others
     ]
