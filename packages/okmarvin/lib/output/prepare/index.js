@@ -1,11 +1,11 @@
 const async = require('neo-async')
-const loadCss = require('./loadCss')
+const inlineCss = require('./inlineCss')
 const loadLayouts = require('./loadLayouts')
 const loadClientJsPath = require('./loadClientJsPath')
 module.exports = function(conn, callback) {
   async.parallel(
     {
-      css: callback => loadCss(conn, callback),
+      css: callback => inlineCss(conn, callback),
       clientJsPath: callback => loadClientJsPath(conn, callback),
       layouts: callback => loadLayouts(conn, callback)
     },
