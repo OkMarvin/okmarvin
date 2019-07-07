@@ -20,7 +20,7 @@ module.exports = (conn, callback) => {
   for (let i = 0, len = defaultLayoutList.length; i < len; i++) {
     const layoutName = defaultLayoutList[i]
     try {
-      const layoutPath = requireResolve(layoutName, {
+      const layoutPath = requireResolve('./' + layoutName, {
         paths: layoutPaths
       })
       availableLayoutList = availableLayoutList.concat([
