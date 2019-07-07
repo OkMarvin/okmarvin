@@ -34,14 +34,13 @@ Bulid [my blog](https://blog.zfanw.com) on iMac (Retina 5K, 27-inch, 2017) with 
 
 ```
 $ okmarvin build --log-level 4
-[23:51:16]: Ok Marvin, lets do it.
-[23:51:16]: Collected 62 markdown files
-[23:51:16]: layouts kept the same
-[23:51:16]: ✨  Read in 89ms
-[23:51:16]: ✨  Parsed 62 files in 303ms
-[23:51:17]: ✨  Rendered 116 files in 207ms
-[23:51:17]: ✨  116 files generated.
-[23:51:17]: Total memory used: 97.32MB
-[23:51:17]: ✨  Built in 690ms
-[23:51:17]: ✨  Your site is ready under 'dist' directory.
+[22:13:38]: Collected 60 markdown files
+[22:13:38]: ✨  Read in 69ms
+[22:13:38]: Parsed 60 files in 2ms
+[22:13:38]: ✨  Parsed 112 markdown contents in 173ms
+[22:13:38]: ✨  Wrote 112 files in 229ms.
+[22:13:38]: File assets copied in 23ms
+[22:13:38]: rss memory used: 109.09MB
+[22:13:38]: ✨  Built in 516ms
+[22:13:38]: ✨  Your site is ready under '_site' directory.
 ```
