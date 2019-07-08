@@ -8,6 +8,7 @@ const generateFeed = require('@okmarvin/generate-feed')
 const generateSitemap = require('@okmarvin/generate-sitemap')
 const escapeHtml = require('escape-html')
 const { format } = require('date-fns')
+const md = require('@okmarvin/markdown')
 
 const { prettyTime } = require('@okmarvin/helpers')
 
@@ -17,9 +18,18 @@ const react = require('./ssr/react')
 module.exports = function(conn, callback) {
   const begin = Date.now()
   const { files } = conn
-  const { root, dest, site, themeManifest, clientJsPath, css = {} } = conn
+  const {
+    root,
+    dest,
+    site,
+    themeManifest,
+    clientJsPath,
+    css = {},
+    okmarvinConfig
+  } = conn
   const { theme } = site
   const themeRoot = path.join(requireResolve(theme, { paths: [root] }), '..')
+  const MD = md(okmarvinConfig)
   async.parallel(
     [
       callback =>
@@ -39,8 +49,12 @@ module.exports = function(conn, callback) {
              * right now we only support React ssr
              * but vue, preact, etc. can be supported too
              */
+            const { content = '', ...others } = file
             const rendered = react(Component, {
-              file,
+              file: {
+                ...others,
+                content: MD.render(content)
+              },
               site
             })
             const html = file.layout({
