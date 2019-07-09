@@ -2,5 +2,3 @@ node_modules
 _site
 .cache
 build
-dist
-_data.js
