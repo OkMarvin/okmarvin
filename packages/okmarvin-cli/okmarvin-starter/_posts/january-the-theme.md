@@ -5,4 +5,4 @@ tags:
   - theme
 ---
 
-January is the first and default theme for okmarvin, it's designed for blog.
+January is the first and default theme for okmarvin, it's designed for [my blog](https://blog.zfanw.com).
