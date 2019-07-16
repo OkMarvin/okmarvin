@@ -14,7 +14,7 @@ module.exports = conn => {
       ...posts.map(post => {
         const related = Object.keys(tags)
           .filter(key => {
-            return !(post.tags || [])
+            return (post.tags || [])
               .map(tag => tag.toLowerCase())
               .includes(key)
           })
