@@ -5,31 +5,16 @@ tags:
   - introduction
 ---
 
-## Why another static site generator
+You might be wondering why I would develop another static site generator while there are already hundreds of [them](https://www.staticgen.com/).
 
-Have you ever wrote any CSS, you'll find it hard to maintain because all CSS rules live in one global scope. We learn [BEM](http://getbem.com/) and other tricks, hoping our CSS won't go wild, but we could fail most of the time.
+## CSS is hard
 
-That's why I thought most static site generators out there are broken in term of CSS. They're still writing CSS in global scope while scoped CSS is a much better choice these days.
+CSS is hard to maintain, especially when you have a large code base or older one.
 
-So I created okmarvin.With scoped CSS and component as your templates, you have better developer experience which brings better result.
+That's why I think **scoped CSS**/**CSS in JS** is a much better choice nowadays. We no longer break things we didn't mean to.
 
 ## Why not GatsbyJS, etc.
 
-We could group static site generators into two categories depending on whether HTML, CSS, JavaScript are modularized :
+So GatsbyJS alike looks great regarding my CSS demand, why not just use those static site generators?
 
-|            | Hexo, Hugo, etc. | GatsbyJS, react-static, phenomic, etc. |
-| ---------- | ---------------- | -------------------------------------- |
-| HTML       | ✗                | ✓                                      |
-| CSS        | ✗                | ✓                                      |
-| JavaScript | ✗                | ✓                                      |
-
-So GatsbyJS alike looks perfect regarding my demand, why not just use those static site generators but to create another one?
-
-There're two main reasons as for me:
-
-1. They're overkill for simple static site like a blog without many dynamic UIs.
-2. They have steep learning curve if you don't know React/Vue/etc.
-
-## Caveats of okmarvin
-
-Currently okmarvin only supports templates built with React.js, but we consider adding more supports like Vue in future.
+There is one main reason, they're overkill for simple static site which doesn't have many dynamic UIs. I just don't want to load a total framework runtime for my blog.
