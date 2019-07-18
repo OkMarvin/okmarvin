@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@okmarvin/markdown-it-toc": "^0.0.20",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^9.0.0",
     "markdown-it-linkify-images": "^1.1.0",
     "prismjs": "^1.16.0"
   }
