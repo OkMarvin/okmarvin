@@ -5,7 +5,8 @@
 const uniqBy = require('lodash/fp/uniqBy')
 const { isPost, shrink } = require('@okmarvin/helpers')
 module.exports = conn => {
-  const { files, tags } = conn
+  const { files, site } = conn
+  const { tags } = site
   const posts = files.filter(isPost)
   const others = files.filter(file => !posts.includes(file))
   return {
@@ -14,9 +15,7 @@ module.exports = conn => {
       ...posts.map(post => {
         const related = Object.keys(tags)
           .filter(key => {
-            return (post.tags || [])
-              .map(tag => tag.toLowerCase())
-              .includes(key)
+            return (post.tags || []).map(tag => tag.toLowerCase()).includes(key)
           })
           .map(k => tags[k])
           .reduce((acc, topic) => {

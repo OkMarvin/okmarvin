@@ -2,11 +2,10 @@
 
 const slug = require('@okmarvin/slug')
 const paginateRobot = require('./paginateRobot')
-module.exports = (conn) => {
+module.exports = conn => {
   const {
-    site: { paginate },
-    builtAt,
-    authors = []
+    site: { paginate, authors = [] },
+    builtAt
   } = conn
   return Object.keys(authors).reduce((acc, author) => {
     const fields = {
@@ -22,8 +21,9 @@ module.exports = (conn) => {
     const permalinkFormat = `/authors/${encodeURIComponent(
       slug(author)
     )}/page:num/`
-    const data = authors[author]
-      .sort((a, b) => b.datePublished - a.datePublished)
+    const data = authors[author].sort(
+      (a, b) => b.datePublished - a.datePublished
+    )
     return [...acc, ...paginateRobot(data, paginate, fields, permalinkFormat)]
   }, [])
 }

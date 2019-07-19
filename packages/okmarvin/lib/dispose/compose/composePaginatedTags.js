@@ -1,11 +1,10 @@
 'use strict'
 const slug = require('@okmarvin/slug')
 const paginateRobot = require('./paginateRobot')
-module.exports = function (conn) {
+module.exports = function(conn) {
   const {
-    site: { author, paginate },
-    builtAt,
-    tags = []
+    site: { author, paginate, tags = [] },
+    builtAt
   } = conn
   return Object.keys(tags).reduce((acc, topic) => {
     const fields = {
@@ -21,8 +20,7 @@ module.exports = function (conn) {
     const permalinkFormat = `/topics/${encodeURIComponent(
       slug(topic)
     )}/page:num/`
-    const data = tags[topic]
-      .sort((a, b) => b.datePublished - a.datePublished)
+    const data = tags[topic].sort((a, b) => b.datePublished - a.datePublished)
     return [...acc, ...paginateRobot(data, paginate, fields, permalinkFormat)]
   }, [])
 }
