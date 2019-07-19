@@ -1,8 +1,8 @@
 'use strict'
 const findRelatedPostsByTags = require('./findRelatedPostsByTags')
 it('should call callback', () => {
-  expect(findRelatedPostsByTags({ files: [], tags: {} })).toEqual({
+  expect(findRelatedPostsByTags({ files: [], site: { tags: {} } })).toEqual({
     files: [],
-    tags: {}
+    site: { tags: {} }
   })
 })
