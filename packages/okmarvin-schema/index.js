@@ -141,6 +141,14 @@ module.exports = {
           description: 'Maximum posts in one page',
           type: 'integer'
         },
+        tags: {
+          description: 'All tags on the site',
+          type: 'array'
+        },
+        categories: {
+          description: 'All categories on the site',
+          type: 'array'
+        },
         github: {
           description: 'Github username',
           type: 'string'
