@@ -1,6 +1,6 @@
 {
   "name": "okmarvin-cli",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Command line tool for static site generator okmarvin",
   "main": "index.js",
   "scripts": {},
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@okmarvin/okmarvin": "^0.1.5",
+    "@okmarvin/okmarvin": "^0.1.6",
     "@parcel/logger": "^1.11.0",
     "date-fns": "^1.29.0",
     "finalhandler": "^1.1.1",
