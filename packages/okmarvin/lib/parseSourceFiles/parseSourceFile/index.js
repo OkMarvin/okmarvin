@@ -3,8 +3,12 @@ const computePermalink = require('./computePermalink')
 const getInferredTemplate = require('./getInferredTemplate')
 const logger = require('@parcel/logger')
 const getToc = require('./getToc')
-
-module.exports = function({ builtAt, themeManifest, site }, file, callback) {
+const md = require('@okmarvin/markdown')
+module.exports = function(
+  { builtAt, themeManifest, site, okmarvinConfig },
+  file,
+  callback
+) {
   const {
     filePath,
     excerpt,
@@ -18,6 +22,7 @@ module.exports = function({ builtAt, themeManifest, site }, file, callback) {
     dateModified: dateModifiedStr,
     permalink: filePermalink
   } = file
+  const MD = md(okmarvinConfig)
 
   const datePublished = dateStr ? getTimeFromDateStr(dateStr) : builtAt
   const dateModified = dateModifiedStr
@@ -48,6 +53,8 @@ module.exports = function({ builtAt, themeManifest, site }, file, callback) {
     dateModified,
     permalink,
     template,
-    content: getToc(toc, site.toc) ? `{:toc}\n${file.content}` : file.content
+    content: MD.render(
+      getToc(toc, site.toc) ? `{:toc}\n${file.content}` : file.content
+    )
   })
 }
