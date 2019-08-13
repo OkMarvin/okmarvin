@@ -10,7 +10,8 @@ const defaultConn = {
 const defaultFile = {
   title: 'ok marvin',
   permalink: '/hello-marvin',
-  filePath: 'post/hello marvin/index.md'
+  filePath: 'post/hello marvin/index.md',
+  content: ''
 }
 test('do not return toc because we will not need it', () => {
   const conn = { ...defaultConn }
